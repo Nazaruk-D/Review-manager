@@ -30,9 +30,16 @@
     "no-extraneous-dependencies": "off",
     "import/no-cycle": "off",
     "react/jsx-props-no-spreading": "off",
+    "import/prefer-default-export": "error",
     "no-param-reassign": [
       "error",
       { "props": true, "ignorePropertyModificationsFor": ["state"] }
+    ],
+    "react/function-component-definition": [
+      "error",
+      {
+        "arrowFunctions": true
+      }
     ]
   },
   "settings": {
