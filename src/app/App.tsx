@@ -1,16 +1,15 @@
 import React from 'react';
 import './App.css';
-import Header from './Header/Header';
-import Content from './Content/Content';
-import Footer from './Footer/Footer';
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import routes from '../routes/routes';
 
 function App() {
+    const router = createBrowserRouter(routes);
+
     return (
-        <>
-            <Header />
-            <Content />
-            <Footer />
-        </>
+        <div>
+            <RouterProvider router={router} />
+        </div>
     );
 }
 
