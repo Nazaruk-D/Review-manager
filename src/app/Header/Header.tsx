@@ -3,7 +3,7 @@ import { AppBar, Avatar, Box, Button, Container, IconButton, Menu, MenuItem, Too
 import AdbIcon from '@mui/icons-material/Adb';
 import WbSunnyOutlinedIcon from '@mui/icons-material/WbSunnyOutlined';
 import ModeNightOutlinedIcon from '@mui/icons-material/ModeNightOutlined';
-import { MaterialUISwitch } from '../../common/components/ThemeSwticher';
+import { MaterialUISwitch } from '../../common/components/ThemeSwitcher/ThemeSwticher';
 
 const pages = ['Products', 'Pricing', 'Blog'];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
