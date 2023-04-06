@@ -7,13 +7,10 @@ const Footer = () => {
         <Box
             component="footer"
             sx={{
-                position: 'absolute',
-                bottom: 0,
-                left: 0,
-                width: '100%',
                 bgcolor: 'background.paper',
                 textAlign: 'center',
                 fontSize: '0.8rem',
+                marginTop: 'auto',
             }}
         >
             <Container maxWidth="lg" sx={{ p: 0 }}>
