@@ -25,21 +25,17 @@
   "plugins": ["@typescript-eslint", "import", "react", "prettier"],
   "ignorePatterns": ["vite.config.ts"],
   "rules": {
+    "react/function-component-definition": ["off"],
+    "arrow-body-style": ["off"],
     "@typescript-eslint/no-explicit-any": "error",
     "no-underscore-dangle": "off",
     "no-extraneous-dependencies": "off",
     "import/no-cycle": "off",
     "react/jsx-props-no-spreading": "off",
-    "import/prefer-default-export": "error",
+    "import/prefer-default-export": "off",
     "no-param-reassign": [
       "error",
       { "props": true, "ignorePropertyModificationsFor": ["state"] }
-    ],
-    "react/function-component-definition": [
-      "error",
-      {
-        "arrowFunctions": true
-      }
     ]
   },
   "settings": {
