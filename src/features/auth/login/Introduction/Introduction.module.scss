@@ -1,0 +1,11 @@
+@import './src/styles/sass/mixin';
+@import './src/styles/sass/variables';
+
+
+.introductionContainer {
+  width: 50%;
+  height: 100%;
+  @media screen and (max-width: $mediaWidth) {
+    display: none;
+  }
+}
