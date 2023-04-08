@@ -1,6 +1,7 @@
 import React from 'react';
 import { Avatar, Box, Button, IconButton, Menu, MenuItem, Tooltip, Typography } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import { Path } from '../../../enums/path';
 
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
@@ -8,6 +9,7 @@ const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 const AuthButtonsBlock = () => {
     const isLogin = false;
     const navigate = useNavigate();
+    const { t } = useTranslation('translation', { keyPrefix: 'auth' });
 
     const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null);
     const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(null);
@@ -67,7 +69,7 @@ const AuthButtonsBlock = () => {
     ) : (
         <Box sx={{ flexGrow: 0 }}>
             <Button color="inherit" sx={{ p: 0 }} component="span" onClick={navigateToLogin}>
-                Sign in
+                {t('signIn')}
             </Button>
         </Box>
     );

@@ -4,12 +4,14 @@ import { Box, Button, Grid, Paper, TextField, Typography } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import FacebookOutlinedIcon from '@mui/icons-material/FacebookOutlined';
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
+import { useTranslation } from 'react-i18next';
 import s from './LoginForm.module.scss';
 import { Path } from '../../../../enums/path';
 import { LoginErrorType } from '../../../../types/AuthErrorType';
 
 const LoginForm = () => {
     const navigate = useNavigate();
+    const { t } = useTranslation('translation', { keyPrefix: 'auth' });
 
     const formik = useFormik({
         initialValues: {
@@ -51,7 +53,7 @@ const LoginForm = () => {
                         textDecoration: 'none',
                     }}
                 >
-                    Sign in
+                    {t('signIn')}
                 </Typography>
                 <form onSubmit={formik.handleSubmit}>
                     <TextField
@@ -135,14 +137,14 @@ const LoginForm = () => {
                         <hr />
                     </Grid>
                     <Grid item xs={2} sx={{ textAlign: 'center' }}>
-                        Or
+                        {t('or')}
                     </Grid>
                     <Grid item xs={5}>
                         <hr />
                     </Grid>
                 </Grid>
                 <Button variant="contained" color="primary" fullWidth sx={{ mt: '20px' }} onClick={() => navigate(Path.Register)}>
-                    Sign up
+                    {t('signUp')}
                 </Button>
             </Box>
         </Paper>

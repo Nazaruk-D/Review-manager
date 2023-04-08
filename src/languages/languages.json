@@ -4,6 +4,18 @@
       "header": {
         "signIn": "Sign In"
       },
+      "auth": {
+        "signIn": "Sign In",
+        "signUp": "Sign Up",
+        "email": "E-mail",
+        "emailPlaceholder": "Enter e-mail address",
+        "password": "Password",
+        "or": "Or"
+      },
+      "introduction": {
+        "title": "Meet Reviewer - a website created for managing recommendations.",
+        "description": "Reviewer provides personalized recommendations based on viewing history, allows sharing reviews and ratings, creating lists of favorite content, and keeping up with new releases. Find something new and exciting in the world of entertainment with Reviewer."
+      },
       "footer": {
         "copyright": "Dmitry Nazaruk © 2023"
       }
@@ -13,6 +25,18 @@
     "translation": {
       "header": {
         "signIn": "Вход"
+      },
+      "auth": {
+        "signIn": "Вход",
+        "signUp": "Регистрация",
+        "email": "E-mail",
+        "emailPlaceholder": "Введите e-mail адрес",
+        "password": "Пароль",
+        "or": "Или"
+      },
+      "introduction": {
+        "title": "Познакомьтесь с Reviewer manager - сайтом, созданным для управления рекомендациями.",
+        "description": "Reviewer предоставляет персонализированные рекомендации на основе истории просмотра, позволяет делиться отзывами и рейтингами, создавать списки любимых контентов и следить за новыми релизами. Найдите что-то новое и интересное в мире развлечений с помощью Reviewer."
       },
       "footer": {
         "copyright": "Дмитрий Назарук © 2023"

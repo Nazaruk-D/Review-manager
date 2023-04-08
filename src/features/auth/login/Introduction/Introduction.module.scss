@@ -3,9 +3,20 @@
 
 
 .introductionContainer {
+  @include flex(column, space-evenly, center, wrap);
   width: 50%;
   height: 100%;
   @media screen and (max-width: $mediaWidth) {
     display: none;
+  }
+
+  .title {
+    width: 80%;
+  }
+
+  .description {
+    width: 80%;
+    height: 40%;
+    text-align: justify;
   }
 }
