@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { AppBar, Avatar, Box, Button, Container, IconButton, Menu, MenuItem, Toolbar, Tooltip, Typography } from '@mui/material';
 import AdbIcon from '@mui/icons-material/Adb';
 import WbSunnyOutlinedIcon from '@mui/icons-material/WbSunnyOutlined';
 import ModeNightOutlinedIcon from '@mui/icons-material/ModeNightOutlined';
 import { useNavigate } from 'react-router-dom';
 import { Path } from '../../enums/path';
+import { ColorModeContext } from '../../hooks/useThemeMode';
 
 const pages = ['Products', 'Pricing', 'Blog'];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
@@ -33,6 +34,8 @@ const Header = () => {
     const navigateToLogin = () => {
         navigate(Path.Login);
     };
+
+    const { toggleColorMode, mode } = useContext(ColorModeContext);
 
     return (
         <AppBar position="static" component="header">
@@ -76,12 +79,15 @@ const Header = () => {
                         LOGO
                     </Typography>
                     <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-                        <IconButton color="inherit">
-                            <WbSunnyOutlinedIcon />
-                        </IconButton>
-                        <IconButton color="inherit">
-                            <ModeNightOutlinedIcon />
-                        </IconButton>
+                        {mode === 'dark' ? (
+                            <IconButton color="inherit">
+                                <WbSunnyOutlinedIcon onClick={toggleColorMode} />
+                            </IconButton>
+                        ) : (
+                            <IconButton color="inherit">
+                                <ModeNightOutlinedIcon onClick={toggleColorMode} />
+                            </IconButton>
+                        )}
                     </Box>
                     {isLogin ? (
                         <Box sx={{ flexGrow: 0 }}>
