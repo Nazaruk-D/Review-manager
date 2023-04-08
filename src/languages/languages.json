@@ -1,0 +1,22 @@
+{
+  "en": {
+    "translation": {
+      "header": {
+        "signIn": "Sign In"
+      },
+      "footer": {
+        "copyright": "Dmitry Nazaruk © 2023"
+      }
+    }
+  },
+  "ru": {
+    "translation": {
+      "header": {
+        "signIn": "Вход"
+      },
+      "footer": {
+        "copyright": "Дмитрий Назарук © 2023"
+      }
+    }
+  }
+}

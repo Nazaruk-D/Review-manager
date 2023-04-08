@@ -1,8 +1,10 @@
 import React from 'react';
 import { Container, Box, Typography, IconButton } from '@mui/material';
 import { Facebook, GitHub, Instagram, LinkedIn } from '@mui/icons-material';
+import { useTranslation } from 'react-i18next';
 
 const Footer = () => {
+    const { t } = useTranslation('translation', { keyPrefix: 'footer' });
     return (
         <Box
             component="footer"
@@ -30,7 +32,7 @@ const Footer = () => {
                 </Box>
                 <Box sx={{ pb: 1 }}>
                     <Typography variant="body2" color="text.secondary">
-                        Dmitry Nazaruk © 2023
+                        {t('copyright')}
                     </Typography>
                 </Box>
             </Container>

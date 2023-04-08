@@ -6,6 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import { Path } from '../../enums/path';
 import { ColorModeContext } from '../../hooks/useThemeMode';
 import Logo from '../../common/components/Logo/Logo';
+import LanguageSwitcher from '../../common/components/LanguageSwitcher/LanguageSwitcher';
 
 const pages = ['Products', 'Pricing', 'Blog'];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
@@ -42,17 +43,8 @@ const Header = () => {
             <Container maxWidth="xl">
                 <Toolbar disableGutters>
                     <Logo />
-                    <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-                        {mode === 'dark' ? (
-                            <IconButton color="inherit">
-                                <WbSunnyOutlinedIcon onClick={toggleColorMode} />
-                            </IconButton>
-                        ) : (
-                            <IconButton color="inherit">
-                                <ModeNightOutlinedIcon onClick={toggleColorMode} />
-                            </IconButton>
-                        )}
-                    </Box>
+
+                    <LanguageSwitcher />
                     {isLogin ? (
                         <Box sx={{ flexGrow: 0 }}>
                             <Tooltip title="Open settings">
