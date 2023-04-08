@@ -1,0 +1,6 @@
+@import './src/styles/sass/mixin';
+
+.logo {
+  @include flex(column, center, center, nowrap);
+  width: 200px;
+}
