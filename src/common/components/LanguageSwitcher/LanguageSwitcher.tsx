@@ -1,29 +1,40 @@
-import React, { ChangeEvent, useCallback } from 'react';
-import { FormControlLabel, FormGroup } from '@mui/material';
-import Switch from '@mui/material/Switch';
+import React, { useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
+import { FormControlLabel, FormGroup, Switch } from '@mui/material';
 
 const LanguageSwitcher = () => {
     const { i18n } = useTranslation();
 
-    const handleLanguageChange = useCallback(
-        (event: ChangeEvent<HTMLInputElement>) => {
-            const { checked } = event.target;
-            if (checked) {
-                i18n.changeLanguage('en');
-            } else {
-                i18n.changeLanguage('ru');
-            }
-        },
-        [i18n],
-    );
+    const handleLanguageChange = useCallback(() => {
+        const newLanguage = i18n.language === 'ru' ? 'en' : 'ru';
+        i18n.changeLanguage(newLanguage);
+    }, [i18n]);
 
     const isEnglish = i18n.language === 'en';
+
     return (
         <FormGroup>
             <FormControlLabel
-                control={<Switch checked={isEnglish} onChange={handleLanguageChange} />}
+                control={
+                    <Switch
+                        checked={isEnglish}
+                        onChange={handleLanguageChange}
+                        sx={{
+                            '& .MuiSwitch-switchBase.Mui-checked + .MuiSwitch-track': {
+                                bgcolor: '#fff',
+                            },
+                            '& .MuiSwitch-switchBase.Mui-checked': {
+                                color: '#fff',
+                            },
+                        }}
+                    />
+                }
                 label={isEnglish ? 'EN' : 'RUS'}
+                sx={{
+                    '& .MuiTypography-root': {
+                        color: '#fff',
+                    },
+                }}
             />
         </FormGroup>
     );
