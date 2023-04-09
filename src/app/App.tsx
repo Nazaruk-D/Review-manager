@@ -4,6 +4,7 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import { CssBaseline, ThemeProvider } from '@mui/material';
 import routes from '../routes/routes';
 import { ColorModeContext, useThemeMode } from '../hooks/useThemeMode';
+import { useAuthQuery } from '../store/api/authAPI';
 
 function App() {
     const router = createBrowserRouter(routes);
@@ -15,6 +16,9 @@ function App() {
         }),
         [colorMode.toggleColorMode, mode],
     );
+
+    useAuthQuery({});
+
     return (
         <div>
             <ColorModeContext.Provider value={memoizedColorModeValue}>

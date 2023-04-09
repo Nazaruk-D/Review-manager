@@ -29,7 +29,7 @@ const LanguageSwitcher = () => {
                         }}
                     />
                 }
-                label={isEnglish ? 'EN' : 'RUS'}
+                label={isEnglish ? 'EN' : 'RU'}
                 sx={{
                     '& .MuiTypography-root': {
                         color: '#fff',
