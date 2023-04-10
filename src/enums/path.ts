@@ -4,4 +4,5 @@ export enum Path {
     Login = '/login',
     Register = '/register',
     Profile = '/profile',
+    Card = '/card',
 }
