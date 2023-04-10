@@ -97,26 +97,26 @@ export const themeSettings = (mode: PaletteMode) => {
                   }),
         },
         typography: {
-            fontFamily: ['Poppins', 'sans-serif'].join(','),
+            fontFamily: ['Montserrat', 'sans-serif'].join(','),
             fontSize: 14,
             fontWeight: 500,
             h1: {
-                fontFamily: ['Poppins', 'sans-serif'].join(','),
+                fontFamily: ['Montserrat', 'sans-serif'].join(','),
                 fontSize: 28,
                 fontWeight: 600,
             },
             h2: {
-                fontFamily: ['Poppins', 'sans-serif'].join(','),
+                fontFamily: ['Montserrat', 'sans-serif'].join(','),
                 fontSize: 20,
                 fontWeight: 600,
             },
             h3: {
-                fontFamily: ['Poppins', 'sans-serif'].join(','),
+                fontFamily: ['Montserrat', 'sans-serif'].join(','),
                 fontSize: 18,
                 fontWeight: 600,
             },
             p: {
-                fontFamily: ['Poppins', 'sans-serif'].join(','),
+                fontFamily: ['Montserrat', 'sans-serif'].join(','),
                 fontSize: 14,
                 fontWeight: 500,
             },

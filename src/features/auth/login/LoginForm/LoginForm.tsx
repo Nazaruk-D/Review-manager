@@ -48,7 +48,6 @@ const LoginForm = () => {
                         mr: 2,
                         display: 'flex',
                         fontWeight: 700,
-                        letterSpacing: '.3rem',
                         color: 'inherit',
                         textDecoration: 'none',
                     }}
