@@ -3,8 +3,13 @@ import { useFormik } from 'formik';
 import { Box, Button, Paper, TextField, Typography } from '@mui/material';
 import s from '../../login/LoginForm/LoginForm.module.scss';
 import { RegisterErrorType } from '../../../../types/AuthErrorType';
+import { useRegisterMutation } from '../../../../store/api/authAPI';
+import { useAppDispatch } from '../../../../hooks/useRedux';
 
 const RegistrationForm = () => {
+    const dispatch = useAppDispatch();
+    const [registerAccount] = useRegisterMutation({});
+
     const formik = useFormik({
         initialValues: {
             firstName: '',
@@ -49,10 +54,14 @@ const RegistrationForm = () => {
             return errors;
         },
         onSubmit: (values) => {
-            console.log(values);
+            const { firstName, lastName, email, password } = values;
+            if (firstName && lastName && email && password) {
+                registerAccount({ firstName, lastName, email, password });
+            }
             formik.resetForm();
         },
     });
+
     return (
         <Paper elevation={3} className={s.loginFormContainer}>
             <Box className={s.loginFormBlock}>
