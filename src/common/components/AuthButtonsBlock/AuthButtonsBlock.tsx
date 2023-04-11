@@ -3,11 +3,13 @@ import { Avatar, Box, Button, IconButton, Menu, MenuItem, Tooltip, Typography } 
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { Path } from '../../../enums/path';
+import { useAppSelector } from '../../../hooks/useRedux';
+import { selectorIsLogin, selectorUserData } from '../../../store/selectors/userSelector';
 
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
 const AuthButtonsBlock = () => {
-    const isLogin = false;
+    const userData = useAppSelector(selectorUserData);
     const navigate = useNavigate();
     const { t } = useTranslation('translation', { keyPrefix: 'auth' });
 
@@ -33,7 +35,7 @@ const AuthButtonsBlock = () => {
         navigate(Path.Login);
     };
 
-    return isLogin ? (
+    return userData ? (
         <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
                 <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
@@ -43,28 +45,6 @@ const AuthButtonsBlock = () => {
                     />
                 </IconButton>
             </Tooltip>
-            <Menu
-                sx={{ mt: '45px' }}
-                id="menu-appbar"
-                anchorEl={anchorElUser}
-                anchorOrigin={{
-                    vertical: 'top',
-                    horizontal: 'right',
-                }}
-                keepMounted
-                transformOrigin={{
-                    vertical: 'top',
-                    horizontal: 'right',
-                }}
-                open={Boolean(anchorElUser)}
-                onClose={handleCloseUserMenu}
-            >
-                {settings.map((setting) => (
-                    <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                        <Typography textAlign="center">{setting}</Typography>
-                    </MenuItem>
-                ))}
-            </Menu>
         </Box>
     ) : (
         <Box sx={{ flexGrow: 0 }}>

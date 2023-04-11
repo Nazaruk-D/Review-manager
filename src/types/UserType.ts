@@ -7,7 +7,7 @@ export type UserType = {
     lastLame: string;
     role: RoleType;
     avatar: string;
-    isBlocked: boolean;
+    isBlocked: 0 | 1;
     createdAt: string;
     updatedAt: string;
 };

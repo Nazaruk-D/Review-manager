@@ -1,7 +1,6 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/dist/query/react';
 import { PathAPI } from '../../enums/pathAPI';
 import { ResponseType } from '../../types/ResponseType';
-import { AuthType } from '../../types/AuthType';
 import { RegistrationType } from '../../types/RegistrationType';
 import { LoginType } from '../../types/LoginType';
 import { UserType } from '../../types/UserType';
@@ -13,7 +12,7 @@ export const authAPI = createApi({
         credentials: 'include',
     }),
     endpoints: (builder) => ({
-        auth: builder.query<ResponseType<AuthType>, Record<string, never>>({
+        auth: builder.query<ResponseType<UserType>, Record<string, never>>({
             query: () => `${PathAPI.Auth}`,
         }),
         register: builder.mutation<ResponseType, RegistrationType>({
