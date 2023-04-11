@@ -8,9 +8,11 @@ import { useTranslation } from 'react-i18next';
 import s from './LoginForm.module.scss';
 import { Path } from '../../../../enums/path';
 import { LoginErrorType } from '../../../../types/AuthErrorType';
+import { useLoginMutation, useRegisterMutation } from '../../../../store/api/authAPI';
 
 const LoginForm = () => {
     const navigate = useNavigate();
+    const [login] = useLoginMutation({});
     const { t } = useTranslation('translation', { keyPrefix: 'auth' });
 
     const formik = useFormik({
@@ -33,7 +35,8 @@ const LoginForm = () => {
             return errors;
         },
         onSubmit: (values) => {
-            console.log(values);
+            const { email, password } = values;
+            login({ email, password });
             formik.resetForm();
         },
     });

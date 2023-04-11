@@ -22,7 +22,14 @@ export const authAPI = createApi({
                 body: { firstName, lastName, email, password },
             }),
         }),
+        login: builder.mutation<ResponseType<any>, LoginType>({
+            query: ({ email, password }) => ({
+                url: `${PathAPI.Login}`,
+                method: 'POST',
+                body: { email, password },
+            }),
+        }),
     }),
 });
 
-export const { useAuthQuery, useRegisterMutation } = authAPI;
+export const { useAuthQuery, useRegisterMutation, useLoginMutation } = authAPI;

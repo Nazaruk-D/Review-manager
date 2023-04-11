@@ -54,10 +54,7 @@ const RegistrationForm = () => {
             return errors;
         },
         onSubmit: (values) => {
-            const { firstName, lastName, email, password } = values;
-            if (firstName && lastName && email && password) {
-                registerAccount({ firstName, lastName, email, password });
-            }
+            registerAccount({ ...values });
             formik.resetForm();
         },
     });
