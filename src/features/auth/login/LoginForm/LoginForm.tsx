@@ -8,11 +8,14 @@ import { useTranslation } from 'react-i18next';
 import s from './LoginForm.module.scss';
 import { Path } from '../../../../enums/path';
 import { LoginErrorType } from '../../../../types/AuthErrorType';
-import { useLoginMutation, useRegisterMutation } from '../../../../store/api/authAPI';
+import { useLoginMutation } from '../../../../store/api/authAPI';
+import { useAppDispatch } from '../../../../hooks/useRedux';
+import { setLoggedIn, setUser } from '../../../../store/slices/userSlice';
 
 const LoginForm = () => {
     const navigate = useNavigate();
-    const [login] = useLoginMutation({});
+    const dispatch = useAppDispatch();
+    const [login] = useLoginMutation();
     const { t } = useTranslation('translation', { keyPrefix: 'auth' });
 
     const formik = useFormik({
@@ -34,10 +37,18 @@ const LoginForm = () => {
             }
             return errors;
         },
-        onSubmit: (values) => {
-            const { email, password } = values;
-            login({ email, password });
-            formik.resetForm();
+        onSubmit: async (values) => {
+            try {
+                const user = await login({ ...values }).unwrap();
+                if (user.data) {
+                    dispatch(setUser(user.data));
+                    dispatch(setLoggedIn(true));
+                    formik.resetForm();
+                    navigate(Path.Root);
+                }
+            } catch (err) {
+                console.log(err);
+            }
         },
     });
     return (
@@ -63,6 +74,7 @@ const LoginForm = () => {
                         variant="standard"
                         id="email"
                         label="Email"
+                        autoComplete="email"
                         className={s.input}
                         {...formik.getFieldProps('email')}
                     />
@@ -73,6 +85,7 @@ const LoginForm = () => {
                         id="password"
                         label="Password"
                         type="password"
+                        autoComplete="current-password"
                         className={s.input}
                         {...formik.getFieldProps('password')}
                     />

@@ -4,6 +4,7 @@ import { ResponseType } from '../../types/ResponseType';
 import { AuthType } from '../../types/AuthType';
 import { RegistrationType } from '../../types/RegistrationType';
 import { LoginType } from '../../types/LoginType';
+import { UserType } from '../../types/UserType';
 
 export const authAPI = createApi({
     reducerPath: 'auth',
@@ -22,7 +23,7 @@ export const authAPI = createApi({
                 body: { firstName, lastName, email, password },
             }),
         }),
-        login: builder.mutation<ResponseType<any>, LoginType>({
+        login: builder.mutation<ResponseType<UserType>, LoginType>({
             query: ({ email, password }) => ({
                 url: `${PathAPI.Login}`,
                 method: 'POST',

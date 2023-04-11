@@ -10,12 +10,12 @@ const ThemeSwitcher = () => {
     return (
         <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
             {mode === 'dark' ? (
-                <IconButton color="inherit">
-                    <WbSunnyOutlinedIcon onClick={toggleColorMode} />
+                <IconButton color="inherit" onClick={toggleColorMode}>
+                    <WbSunnyOutlinedIcon />
                 </IconButton>
             ) : (
-                <IconButton color="inherit">
-                    <ModeNightOutlinedIcon onClick={toggleColorMode} />
+                <IconButton color="inherit" onClick={toggleColorMode}>
+                    <ModeNightOutlinedIcon />
                 </IconButton>
             )}
         </Box>
