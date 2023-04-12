@@ -8,7 +8,7 @@ const Posters = () => {
     return (
         <Grid container spacing={2}>
             {data.map((d) => (
-                <PosterItem key={d} />
+                <PosterItem key={d} createdDate="20.10.2020" creator="Dmitry Nazaruk" />
             ))}
         </Grid>
     );
