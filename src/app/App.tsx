@@ -31,16 +31,14 @@ function App() {
     }, [data]);
 
     return (
-        <div>
-            <ColorModeContext.Provider value={memoizedColorModeValue}>
-                <ThemeProvider theme={theme}>
-                    <CssBaseline />
-                    <Suspense fallback={<Loader />}>
-                        <RouterProvider router={router} />
-                    </Suspense>
-                </ThemeProvider>
-            </ColorModeContext.Provider>
-        </div>
+        <ColorModeContext.Provider value={memoizedColorModeValue}>
+            <ThemeProvider theme={theme}>
+                <CssBaseline />
+                <Suspense fallback={<Loader />}>
+                    <RouterProvider router={router} />
+                </Suspense>
+            </ThemeProvider>
+        </ColorModeContext.Provider>
     );
 }
 

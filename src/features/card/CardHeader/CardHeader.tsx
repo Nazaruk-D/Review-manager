@@ -1,6 +1,6 @@
 import React from 'react';
 import { Grid, Theme, Typography, useMediaQuery } from '@mui/material';
-import s from '../Card.module.scss';
+import s from './CardHeader.module.scss';
 
 const CardHeader = () => {
     const isMobile = useMediaQuery((theme: Theme) => theme.breakpoints.down('sm'));

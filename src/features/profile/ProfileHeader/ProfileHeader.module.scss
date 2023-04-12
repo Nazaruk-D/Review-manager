@@ -1,0 +1,44 @@
+@import './src/styles/sass/mixin';
+@import './src/styles/sass/variables';
+
+.headerContainer {
+  margin-bottom: 40px;
+
+  .avaBlock {
+    @include flex(column, space-between, center, nowrap);
+
+    .image {
+      position: absolute;
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      object-fit: cover;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+      border: 3px solid #ffffff;
+      cursor: pointer;
+
+      &:hover {
+        position: absolute;
+      }
+    }
+
+    .uploadPhoto {
+      @include flex(column, center, center, nowrap);
+      position: absolute;
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 3px solid #ffffff;
+      cursor: pointer;
+      background-color: rgba(157, 157, 157, 0.63);
+      z-index: 2;
+    }
+  }
+
+  .settingsBlock {
+    @include flex(column, space-between, flex-start, nowrap);
+  }
+}
+
+

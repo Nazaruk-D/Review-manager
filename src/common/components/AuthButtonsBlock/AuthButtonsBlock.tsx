@@ -36,8 +36,8 @@ const AuthButtonsBlock = () => {
     };
 
     return userData ? (
-        <Box sx={{ flexGrow: 0 }}>
-            <Tooltip title="Open settings">
+        <Box sx={{ flexGrow: 0 }} onClick={() => navigate(Path.Profile)}>
+            <Tooltip title="Open profile">
                 <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                     <Avatar
                         alt="Remy Sharp"

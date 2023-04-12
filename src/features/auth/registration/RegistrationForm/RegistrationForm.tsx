@@ -1,13 +1,14 @@
 import React from 'react';
 import { useFormik } from 'formik';
+import { useNavigate } from 'react-router-dom';
 import { Box, Button, Paper, TextField, Typography } from '@mui/material';
 import s from '../../login/LoginForm/LoginForm.module.scss';
 import { RegisterErrorType } from '../../../../types/AuthErrorType';
 import { useRegisterMutation } from '../../../../store/api/authAPI';
-import { useAppDispatch } from '../../../../hooks/useRedux';
+import { Path } from '../../../../enums/path';
 
 const RegistrationForm = () => {
-    const dispatch = useAppDispatch();
+    const navigate = useNavigate();
     const [registerAccount] = useRegisterMutation({});
 
     const formik = useFormik({
@@ -56,6 +57,7 @@ const RegistrationForm = () => {
         onSubmit: (values) => {
             registerAccount({ ...values });
             formik.resetForm();
+            navigate(Path.Login);
         },
     });
 

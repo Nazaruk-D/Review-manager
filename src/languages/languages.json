@@ -12,6 +12,22 @@
         "password": "Password",
         "or": "Or"
       },
+      "profile": {
+        "changePhoto": "Change photo",
+        "logout": "Logout",
+        "rating": "Rating",
+        "created": "Created",
+        "email": "Email",
+        "profile info": "Profile info",
+        "name": "Name",
+        "image": "Image",
+        "nameCard": "Name",
+        "createdCard": "Created",
+        "category": "Category",
+        "settings": "Settings",
+        "new review": "New review",
+        "upload photo": "Upload photo"
+      },
       "introduction": {
         "title": "Meet Reviewer - a website created for managing recommendations.",
         "description": "Reviewer provides personalized recommendations based on viewing history, allows sharing reviews and ratings, creating lists of favorite content, and keeping up with new releases. Find something new and exciting in the world of entertainment with Reviewer."
@@ -33,6 +49,22 @@
         "emailPlaceholder": "Введите e-mail адрес",
         "password": "Пароль",
         "or": "Или"
+      },
+      "profile": {
+        "changePhoto": "Сменить фото",
+        "logout": "Выйти",
+        "rating": "Рейтинг",
+        "created": "Аккаунт создан",
+        "email": "Email",
+        "profile info": "Информация профиля",
+        "name": "Имя",
+        "image": "Изображение",
+        "nameCard": "Название",
+        "createdCard": "Создано",
+        "category": "Категория",
+        "settings": "Настройки",
+        "new review": "Новый обзор",
+        "upload photo": "Загрузить фотографию"
       },
       "introduction": {
         "title": "Познакомьтесь с Reviewer manager - сайтом, созданным для управления рекомендациями.",
