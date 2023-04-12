@@ -29,7 +29,13 @@ export const authAPI = createApi({
                 body: { email, password },
             }),
         }),
+        logout: builder.mutation<ResponseType, Record<string, never>>({
+            query: () => ({
+                url: `${PathAPI.Logout}`,
+                method: 'DELETE',
+            }),
+        }),
     }),
 });
 
-export const { useAuthQuery, useRegisterMutation, useLoginMutation } = authAPI;
+export const { useAuthQuery, useRegisterMutation, useLoginMutation, useLogoutMutation } = authAPI;
