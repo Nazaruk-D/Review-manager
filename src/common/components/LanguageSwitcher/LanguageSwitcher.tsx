@@ -33,6 +33,7 @@ const LanguageSwitcher = () => {
                 sx={{
                     '& .MuiTypography-root': {
                         color: '#fff',
+                        mr: 1,
                     },
                 }}
             />

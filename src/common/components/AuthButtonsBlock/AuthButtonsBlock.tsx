@@ -29,7 +29,7 @@ const AuthButtonsBlock = () => {
         navigate(Path.Login);
     };
 
-    const openProfile = () => {
+    const profilePage = () => {
         navigate(Path.Profile);
         handleCloseUserMenu();
     };
@@ -37,6 +37,11 @@ const AuthButtonsBlock = () => {
     const LogoutHandler = async () => {
         await logout({});
         dispatch(setLoggedOut());
+        handleCloseUserMenu();
+    };
+
+    const homePage = () => {
+        navigate(Path.Root);
         handleCloseUserMenu();
     };
 
@@ -63,7 +68,10 @@ const AuthButtonsBlock = () => {
                 open={Boolean(anchorElUser)}
                 onClose={handleCloseUserMenu}
             >
-                <MenuItem onClick={openProfile}>
+                <MenuItem onClick={homePage}>
+                    <Typography textAlign="center">Home</Typography>
+                </MenuItem>
+                <MenuItem onClick={profilePage}>
                     <Typography textAlign="center">Profile</Typography>
                 </MenuItem>
                 <MenuItem onClick={LogoutHandler}>
@@ -72,7 +80,7 @@ const AuthButtonsBlock = () => {
             </Menu>
         </Box>
     ) : (
-        <Box sx={{ flexGrow: 0 }}>
+        <Box sx={{ display: 'flex', alignItems: 'center' }}>
             <Button color="inherit" sx={{ p: 0 }} component="span" onClick={navigateToLogin}>
                 {t('signIn')}
             </Button>

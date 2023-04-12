@@ -1,6 +1,10 @@
 @import './src/styles/sass/mixin';
+@import './src/styles/sass/variables';
 
 .logo {
   @include flex(column, center, center, nowrap);
   width: 200px;
+  @media screen and (max-width: $mediaWidth) {
+    display: none;
+  }
 }
