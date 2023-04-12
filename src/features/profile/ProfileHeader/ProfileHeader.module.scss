@@ -6,6 +6,10 @@
 
   .avaBlock {
     @include flex(column, space-between, center, nowrap);
+    @media screen and (max-width: $mediaWidth) {
+     width: 100%;
+      height: 170px;
+    }
 
     .image {
       position: absolute;
