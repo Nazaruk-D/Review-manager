@@ -28,6 +28,24 @@
         "new review": "New review",
         "upload photo": "Upload photo"
       },
+      "review editor": {
+        "review editor":  "Review editor",
+        "title": "Title",
+        "category": "Category",
+        "text": "Text",
+        "rating": "Rating",
+        "tags": "Tags",
+        "add photo": "Add photo",
+        "save review": "Save review",
+        "press enter": "Press Enter for saving tag"
+      },
+      "category": {
+        "movies": "Movies",
+        "books": "Books",
+        "games": "Games",
+        "food": "Food",
+        "other": "Other"
+      },
       "introduction": {
         "title": "Meet Reviewer - a website created for managing recommendations.",
         "description": "Reviewer provides personalized recommendations based on viewing history, allows sharing reviews and ratings, creating lists of favorite content, and keeping up with new releases. Find something new and exciting in the world of entertainment with Reviewer."
@@ -70,6 +88,24 @@
         "settings": "Настройки",
         "new review": "Новый обзор",
         "upload photo": "Загрузить фотографию"
+      },
+      "review editor": {
+        "review editor":  "Редактирование обзора",
+        "title": "Название",
+        "category": "Категория",
+        "text": "Описание",
+        "rating": "Рейтинг",
+        "tags": "Тэги",
+        "add photo": "Добавить фото",
+        "save review": "Сохранить обзор",
+        "press enter": "Нажмите Enter, чтобы добавить тэг"
+      },
+      "category": {
+        "movies": "Фильмы",
+        "books": "Книги",
+        "games": "Игры",
+        "food": "Еда",
+        "other": "Другое"
       },
       "introduction": {
         "title": "Познакомьтесь с Reviewer manager - сайтом, созданным для управления рекомендациями.",

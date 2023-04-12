@@ -5,7 +5,7 @@ import CardDescription from './CardDescription/CardDescription';
 import CommentsBlock from './CommentsBlock/CommentsBlock';
 import SendCommentForm from './SendCommentForm/SendCommentForm';
 
-const Card = () => {
+const Review = () => {
     return (
         <Container sx={{ mt: '1rem' }}>
             <CardHeader />
@@ -16,4 +16,4 @@ const Card = () => {
     );
 };
 
-export default Card;
+export default Review;
