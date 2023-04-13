@@ -1,4 +1,4 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { RequestStatusType } from '../../types/RequestStatusType';
 
 type InitialStateType = {
@@ -16,7 +16,19 @@ const initialState: InitialStateType = {
 const appSlice = createSlice({
     name: 'app',
     initialState,
-    reducers: {},
+    reducers: {
+        setAppStatusAC(state, action: PayloadAction<{ status: RequestStatusType }>) {
+            state.status = action.payload.status;
+        },
+        setInitialized(state) {
+            state.initialized = true;
+        },
+        setAppErrorAC(state, action: PayloadAction<{ message: null | string }>) {
+            state.error = action.payload.message;
+        },
+    },
 });
+
+export const { setAppStatusAC, setInitialized, setAppErrorAC } = appSlice.actions;
 
 export default appSlice.reducer;

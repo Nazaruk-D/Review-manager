@@ -4,7 +4,7 @@ export type UserType = {
     id: string | number;
     email: string;
     firstName: string;
-    lastLame: string;
+    lastName: string;
     role: RoleType;
     avatar: string;
     isBlocked: 0 | 1;

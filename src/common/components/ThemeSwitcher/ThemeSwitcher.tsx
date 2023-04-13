@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { Box, FormGroup, IconButton } from '@mui/material';
+import { FormGroup, IconButton } from '@mui/material';
 import WbSunnyOutlinedIcon from '@mui/icons-material/WbSunnyOutlined';
 import ModeNightOutlinedIcon from '@mui/icons-material/ModeNightOutlined';
 import { ColorModeContext } from '../../../hooks/useThemeMode';

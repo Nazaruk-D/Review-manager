@@ -1,10 +1,14 @@
 import React, { useState } from 'react';
 import { Box, Button, Grid, Typography } from '@mui/material';
 import { useTranslation } from 'react-i18next';
+import dateFormat from 'dateformat';
 import s from './ProfileHeader.module.scss';
+import { useAppSelector } from '../../../hooks/useRedux';
+import { selectorUserData } from '../../../store/selectors/userSelector';
 
 const ProfileHeader = () => {
     const [isVisible, setIsVisible] = useState(false);
+    const user = useAppSelector(selectorUserData);
     const { t } = useTranslation('translation', { keyPrefix: 'profile' });
 
     return (
@@ -38,13 +42,13 @@ const ProfileHeader = () => {
                 <Box sx={{ display: 'flex', flexDirection: 'row' }}>
                     <Typography variant="h3">{t('name')}:</Typography>
                     <Typography variant="h3" color="textSecondary" sx={{ ml: 1, mb: 1, fontWeight: 500 }}>
-                        Dmitry Nazaruk
+                        {user?.firstName} {user?.lastName}
                     </Typography>
                 </Box>
                 <Box sx={{ display: 'flex', flexDirection: 'row' }}>
                     <Typography variant="h3">{t('email')}:</Typography>
                     <Typography variant="h3" color="textSecondary" sx={{ ml: 1, mb: 1, fontWeight: 500 }}>
-                        nazaruk-dima@mail.ru
+                        {user?.email}
                     </Typography>
                 </Box>
                 <Box sx={{ display: 'flex', flexDirection: 'row' }}>
@@ -56,7 +60,7 @@ const ProfileHeader = () => {
                 <Box sx={{ display: 'flex', flexDirection: 'row' }}>
                     <Typography variant="h3">{t('created')}:</Typography>
                     <Typography variant="h3" color="textSecondary" sx={{ ml: 1, fontWeight: 500 }}>
-                        22.10.2001
+                        {dateFormat(user?.createdAt, 'mmmm dS, yyyy, h:MM:ss TT')}
                     </Typography>
                 </Box>
             </Grid>

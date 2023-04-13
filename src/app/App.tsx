@@ -6,11 +6,14 @@ import routes from '../routes/routes';
 import { ColorModeContext, useThemeMode } from '../hooks/useThemeMode';
 import { useAuthQuery } from '../store/api/authAPI';
 import Loader from '../common/components/Loader/Loader';
-import { useAppDispatch } from '../hooks/useRedux';
+import { useAppDispatch, useAppSelector } from '../hooks/useRedux';
 import { setLoggedIn, setUser } from '../store/slices/userSlice';
+import { selectorInitialized } from '../store/selectors/appSelector';
+import { setAppStatusAC, setInitialized } from '../store/slices/appSlice';
 
 function App() {
     const dispatch = useAppDispatch();
+    const isAppInitialized = useAppSelector(selectorInitialized);
     const router = createBrowserRouter(routes);
     const [theme, colorMode, mode] = useThemeMode();
     const memoizedColorModeValue = useMemo(
@@ -21,14 +24,27 @@ function App() {
         [colorMode.toggleColorMode, mode],
     );
 
-    const { data } = useAuthQuery({});
+    const { data, isLoading, error } = useAuthQuery({});
 
     useEffect(() => {
-        if (data) {
-            dispatch(setUser(data.data));
-            dispatch(setLoggedIn(true));
+        if (error) {
+            dispatch(setAppStatusAC({ status: 'failed' }));
+            return;
         }
-    }, [data]);
+
+        if (!isLoading) {
+            dispatch(setInitialized());
+            if (data) {
+                dispatch(setUser(data.data));
+                dispatch(setLoggedIn(true));
+            }
+            dispatch(setAppStatusAC({ status: 'succeeded' }));
+        }
+    }, [data, error, isLoading]);
+
+    if (!isAppInitialized || isLoading) {
+        return <Loader />;
+    }
 
     return (
         <ColorModeContext.Provider value={memoizedColorModeValue}>
