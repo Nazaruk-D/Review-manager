@@ -4,6 +4,7 @@ import { ResponseType } from '../../types/ResponseType';
 import { RegistrationType } from '../../types/RegistrationType';
 import { LoginType } from '../../types/LoginType';
 import { UserType } from '../../types/UserType';
+import { FacebookResponse } from '../../types/FacebookResponse';
 
 export const authAPI = createApi({
     reducerPath: 'auth',
@@ -35,7 +36,14 @@ export const authAPI = createApi({
                 method: 'DELETE',
             }),
         }),
+        socialLogin: builder.mutation<ResponseType<UserType>, FacebookResponse>({
+            query: (data) => ({
+                url: `${PathAPI.LoginSocial}`,
+                method: 'POST',
+                body: data,
+            }),
+        }),
     }),
 });
 
-export const { useAuthQuery, useRegisterMutation, useLoginMutation, useLogoutMutation } = authAPI;
+export const { useAuthQuery, useRegisterMutation, useLoginMutation, useLogoutMutation, useSocialLoginMutation } = authAPI;

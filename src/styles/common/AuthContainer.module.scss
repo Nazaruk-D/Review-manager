@@ -4,8 +4,8 @@
 .authContainer {
   @include flex(row, center, flex-start, wrap);
   width: 90%;
-  height: 500px;
-  margin-top: 120px;
+  height: 600px;
+  margin-top: 30px;
   @media screen and (max-width: $mediaWidth) {
     @include flex(column, flex-start, center, wrap);
     margin-top: 20px;

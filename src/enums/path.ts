@@ -6,4 +6,5 @@ export enum Path {
     Profile = '/profile',
     Review = '/review',
     ReviewForm = '/review-form',
+    Success = '/success',
 }

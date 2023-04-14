@@ -8,6 +8,7 @@ import Root from '../app/Root/Root';
 import Profile from '../features/profile/Profile';
 import Review from '../features/review/Review/Review';
 import { ReviewForm } from '../features/review/ReviewForm/ReviewForm';
+import Success from '../common/components/Success/Success';
 
 const routes = createRoutesFromElements(
     <Route path={Path.Root} element={<Root />}>
@@ -17,6 +18,7 @@ const routes = createRoutesFromElements(
         <Route path={Path.Review} element={<Review />} />
         <Route path={Path.Profile} element={<Profile />} />
         <Route path={Path.ReviewForm} element={<ReviewForm />} />
+        <Route path={Path.Success} element={<Success />} />
     </Route>,
 );
 

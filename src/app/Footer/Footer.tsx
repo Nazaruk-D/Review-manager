@@ -12,7 +12,7 @@ const Footer = () => {
                 bgcolor: 'background.paper',
                 textAlign: 'center',
                 fontSize: '0.8rem',
-                marginTop: 'auto',
+                marginTop: 1,
             }}
         >
             <Container maxWidth="lg" sx={{ p: 0 }}>
