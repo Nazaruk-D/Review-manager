@@ -7,6 +7,7 @@ import { useAppDispatch, useAppSelector } from '../../../hooks/useRedux';
 import { selectorUserData } from '../../../store/selectors/userSelector';
 import { useLogoutMutation } from '../../../store/api/authAPI';
 import { setLoggedOut } from '../../../store/slices/userSlice';
+import { supabase } from '../../../utils/supabase';
 
 const AuthButtonsBlock = () => {
     const dispatch = useAppDispatch();
@@ -35,6 +36,11 @@ const AuthButtonsBlock = () => {
     };
 
     const LogoutHandler = async () => {
+        const { error } = await supabase.auth.signOut();
+        if (error) {
+            console.log(error);
+            return;
+        }
         await logout({});
         dispatch(setLoggedOut());
         handleCloseUserMenu();
@@ -49,7 +55,13 @@ const AuthButtonsBlock = () => {
         <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
                 <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                    <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+                    <Avatar
+                        alt="Remy Sharp"
+                        src={
+                            userData.avatar ||
+                            'https://img.freepik.com/premium-vector/male-avatar-icon-unknown-or-anonymous-person-default-avatar-profile-icon-social-media-user-business-man-man-profile-silhouette-isolated-on-white-background-vector-illustration_735449-120.jpg'
+                        }
+                    />
                 </IconButton>
             </Tooltip>
             <Menu
@@ -69,13 +81,13 @@ const AuthButtonsBlock = () => {
                 onClose={handleCloseUserMenu}
             >
                 <MenuItem onClick={homePage}>
-                    <Typography textAlign="center">Home</Typography>
+                    <Typography textAlign="center">{t('home')}</Typography>
                 </MenuItem>
                 <MenuItem onClick={profilePage}>
-                    <Typography textAlign="center">Profile</Typography>
+                    <Typography textAlign="center">{t('profile')}</Typography>
                 </MenuItem>
                 <MenuItem onClick={LogoutHandler}>
-                    <Typography textAlign="center">Logout</Typography>
+                    <Typography textAlign="center">{t('logout')}</Typography>
                 </MenuItem>
             </Menu>
         </Box>

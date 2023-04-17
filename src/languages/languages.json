@@ -10,7 +10,10 @@
         "email": "E-mail",
         "emailPlaceholder": "Enter e-mail address",
         "password": "Password",
-        "or": "Or"
+        "or": "Or",
+        "home": "Home",
+        "profile": "Profile",
+        "logout": "Logout"
       },
       "profile": {
         "changePhoto": "Change photo",
@@ -29,25 +32,27 @@
         "upload photo": "Upload photo"
       },
       "review editor": {
-        "review editor":  "Review editor",
+        "review editor": "Review editor",
         "title": "Title",
+        "review title": "Review title",
         "category": "Category",
         "text": "Text",
         "rating": "Rating",
         "tags": "Tags",
         "add photo": "Add photo",
         "save review": "Save review",
-        "press enter": "Press Enter for saving tag"
+        "press enter": "Press Enter for add a tag"
       },
       "category": {
         "movies": "Movies",
         "books": "Books",
         "games": "Games",
         "food": "Food",
+        "cars": "Cars",
         "other": "Other"
       },
       "introduction": {
-        "title": "Meet Reviewer - a website created for managing recommendations.",
+        "title": "Meet Reviewer manager - a website created for managing recommendations.",
         "description": "Reviewer provides personalized recommendations based on viewing history, allows sharing reviews and ratings, creating lists of favorite content, and keeping up with new releases. Find something new and exciting in the world of entertainment with Reviewer."
       },
       "poster": {
@@ -71,7 +76,10 @@
         "email": "E-mail",
         "emailPlaceholder": "Введите e-mail адрес",
         "password": "Пароль",
-        "or": "Или"
+        "or": "Или",
+        "home": "Главная",
+        "profile": "Профиль",
+        "logout": "Выйти"
       },
       "profile": {
         "changePhoto": "Сменить фото",
@@ -92,6 +100,7 @@
       "review editor": {
         "review editor":  "Редактирование обзора",
         "title": "Название",
+        "review title": "Название обзора",
         "category": "Категория",
         "text": "Описание",
         "rating": "Рейтинг",
@@ -105,6 +114,7 @@
         "books": "Книги",
         "games": "Игры",
         "food": "Еда",
+        "cars": "Автомобили",
         "other": "Другое"
       },
       "introduction": {

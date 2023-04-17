@@ -7,7 +7,7 @@ import SendCommentForm from './SendCommentForm/SendCommentForm';
 
 const Review = () => {
     return (
-        <Container sx={{ mt: '1rem' }}>
+        <Container sx={{ mt: '1rem', backgroundColor: 'red' }}>
             <CardHeader />
             <CardDescription />
             <CommentsBlock />

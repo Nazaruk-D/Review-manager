@@ -6,31 +6,28 @@ import s from '../../login/LoginForm/LoginForm.module.scss';
 import { RegisterErrorType } from '../../../../types/AuthErrorType';
 import { useRegisterMutation } from '../../../../store/api/authAPI';
 import { Path } from '../../../../enums/path';
+import { supabase } from '../../../../utils/supabase';
+
+export type RegisterType = {
+    email: string;
+    password: string;
+    userName: string;
+};
 
 const RegistrationForm = () => {
-    const navigate = useNavigate();
-    const [registerAccount] = useRegisterMutation({});
-
     const formik = useFormik({
         initialValues: {
-            firstName: '',
-            lastName: '',
+            userName: '',
             email: '',
             password: '',
             confirmPassword: '',
         },
         validate: (values) => {
             const errors: RegisterErrorType = {};
-            if (!values.firstName) {
+            if (!values.userName) {
                 errors.firstName = 'First Name is required';
-            } else if (values.firstName.length < 3) {
-                errors.firstName = 'Name must be min 3 characters long.';
-            }
-
-            if (!values.lastName) {
-                errors.lastName = 'Last Name is required';
-            } else if (values.lastName.length < 3) {
-                errors.lastName = 'Last Name must be min 3 characters long.';
+            } else if (values.userName.length < 6) {
+                errors.firstName = 'Name must be min 6 characters long.';
             }
 
             if (!values.email) {
@@ -54,10 +51,22 @@ const RegistrationForm = () => {
             }
             return errors;
         },
-        onSubmit: (values) => {
-            registerAccount({ ...values });
-            formik.resetForm();
-            navigate(Path.Login);
+        onSubmit: async (values) => {
+            try {
+                const { data, error } = await supabase.auth.signUp({
+                    email: values.email,
+                    password: values.password,
+                });
+
+                if (!error && data.user?.id) {
+                    await supabase.from('users').update({ user_name: values.userName }).eq('id', data.user.id);
+                    console.log(data);
+                } else {
+                    console.log(error);
+                }
+            } catch (err) {
+                console.log(err);
+            }
         },
     });
 
@@ -82,24 +91,13 @@ const RegistrationForm = () => {
                     <TextField
                         fullWidth
                         variant="standard"
-                        id="firstName"
-                        label="First Name"
+                        id="userName"
+                        label="User Name"
                         className={s.input}
-                        {...formik.getFieldProps('firstName')}
+                        {...formik.getFieldProps('userName')}
                     />
-                    {formik.touched.firstName && formik.errors.firstName && (
-                        <div style={{ color: 'red' }}>{formik.errors.firstName}</div>
-                    )}
-                    <TextField
-                        fullWidth
-                        variant="standard"
-                        id="lastName"
-                        label="Last Name"
-                        className={s.input}
-                        {...formik.getFieldProps('lastName')}
-                    />
-                    {formik.touched.lastName && formik.errors.lastName && (
-                        <div style={{ color: 'red' }}>{formik.errors.lastName}</div>
+                    {formik.touched.userName && formik.errors.userName && (
+                        <div style={{ color: 'red' }}>{formik.errors.userName}</div>
                     )}
                     <TextField
                         fullWidth

@@ -4,14 +4,16 @@ import { RoleType } from '../../types/RoleType';
 
 interface UserState {
     user: UserType | null;
+    role: RoleType;
     isLoggedIn: boolean;
-    isAdmin: RoleType;
+    isBlocked: boolean;
 }
 
 const initialState: UserState = {
     user: null,
+    role: 'user',
     isLoggedIn: false,
-    isAdmin: 'user',
+    isBlocked: false,
 };
 
 const userSlice = createSlice({
@@ -20,7 +22,6 @@ const userSlice = createSlice({
     reducers: {
         setUser(state, { payload }: PayloadAction<UserType | null>) {
             state.user = payload;
-            state.isAdmin = payload!.role;
         },
 
         setLoggedIn(state, { payload }: PayloadAction<boolean>) {
@@ -29,7 +30,7 @@ const userSlice = createSlice({
 
         setLoggedOut(state) {
             state.user = null;
-            state.isAdmin = 'user';
+            state.role = 'user';
             state.isLoggedIn = false;
         },
     },

@@ -21,7 +21,10 @@ const ProfileHeader = () => {
                 onMouseLeave={() => setIsVisible(false)}
             >
                 <img
-                    src="https://sun9-16.userapi.com/impg/AN-ikCmTp9yLRpLCkoACsL5dMQC9PfxIv9sX-g/zJ5bKUy8JMk.jpg?size=1080x1920&quality=95&sign=0da9f7871dde6f0032cc304b2cd2dec7&type=album"
+                    src={
+                        user?.avatar ||
+                        'https://img.freepik.com/premium-vector/male-avatar-icon-unknown-or-anonymous-person-default-avatar-profile-icon-social-media-user-business-man-man-profile-silhouette-isolated-on-white-background-vector-illustration_735449-120.jpg'
+                    }
                     alt="test"
                     className={s.image}
                 />
@@ -42,7 +45,7 @@ const ProfileHeader = () => {
                 <Box sx={{ display: 'flex', flexDirection: 'row' }}>
                     <Typography variant="h3">{t('name')}:</Typography>
                     <Typography variant="h3" color="textSecondary" sx={{ ml: 1, mb: 1, fontWeight: 500 }}>
-                        {user?.firstName} {user?.lastName}
+                        {user?.userName}
                     </Typography>
                 </Box>
                 <Box sx={{ display: 'flex', flexDirection: 'row' }}>

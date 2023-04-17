@@ -18,36 +18,35 @@ import {
     Typography,
 } from '@mui/material';
 import { useTranslation } from 'react-i18next';
-
-interface IReview {
-    title: string;
-    category: string;
-    text: string;
-    rating: number;
-    tags: string[];
-    photo: string | null;
-}
+import { ReviewType } from '../../../types/ReviewType';
+import { useCreateReviewMutation } from '../../../store/api/reviewAPI';
+import { useAppSelector } from '../../../hooks/useRedux';
+import { selectorUserData } from '../../../store/selectors/userSelector';
 
 export const ReviewForm = () => {
     const { t } = useTranslation('translation', { keyPrefix: 'review editor' });
     const { t: tc } = useTranslation('translation', { keyPrefix: 'category' });
-
+    const user = useAppSelector(selectorUserData);
+    const [sendReview] = useCreateReviewMutation();
     const formik = useFormik({
         initialValues: {
             title: '',
+            review_title: '',
             category: '',
-            text: '',
+            body: '',
             rating: null,
             tags: [],
-            tagsInputValue: '',
             photo: null,
-        },
+        } as ReviewType,
         validate: (values) => {
             const errors = {};
             return errors;
         },
         onSubmit: async (values) => {
             console.log(values);
+            if (values) {
+                sendReview({ ...values, author_id: user!.id });
+            }
         },
     });
 
@@ -71,6 +70,9 @@ export const ReviewForm = () => {
                 <form onSubmit={formik.handleSubmit}>
                     <Grid container spacing={3}>
                         <Grid item xs={12}>
+                            <TextField label={t('review title')} fullWidth {...formik.getFieldProps('review_title')} />
+                        </Grid>
+                        <Grid item xs={12}>
                             <TextField label={t('title')} fullWidth {...formik.getFieldProps('title')} />
                         </Grid>
                         <Grid item xs={12}>
@@ -81,12 +83,13 @@ export const ReviewForm = () => {
                                     <MenuItem value="Books">{tc('books')}</MenuItem>
                                     <MenuItem value="Games">{tc('games')}</MenuItem>
                                     <MenuItem value="Food">{tc('food')}</MenuItem>
+                                    <MenuItem value="Cars">{tc('cars')}</MenuItem>
                                     <MenuItem value="Other">{tc('other')}</MenuItem>
                                 </Select>
                             </FormControl>
                         </Grid>
                         <Grid item xs={12}>
-                            <TextField label={t('text')} fullWidth rows={4} multiline {...formik.getFieldProps('text')} />
+                            <TextField label={t('text')} fullWidth rows={4} multiline {...formik.getFieldProps('body')} />
                         </Grid>
                         <Grid item xs={12}>
                             <FormControl component="fieldset">

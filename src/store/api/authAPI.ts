@@ -4,7 +4,6 @@ import { ResponseType } from '../../types/ResponseType';
 import { RegistrationType } from '../../types/RegistrationType';
 import { LoginType } from '../../types/LoginType';
 import { UserType } from '../../types/UserType';
-import { FacebookResponse } from '../../types/FacebookResponse';
 
 export const authAPI = createApi({
     reducerPath: 'auth',
@@ -17,10 +16,10 @@ export const authAPI = createApi({
             query: () => `${PathAPI.Auth}`,
         }),
         register: builder.mutation<ResponseType, RegistrationType>({
-            query: ({ firstName, lastName, email, password }) => ({
+            query: ({ userName, email, password }) => ({
                 url: `${PathAPI.Register}`,
                 method: 'POST',
-                body: { firstName, lastName, email, password },
+                body: { userName, email, password },
             }),
         }),
         login: builder.mutation<ResponseType<UserType>, LoginType>({
@@ -36,14 +35,7 @@ export const authAPI = createApi({
                 method: 'DELETE',
             }),
         }),
-        socialLogin: builder.mutation<ResponseType<UserType>, FacebookResponse>({
-            query: (data) => ({
-                url: `${PathAPI.LoginSocial}`,
-                method: 'POST',
-                body: data,
-            }),
-        }),
     }),
 });
 
-export const { useAuthQuery, useRegisterMutation, useLoginMutation, useLogoutMutation, useSocialLoginMutation } = authAPI;
+export const { useAuthQuery, useRegisterMutation, useLoginMutation, useLogoutMutation } = authAPI;

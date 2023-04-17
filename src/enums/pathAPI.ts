@@ -4,4 +4,5 @@ export enum PathAPI {
     Login = '/auth/login',
     LoginSocial = '/auth-social/login',
     Logout = '/auth/logout',
+    Review = '/review',
 }

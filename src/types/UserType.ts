@@ -1,13 +1,11 @@
 import { RoleType } from './RoleType';
 
 export type UserType = {
-    id: string | number;
+    id: string;
     email: string;
-    firstName: string;
-    lastName: string;
-    role: RoleType;
+    userName: string;
     avatar: string;
-    isBlocked: 0 | 1;
-    createdAt: string;
-    updatedAt: string;
+    role: RoleType;
+    createdAt?: string;
+    updatedAt?: string;
 };
