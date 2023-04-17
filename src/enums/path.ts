@@ -2,7 +2,7 @@ export enum Path {
     Root = '/',
     Login = '/login',
     Register = '/register',
-    Profile = '/profile',
+    Profile = '/profile/:userId',
     Review = '/review',
-    ReviewForm = '/review-form',
+    CreateReview = '/create-review/:userId',
 }

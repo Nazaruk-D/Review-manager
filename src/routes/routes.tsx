@@ -16,7 +16,7 @@ const routes = createRoutesFromElements(
         <Route path={Path.Register} element={<Registration />} />
         <Route path={Path.Review} element={<Review />} />
         <Route path={Path.Profile} element={<Profile />} />
-        <Route path={Path.ReviewForm} element={<ReviewForm />} />
+        <Route path={Path.CreateReview} element={<ReviewForm />} />
     </Route>,
 );
 

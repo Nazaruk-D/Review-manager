@@ -31,7 +31,7 @@ const AuthButtonsBlock = () => {
     };
 
     const profilePage = () => {
-        navigate(Path.Profile);
+        navigate(`/profile/${userData!.id}`);
         handleCloseUserMenu();
     };
 
