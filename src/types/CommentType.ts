@@ -1,9 +1,10 @@
-export type CommentType = {
+import { CreateCommentType } from './CreateCommentType';
+import { UserType } from './UserType';
+
+export type CommentType = CreateCommentType & {
     id: string;
-    review_id: string;
-    create_at: string;
-    update_at: string;
-    body: string;
-    author_id: string;
+    created_at: string;
+    updated_at: string;
     image: string;
+    users: UserType;
 };

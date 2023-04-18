@@ -6,4 +6,5 @@ export type ReviewResponseType = ReviewType & {
     created_at: string;
     author_id: string;
     author_name: string;
+    author_avatar: string;
 };

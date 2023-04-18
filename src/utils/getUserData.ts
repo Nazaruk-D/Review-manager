@@ -22,13 +22,12 @@ export async function getUserData(dispatch: Dispatch) {
             avatar:
                 user.user_metadata.avatar_url ||
                 'https://sun1.velcom-by-minsk.userapi.com/impg/AN-ikCmTp9yLRpLCkoACsL5dMQC9PfxIv9sX-g/zJ5bKUy8JMk.jpg?size=1080x1920&quality=95&sign=0da9f7871dde6f0032cc304b2cd2dec7&type=album',
-            userName: user.user_metadata.full_name || data[0].user_name,
+            user_name: user.user_metadata.full_name || data[0].user_name,
             id: user.id,
             createdAt: user.created_at,
             updatedAt: user.updated_at,
             role: data[0].role,
         };
-        console.log('NEWDATA: ', newData);
         dispatch(setUser(newData));
         dispatch(setLoggedIn(true));
     }

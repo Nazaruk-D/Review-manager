@@ -7,9 +7,9 @@ import { useGetReviewsQuery } from '../../../store/api/reviewAPI';
 import { ReviewResponseType } from '../../../types/ReviewResponseType';
 
 const ReviewTable = () => {
-    const { userId } = useParams<string>();
+    const { userId = '' } = useParams<string>();
     const { t } = useTranslation('translation', { keyPrefix: 'profile' });
-    const { data, isLoading, isError } = useGetReviewsQuery(userId ? { userId } : { userId: '' });
+    const { data, isLoading, isError } = useGetReviewsQuery({ userId });
     const reviews: ReviewResponseType[] = data ? data.data : [];
     return (
         <TableContainer component={Paper} sx={{ mt: 3, mb: 3 }}>

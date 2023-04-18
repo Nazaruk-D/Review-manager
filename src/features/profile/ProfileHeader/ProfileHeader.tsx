@@ -45,7 +45,7 @@ const ProfileHeader = () => {
                 <Box sx={{ display: 'flex', flexDirection: 'row' }}>
                     <Typography variant="h3">{t('name')}:</Typography>
                     <Typography variant="h3" color="textSecondary" sx={{ ml: 1, mb: 1, fontWeight: 500 }}>
-                        {user?.userName}
+                        {user?.user_name}
                     </Typography>
                 </Box>
                 <Box sx={{ display: 'flex', flexDirection: 'row' }}>
