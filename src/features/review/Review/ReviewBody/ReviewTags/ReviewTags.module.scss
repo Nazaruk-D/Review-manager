@@ -1,0 +1,24 @@
+@import "./src/styles/sass/mixin";
+
+.tagsBlock {
+  @include flex(row, flex-start, center, wrap);
+  min-height: 40px;
+  margin-bottom: 5px;
+
+  .tag {
+    margin-right: 10px;
+    margin-bottom: 10px;
+    padding: 5px 10px;
+    background-color: #4cd9ea;
+    text-decoration: none;
+    border-radius: 10px;
+    color: black;
+    transition: transform 0.2s ease-in-out;
+    display: inline-block;
+
+    &:hover {
+      transform: scale(1.1);
+      cursor: pointer;
+    }
+  }
+}

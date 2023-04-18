@@ -4,7 +4,7 @@ import { useLocation } from 'react-router-dom';
 import CommentsBlock from './CommentsBlock/CommentsBlock';
 import SendCommentForm from './SendCommentForm/SendCommentForm';
 import ReviewHeader from './ReviewHeader/ReviewHeader';
-import ReviewDescription from './ReviewDescription/ReviewDescription';
+import ReviewBody from './ReviewBody/ReviewBody';
 import { ReviewResponseType } from '../../../types/ReviewResponseType';
 
 const Review = () => {
@@ -14,7 +14,7 @@ const Review = () => {
     return (
         <Container sx={{ mt: '1rem' }}>
             <ReviewHeader review={review} />
-            <ReviewDescription review={review} />
+            <ReviewBody review={review} />
             <SendCommentForm />
             <CommentsBlock />
         </Container>
