@@ -1,6 +1,7 @@
 import React from 'react';
 import { Avatar, Box, Grid, Typography } from '@mui/material';
 import { CommentType } from '../../../../types/CommentType';
+import s from './CommentsBlock.module.scss';
 
 const comments: CommentType[] = [
     {
@@ -33,7 +34,28 @@ const comments: CommentType[] = [
 ];
 
 const CommentsBlock = () => {
-    return <Box sx={{ w: '100%' }}>Comment Block</Box>;
+    return (
+        <Box className={s.commentContainer}>
+            {comments.map((comment) => (
+                <Box key={comment.id} className={s.commentBlock}>
+                    <Grid container alignItems="center">
+                        <Grid item>
+                            <Avatar variant="rounded" alt={comment.author_id} src={comment.image} className={s.avatar} />
+                        </Grid>
+                        <Grid item className={s.textBlock}>
+                            <Typography component="span" sx={{ fontWeight: 'bold' }}>
+                                {comment.author_id}
+                            </Typography>
+                            <Typography variant="caption" color="textSecondary">
+                                {comment.create_at}
+                            </Typography>
+                            <Typography variant="body1">{comment.body}</Typography>
+                        </Grid>
+                    </Grid>
+                </Box>
+            ))}
+        </Box>
+    );
 };
 
 export default CommentsBlock;

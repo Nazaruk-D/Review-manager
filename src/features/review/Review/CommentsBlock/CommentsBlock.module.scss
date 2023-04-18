@@ -1,0 +1,25 @@
+@import './src/styles/sass/mixin';
+@import './src/styles/sass/variables';
+
+
+.commentContainer {
+
+  .commentBlock {
+    @include flex(column, center, flex-start, wrap);
+    height: 80px;
+    margin-top: 7px;
+    border: 1px solid #bebebe;
+    border-radius: 5px;
+
+    .avatar {
+      width: 70px;
+      height: 70px;
+      margin: 0 10px;
+    }
+
+    .textBlock {
+      @include flex(column, flex-start, flex-start, wrap);
+
+    }
+  }
+}
