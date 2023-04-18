@@ -1,7 +1,6 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/dist/query/react';
 import { PathAPI } from '../../enums/pathAPI';
 import { ResponseType } from '../../types/ResponseType';
-import { ReviewType } from '../../types/ReviewType';
 import { ReviewResponseType } from '../../types/ReviewResponseType';
 import { CreateReviewType } from '../../types/CreateReviewType';
 
@@ -12,17 +11,17 @@ export const reviewAPI = createApi({
         credentials: 'include',
     }),
     endpoints: (builder) => ({
-        getReviews: builder.query<ResponseType<ReviewResponseType>, ReviewType>({
-            query: () => `${PathAPI.Review}`,
+        getReviews: builder.query<ResponseType<ReviewResponseType[]>, { userId: string }>({
+            query: ({ userId }) => `${PathAPI.Review}/${userId}`,
         }),
         createReview: builder.mutation<ResponseType<ReviewResponseType>, CreateReviewType>({
-            query: ({ title, category, rating, photo, body, tags, review_title, author_id }) => ({
+            query: ({ title, category, rating, photo, body, tags, review_title, author_id, author_name }) => ({
                 url: `${PathAPI.Review}`,
                 method: 'POST',
-                body: { title, category, rating, photo, body, tags, review_title, author_id },
+                body: { title, category, rating, photo, body, tags, review_title, author_id, author_name },
             }),
         }),
     }),
 });
 
-export const { useCreateReviewMutation } = reviewAPI;
+export const { useGetReviewsQuery, useCreateReviewMutation } = reviewAPI;

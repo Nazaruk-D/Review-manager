@@ -2,8 +2,11 @@ import React from 'react';
 import { Container, Box, Typography, IconButton } from '@mui/material';
 import { Facebook, GitHub, Instagram, LinkedIn } from '@mui/icons-material';
 import { useTranslation } from 'react-i18next';
+import { useNavigate } from 'react-router-dom';
+import { Path } from '../../enums/path';
 
 const Footer = () => {
+    const navigate = useNavigate();
     const { t } = useTranslation('translation', { keyPrefix: 'footer' });
     return (
         <Box
@@ -12,8 +15,9 @@ const Footer = () => {
                 bgcolor: 'background.paper',
                 textAlign: 'center',
                 fontSize: '0.8rem',
-                marginTop: 1,
+                marginTop: 'auto',
             }}
+            onClick={() => navigate(`${Path.Review}/`)}
         >
             <Container maxWidth="lg" sx={{ p: 0 }}>
                 <Box sx={{ display: 'flex', justifyContent: 'center' }}>

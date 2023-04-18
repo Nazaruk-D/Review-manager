@@ -2,23 +2,28 @@ import React, { FC } from 'react';
 import { Box, IconButton, TableCell, TableRow } from '@mui/material';
 import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
 import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined';
-import s from './CardsRow.module.scss';
-import { TableRowType } from '../../../../types/TableType';
+import dateFormat from 'dateformat';
+import { useNavigate } from 'react-router-dom';
+import s from './ReviewRow.module.scss';
+import noImage from '../../../../common/img/No_Image_Available.jpg';
+import { ReviewResponseType } from '../../../../types/ReviewResponseType';
 
 type CardsRowPropsType = {
-    row: TableRowType;
+    row: ReviewResponseType;
+    index: number;
 };
 
-const CardsRow: FC<CardsRowPropsType> = ({ row }) => {
+const ReviewRow: FC<CardsRowPropsType> = ({ row, index }) => {
+    const navigate = useNavigate();
     return (
-        <TableRow key={row.id} className={s.row}>
-            <TableCell>{row.id}</TableCell>
+        <TableRow className={s.row} onClick={() => navigate(`/review/${row.id}`, { state: row })}>
+            <TableCell>{index + 1}</TableCell>
             <TableCell>
-                <img src={row.image} alt={row.name} />
+                <img src={row.photo ? row.photo : noImage} alt={row.title} className={s.image} />
             </TableCell>
-            <TableCell>{row.name}</TableCell>
+            <TableCell>{row.title}</TableCell>
             <TableCell>{row.category}</TableCell>
-            <TableCell>{row.createdAt}</TableCell>
+            <TableCell>{dateFormat(row.created_at, 'mm/dd/yyyy')}</TableCell>
             <TableCell>{row.rating}</TableCell>
             <TableCell>
                 <Box sx={{ display: 'flex', flexDirection: 'row' }}>
@@ -34,4 +39,4 @@ const CardsRow: FC<CardsRowPropsType> = ({ row }) => {
     );
 };
 
-export default CardsRow;
+export default ReviewRow;

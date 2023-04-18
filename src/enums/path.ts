@@ -3,6 +3,6 @@ export enum Path {
     Login = '/login',
     Register = '/register',
     Profile = '/profile/:userId',
-    Review = '/review',
+    Review = '/review/:reviewId',
     CreateReview = '/create-review/:userId',
 }

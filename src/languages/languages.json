@@ -41,7 +41,10 @@
         "tags": "Tags",
         "add photo": "Add photo",
         "save review": "Save review",
-        "press enter": "Press Enter for add a tag"
+        "press enter": "Press Enter for add a tag",
+        "author's assessment": "Author's assessment",
+        "created by": "Created by",
+        "on": "on"
       },
       "category": {
         "movies": "Movies",
@@ -103,11 +106,14 @@
         "review title": "Название обзора",
         "category": "Категория",
         "text": "Описание",
-        "rating": "Рейтинг",
+        "rating": "Оценка",
         "tags": "Тэги",
         "add photo": "Добавить фото",
         "save review": "Сохранить обзор",
-        "press enter": "Нажмите Enter, чтобы добавить тэг"
+        "press enter": "Нажмите Enter, чтобы добавить тэг",
+        "author's assessment": "Оценка автора",
+        "created by": "Автор",
+        "on": ""
       },
       "category": {
         "movies": "Фильмы",

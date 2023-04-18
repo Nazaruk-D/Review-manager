@@ -5,6 +5,5 @@ export type ReviewType = {
     body: string;
     rating: number | null;
     tags?: string[];
-    photo?: string | null;
-    author_id?: string;
+    photo: string | null;
 };

@@ -45,7 +45,7 @@ export const ReviewForm = () => {
         onSubmit: async (values) => {
             console.log(values);
             if (values) {
-                sendReview({ ...values, author_id: user!.id });
+                sendReview({ ...values, author_id: user!.id, author_name: user!.userName });
             }
         },
     });
