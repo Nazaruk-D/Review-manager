@@ -1,0 +1,19 @@
+@import 'src/styles/sass/mixin';
+
+.editProfileContainer {
+  background-color: yellow;
+  .settingsBlock {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    cursor: pointer;
+  }
+
+  .modalBlock {
+    .modalContent{
+      width: 600px;
+      height: 600px;
+      background-color: white;
+    }
+  }
+}

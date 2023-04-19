@@ -1,0 +1,5 @@
+@import 'src/styles/sass/mixin';
+
+.profileBlock {
+  @include flex(column, space-between, flex-start, nowrap);
+}

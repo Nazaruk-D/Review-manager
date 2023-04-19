@@ -17,7 +17,7 @@ const CommentsBlock = () => {
                 <Box key={comment.id} className={s.commentBlock}>
                     <Grid container alignItems="center">
                         <Grid item>
-                            <Avatar variant="rounded" alt={comment.author_id} src={comment.image} className={s.avatar} />
+                            <Avatar variant="rounded" alt="small photo" src={comment.users.small_photo} className={s.avatar} />
                         </Grid>
                         <Grid item className={s.textBlock}>
                             <Typography component="span" sx={{ fontWeight: 'bold' }}>
