@@ -21,15 +21,14 @@ const StyledCard = styled(Card)({
 });
 
 type PosterPropsType = {
-    key: string;
     creator: string;
     createdDate: string;
 };
 
-const PosterItem: FC<PosterPropsType> = ({ key, creator, createdDate }) => {
+const PosterItem: FC<PosterPropsType> = ({ creator, createdDate }) => {
     const { t } = useTranslation('translation', { keyPrefix: 'poster' });
     return (
-        <Grid item xs={12} md={4} key={key}>
+        <Grid item xs={12} md={4}>
             <StyledCard>
                 <Card>
                     <CardMedia

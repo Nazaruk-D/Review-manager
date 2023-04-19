@@ -1,7 +1,6 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/dist/query/react';
 import { PathAPI } from '../../enums/pathAPI';
 import { ResponseType } from '../../types/ResponseType';
-import { ReviewResponseType } from '../../types/ReviewResponseType';
 import { CommentType } from '../../types/CommentType';
 import { CreateCommentType } from '../../types/CreateCommentType';
 

@@ -1,6 +1,7 @@
 import { Dispatch } from '@reduxjs/toolkit';
 import { supabase } from './supabase';
 import { setLoggedIn, setUser } from '../store/slices/userSlice';
+import { UserType } from '../types/UserType';
 
 export async function getUserData(dispatch: Dispatch) {
     const { data: authData, error: authError } = await supabase.auth.getUser();
@@ -17,11 +18,12 @@ export async function getUserData(dispatch: Dispatch) {
             return;
         }
         console.log('A NET, BEREM OTSUDA: ', data[0]);
-        const newData = {
+        const newData: UserType = {
             email: user.email!,
-            avatar:
+            small_photo:
                 user.user_metadata.avatar_url ||
                 'https://sun1.velcom-by-minsk.userapi.com/impg/AN-ikCmTp9yLRpLCkoACsL5dMQC9PfxIv9sX-g/zJ5bKUy8JMk.jpg?size=1080x1920&quality=95&sign=0da9f7871dde6f0032cc304b2cd2dec7&type=album',
+            main_photo: '',
             user_name: data[0].user_name,
             id: user.id,
             createdAt: user.created_at,
