@@ -1,7 +1,7 @@
 import React, { ChangeEvent, useState } from 'react';
 import { Button, Grid, TextField } from '@mui/material';
 import { useParams } from 'react-router-dom';
-import { useCreateCommentMutation } from '../../../../store/api/commentAPI';
+import { useCreateCommentMutation, useGetCommentsQuery } from '../../../../store/api/commentAPI';
 import { useAppSelector } from '../../../../hooks/useRedux';
 import { selectorUserId } from '../../../../store/selectors/userSelector';
 
@@ -20,6 +20,7 @@ const SendCommentForm = () => {
             await sendComment({ review_id: reviewId, author_id: userId, body: comment });
             if (isSuccess) {
                 setComment('');
+                useGetCommentsQuery({ reviewId });
             }
         }
     };

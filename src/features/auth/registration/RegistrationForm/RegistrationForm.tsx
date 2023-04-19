@@ -8,25 +8,19 @@ import { useRegisterMutation } from '../../../../store/api/authAPI';
 import { Path } from '../../../../enums/path';
 import { supabase } from '../../../../utils/supabase';
 
-export type RegisterType = {
-    email: string;
-    password: string;
-    userName: string;
-};
-
 const RegistrationForm = () => {
     const formik = useFormik({
         initialValues: {
-            userName: '',
+            user_name: '',
             email: '',
             password: '',
             confirmPassword: '',
         },
         validate: (values) => {
             const errors: RegisterErrorType = {};
-            if (!values.userName) {
+            if (!values.user_name) {
                 errors.firstName = 'First Name is required';
-            } else if (values.userName.length < 6) {
+            } else if (values.user_name.length < 6) {
                 errors.firstName = 'Name must be min 6 characters long.';
             }
 
@@ -59,7 +53,7 @@ const RegistrationForm = () => {
                 });
 
                 if (!error && data.user?.id) {
-                    await supabase.from('users').update({ user_name: values.userName }).eq('id', data.user.id);
+                    await supabase.from('users').update({ user_name: values.user_name }).eq('id', data.user.id);
                     console.log(data);
                 } else {
                     console.log(error);
@@ -91,13 +85,13 @@ const RegistrationForm = () => {
                     <TextField
                         fullWidth
                         variant="standard"
-                        id="userName"
+                        id="user_name"
                         label="User Name"
                         className={s.input}
-                        {...formik.getFieldProps('userName')}
+                        {...formik.getFieldProps('user_name')}
                     />
-                    {formik.touched.userName && formik.errors.userName && (
-                        <div style={{ color: 'red' }}>{formik.errors.userName}</div>
+                    {formik.touched.user_name && formik.errors.user_name && (
+                        <div style={{ color: 'red' }}>{formik.errors.user_name}</div>
                     )}
                     <TextField
                         fullWidth
