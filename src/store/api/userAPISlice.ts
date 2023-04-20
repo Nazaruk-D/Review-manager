@@ -9,17 +9,27 @@ export const userAPISlice = createApi({
         credentials: 'include',
     }),
     endpoints: (builder) => ({
-        uploadPhoto: builder.mutation<ResponseType<any>, any>({
-            query: (formData) => ({
-                url: `${PathAPI.UploadPhoto}`,
-                method: 'PUT',
-                body: { formData },
-                headers: {
-                    'Content-Type': 'multipart/form-data',
-                },
-            }),
+        updateInfo: builder.mutation<ResponseType, { newName: string; profilePhoto: File | null }>({
+            query: ({ newName, profilePhoto }) => {
+                const formData = new FormData();
+                formData.append('newName', newName);
+                if (profilePhoto) {
+                    formData.append('profilePhoto', profilePhoto);
+                }
+                const fetchConfig: RequestInit = {
+                    method: 'PUT',
+                    body: formData,
+                    headers: {
+                        Accept: 'application/json',
+                    },
+                };
+                return {
+                    url: `${PathAPI.UploadPhoto}`,
+                    ...fetchConfig,
+                };
+            },
         }),
     }),
 });
 
-export const { useUploadPhotoMutation } = userAPISlice;
+export const { useUpdateInfoMutation } = userAPISlice;

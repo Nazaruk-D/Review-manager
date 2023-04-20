@@ -14,15 +14,9 @@ const ProfileHeader = () => {
 
     return (
         <Grid container spacing={2} className={s.headerContainer}>
-            {/*<Grid item md={2.2}>*/}
-            <Avatar t={t} user={user!} />
-            {/*</Grid>*/}
-            {/*<Grid item>*/}
+            <Avatar user={user!} />
             <ProfileInfo t={t} user={user!} />
-            {/*</Grid>*/}
-            {/*<Grid item>*/}
             <EditProfile />
-            {/*</Grid>*/}
         </Grid>
     );
 };
