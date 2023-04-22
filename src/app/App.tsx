@@ -26,6 +26,10 @@ function App() {
         getUserData(dispatch);
     }, []);
 
+    if (!isAppInitialized) {
+        return <Loader />;
+    }
+
     return (
         <ColorModeContext.Provider value={memoizedColorModeValue}>
             <ThemeProvider theme={theme}>

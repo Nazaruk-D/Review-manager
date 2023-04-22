@@ -5,12 +5,18 @@ import { useParams } from 'react-router-dom';
 import ReviewRow from './ReviewRow/ReviewRow';
 import { useGetReviewsQuery } from '../../../store/api/reviewAPI';
 import { ReviewResponseType } from '../../../types/ReviewResponseType';
+import Loader from '../../../common/components/Loader/Loader';
 
 const ReviewTable = () => {
     const { userId = '' } = useParams<string>();
     const { t } = useTranslation('translation', { keyPrefix: 'profile' });
     const { data, isLoading, isError } = useGetReviewsQuery({ userId });
     const reviews: ReviewResponseType[] = data ? data.data : [];
+
+    if (isLoading) {
+        return <Loader />;
+    }
+
     return (
         <TableContainer component={Paper} sx={{ mt: 3, mb: 3 }}>
             <Table>

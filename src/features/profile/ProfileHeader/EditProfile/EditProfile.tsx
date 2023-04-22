@@ -4,11 +4,12 @@ import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import { useDropzone } from 'react-dropzone';
 import s from './EditProfiile.module.scss';
 import { useAppSelector } from '../../../../hooks/useRedux';
-import { selectorUserName } from '../../../../store/selectors/userSelector';
+import { selectorUserId, selectorUserName } from '../../../../store/selectors/userSelector';
 import { useUpdateInfoMutation } from '../../../../store/api/userAPISlice';
 
 const EditProfile = () => {
     const userName = useAppSelector(selectorUserName);
+    const userId = useAppSelector(selectorUserId);
     const [open, setOpen] = useState(false);
     const [newName, setNewName] = useState<string>(userName || '');
     const [profilePhoto, setProfilePhoto] = useState<File | null>(null);
@@ -23,11 +24,6 @@ const EditProfile = () => {
 
     const handleNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setNewName(e.target.value);
-    };
-
-    const handleSaveChanges = () => {
-        uploadInfo({ newName, profilePhoto });
-        handleClose();
     };
 
     const handleProfilePhotoDrop = (acceptedFiles: File[]) => {
@@ -46,6 +42,18 @@ const EditProfile = () => {
         onDrop: handleProfilePhotoDrop,
         multiple: false,
     });
+
+    const handleSaveChanges = () => {
+        if (userId) {
+            if (newName !== userName) {
+                uploadInfo({ userId, newName, profilePhoto });
+            } else {
+                uploadInfo({ userId, profilePhoto });
+            }
+            setProfilePhoto(null);
+            handleClose();
+        }
+    };
 
     return (
         <Grid className={s.editProfileContainer}>

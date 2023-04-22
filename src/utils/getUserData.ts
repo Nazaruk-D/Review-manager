@@ -2,6 +2,7 @@ import { Dispatch } from '@reduxjs/toolkit';
 import { supabase } from './supabase';
 import { setLoggedIn, setUser } from '../store/slices/userSlice';
 import { UserType } from '../types/UserType';
+import { setInitialized } from '../store/slices/appSlice';
 
 export async function getUserData(dispatch: Dispatch) {
     const { data: authData, error: authError } = await supabase.auth.getUser();
@@ -11,19 +12,16 @@ export async function getUserData(dispatch: Dispatch) {
     }
     if (authData?.user) {
         const { user } = authData;
-        console.log('BEREM INFU OTSUDA?', user);
         const { data, error } = await supabase.from('users').select('*').eq('id', user.id);
         if (error) {
             console.error(error);
             return;
         }
-        console.log('A NET, BEREM OTSUDA: ', data[0]);
+        console.log('BEREM OTSUDA: ', data[0]);
         const newData: UserType = {
             email: user.email!,
-            small_photo:
-                user.user_metadata.avatar_url ||
-                'https://sun1.velcom-by-minsk.userapi.com/impg/AN-ikCmTp9yLRpLCkoACsL5dMQC9PfxIv9sX-g/zJ5bKUy8JMk.jpg?size=1080x1920&quality=95&sign=0da9f7871dde6f0032cc304b2cd2dec7&type=album',
-            main_photo: '',
+            small_photo: data[0].small_photo,
+            main_photo: data[0].main_photo,
             user_name: data[0].user_name,
             id: user.id,
             createdAt: user.created_at,
@@ -32,5 +30,6 @@ export async function getUserData(dispatch: Dispatch) {
         };
         dispatch(setUser(newData));
         dispatch(setLoggedIn(true));
+        dispatch(setInitialized());
     }
 }
