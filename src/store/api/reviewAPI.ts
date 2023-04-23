@@ -14,6 +14,9 @@ export const reviewAPI = createApi({
         getReviews: builder.query<ResponseType<ReviewResponseType[]>, { userId: string }>({
             query: ({ userId }) => `${PathAPI.Review}/${userId}`,
         }),
+        getReviewById: builder.query<ResponseType<ReviewResponseType>, { reviewId: string }>({
+            query: ({ reviewId }) => `${PathAPI.GetReview}/${reviewId}`,
+        }),
         createReview: builder.mutation<ResponseType<ReviewResponseType>, CreateReviewType>({
             query: ({ title, category, rating, uploadImage, body, tags, review_title, author_id, author_name }) => {
                 const formData = new FormData();
@@ -48,4 +51,4 @@ export const reviewAPI = createApi({
     }),
 });
 
-export const { useGetReviewsQuery, useCreateReviewMutation } = reviewAPI;
+export const { useGetReviewsQuery, useGetReviewByIdQuery, useCreateReviewMutation } = reviewAPI;

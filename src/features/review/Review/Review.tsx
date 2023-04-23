@@ -1,20 +1,25 @@
 import React from 'react';
 import { Container } from '@mui/material';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useParams } from 'react-router-dom';
 import CommentsBlock from './CommentsBlock/CommentsBlock';
 import SendCommentForm from './SendCommentForm/SendCommentForm';
 import ReviewHeader from './ReviewHeader/ReviewHeader';
 import ReviewBody from './ReviewBody/ReviewBody';
 import { ReviewResponseType } from '../../../types/ReviewResponseType';
 import Loader from '../../../common/components/Loader/Loader';
+import { useGetReviewByIdQuery } from '../../../store/api/reviewAPI';
 
 const Review = () => {
     const location = useLocation();
-    const review: ReviewResponseType = location.state;
+    const { reviewId = '' } = useParams<string>();
+    let review: ReviewResponseType = location.state;
 
     if (!review) {
-        console.log('!!!!!!!!!!!!!!Получить review по ID из URL');
-        return <Loader />;
+        const { data, isLoading, isError } = useGetReviewByIdQuery({ reviewId });
+        if (data) {
+            review = data.data;
+        }
+        if (isLoading) return <Loader />;
     }
 
     return (

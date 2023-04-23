@@ -15,8 +15,6 @@ type CardsRowPropsType = {
 
 const ReviewRow: FC<CardsRowPropsType> = ({ row, index }) => {
     const navigate = useNavigate();
-    console.log(row.image);
-    console.log(typeof noImage);
     return (
         <TableRow className={s.row} onClick={() => navigate(`/review/${row.id}`, { state: row })}>
             <TableCell>{index + 1}</TableCell>
