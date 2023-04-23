@@ -19,21 +19,24 @@ import {
     Typography,
 } from '@mui/material';
 import { useTranslation } from 'react-i18next';
+import { useNavigate } from 'react-router-dom';
 import { ReviewType } from '../../../types/ReviewType';
 import { useCreateReviewMutation } from '../../../store/api/reviewAPI';
 import { useAppSelector } from '../../../hooks/useRedux';
 import { selectorUserData } from '../../../store/selectors/userSelector';
 import UploadImage from '../../../common/components/UploadImage/UploadImage';
+import { Path } from '../../../enums/path';
 import { ReviewErrorType } from '../../../types/FormikErrorTypes';
 import { ErrorStyle } from '../../../styles/common/ErrorStyle';
 
 export const ReviewForm = () => {
+    const navigate = useNavigate();
     const [uploadImage, setUploadImage] = useState<File | null>(null);
     const { t } = useTranslation('translation', { keyPrefix: 'review editor' });
     const { t: tc } = useTranslation('translation', { keyPrefix: 'category' });
     const { t: tv } = useTranslation('translation', { keyPrefix: 'validator' });
     const user = useAppSelector(selectorUserData);
-    const [sendReview, { isLoading }] = useCreateReviewMutation();
+    const [sendReview, { isLoading, isError }] = useCreateReviewMutation();
     const formik = useFormik({
         initialValues: {
             review_title: '',
@@ -65,6 +68,9 @@ export const ReviewForm = () => {
         onSubmit: async (values) => {
             if (values) {
                 sendReview({ ...values, author_id: user!.id, author_name: user!.user_name, uploadImage });
+                if (!isError) {
+                    navigate(`/profile/${user!.id}`);
+                }
             }
         },
     });
@@ -178,7 +184,7 @@ export const ReviewForm = () => {
                         sx={{ mt: 2, mb: 2 }}
                         disabled={!(formik.isValid && formik.dirty)}
                     >
-                        {isLoading ? <CircularProgress size={24} /> : t('save review')}
+                        {isLoading ? <CircularProgress size={24} color="inherit" /> : t('save review')}
                     </Button>
                 </form>
             </Box>
