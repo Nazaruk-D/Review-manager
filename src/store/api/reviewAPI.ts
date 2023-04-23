@@ -15,11 +15,35 @@ export const reviewAPI = createApi({
             query: ({ userId }) => `${PathAPI.Review}/${userId}`,
         }),
         createReview: builder.mutation<ResponseType<ReviewResponseType>, CreateReviewType>({
-            query: ({ title, category, rating, photo, body, tags, review_title, author_id, author_name }) => ({
-                url: `${PathAPI.Review}`,
-                method: 'POST',
-                body: { title, category, rating, photo, body, tags, review_title, author_id, author_name },
-            }),
+            query: ({ title, category, rating, uploadImage, body, tags, review_title, author_id, author_name }) => {
+                const formData = new FormData();
+                formData.append('review_title', review_title);
+                formData.append('title', title);
+                formData.append('category', category);
+                formData.append('body', body);
+                formData.append('author_id', author_id);
+                formData.append('author_name', author_name);
+                formData.append('rating', rating);
+                if (tags) {
+                    tags.forEach((tag) => {
+                        formData.append('tags', tag);
+                    });
+                }
+                if (uploadImage) {
+                    formData.append('reviewImage', uploadImage);
+                }
+                const fetchConfig: RequestInit = {
+                    method: 'POST',
+                    body: formData,
+                    headers: {
+                        Accept: 'application/json',
+                    },
+                };
+                return {
+                    url: `${PathAPI.Review}`,
+                    ...fetchConfig,
+                };
+            },
         }),
     }),
 });

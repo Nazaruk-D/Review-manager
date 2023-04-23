@@ -10,7 +10,6 @@ type UploadImagePropsType = {
 
 const UploadImage: FC<UploadImagePropsType> = ({ setImage, image }) => {
     const handleProfilePhotoDrop = (acceptedFiles: File[]) => {
-        console.log('acceptedFiles: ', acceptedFiles);
         const file = acceptedFiles[0];
         if (file.size > 2 * 1024 * 1024) {
             alert('The file size should not exceed 2MB');

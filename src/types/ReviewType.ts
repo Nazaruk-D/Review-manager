@@ -3,7 +3,7 @@ export type ReviewType = {
     review_title: string;
     category: string;
     body: string;
-    rating: number | null;
+    rating: string;
     tags?: string[];
-    photo: string | null;
+    image?: string;
 };

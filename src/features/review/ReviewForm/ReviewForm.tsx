@@ -28,7 +28,7 @@ import { ReviewErrorType } from '../../../types/FormikErrorTypes';
 import { ErrorStyle } from '../../../styles/common/ErrorStyle';
 
 export const ReviewForm = () => {
-    const [image, setImage] = useState<File | null>(null);
+    const [uploadImage, setUploadImage] = useState<File | null>(null);
     const { t } = useTranslation('translation', { keyPrefix: 'review editor' });
     const { t: tc } = useTranslation('translation', { keyPrefix: 'category' });
     const { t: tv } = useTranslation('translation', { keyPrefix: 'validator' });
@@ -40,9 +40,8 @@ export const ReviewForm = () => {
             title: '',
             category: '',
             body: '',
-            rating: null,
+            rating: '',
             tags: [],
-            photo: null,
         } as ReviewType,
         validate: (values) => {
             const errors: ReviewErrorType = {};
@@ -65,7 +64,7 @@ export const ReviewForm = () => {
         },
         onSubmit: async (values) => {
             if (values) {
-                sendReview({ ...values, author_id: user!.id, author_name: user!.user_name });
+                sendReview({ ...values, author_id: user!.id, author_name: user!.user_name, uploadImage });
             }
         },
     });
@@ -169,7 +168,7 @@ export const ReviewForm = () => {
                             />
                         </Grid>
                         <Grid item xs={12}>
-                            <UploadImage image={image} setImage={setImage} />
+                            <UploadImage image={uploadImage} setImage={setUploadImage} />
                         </Grid>
                     </Grid>
                     <Button

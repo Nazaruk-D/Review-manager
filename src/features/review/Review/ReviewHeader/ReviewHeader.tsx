@@ -19,7 +19,11 @@ const ReviewHeader: FC<ReviewHeaderPropsType> = ({ review }) => {
         <Grid container spacing={2}>
             <Grid item xs={12} md={4}>
                 <img
-                    src="https://i.pinimg.com/736x/70/5b/bb/705bbb820c7332b04d619f7536645753.jpg"
+                    src={
+                        review.image
+                            ? review.image
+                            : 'https://consultix.radiantthemes.com/demo-nine/wp-content/themes/consultix/images/no-image-found-360x250.png'
+                    }
                     alt="test"
                     className={s.image}
                     style={{

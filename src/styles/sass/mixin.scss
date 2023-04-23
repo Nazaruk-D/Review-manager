@@ -5,3 +5,9 @@
   justify-content: $justifyContent;
   flex-wrap: $wrap;
 }
+
+@mixin bgSettings($bs, $bp, $br) {
+  background-size: $bs;
+  background-position: $bp;
+  background-repeat: $br;
+}

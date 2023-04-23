@@ -1,4 +1,5 @@
 @import "./src/styles/sass/variables";
+@import "./src/styles/sass/mixin";
 
 .row {
   cursor: pointer;
@@ -9,7 +10,10 @@
   }
 
   .image {
-    width: 80px;
+    @include bgSettings(contain, center center, no-repeat);
+    width: 140px;
     height: 80px;
+    display: block;
+    object-fit: cover;
   }
 }
