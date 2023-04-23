@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useFormik } from 'formik';
 import {
     Autocomplete,
     Box,
     Button,
+    CircularProgress,
     Container,
     FormControl,
     FormControlLabel,
@@ -22,12 +23,14 @@ import { ReviewType } from '../../../types/ReviewType';
 import { useCreateReviewMutation } from '../../../store/api/reviewAPI';
 import { useAppSelector } from '../../../hooks/useRedux';
 import { selectorUserData } from '../../../store/selectors/userSelector';
+import UploadImage from '../../../common/components/UploadImage/UploadImage';
 
 export const ReviewForm = () => {
+    const [image, setImage] = useState<File | null>(null);
     const { t } = useTranslation('translation', { keyPrefix: 'review editor' });
     const { t: tc } = useTranslation('translation', { keyPrefix: 'category' });
     const user = useAppSelector(selectorUserData);
-    const [sendReview] = useCreateReviewMutation();
+    const [sendReview, { isLoading }] = useCreateReviewMutation();
     const formik = useFormik({
         initialValues: {
             title: '',
@@ -43,7 +46,6 @@ export const ReviewForm = () => {
             return errors;
         },
         onSubmit: async (values) => {
-            console.log(values);
             if (values) {
                 sendReview({ ...values, author_id: user!.id, author_name: user!.user_name });
             }
@@ -124,27 +126,12 @@ export const ReviewForm = () => {
                             />
                         </Grid>
                         <Grid item xs={12}>
-                            <input
-                                id="photo-upload"
-                                type="file"
-                                accept="image/*"
-                                multiple
-                                style={{ display: 'none' }}
-                                {...formik.getFieldProps('photo')}
-                            />
-                            <Button
-                                variant="contained"
-                                component="span"
-                                onClick={(event) => {
-                                    event.preventDefault();
-                                    document.getElementById('photo-upload')!.click();
-                                }}
-                            >
-                                {t('add photo')}
-                            </Button>
+                            <UploadImage image={image} setImage={setImage} />
                         </Grid>
                     </Grid>
-                    <Button type="submit">{t('save review')}</Button>
+                    <Button variant="contained" type="submit" fullWidth sx={{ mt: 2, mb: 2 }}>
+                        {isLoading ? <CircularProgress size={24} /> : t('save review')}
+                    </Button>
                 </form>
             </Box>
         </Container>

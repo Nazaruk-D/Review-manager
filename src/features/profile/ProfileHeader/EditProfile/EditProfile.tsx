@@ -6,11 +6,13 @@ import s from './EditProfiile.module.scss';
 import { useAppSelector } from '../../../../hooks/useRedux';
 import { selectorUserId, selectorUserName } from '../../../../store/selectors/userSelector';
 import { useUpdateInfoMutation } from '../../../../store/api/userAPISlice';
+import UploadImage from '../../../../common/components/UploadImage/UploadImage';
 
 const EditProfile = () => {
     const userName = useAppSelector(selectorUserName);
     const userId = useAppSelector(selectorUserId);
     const [open, setOpen] = useState(false);
+    const [image, setImage] = useState<File | null>(null);
     const [newName, setNewName] = useState<string>(userName || '');
     const [profilePhoto, setProfilePhoto] = useState<File | null>(null);
     const [uploadInfo] = useUpdateInfoMutation();
@@ -38,17 +40,12 @@ const EditProfile = () => {
         }
     };
 
-    const { getRootProps, getInputProps } = useDropzone({
-        onDrop: handleProfilePhotoDrop,
-        multiple: false,
-    });
-
     const handleSaveChanges = () => {
         if (userId) {
             if (newName !== userName) {
-                uploadInfo({ userId, newName, profilePhoto });
+                uploadInfo({ userId, newName, image });
             } else {
-                uploadInfo({ userId, profilePhoto });
+                uploadInfo({ userId, image });
             }
             setProfilePhoto(null);
             handleClose();
@@ -79,18 +76,7 @@ const EditProfile = () => {
                             />
                         </Grid>
                         <Grid item xs={12}>
-                            <Box
-                                {...getRootProps()}
-                                className={s.profilePhotoContainer}
-                                style={{ backgroundImage: `url(${profilePhoto ? URL.createObjectURL(profilePhoto) : ''})` }}
-                            >
-                                <input {...getInputProps()} className={s.photoBlock} />
-                                {profilePhoto ? null : (
-                                    <Typography variant="caption" component="span">
-                                        Drag and drop a photo here or click to select
-                                    </Typography>
-                                )}
-                            </Box>
+                            <UploadImage image={image} setImage={setImage} />
                         </Grid>
                         <Grid item xs={12}>
                             <Button variant="contained" color="primary" fullWidth onClick={handleSaveChanges}>

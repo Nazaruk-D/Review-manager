@@ -9,15 +9,15 @@ export const userAPISlice = createApi({
         credentials: 'include',
     }),
     endpoints: (builder) => ({
-        updateInfo: builder.mutation<ResponseType, { userId: string; newName?: string; profilePhoto: File | null }>({
-            query: ({ userId, newName, profilePhoto }) => {
+        updateInfo: builder.mutation<ResponseType, { userId: string; newName?: string; image: File | null }>({
+            query: ({ userId, newName, image }) => {
                 const formData = new FormData();
                 formData.append('userId', userId);
                 if (newName) {
                     formData.append('newName', newName);
                 }
-                if (profilePhoto) {
-                    formData.append('profilePhoto', profilePhoto);
+                if (image) {
+                    formData.append('profilePhoto', image);
                 }
                 const fetchConfig: RequestInit = {
                     method: 'PUT',
