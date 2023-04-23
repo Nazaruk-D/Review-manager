@@ -46,6 +46,13 @@
         "created by": "Created by",
         "on": "on"
       },
+      "validator": {
+        "review title": "Review title is required",
+        "title": "Title is required",
+        "category": "Category is required",
+        "body": "Description text is required",
+        "rating": "Rating is required"
+      },
       "category": {
         "movies": "Movies",
         "books": "Books",
@@ -114,6 +121,13 @@
         "author's assessment": "Оценка автора",
         "created by": "Автор",
         "on": ""
+      },
+      "validator": {
+        "review title": "Укажите название обзора",
+        "title": "Укажите название",
+        "category": "Укажите категорию",
+        "body": "Напшии своё описание к обзору",
+        "rating": "Поставьте оценку"
       },
       "category": {
         "movies": "Фильмы",

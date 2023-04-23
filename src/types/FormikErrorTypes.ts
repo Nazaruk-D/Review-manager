@@ -4,9 +4,16 @@ export type LoginErrorType = {
 };
 
 export type RegisterErrorType = {
-    firstName?: string;
-    lastName?: string;
+    user_name?: string;
     email?: string;
     password?: string;
     confirmPassword?: string;
+};
+
+export type ReviewErrorType = {
+    review_title?: string;
+    title?: string;
+    category?: string;
+    body?: string;
+    rating?: string;
 };

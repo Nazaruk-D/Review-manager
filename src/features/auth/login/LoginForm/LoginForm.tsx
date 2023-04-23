@@ -8,7 +8,7 @@ import { useTranslation } from 'react-i18next';
 import DiscordIcon from '../../../../common/svg/discord.svg';
 import s from './LoginForm.module.scss';
 import { Path } from '../../../../enums/path';
-import { LoginErrorType } from '../../../../types/AuthErrorType';
+import { LoginErrorType } from '../../../../types/FormikErrorTypes';
 import { useAppDispatch } from '../../../../hooks/useRedux';
 import { supabase } from '../../../../utils/supabase';
 import { getUserData } from '../../../../utils/getUserData';

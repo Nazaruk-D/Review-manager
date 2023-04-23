@@ -8,6 +8,7 @@ export async function getUserData(dispatch: Dispatch) {
     const { data: authData, error: authError } = await supabase.auth.getUser();
     if (authError) {
         console.error(authError);
+        dispatch(setInitialized());
         return;
     }
     if (authData?.user) {

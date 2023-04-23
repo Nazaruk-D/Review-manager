@@ -24,17 +24,20 @@ import { useCreateReviewMutation } from '../../../store/api/reviewAPI';
 import { useAppSelector } from '../../../hooks/useRedux';
 import { selectorUserData } from '../../../store/selectors/userSelector';
 import UploadImage from '../../../common/components/UploadImage/UploadImage';
+import { ReviewErrorType } from '../../../types/FormikErrorTypes';
+import { ErrorStyle } from '../../../styles/common/ErrorStyle';
 
 export const ReviewForm = () => {
     const [image, setImage] = useState<File | null>(null);
     const { t } = useTranslation('translation', { keyPrefix: 'review editor' });
     const { t: tc } = useTranslation('translation', { keyPrefix: 'category' });
+    const { t: tv } = useTranslation('translation', { keyPrefix: 'validator' });
     const user = useAppSelector(selectorUserData);
     const [sendReview, { isLoading }] = useCreateReviewMutation();
     const formik = useFormik({
         initialValues: {
-            title: '',
             review_title: '',
+            title: '',
             category: '',
             body: '',
             rating: null,
@@ -42,7 +45,22 @@ export const ReviewForm = () => {
             photo: null,
         } as ReviewType,
         validate: (values) => {
-            const errors = {};
+            const errors: ReviewErrorType = {};
+            if (!values.review_title) {
+                errors.review_title = `${tv('review title')}`;
+            }
+            if (!values.title) {
+                errors.title = `${tv('title')}`;
+            }
+            if (!values.category) {
+                errors.category = `${tv('category')}`;
+            }
+            if (!values.body) {
+                errors.body = `${tv('body')}`;
+            }
+            if (!errors.review_title && !errors.title && !errors.category && !errors.body && !values.rating) {
+                errors.rating = `${tv('rating')}`;
+            }
             return errors;
         },
         onSubmit: async (values) => {
@@ -74,9 +92,19 @@ export const ReviewForm = () => {
                         <Grid item xs={12}>
                             <TextField label={t('review title')} fullWidth {...formik.getFieldProps('review_title')} />
                         </Grid>
+                        {formik.touched.review_title && formik.errors.review_title && (
+                            <Grid item xs={12} sx={ErrorStyle}>
+                                {formik.errors.review_title}
+                            </Grid>
+                        )}
                         <Grid item xs={12}>
                             <TextField label={t('title')} fullWidth {...formik.getFieldProps('title')} />
                         </Grid>
+                        {formik.touched.title && formik.errors.title && (
+                            <Grid item xs={12} sx={ErrorStyle}>
+                                {formik.errors.title}
+                            </Grid>
+                        )}
                         <Grid item xs={12}>
                             <FormControl fullWidth>
                                 <InputLabel id="demo-simple-select-label">{t('category')}</InputLabel>
@@ -90,9 +118,19 @@ export const ReviewForm = () => {
                                 </Select>
                             </FormControl>
                         </Grid>
+                        {formik.touched.category && formik.errors.category && (
+                            <Grid item xs={12} sx={ErrorStyle}>
+                                {formik.errors.category}
+                            </Grid>
+                        )}
                         <Grid item xs={12}>
                             <TextField label={t('text')} fullWidth rows={4} multiline {...formik.getFieldProps('body')} />
                         </Grid>
+                        {formik.touched.body && formik.errors.body && (
+                            <Grid item xs={12} sx={ErrorStyle}>
+                                {formik.errors.body}
+                            </Grid>
+                        )}
                         <Grid item xs={12}>
                             <FormControl component="fieldset">
                                 <FormLabel component="legend">{t('rating')}</FormLabel>
@@ -114,6 +152,11 @@ export const ReviewForm = () => {
                                 </RadioGroup>
                             </FormControl>
                         </Grid>
+                        {formik.touched.body && formik.errors.rating && (
+                            <Grid item xs={12} sx={{ color: 'green', fontSize: '14px', fontWeight: 600 }}>
+                                {formik.errors.rating}
+                            </Grid>
+                        )}
                         <Grid item xs={12}>
                             <Autocomplete
                                 multiple
@@ -129,7 +172,13 @@ export const ReviewForm = () => {
                             <UploadImage image={image} setImage={setImage} />
                         </Grid>
                     </Grid>
-                    <Button variant="contained" type="submit" fullWidth sx={{ mt: 2, mb: 2 }}>
+                    <Button
+                        variant="contained"
+                        type="submit"
+                        fullWidth
+                        sx={{ mt: 2, mb: 2 }}
+                        disabled={!(formik.isValid && formik.dirty)}
+                    >
                         {isLoading ? <CircularProgress size={24} /> : t('save review')}
                     </Button>
                 </form>
