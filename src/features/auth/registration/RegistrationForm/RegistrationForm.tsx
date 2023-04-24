@@ -4,8 +4,11 @@ import { Box, Button, Paper, TextField, Typography } from '@mui/material';
 import s from '../../login/LoginForm/LoginForm.module.scss';
 import { RegisterErrorType } from '../../../../types/FormikErrorTypes';
 import { supabase } from '../../../../utils/supabase';
+import { useAppDispatch } from '../../../../hooks/useRedux';
+import { setAppErrorAC } from '../../../../store/slices/appSlice';
 
 const RegistrationForm = () => {
+    const dispatch = useAppDispatch();
     const formik = useFormik({
         initialValues: {
             user_name: '',
@@ -51,12 +54,11 @@ const RegistrationForm = () => {
 
                 if (!error && data.user?.id) {
                     await supabase.from('users').update({ user_name: values.user_name }).eq('id', data.user.id);
-                    console.log(data);
                 } else {
-                    console.log(error);
+                    dispatch(setAppErrorAC(error!.message));
                 }
-            } catch (err) {
-                console.log(err);
+            } catch {
+                dispatch(setAppErrorAC('Unknown error occurred'));
             }
         },
     });

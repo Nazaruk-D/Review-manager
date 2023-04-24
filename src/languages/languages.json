@@ -29,7 +29,12 @@
         "category": "Category",
         "settings": "Settings",
         "new review": "New review",
-        "upload photo": "Upload photo"
+        "upload photo": "Upload photo",
+        "edit profile": "Edit profile",
+        "new name": "Enter new full name",
+        "save changes": "Save changes",
+        "error update": "Failed to update profile information",
+        "error get review": "Failed to get reviews"
       },
       "review editor": {
         "review editor": "Review editor",
@@ -70,6 +75,11 @@
         "assessment": "Authors assessment",
         "reviewed": "Reviewed by"
       },
+      "image": {
+        "drag and drop": "Drag and drop a photo here or click to select",
+        "file size": "The file size should not exceed 2MB",
+        "only image": "Only image files are allowed"
+      },
       "footer": {
         "copyright": "Dmitry Nazaruk © 2023"
       }
@@ -105,7 +115,12 @@
         "category": "Категория",
         "settings": "Настройки",
         "new review": "Новый обзор",
-        "upload photo": "Загрузить фотографию"
+        "upload photo": "Загрузить фотографию",
+        "edit profile": "Редактирование профиля",
+        "new name": "Введите новое имя",
+        "save changes": "Сохранить изменения",
+        "error update": "Не получилось обновить информацию профиля",
+        "error get review": "Не получилось обновить обзоры"
       },
       "review editor": {
         "review editor":  "Редактирование обзора",
@@ -145,6 +160,11 @@
         "category": "Категория",
         "assessment": "Оценка автора",
         "reviewed": "Обозреватель"
+      },
+      "image": {
+        "drag and drop": "Перетащите фото сюда или нажмите, чтобы выбрать",
+        "file size": "Размер файла не должен превышать 2 МБ",
+        "only image": "Разрешены только файлы изображений"
       },
       "footer": {
         "copyright": "Дмитрий Назарук © 2023"

@@ -6,15 +6,21 @@ import ReviewRow from './ReviewRow/ReviewRow';
 import { useGetReviewsQuery } from '../../../store/api/reviewAPI';
 import { ReviewResponseType } from '../../../types/ReviewResponseType';
 import Loader from '../../../common/components/Loader/Loader';
+import { useAppDispatch } from '../../../hooks/useRedux';
+import { setAppErrorAC } from '../../../store/slices/appSlice';
 
 const ReviewTable = () => {
+    const dispatch = useAppDispatch();
     const { userId = '' } = useParams<string>();
     const { t } = useTranslation('translation', { keyPrefix: 'profile' });
-    const { data, isLoading, isError } = useGetReviewsQuery({ userId });
+    const { data, isLoading, error } = useGetReviewsQuery({ userId });
     const reviews: ReviewResponseType[] = data ? data.data : [];
 
     if (isLoading) {
         return <Loader />;
+    }
+    if (error) {
+        dispatch(setAppErrorAC(t('error get review')));
     }
 
     return (

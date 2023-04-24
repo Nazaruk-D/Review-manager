@@ -12,6 +12,7 @@ import { LoginErrorType } from '../../../../types/FormikErrorTypes';
 import { useAppDispatch } from '../../../../hooks/useRedux';
 import { supabase } from '../../../../utils/supabase';
 import { getUserData } from '../../../../utils/getUserData';
+import { setAppErrorAC } from '../../../../store/slices/appSlice';
 
 const LoginForm = () => {
     const navigate = useNavigate();
@@ -47,10 +48,10 @@ const LoginForm = () => {
                     await getUserData(dispatch);
                     navigate(Path.Root);
                 } else {
-                    console.log(error);
+                    dispatch(setAppErrorAC(error.message));
                 }
             } catch (err) {
-                console.log(err);
+                dispatch(setAppErrorAC('Unknown error occurred'));
             }
         },
     });
@@ -60,7 +61,7 @@ const LoginForm = () => {
             provider: social,
         });
         if (error) {
-            console.log(error);
+            dispatch(setAppErrorAC(error.message));
         }
     }, []);
 

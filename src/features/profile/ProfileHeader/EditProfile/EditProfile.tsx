@@ -1,21 +1,28 @@
-import React, { useState } from 'react';
-import { Box, Button, Grid, IconButton, Modal, TextField, Typography } from '@mui/material';
+import React, { FC, useEffect, useState } from 'react';
+import { Box, Button, CircularProgress, Grid, IconButton, Modal, TextField, Typography } from '@mui/material';
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
-import { useDropzone } from 'react-dropzone';
+import { useTranslation } from 'react-i18next';
 import s from './EditProfiile.module.scss';
-import { useAppSelector } from '../../../../hooks/useRedux';
+import { useAppDispatch, useAppSelector } from '../../../../hooks/useRedux';
 import { selectorUserId, selectorUserName } from '../../../../store/selectors/userSelector';
 import { useUpdateInfoMutation } from '../../../../store/api/userAPISlice';
 import UploadImage from '../../../../common/components/UploadImage/UploadImage';
+import { setAppErrorAC } from '../../../../store/slices/appSlice';
+import { TFunction } from 'i18next';
 
-const EditProfile = () => {
+type EditProfilePropsType = {
+    t: TFunction;
+};
+
+const EditProfile: FC<EditProfilePropsType> = ({ t }) => {
+    const dispatch = useAppDispatch();
     const userName = useAppSelector(selectorUserName);
     const userId = useAppSelector(selectorUserId);
     const [open, setOpen] = useState(false);
     const [image, setImage] = useState<File | null>(null);
     const [newName, setNewName] = useState<string>(userName || '');
     const [profilePhoto, setProfilePhoto] = useState<File | null>(null);
-    const [uploadInfo] = useUpdateInfoMutation();
+    const [uploadInfo, { error, isLoading }] = useUpdateInfoMutation();
 
     const handleOpen = () => {
         setOpen(true);
@@ -28,18 +35,6 @@ const EditProfile = () => {
         setNewName(e.target.value);
     };
 
-    const handleProfilePhotoDrop = (acceptedFiles: File[]) => {
-        console.log('acceptedFiles: ', acceptedFiles);
-        const file = acceptedFiles[0];
-        if (file.size > 2 * 1024 * 1024) {
-            alert('The file size should not exceed 2MB');
-        } else if (!/^image\//.test(file.type)) {
-            alert('Only image files are allowed');
-        } else {
-            setProfilePhoto(file);
-        }
-    };
-
     const handleSaveChanges = () => {
         if (userId) {
             if (newName !== userName) {
@@ -47,10 +42,17 @@ const EditProfile = () => {
             } else {
                 uploadInfo({ userId, image });
             }
+        }
+    };
+
+    useEffect(() => {
+        if (error) {
+            dispatch(setAppErrorAC(t('error update')));
+        } else {
             setProfilePhoto(null);
             handleClose();
         }
-    };
+    }, [error, dispatch]);
 
     return (
         <Grid className={s.editProfileContainer}>
@@ -62,13 +64,13 @@ const EditProfile = () => {
             <Modal open={open} onClose={handleClose}>
                 <Box sx={{ bgcolor: 'background.paper' }} className={s.modalBlock}>
                     <Typography variant="h6" component="h2" gutterBottom>
-                        Edit profile
+                        {t('edit profile')}
                     </Typography>
                     <Grid container spacing={2}>
                         <Grid item xs={12}>
                             <TextField
                                 fullWidth
-                                label="Enter new username"
+                                label={t('new name')}
                                 variant="outlined"
                                 value={newName}
                                 sx={{ mt: 1 }}
@@ -80,7 +82,7 @@ const EditProfile = () => {
                         </Grid>
                         <Grid item xs={12}>
                             <Button variant="contained" color="primary" fullWidth onClick={handleSaveChanges}>
-                                Save changes
+                                {isLoading ? <CircularProgress size={24} color="inherit" /> : t('save changes')}
                             </Button>
                         </Grid>
                     </Grid>

@@ -23,8 +23,8 @@ const appSlice = createSlice({
         setInitialized(state) {
             state.initialized = true;
         },
-        setAppErrorAC(state, action: PayloadAction<{ message: null | string }>) {
-            state.error = action.payload.message;
+        setAppErrorAC(state, action: PayloadAction<null | string>) {
+            state.error = action.payload;
         },
     },
 });
