@@ -1,6 +1,8 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/dist/query/react';
 import { PathAPI } from '../../enums/pathAPI';
 import { ResponseType } from '../../types/ResponseType';
+import { ReviewResponseType } from '../../types/ReviewResponseType';
+import { UserType } from '../../types/UserType';
 
 export const userAPISlice = createApi({
     reducerPath: 'userAPI',
@@ -9,6 +11,9 @@ export const userAPISlice = createApi({
         credentials: 'include',
     }),
     endpoints: (builder) => ({
+        getUsers: builder.query<ResponseType<UserType[]>, void>({
+            query: () => `${PathAPI.GetUsers}`,
+        }),
         updateInfo: builder.mutation<ResponseType, { userId: string; newName?: string; image: File | null }>({
             query: ({ userId, newName, image }) => {
                 const formData = new FormData();
@@ -35,4 +40,4 @@ export const userAPISlice = createApi({
     }),
 });
 
-export const { useUpdateInfoMutation } = userAPISlice;
+export const { useUpdateInfoMutation, useGetUsersQuery } = userAPISlice;

@@ -8,6 +8,7 @@ import Root from '../app/Root/Root';
 import Profile from '../features/profile/Profile';
 import Review from '../features/review/Review/Review';
 import { ReviewForm } from '../features/review/ReviewForm/ReviewForm';
+import AdminPage from '../features/admin/AdminPage';
 
 const routes = createRoutesFromElements(
     <Route path={Path.Root} element={<Root />}>
@@ -16,6 +17,7 @@ const routes = createRoutesFromElements(
         <Route path={Path.Register} element={<Registration />} />
         <Route path={Path.Review} element={<Review />} />
         <Route path={Path.Profile} element={<Profile />} />
+        <Route path={Path.AdminPage} element={<AdminPage />} />
         <Route path={Path.CreateReview} element={<ReviewForm />} />
     </Route>,
 );

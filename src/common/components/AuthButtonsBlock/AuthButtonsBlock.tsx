@@ -8,6 +8,7 @@ import { selectorUserData } from '../../../store/selectors/userSelector';
 import { useLogoutMutation } from '../../../store/api/authAPI';
 import { setLoggedOut } from '../../../store/slices/userSlice';
 import { supabase } from '../../../utils/supabase';
+import { Role } from '../../../enums/role';
 
 const AuthButtonsBlock = () => {
     const dispatch = useAppDispatch();
@@ -51,6 +52,11 @@ const AuthButtonsBlock = () => {
         handleCloseUserMenu();
     };
 
+    const adminPage = () => {
+        navigate(Path.AdminPage);
+        handleCloseUserMenu();
+    };
+
     return userData ? (
         <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
@@ -86,6 +92,11 @@ const AuthButtonsBlock = () => {
                 <MenuItem onClick={profilePage}>
                     <Typography textAlign="center">{t('profile')}</Typography>
                 </MenuItem>
+                {userData.role === Role.Admin && (
+                    <MenuItem onClick={adminPage}>
+                        <Typography textAlign="center">{t('admin')}</Typography>
+                    </MenuItem>
+                )}
                 <MenuItem onClick={LogoutHandler}>
                     <Typography textAlign="center">{t('logout')}</Typography>
                 </MenuItem>

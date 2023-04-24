@@ -7,6 +7,7 @@ export type UserType = {
     small_photo: string;
     main_photo: string;
     role: RoleType;
-    createdAt?: string;
-    updatedAt?: string;
+    is_blocked: boolean;
+    created_at?: string;
+    updated_at?: string;
 };

@@ -15,6 +15,17 @@ type CardsRowPropsType = {
 
 const ReviewRow: FC<CardsRowPropsType> = ({ row, index }) => {
     const navigate = useNavigate();
+
+    const onEditReviewHandler = (event: React.MouseEvent<HTMLButtonElement>) => {
+        event.stopPropagation();
+        console.log('EDIT');
+    };
+
+    const onDeleteReviewHandler = (event: React.MouseEvent<HTMLButtonElement>) => {
+        event.stopPropagation();
+        console.log('DELETE');
+    };
+
     return (
         <TableRow className={s.row} onClick={() => navigate(`/review/${row.id}`, { state: row })}>
             <TableCell>{index + 1}</TableCell>
@@ -27,10 +38,10 @@ const ReviewRow: FC<CardsRowPropsType> = ({ row, index }) => {
             <TableCell>{row.rating}</TableCell>
             <TableCell>
                 <Box sx={{ display: 'flex', flexDirection: 'row' }}>
-                    <IconButton>
+                    <IconButton onClick={onEditReviewHandler}>
                         <EditOutlinedIcon />
                     </IconButton>
-                    <IconButton>
+                    <IconButton onClick={onDeleteReviewHandler}>
                         <DeleteOutlineOutlinedIcon />
                     </IconButton>
                 </Box>

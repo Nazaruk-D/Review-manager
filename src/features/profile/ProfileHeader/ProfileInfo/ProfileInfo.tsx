@@ -39,7 +39,7 @@ const ProfileInfo: FC<ProfileInfoPropsType> = ({ user, t }) => {
             <Box sx={{ display: 'flex', flexDirection: 'row' }}>
                 <Typography variant="h3">{t('created')}:</Typography>
                 <Typography variant="h3" color="textSecondary" sx={{ ml: 1, fontWeight: 500 }}>
-                    {dateFormat(user?.createdAt, 'mmmm dS, yyyy, h:MM:ss TT')}
+                    {dateFormat(user?.created_at, 'mmmm dS, yyyy, h:MM:ss TT')}
                 </Typography>
             </Box>
         </Grid>

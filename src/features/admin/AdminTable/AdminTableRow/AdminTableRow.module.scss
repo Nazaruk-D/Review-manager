@@ -1,0 +1,19 @@
+@import 'src/styles/sass/mixin';
+@import 'src/styles/sass/variables';
+
+.row {
+  cursor: pointer;
+
+  &:hover {
+    background-color: $hoverColor;
+    transition: background-color 0.3s;
+  }
+
+  .image {
+    @include bgSettings(contain, center center, no-repeat);
+    width: 60px;
+    height: 60px;
+    display: block;
+    object-fit: cover;
+  }
+}

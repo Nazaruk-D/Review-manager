@@ -13,6 +13,7 @@
         "or": "Or",
         "home": "Home",
         "profile": "Profile",
+        "admin": "Admin",
         "logout": "Logout"
       },
       "profile": {
@@ -24,8 +25,10 @@
         "profile info": "Profile info",
         "name": "Name",
         "image": "Image",
-        "nameCard": "Name",
-        "createdCard": "Created",
+        "role": "Role",
+        "blocked": "Blocked",
+        "name review": "Name",
+        "created review": "Created",
         "category": "Category",
         "settings": "Settings",
         "new review": "New review",
@@ -99,6 +102,7 @@
         "or": "Или",
         "home": "Главная",
         "profile": "Профиль",
+        "admin": "Админка",
         "logout": "Выйти"
       },
       "profile": {
@@ -110,8 +114,10 @@
         "profile info": "Информация профиля",
         "name": "Имя",
         "image": "Изображение",
-        "nameCard": "Название",
-        "createdCard": "Создано",
+        "role": "Права",
+        "blocked": "Заблокирован",
+        "name review": "Название",
+        "created review": "Создано",
         "category": "Категория",
         "settings": "Настройки",
         "new review": "Новый обзор",

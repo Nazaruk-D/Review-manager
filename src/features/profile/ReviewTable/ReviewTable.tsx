@@ -30,9 +30,9 @@ const ReviewTable = () => {
                     <TableRow>
                         <TableCell>№</TableCell>
                         <TableCell>{t('image')}</TableCell>
-                        <TableCell>{t('nameCard')}</TableCell>
+                        <TableCell>{t('name review')}</TableCell>
                         <TableCell>{t('category')}</TableCell>
-                        <TableCell>{t('createdCard')}</TableCell>
+                        <TableCell>{t('created review')}</TableCell>
                         <TableCell>{t('rating')}</TableCell>
                         <TableCell>{t('settings')}</TableCell>
                     </TableRow>

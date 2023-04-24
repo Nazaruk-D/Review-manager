@@ -24,10 +24,11 @@ export async function getUserData(dispatch: Dispatch) {
             small_photo: data[0].small_photo,
             main_photo: data[0].main_photo,
             user_name: data[0].user_name,
-            id: user.id,
-            createdAt: user.created_at,
-            updatedAt: user.updated_at,
             role: data[0].role,
+            is_blocked: data[0].is_blocked,
+            id: user.id,
+            created_at: user.created_at,
+            updated_at: user.updated_at,
         };
         dispatch(setUser(newData));
         dispatch(setLoggedIn(true));
