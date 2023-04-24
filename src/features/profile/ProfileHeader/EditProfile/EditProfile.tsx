@@ -1,14 +1,13 @@
 import React, { FC, useEffect, useState } from 'react';
 import { Box, Button, CircularProgress, Grid, IconButton, Modal, TextField, Typography } from '@mui/material';
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
-import { useTranslation } from 'react-i18next';
+import { TFunction } from 'i18next';
 import s from './EditProfiile.module.scss';
 import { useAppDispatch, useAppSelector } from '../../../../hooks/useRedux';
 import { selectorUserId, selectorUserName } from '../../../../store/selectors/userSelector';
 import { useUpdateInfoMutation } from '../../../../store/api/userAPISlice';
 import UploadImage from '../../../../common/components/UploadImage/UploadImage';
 import { setAppErrorAC } from '../../../../store/slices/appSlice';
-import { TFunction } from 'i18next';
 
 type EditProfilePropsType = {
     t: TFunction;

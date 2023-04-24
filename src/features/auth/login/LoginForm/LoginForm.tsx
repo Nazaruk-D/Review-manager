@@ -1,6 +1,6 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useState } from 'react';
 import { useFormik } from 'formik';
-import { Box, Button, Grid, Paper, TextField, Typography } from '@mui/material';
+import { Box, Button, CircularProgress, Grid, Paper, TextField, Typography } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import FacebookOutlinedIcon from '@mui/icons-material/FacebookOutlined';
 import { Provider } from '@supabase/supabase-js';
@@ -17,6 +17,7 @@ import { setAppErrorAC } from '../../../../store/slices/appSlice';
 const LoginForm = () => {
     const navigate = useNavigate();
     const dispatch = useAppDispatch();
+    const [inProgress, setInProgress] = useState(false);
     const { t } = useTranslation('translation', { keyPrefix: 'auth' });
 
     const formik = useFormik({
@@ -33,13 +34,14 @@ const LoginForm = () => {
             }
             if (!values.password) {
                 errors.password = 'Password required';
-            } else if (values.password.length < 6) {
-                errors.password = 'Password must be min 6 characters long.';
+            } else if (values.password.length < 3) {
+                errors.password = 'Password must be min 3 characters long.';
             }
             return errors;
         },
         onSubmit: async (values) => {
             try {
+                setInProgress(true);
                 const { data, error } = await supabase.auth.signInWithPassword({
                     email: values.email,
                     password: values.password,
@@ -50,8 +52,10 @@ const LoginForm = () => {
                 } else {
                     dispatch(setAppErrorAC(error.message));
                 }
+                setInProgress(false);
             } catch (err) {
                 dispatch(setAppErrorAC('Unknown error occurred'));
+                setInProgress(false);
             }
         },
     });
@@ -114,7 +118,7 @@ const LoginForm = () => {
                         sx={{ mt: '20px' }}
                         disabled={!(formik.isValid && formik.dirty)}
                     >
-                        Login
+                        {inProgress ? <CircularProgress size={24} color="inherit" /> : t('signIn')}
                     </Button>
                 </form>
                 <Grid container spacing={2}>

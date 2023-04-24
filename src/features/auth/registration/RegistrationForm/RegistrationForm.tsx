@@ -1,6 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useFormik } from 'formik';
-import { Box, Button, Paper, TextField, Typography } from '@mui/material';
+import { Box, Button, CircularProgress, Paper, TextField, Typography } from '@mui/material';
+import { useTranslation } from 'react-i18next';
+import { useNavigate } from 'react-router-dom';
+import { Path } from '../../../../enums/path';
 import s from '../../login/LoginForm/LoginForm.module.scss';
 import { RegisterErrorType } from '../../../../types/FormikErrorTypes';
 import { supabase } from '../../../../utils/supabase';
@@ -9,6 +12,10 @@ import { setAppErrorAC } from '../../../../store/slices/appSlice';
 
 const RegistrationForm = () => {
     const dispatch = useAppDispatch();
+    const navigate = useNavigate();
+    const [inProgress, setInProgress] = useState(false);
+    const { t } = useTranslation('translation', { keyPrefix: 'auth' });
+
     const formik = useFormik({
         initialValues: {
             user_name: '',
@@ -20,8 +27,8 @@ const RegistrationForm = () => {
             const errors: RegisterErrorType = {};
             if (!values.user_name) {
                 errors.user_name = 'Name is required';
-            } else if (values.user_name.length < 6) {
-                errors.user_name = 'Name must be min 6 characters long.';
+            } else if (values.user_name.length < 3) {
+                errors.user_name = 'Name must be min 3 characters long.';
             }
 
             if (!values.email) {
@@ -47,18 +54,21 @@ const RegistrationForm = () => {
         },
         onSubmit: async (values) => {
             try {
+                setInProgress(true);
                 const { data, error } = await supabase.auth.signUp({
                     email: values.email,
                     password: values.password,
                 });
-
                 if (!error && data.user?.id) {
                     await supabase.from('users').update({ user_name: values.user_name }).eq('id', data.user.id);
                 } else {
                     dispatch(setAppErrorAC(error!.message));
                 }
+                navigate(Path.Login);
+                setInProgress(false);
             } catch {
                 dispatch(setAppErrorAC('Unknown error occurred'));
+                setInProgress(false);
             }
         },
     });
@@ -133,7 +143,7 @@ const RegistrationForm = () => {
                         sx={{ mt: '10px' }}
                         disabled={!(formik.isValid && formik.dirty)}
                     >
-                        Sign UP
+                        {inProgress ? <CircularProgress size={24} color="inherit" /> : t('signUp')}
                     </Button>
                 </form>
             </Box>
