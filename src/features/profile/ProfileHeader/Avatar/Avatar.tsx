@@ -4,7 +4,7 @@ import s from './Avatar.module.scss';
 import { UserType } from '../../../../types/UserType';
 
 type AvatarPropsType = {
-    user: UserType;
+    user: UserType | undefined;
 };
 
 const Avatar: FC<AvatarPropsType> = ({ user }) => {

@@ -14,6 +14,9 @@ export const userAPISlice = createApi({
         getUsers: builder.query<ResponseType<UserType[]>, void>({
             query: () => `${PathAPI.GetUsers}`,
         }),
+        getUser: builder.query<ResponseType<UserType>, { userId: string }>({
+            query: ({ userId }) => `${PathAPI.GetUser}/${userId}`,
+        }),
         updateInfo: builder.mutation<ResponseType, { userId: string; newName?: string; image: File | null }>({
             query: ({ userId, newName, image }) => {
                 const formData = new FormData();
@@ -40,4 +43,4 @@ export const userAPISlice = createApi({
     }),
 });
 
-export const { useUpdateInfoMutation, useGetUsersQuery } = userAPISlice;
+export const { useUpdateInfoMutation, useGetUsersQuery, useGetUserQuery } = userAPISlice;

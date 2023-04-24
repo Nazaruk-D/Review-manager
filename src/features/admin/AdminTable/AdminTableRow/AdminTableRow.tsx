@@ -6,6 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import { useAppDispatch } from '../../../../hooks/useRedux';
 import { UserType } from '../../../../types/UserType';
 import s from './AdminTableRow.module.scss';
+import { Role } from '../../../../enums/role';
 
 type AdminTableRowPropsType = {
     user: UserType;
@@ -44,7 +45,7 @@ const AdminTableRow: FC<AdminTableRowPropsType> = ({ user, index }) => {
             <TableCell onClick={(e) => e.stopPropagation()}>
                 <FormControlLabel
                     control={<Switch checked={isUser} onChange={handleUserRoleChange} />}
-                    label={isUser ? 'user' : 'admin'}
+                    label={isUser ? Role.User : Role.Admin}
                 />
             </TableCell>
             <TableCell onClick={(e) => e.stopPropagation()}>

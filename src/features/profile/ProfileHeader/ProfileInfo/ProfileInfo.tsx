@@ -7,7 +7,7 @@ import { UserType } from '../../../../types/UserType';
 
 type ProfileInfoPropsType = {
     t: TFunction;
-    user: UserType;
+    user: UserType | undefined;
 };
 
 const ProfileInfo: FC<ProfileInfoPropsType> = ({ user, t }) => {

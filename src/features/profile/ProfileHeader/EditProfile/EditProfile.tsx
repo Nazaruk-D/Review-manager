@@ -11,11 +11,11 @@ import { setAppErrorAC } from '../../../../store/slices/appSlice';
 
 type EditProfilePropsType = {
     t: TFunction;
+    userName: string;
 };
 
-const EditProfile: FC<EditProfilePropsType> = ({ t }) => {
+const EditProfile: FC<EditProfilePropsType> = ({ t, userName }) => {
     const dispatch = useAppDispatch();
-    const userName = useAppSelector(selectorUserName);
     const userId = useAppSelector(selectorUserId);
     const [open, setOpen] = useState(false);
     const [image, setImage] = useState<File | null>(null);
