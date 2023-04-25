@@ -1,7 +1,10 @@
 import React, { FC } from 'react';
-import { Button, Card, CardActions, CardContent, CardMedia, Grid, Rating, Typography } from '@mui/material';
-import { styled } from '@mui/material/styles';
 import { useTranslation } from 'react-i18next';
+import { Card, CardContent, CardMedia, Grid, Rating, Typography } from '@mui/material';
+import { styled } from '@mui/material/styles';
+import dateFormat from 'dateformat';
+import { ReviewResponseType } from '../../../types/ReviewResponseType';
+import noImage from '../../png/no_image.png';
 
 const StyledCard = styled(Card)({
     transition: 'all 0.2s ease-in-out',
@@ -20,35 +23,32 @@ const StyledCard = styled(Card)({
     cursor: 'pointer',
 });
 
-type PosterPropsType = {
-    creator: string;
-    createdDate: string;
+type ReviewItemPropsType = {
+    review: ReviewResponseType;
 };
 
-const PosterItem: FC<PosterPropsType> = ({ creator, createdDate }) => {
+const ReviewItem: FC<ReviewItemPropsType> = ({ review }) => {
     const { t } = useTranslation('translation', { keyPrefix: 'poster' });
     return (
         <Grid item xs={12} md={4}>
             <StyledCard>
                 <Card>
-                    <CardMedia
-                        sx={{ height: 240 }}
-                        image="https://www.everythingreptiles.com/wp-content/uploads/2020/05/Green-Iguana-Portrait.jpg"
-                        title="green iguana"
-                    />
+                    <CardMedia sx={{ height: 240 }} image={review.image ? review.image : noImage} title="review" />
                     <CardContent>
                         <Typography gutterBottom variant="h2" component="h3" color="text.secondary">
-                            Lizard
+                            {review.review_title}
+                        </Typography>
+                        <Typography gutterBottom variant="h3" component="h3" color="text.secondary">
+                            {review.title}
                         </Typography>
                         <Typography variant="body2" color="text.secondary">
-                            {t('category')}: Movie
+                            {t('category')}: {review.category}
                         </Typography>
                         <Typography variant="body2" color="text.secondary" sx={{ px: 0, py: 1 }}>
-                            {t('assessment')}: 7
+                            {t('assessment')}: {review.rating}
                         </Typography>
                         <Typography variant="body1" color="text.secondary">
-                            Lizards are a widespread group of squamate reptiles, with over 6,000 species, ranging across all
-                            continents except Antarctica
+                            {review.body}
                         </Typography>
                     </CardContent>
                     <CardContent sx={{ px: 2, py: 0 }}>
@@ -58,9 +58,9 @@ const PosterItem: FC<PosterPropsType> = ({ creator, createdDate }) => {
                         <Typography variant="caption" color="text.secondary">
                             {t('reviewed')}{' '}
                             <Typography variant="subtitle2" component="span" color="text.secondary">
-                                {creator}
+                                {review.author_name}
                             </Typography>
-                            , {createdDate}
+                            , {dateFormat(review.created_at, 'mm/dd/yyyy')}
                         </Typography>
                     </CardContent>
                 </Card>
@@ -69,4 +69,4 @@ const PosterItem: FC<PosterPropsType> = ({ creator, createdDate }) => {
     );
 };
 
-export default PosterItem;
+export default ReviewItem;

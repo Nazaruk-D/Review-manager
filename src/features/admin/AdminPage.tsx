@@ -8,12 +8,13 @@ import { Role } from '../../enums/role';
 import { useGetUsersQuery } from '../../store/api/userAPISlice';
 import { UserType } from '../../types/UserType';
 import AdminTable from './AdminTable/AdminTable';
+import Loader from '../../common/components/Loader/Loader';
 
 const AdminPage = () => {
     const isLogin = useAppSelector(selectorIsLogin);
     const role = useAppSelector(selectorRole);
     const navigate = useNavigate();
-    const { data } = useGetUsersQuery();
+    const { data, isLoading, error } = useGetUsersQuery();
     const users: UserType[] = data ? data.data : [];
 
     useEffect(() => {
@@ -23,6 +24,14 @@ const AdminPage = () => {
     useEffect(() => {
         if (role !== Role.Admin) navigate(Path.Root);
     }, [role]);
+
+    if (error) {
+        console.log(error);
+    }
+
+    if (isLoading) {
+        return <Loader />;
+    }
 
     return (
         <Container sx={{ mt: '2rem' }}>

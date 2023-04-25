@@ -3,6 +3,7 @@ import { PathAPI } from '../../enums/pathAPI';
 import { ResponseType } from '../../types/ResponseType';
 import { ReviewResponseType } from '../../types/ReviewResponseType';
 import { CreateReviewType } from '../../types/CreateReviewType';
+import { ReviewType } from '../../types/ReviewType';
 
 export const reviewAPI = createApi({
     reducerPath: 'review',
@@ -16,6 +17,9 @@ export const reviewAPI = createApi({
         }),
         getReviewById: builder.query<ResponseType<ReviewResponseType>, { reviewId: string }>({
             query: ({ reviewId }) => `${PathAPI.GetReview}/${reviewId}`,
+        }),
+        getLatestReviews: builder.query<ResponseType<ReviewResponseType[]>, Record<string, never>>({
+            query: () => `${PathAPI.GetLatestReviews}`,
         }),
         createReview: builder.mutation<ResponseType<ReviewResponseType>, CreateReviewType>({
             query: ({ title, category, rating, uploadImage, body, tags, review_title, author_id, author_name }) => {
@@ -51,4 +55,4 @@ export const reviewAPI = createApi({
     }),
 });
 
-export const { useGetReviewsQuery, useGetReviewByIdQuery, useCreateReviewMutation } = reviewAPI;
+export const { useGetReviewsQuery, useGetReviewByIdQuery, useCreateReviewMutation, useGetLatestReviewsQuery } = reviewAPI;

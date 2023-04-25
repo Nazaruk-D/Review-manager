@@ -8,14 +8,20 @@ import ProfileInfo from './ProfileInfo/ProfileInfo';
 import Avatar from './Avatar/Avatar';
 import { useGetUserQuery } from '../../../store/api/userAPISlice';
 import Loader from '../../../common/components/Loader/Loader';
+import { useAppDispatch } from '../../../hooks/useRedux';
+import { setAppErrorAC } from '../../../store/slices/appSlice';
 
 const ProfileHeader = () => {
+    const dispatch = useAppDispatch();
     const { userId = '' } = useParams<string>();
     const { t } = useTranslation('translation', { keyPrefix: 'profile' });
-    const { data, isLoading } = useGetUserQuery({ userId });
+    const { data, isLoading, error } = useGetUserQuery({ userId });
 
     if (isLoading) {
         return <Loader />;
+    }
+    if (error) {
+        dispatch(setAppErrorAC('error'));
     }
     const user = data?.data;
     console.log('data:', data);
