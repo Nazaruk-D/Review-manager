@@ -20,8 +20,13 @@ const RatingReview: FC<RatingReviewPropsType> = ({ review }) => {
             setRating({ userId, reviewId: review.id, value });
         }
     };
+
+    const onclickHandler = (event: React.MouseEvent<HTMLElement>) => {
+        event.stopPropagation();
+    };
+
     return (
-        <Box>
+        <Box sx={{ display: 'flex' }}>
             <Rating
                 name="poster-rating"
                 precision={0.5}
@@ -29,6 +34,7 @@ const RatingReview: FC<RatingReviewPropsType> = ({ review }) => {
                 size="medium"
                 disabled={review.rating.ratingUsers.includes(userId!)}
                 onChange={setRatingHandler}
+                onClick={onclickHandler}
             />
             <Typography variant="body1" color="text.secondary" sx={{ ml: 1, fontWeight: 600 }}>
                 {review.rating.avgRating ? review.rating.avgRating.toFixed(1) : 0}
