@@ -23,6 +23,8 @@ const ReviewTable = () => {
         dispatch(setAppErrorAC(t('error get review')));
     }
 
+    console.log('reviews: ', reviews);
+
     return (
         <TableContainer component={Paper} sx={{ mt: 3, mb: 3 }}>
             <Table>

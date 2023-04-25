@@ -30,6 +30,8 @@ const Review = () => {
         if (isLoading) return <Loader />;
     }
 
+    console.log('reviewreviewreviewreview: ', review);
+
     return (
         <Container sx={{ mt: '1rem' }}>
             <ReviewHeader review={review} />

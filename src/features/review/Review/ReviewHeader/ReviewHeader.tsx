@@ -1,11 +1,12 @@
 import React, { FC } from 'react';
-import { Grid, Theme, Typography, useMediaQuery } from '@mui/material';
+import { Grid, Rating, Theme, Typography, useMediaQuery } from '@mui/material';
 import dateFormat from 'dateformat';
 import { useTranslation } from 'react-i18next';
 import { NavLink } from 'react-router-dom';
 import s from './ReviewHeader.module.scss';
 import { ReviewResponseType } from '../../../../types/ReviewResponseType';
 import { Path } from '../../../../enums/path';
+import RatingReview from '../../../../common/components/RatingReview/RatingReview';
 
 type ReviewHeaderPropsType = {
     review: ReviewResponseType;
@@ -50,6 +51,7 @@ const ReviewHeader: FC<ReviewHeaderPropsType> = ({ review }) => {
                 <Typography variant="subtitle2" color="textSecondary" gutterBottom>
                     {tr('created by')} {review.author_name} {tr('on')} {dateFormat(review.created_at, 'mm/dd/yyyy')}
                 </Typography>
+                <RatingReview review={review} />
             </Grid>
         </Grid>
     );

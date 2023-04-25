@@ -7,6 +7,8 @@ export type ReviewResponseType = ReviewType & {
     author_id: string;
     author_name: string;
     author_avatar: string;
-    avgRating: number;
-    ratingUsers: string[];
+    rating: {
+        avgRating: number;
+        ratingUsers: string[];
+    };
 };

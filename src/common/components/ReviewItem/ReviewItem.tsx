@@ -69,13 +69,13 @@ const ReviewItem: FC<ReviewItemPropsType> = ({ review }) => {
                         <Rating
                             name="poster-rating"
                             precision={0.5}
-                            defaultValue={review.avgRating}
+                            defaultValue={review.rating.avgRating}
                             size="medium"
-                            disabled={review.ratingUsers.includes(userId!)}
+                            disabled={review.rating.ratingUsers.includes(userId!)}
                             onChange={setRatingHandler}
                         />
                         <Typography variant="body1" color="text.secondary" sx={{ ml: 1, fontWeight: 600 }}>
-                            {review.avgRating ? review.avgRating.toFixed(1) : 0}
+                            {review.rating.avgRating ? review.rating.avgRating.toFixed(1) : 0}
                         </Typography>
                     </CardContent>
                     <CardContent sx={{ px: 2, py: 0 }}>
