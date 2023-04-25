@@ -10,5 +10,6 @@ export enum PathAPI {
     GetUsers = '/user/get-users',
     GetUser = '/user/get-user',
     Comment = '/comment',
+    Rating = '/review/rating',
     UploadPhoto = '/user/upload-info',
 }

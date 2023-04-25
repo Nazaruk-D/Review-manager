@@ -25,7 +25,6 @@ import { useCreateReviewMutation } from '../../../store/api/reviewAPI';
 import { useAppSelector } from '../../../hooks/useRedux';
 import { selectorUserData } from '../../../store/selectors/userSelector';
 import UploadImage from '../../../common/components/UploadImage/UploadImage';
-import { Path } from '../../../enums/path';
 import { ReviewErrorType } from '../../../types/FormikErrorTypes';
 import { ErrorStyle } from '../../../styles/common/ErrorStyle';
 
@@ -43,7 +42,7 @@ export const ReviewForm = () => {
             title: '',
             category: '',
             body: '',
-            rating: '',
+            assessment: '',
             tags: [],
         } as ReviewType,
         validate: (values) => {
@@ -60,8 +59,8 @@ export const ReviewForm = () => {
             if (!values.body) {
                 errors.body = `${tv('body')}`;
             }
-            if (!errors.review_title && !errors.title && !errors.category && !errors.body && !values.rating) {
-                errors.rating = `${tv('rating')}`;
+            if (!errors.review_title && !errors.title && !errors.category && !errors.body && !values.assessment) {
+                errors.assessment = `${tv('rating')}`;
             }
             return errors;
         },
@@ -141,9 +140,9 @@ export const ReviewForm = () => {
                                 <FormLabel component="legend">{t('rating')}</FormLabel>
                                 <RadioGroup
                                     row
-                                    aria-label="rating"
-                                    name="rating"
-                                    value={formik.values.rating}
+                                    aria-label="assessment"
+                                    name="assessment"
+                                    value={formik.values.assessment}
                                     onChange={formik.handleChange}
                                 >
                                     {Array.from({ length: 10 }, (_, index) => (
@@ -157,9 +156,9 @@ export const ReviewForm = () => {
                                 </RadioGroup>
                             </FormControl>
                         </Grid>
-                        {formik.touched.body && formik.errors.rating && (
+                        {formik.touched.body && formik.errors.assessment && (
                             <Grid item xs={12} sx={{ color: 'green', fontSize: '14px', fontWeight: 600 }}>
-                                {formik.errors.rating}
+                                {formik.errors.assessment}
                             </Grid>
                         )}
                         <Grid item xs={12}>

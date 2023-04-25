@@ -45,7 +45,7 @@ const ReviewHeader: FC<ReviewHeaderPropsType> = ({ review }) => {
                 </Typography>
                 <Typography variant="body1">
                     {' '}
-                    {tr("author's assessment")}: {review.rating}
+                    {tr("author's assessment")}: {review.assessment}
                 </Typography>
                 <Typography variant="subtitle2" color="textSecondary" gutterBottom>
                     {tr('created by')} {review.author_name} {tr('on')} {dateFormat(review.created_at, 'mm/dd/yyyy')}

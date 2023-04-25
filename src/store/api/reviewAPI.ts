@@ -25,7 +25,7 @@ export const reviewAPI = createApi({
             query: () => `${PathAPI.GetPopularTags}`,
         }),
         createReview: builder.mutation<ResponseType<ReviewResponseType>, CreateReviewType>({
-            query: ({ title, category, rating, uploadImage, body, tags, review_title, author_id, author_name }) => {
+            query: ({ title, category, assessment, uploadImage, body, tags, review_title, author_id, author_name }) => {
                 const formData = new FormData();
                 formData.append('review_title', review_title);
                 formData.append('title', title);
@@ -33,7 +33,7 @@ export const reviewAPI = createApi({
                 formData.append('body', body);
                 formData.append('author_id', author_id);
                 formData.append('author_name', author_name);
-                formData.append('rating', rating);
+                formData.append('rating', assessment);
                 if (tags) {
                     tags.forEach((tag) => {
                         formData.append('tags', tag);
@@ -55,6 +55,13 @@ export const reviewAPI = createApi({
                 };
             },
         }),
+        setRating: builder.mutation<ResponseType, { userId: string; reviewId: string; value: number }>({
+            query: ({ userId, reviewId, value }) => ({
+                url: `${PathAPI.Rating}`,
+                method: 'POST',
+                body: { userId, reviewId, value },
+            }),
+        }),
     }),
 });
 
@@ -64,4 +71,5 @@ export const {
     useCreateReviewMutation,
     useGetLatestReviewsQuery,
     useGetPopularTagsQuery,
+    useSetRatingMutation,
 } = reviewAPI;

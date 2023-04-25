@@ -18,6 +18,7 @@ const MainPage = () => {
         dispatch(setAppErrorAC('Error getting reviews'));
     }
     const reviews = data!.data;
+    console.log('TAK POLUCHAU REVIEW: ', reviews);
     return (
         <Container sx={{ mt: '2rem' }}>
             <TagCloudBox />

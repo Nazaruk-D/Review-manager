@@ -15,5 +15,5 @@ export type ReviewErrorType = {
     title?: string;
     category?: string;
     body?: string;
-    rating?: string;
+    assessment?: string;
 };

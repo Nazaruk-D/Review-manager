@@ -35,7 +35,7 @@ const ReviewRow: FC<CardsRowPropsType> = ({ row, index }) => {
             <TableCell>{row.title}</TableCell>
             <TableCell>{row.category}</TableCell>
             <TableCell>{dateFormat(row.created_at, 'mm/dd/yyyy')}</TableCell>
-            <TableCell>{row.rating}</TableCell>
+            <TableCell>{row.assessment}</TableCell>
             <TableCell>
                 <Box sx={{ display: 'flex', flexDirection: 'row' }}>
                     <IconButton onClick={onEditReviewHandler}>
