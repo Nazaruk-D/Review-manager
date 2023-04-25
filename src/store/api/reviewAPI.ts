@@ -21,6 +21,9 @@ export const reviewAPI = createApi({
         getLatestReviews: builder.query<ResponseType<ReviewResponseType[]>, Record<string, never>>({
             query: () => `${PathAPI.GetLatestReviews}`,
         }),
+        getPopularTags: builder.query<ResponseType<string[]>, Record<string, never>>({
+            query: () => `${PathAPI.GetPopularTags}`,
+        }),
         createReview: builder.mutation<ResponseType<ReviewResponseType>, CreateReviewType>({
             query: ({ title, category, rating, uploadImage, body, tags, review_title, author_id, author_name }) => {
                 const formData = new FormData();
@@ -55,4 +58,10 @@ export const reviewAPI = createApi({
     }),
 });
 
-export const { useGetReviewsQuery, useGetReviewByIdQuery, useCreateReviewMutation, useGetLatestReviewsQuery } = reviewAPI;
+export const {
+    useGetReviewsQuery,
+    useGetReviewByIdQuery,
+    useCreateReviewMutation,
+    useGetLatestReviewsQuery,
+    useGetPopularTagsQuery,
+} = reviewAPI;

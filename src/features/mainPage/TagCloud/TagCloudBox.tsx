@@ -1,22 +1,33 @@
 import React from 'react';
-import { TagCloud } from 'react-tagcloud';
-import { Box } from '@mui/material';
-
-const data = [
-    { value: 'JavaScript', count: 80, color: 'grey' },
-    { value: 'React', count: 50, color: 'grey' },
-    { value: 'Node.js', count: 60, color: 'grey' },
-    { value: 'HTML', count: 40, color: 'grey' },
-    { value: 'CSS', count: 30, color: 'grey' },
-    { value: 'TypeScript', count: 20, color: 'grey' },
-    { value: 'Webpack', count: 30, color: 'grey' },
-    { value: 'Redux', count: 40, color: 'grey' },
-];
+import { Box, Typography } from '@mui/material';
+import { NavLink } from 'react-router-dom';
+import { useGetPopularTagsQuery } from '../../../store/api/reviewAPI';
+import Loader from '../../../common/components/Loader/Loader';
+import { setAppErrorAC } from '../../../store/slices/appSlice';
+import { useAppDispatch } from '../../../hooks/useRedux';
+import { Path } from '../../../enums/path';
+import s from './TagCloud.module.scss';
 
 const TagCloudBox = () => {
+    const dispatch = useAppDispatch();
+    const { data, isLoading, error } = useGetPopularTagsQuery({});
+    if (isLoading) {
+        return <Loader />;
+    }
+    if (error) {
+        dispatch(setAppErrorAC('Error getting reviews'));
+    }
+    const tags = data!.data;
     return (
         <Box>
-            <TagCloud tags={data} minSize={12} maxSize={35} shuffle />
+            <Typography variant="h2" style={{ marginBottom: '15px' }}>
+                Popular tags
+            </Typography>
+            {tags!.map((tag) => (
+                <NavLink key={tag} to={Path.Root} className={s.tag}>
+                    #{tag}
+                </NavLink>
+            ))}
         </Box>
     );
 };

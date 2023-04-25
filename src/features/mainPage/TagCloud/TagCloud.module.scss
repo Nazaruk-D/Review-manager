@@ -1,0 +1,16 @@
+.tag {
+  margin-right: 10px;
+  margin-bottom: 10px;
+  padding: 5px 10px;
+  background-color: #4cd9ea;
+  text-decoration: none;
+  border-radius: 10px;
+  color: black;
+  transition: transform 0.2s ease-in-out;
+  display: inline-block;
+
+  &:hover {
+    transform: scale(1.1);
+    cursor: pointer;
+  }
+}

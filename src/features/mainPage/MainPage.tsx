@@ -20,9 +20,9 @@ const MainPage = () => {
     const reviews = data!.data;
     return (
         <Container sx={{ mt: '2rem' }}>
+            <TagCloudBox />
             <BlockReviews title="Popular reviews" reviews={reviews} />
             <BlockReviews title="Latest added reviews" reviews={reviews} />
-            <TagCloudBox />
         </Container>
     );
 };

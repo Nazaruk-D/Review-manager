@@ -10,7 +10,6 @@ type ReviewTagsPropsType = {
 };
 
 const ReviewTags: FC<ReviewTagsPropsType> = ({ tags }) => {
-    const { t: tr } = useTranslation('translation', { keyPrefix: 'review editor' });
     return (
         <Grid item xs={12} className={s.tagsBlock}>
             {tags!.length > 0 && (
