@@ -18,7 +18,6 @@ export async function getUserData(dispatch: Dispatch) {
             console.error(error);
             return;
         }
-        console.log('BEREM OTSUDA: ', data[0]);
         const newData: UserType = {
             email: user.email!,
             small_photo: data[0].small_photo,

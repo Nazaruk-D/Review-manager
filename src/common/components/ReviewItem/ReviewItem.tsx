@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Card, CardContent, CardMedia, Grid, Rating, Typography } from '@mui/material';
+import { Box, Card, CardContent, CardMedia, Grid, Rating, Typography } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import dateFormat from 'dateformat';
 import { NavLink } from 'react-router-dom';
@@ -11,6 +11,7 @@ import { useAppSelector } from '../../../hooks/useRedux';
 import { selectorUserId } from '../../../store/selectors/userSelector';
 import { Path } from '../../../enums/path';
 import RatingReview from '../RatingReview/RatingReview';
+import Like from '../Like/Like';
 
 const StyledCard = styled(Card)({
     transition: 'all 0.2s ease-in-out',
@@ -34,17 +35,8 @@ type ReviewItemPropsType = {
 };
 
 const ReviewItem: FC<ReviewItemPropsType> = ({ review }) => {
-    const { t } = useTranslation('translation', { keyPrefix: 'poster' });
     const userId = useAppSelector(selectorUserId);
-    const [setRating] = useSetRatingMutation();
-
-    const setRatingHandler = (event: React.SyntheticEvent, value: number | null) => {
-        if (value && userId && review.id) {
-            console.log(typeof value);
-            console.log(value);
-            setRating({ userId, reviewId: review.id, value });
-        }
-    };
+    const { t } = useTranslation('translation', { keyPrefix: 'poster' });
 
     return (
         <Grid item xs={12} md={4}>
@@ -53,9 +45,12 @@ const ReviewItem: FC<ReviewItemPropsType> = ({ review }) => {
                     <Card>
                         <CardMedia sx={{ height: 240 }} image={review.image ? review.image : noImage} title="review" />
                         <CardContent>
-                            <Typography gutterBottom variant="h2" component="h3" color="text.secondary">
-                                {review.review_title}
-                            </Typography>
+                            <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                                <Typography gutterBottom variant="h2" component="h3" color="text.secondary">
+                                    {review.review_title}
+                                </Typography>
+                                <Like userId={userId!} reviewId={review.id} likes={review.likes} />
+                            </Box>
                             <Typography gutterBottom variant="h3" component="h3" color="text.secondary">
                                 {review.title}
                             </Typography>

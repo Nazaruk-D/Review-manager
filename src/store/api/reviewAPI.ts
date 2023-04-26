@@ -13,10 +13,10 @@ export const reviewAPI = createApi({
     }),
     endpoints: (builder) => ({
         getReviews: builder.query<ResponseType<ReviewResponseType[]>, { userId: string }>({
-            query: ({ userId }) => `${PathAPI.Review}/${userId}`,
+            query: ({ userId }) => `${PathAPI.GetReview}/${userId}`,
         }),
         getReviewById: builder.query<ResponseType<ReviewResponseType>, { reviewId: string }>({
-            query: ({ reviewId }) => `${PathAPI.GetReview}/${reviewId}`,
+            query: ({ reviewId }) => `${PathAPI.Review}/${reviewId}`,
         }),
         getLatestReviews: builder.query<ResponseType<ReviewResponseType[]>, Record<string, never>>({
             query: () => `${PathAPI.GetLatestReviews}`,
@@ -62,6 +62,13 @@ export const reviewAPI = createApi({
                 body: { userId, reviewId, value },
             }),
         }),
+        setLike: builder.mutation<ResponseType, { userId: string; reviewId: string }>({
+            query: ({ userId, reviewId }) => ({
+                url: `${PathAPI.Like}`,
+                method: 'POST',
+                body: { userId, reviewId },
+            }),
+        }),
     }),
 });
 
@@ -72,4 +79,5 @@ export const {
     useGetLatestReviewsQuery,
     useGetPopularTagsQuery,
     useSetRatingMutation,
+    useSetLikeMutation,
 } = reviewAPI;

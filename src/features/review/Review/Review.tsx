@@ -30,10 +30,8 @@ const Review = () => {
         if (isLoading) return <Loader />;
     }
 
-    console.log('reviewreviewreviewreview: ', review);
-
     return (
-        <Container sx={{ mt: '1rem' }}>
+        <Container sx={{ mt: '2rem' }}>
             <ReviewHeader review={review} />
             <ReviewBody review={review} />
             <SendCommentForm />

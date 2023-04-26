@@ -15,8 +15,6 @@ const RatingReview: FC<RatingReviewPropsType> = ({ review }) => {
 
     const setRatingHandler = (event: React.SyntheticEvent, value: number | null) => {
         if (value && userId && review.id) {
-            console.log(typeof value);
-            console.log(value);
             setRating({ userId, reviewId: review.id, value });
         }
     };
