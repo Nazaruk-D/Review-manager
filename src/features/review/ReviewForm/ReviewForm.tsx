@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useFormik } from 'formik';
 import {
     Autocomplete,
@@ -19,7 +19,7 @@ import {
     Typography,
 } from '@mui/material';
 import { useTranslation } from 'react-i18next';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { ReviewType } from '../../../types/ReviewType';
 import { useCreateReviewMutation } from '../../../store/api/reviewAPISlice';
 import { useAppSelector } from '../../../hooks/useRedux';
@@ -30,14 +30,16 @@ import { ErrorStyle } from '../../../styles/common/ErrorStyle';
 
 export const ReviewForm = () => {
     const navigate = useNavigate();
+    const { userId = '' } = useParams<string>();
     const [uploadImage, setUploadImage] = useState<File | null>(null);
     const { t } = useTranslation('translation', { keyPrefix: 'review editor' });
     const { t: tc } = useTranslation('translation', { keyPrefix: 'category' });
     const { t: tv } = useTranslation('translation', { keyPrefix: 'validator' });
     const user = useAppSelector(selectorUserData);
-    const [sendReview, { isLoading, isError }] = useCreateReviewMutation();
+    const [sendReview, { isLoading, isError, isSuccess, status, data }] = useCreateReviewMutation();
     const formik = useFormik({
         initialValues: {
+            reviewId: '',
             review_title: '',
             title: '',
             category: '',
@@ -60,19 +62,23 @@ export const ReviewForm = () => {
                 errors.body = `${tv('body')}`;
             }
             if (!errors.review_title && !errors.title && !errors.category && !errors.body && !values.assessment) {
-                errors.assessment = `${tv('rating')}`;
+                errors.assessment = `${tv('assessment')}`;
             }
             return errors;
         },
         onSubmit: async (values) => {
             if (values) {
-                sendReview({ ...values, author_id: user!.id, author_name: user!.user_name, uploadImage });
-                if (!isError) {
-                    navigate(`/profile/${user!.id}`);
-                }
+                console.log('VALUES: ', values);
+                sendReview({ ...values, author_name: user!.user_name, uploadImage, userId });
             }
         },
     });
+
+    useEffect(() => {
+        if (isSuccess) {
+            navigate(`/profile/${user!.id}`);
+        }
+    }, [isSuccess, navigate]);
 
     return (
         <Container maxWidth="md" sx={{ mt: 3 }}>

@@ -3,11 +3,9 @@ import { useTranslation } from 'react-i18next';
 import { Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@mui/material';
 import { useParams } from 'react-router-dom';
 import ReviewRow from './ReviewRow/ReviewRow';
-import { useGetReviewsQuery } from '../../../store/api/reviewAPISlice';
-import { ReviewResponseType } from '../../../types/ReviewResponseType';
+import { useDeleteReviewByIdMutation, useGetReviewsQuery } from '../../../store/api/reviewAPISlice';
 import Loader from '../../../common/components/Loader/Loader';
 import { useAppDispatch, useAppSelector } from '../../../hooks/useRedux';
-import { setAppErrorAC } from '../../../store/slices/appSlice';
 import { setUsersReview } from '../../../store/slices/reviewSlice';
 import { selectorUserReviews } from '../../../store/selectors/reviewSelector';
 
@@ -44,7 +42,7 @@ const ReviewTable = () => {
                 </TableHead>
                 <TableBody>
                     {reviews?.map((row, index) => (
-                        <ReviewRow row={row} index={index} key={row.id} />
+                        <ReviewRow review={row} index={index} key={row.id} />
                     ))}
                 </TableBody>
             </Table>

@@ -29,15 +29,14 @@ export const reviewAPISlice = createApi({
             query: () => `${PathAPI.GetPopularTags}`,
         }),
         createReview: builder.mutation<ResponseType<ReviewResponseType>, CreateReviewType>({
-            query: ({ title, category, assessment, uploadImage, body, tags, review_title, author_id, author_name }) => {
+            query: ({ title, category, assessment, uploadImage, body, tags, review_title, author_name, userId }) => {
                 const formData = new FormData();
                 formData.append('review_title', review_title);
                 formData.append('title', title);
                 formData.append('category', category);
                 formData.append('body', body);
-                formData.append('author_id', author_id);
                 formData.append('author_name', author_name);
-                formData.append('rating', assessment);
+                formData.append('assessment', assessment);
                 if (tags) {
                     tags.forEach((tag) => {
                         formData.append('tags', tag);
@@ -54,10 +53,19 @@ export const reviewAPISlice = createApi({
                     },
                 };
                 return {
-                    url: `${PathAPI.Review}`,
+                    url: `${PathAPI.Review}/${userId}`,
                     ...fetchConfig,
                 };
             },
+            invalidatesTags: [TagType.Review],
+        }),
+        deleteReviewById: builder.mutation<ResponseType, { reviewId: string }>({
+            query: ({ reviewId }) => ({
+                url: `${PathAPI.Review}`,
+                method: 'DELETE',
+                body: { reviewId },
+            }),
+            invalidatesTags: [TagType.Review, TagType.ReviewById],
         }),
         setRating: builder.mutation<ResponseType, { userId: string; reviewId: string; value: number }>({
             query: ({ userId, reviewId, value }) => ({
@@ -84,6 +92,7 @@ export const {
     useCreateReviewMutation,
     useGetLatestReviewsQuery,
     useGetPopularTagsQuery,
+    useDeleteReviewByIdMutation,
     useSetRatingMutation,
     useSetLikeMutation,
 } = reviewAPISlice;
