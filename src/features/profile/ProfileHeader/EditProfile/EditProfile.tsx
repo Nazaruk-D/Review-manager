@@ -8,15 +8,16 @@ import { selectorUserId, selectorUserName } from '../../../../store/selectors/us
 import { useUpdateInfoMutation } from '../../../../store/api/userAPISlice';
 import UploadImage from '../../../../common/components/UploadImage/UploadImage';
 import { setAppErrorAC } from '../../../../store/slices/appSlice';
+import { setUser, uploadUserData } from '../../../../store/slices/userSlice';
 
 type EditProfilePropsType = {
     t: TFunction;
-    userName: string;
 };
 
-const EditProfile: FC<EditProfilePropsType> = ({ t, userName }) => {
+const EditProfile: FC<EditProfilePropsType> = ({ t }) => {
     const dispatch = useAppDispatch();
     const userId = useAppSelector(selectorUserId);
+    const userName = useAppSelector(selectorUserName);
     const [open, setOpen] = useState(false);
     const [image, setImage] = useState<File | null>(null);
     const [newName, setNewName] = useState<string>(userName || '');
@@ -35,12 +36,9 @@ const EditProfile: FC<EditProfilePropsType> = ({ t, userName }) => {
     };
 
     const handleSaveChanges = () => {
-        if (userId) {
-            if (newName !== userName) {
-                uploadInfo({ userId, newName, image });
-            } else {
-                uploadInfo({ userId, image });
-            }
+        if (userId && !error) {
+            uploadInfo({ userId, newName, image });
+            setOpen(false);
         }
     };
 

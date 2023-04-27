@@ -3,23 +3,27 @@ import { PathAPI } from '../../enums/pathAPI';
 import { ResponseType } from '../../types/ResponseType';
 import { ReviewResponseType } from '../../types/ReviewResponseType';
 import { CreateReviewType } from '../../types/CreateReviewType';
-import { ReviewType } from '../../types/ReviewType';
+import { TagType } from '../../enums/tagType';
 
-export const reviewAPI = createApi({
-    reducerPath: 'review',
+export const reviewAPISlice = createApi({
+    reducerPath: 'reviewAPI',
     baseQuery: fetchBaseQuery({
         baseUrl: 'http://localhost:7542/',
         credentials: 'include',
     }),
+    tagTypes: [TagType.Review, TagType.ReviewById],
     endpoints: (builder) => ({
         getReviews: builder.query<ResponseType<ReviewResponseType[]>, { userId: string }>({
             query: ({ userId }) => `${PathAPI.GetReview}/${userId}`,
+            providesTags: [TagType.Review],
         }),
         getReviewById: builder.query<ResponseType<ReviewResponseType>, { reviewId: string }>({
             query: ({ reviewId }) => `${PathAPI.Review}/${reviewId}`,
+            providesTags: [TagType.ReviewById],
         }),
         getLatestReviews: builder.query<ResponseType<ReviewResponseType[]>, Record<string, never>>({
             query: () => `${PathAPI.GetLatestReviews}`,
+            providesTags: [TagType.Review],
         }),
         getPopularTags: builder.query<ResponseType<string[]>, Record<string, never>>({
             query: () => `${PathAPI.GetPopularTags}`,
@@ -61,6 +65,7 @@ export const reviewAPI = createApi({
                 method: 'POST',
                 body: { userId, reviewId, value },
             }),
+            invalidatesTags: [TagType.Review, TagType.ReviewById],
         }),
         setLike: builder.mutation<ResponseType, { userId: string; reviewId: string }>({
             query: ({ userId, reviewId }) => ({
@@ -68,6 +73,7 @@ export const reviewAPI = createApi({
                 method: 'POST',
                 body: { userId, reviewId },
             }),
+            invalidatesTags: [TagType.Review, TagType.ReviewById],
         }),
     }),
 });
@@ -80,4 +86,4 @@ export const {
     useGetPopularTagsQuery,
     useSetRatingMutation,
     useSetLikeMutation,
-} = reviewAPI;
+} = reviewAPISlice;

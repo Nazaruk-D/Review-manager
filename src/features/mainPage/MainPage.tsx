@@ -2,7 +2,7 @@ import React from 'react';
 import { Container } from '@mui/material';
 import BlockReviews from './BlockReviews/BlockReviews';
 import { useAppDispatch } from '../../hooks/useRedux';
-import { useGetLatestReviewsQuery } from '../../store/api/reviewAPI';
+import { useGetLatestReviewsQuery } from '../../store/api/reviewAPISlice';
 import Loader from '../../common/components/Loader/Loader';
 import { setAppErrorAC } from '../../store/slices/appSlice';
 import TagCloudBox from './TagCloud/TagCloudBox';

@@ -2,7 +2,7 @@ import React, { FC } from 'react';
 import { Box, Rating, Typography } from '@mui/material';
 import { useAppSelector } from '../../../hooks/useRedux';
 import { selectorUserId } from '../../../store/selectors/userSelector';
-import { useSetRatingMutation } from '../../../store/api/reviewAPI';
+import { useSetRatingMutation } from '../../../store/api/reviewAPISlice';
 import { ReviewResponseType } from '../../../types/ReviewResponseType';
 
 type RatingReviewPropsType = {

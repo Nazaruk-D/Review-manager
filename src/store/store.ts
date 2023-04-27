@@ -1,16 +1,18 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
 import appReducer from './slices/appSlice';
 import userReducer from './slices/userSlice';
+import reviewReducer from './slices/reviewSlice';
 import { authAPI } from './api/authAPI';
-import { reviewAPI } from './api/reviewAPI';
+import { reviewAPISlice } from './api/reviewAPISlice';
 import { commentAPI } from './api/commentAPI';
 import { userAPISlice } from './api/userAPISlice';
 
 const rootReducer = combineReducers({
     app: appReducer,
     user: userReducer,
+    review: reviewReducer,
     [authAPI.reducerPath]: authAPI.reducer,
-    [reviewAPI.reducerPath]: reviewAPI.reducer,
+    [reviewAPISlice.reducerPath]: reviewAPISlice.reducer,
     [commentAPI.reducerPath]: commentAPI.reducer,
     [userAPISlice.reducerPath]: userAPISlice.reducer,
 });
@@ -20,7 +22,7 @@ export const store = configureStore({
     middleware: (getDefaultMiddleware) =>
         getDefaultMiddleware()
             .concat(authAPI.middleware)
-            .concat(reviewAPI.middleware)
+            .concat(reviewAPISlice.middleware)
             .concat(commentAPI.middleware)
             .concat(userAPISlice.middleware),
 });

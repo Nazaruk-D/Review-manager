@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import { Box, IconButton, Typography } from '@mui/material';
 import { Favorite } from '@mui/icons-material';
-import { useSetLikeMutation } from '../../../store/api/reviewAPI';
+import { useSetLikeMutation } from '../../../store/api/reviewAPISlice';
 
 type LikePropsType = {
     userId: string;

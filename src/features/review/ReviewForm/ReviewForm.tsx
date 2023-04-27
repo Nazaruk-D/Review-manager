@@ -21,7 +21,7 @@ import {
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import { ReviewType } from '../../../types/ReviewType';
-import { useCreateReviewMutation } from '../../../store/api/reviewAPI';
+import { useCreateReviewMutation } from '../../../store/api/reviewAPISlice';
 import { useAppSelector } from '../../../hooks/useRedux';
 import { selectorUserData } from '../../../store/selectors/userSelector';
 import UploadImage from '../../../common/components/UploadImage/UploadImage';

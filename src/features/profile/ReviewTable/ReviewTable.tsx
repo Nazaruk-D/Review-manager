@@ -1,29 +1,32 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@mui/material';
 import { useParams } from 'react-router-dom';
 import ReviewRow from './ReviewRow/ReviewRow';
-import { useGetReviewsQuery } from '../../../store/api/reviewAPI';
+import { useGetReviewsQuery } from '../../../store/api/reviewAPISlice';
 import { ReviewResponseType } from '../../../types/ReviewResponseType';
 import Loader from '../../../common/components/Loader/Loader';
-import { useAppDispatch } from '../../../hooks/useRedux';
+import { useAppDispatch, useAppSelector } from '../../../hooks/useRedux';
 import { setAppErrorAC } from '../../../store/slices/appSlice';
+import { setUsersReview } from '../../../store/slices/reviewSlice';
+import { selectorUserReviews } from '../../../store/selectors/reviewSelector';
 
 const ReviewTable = () => {
     const dispatch = useAppDispatch();
+    const reviews = useAppSelector(selectorUserReviews);
     const { userId = '' } = useParams<string>();
     const { t } = useTranslation('translation', { keyPrefix: 'profile' });
     const { data, isLoading, error } = useGetReviewsQuery({ userId });
-    const reviews: ReviewResponseType[] = data ? data.data : [];
+
+    useEffect(() => {
+        if (data) {
+            dispatch(setUsersReview(data.data));
+        }
+    }, [dispatch, data]);
 
     if (isLoading) {
         return <Loader />;
     }
-    if (error) {
-        dispatch(setAppErrorAC(t('error get review')));
-    }
-
-    console.log('reviews: ', reviews);
 
     return (
         <TableContainer component={Paper} sx={{ mt: 3, mb: 3 }}>

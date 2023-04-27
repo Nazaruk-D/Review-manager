@@ -3,6 +3,7 @@ import { PathAPI } from '../../enums/pathAPI';
 import { ResponseType } from '../../types/ResponseType';
 import { ReviewResponseType } from '../../types/ReviewResponseType';
 import { UserType } from '../../types/UserType';
+import { TagType } from '../../enums/tagType';
 
 export const userAPISlice = createApi({
     reducerPath: 'userAPI',
@@ -10,14 +11,19 @@ export const userAPISlice = createApi({
         baseUrl: 'http://localhost:7542/',
         credentials: 'include',
     }),
+    tagTypes: [TagType.User],
     endpoints: (builder) => ({
         getUsers: builder.query<ResponseType<UserType[]>, void>({
             query: () => `${PathAPI.GetUsers}`,
         }),
         getUser: builder.query<ResponseType<UserType>, { userId: string }>({
             query: ({ userId }) => `${PathAPI.GetUser}/${userId}`,
+            providesTags: [TagType.User],
         }),
-        updateInfo: builder.mutation<ResponseType, { userId: string; newName?: string; image: File | null }>({
+        updateInfo: builder.mutation<
+            ResponseType<{ newName: string; newPhoto?: string }>,
+            { userId: string; newName?: string; image: File | null }
+        >({
             query: ({ userId, newName, image }) => {
                 const formData = new FormData();
                 formData.append('userId', userId);
@@ -39,6 +45,7 @@ export const userAPISlice = createApi({
                     ...fetchConfig,
                 };
             },
+            invalidatesTags: [TagType.User],
         }),
     }),
 });

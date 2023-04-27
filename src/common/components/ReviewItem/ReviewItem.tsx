@@ -6,7 +6,7 @@ import dateFormat from 'dateformat';
 import { NavLink } from 'react-router-dom';
 import { ReviewResponseType } from '../../../types/ReviewResponseType';
 import noImage from '../../png/no_image.png';
-import { useSetRatingMutation } from '../../../store/api/reviewAPI';
+import { useSetRatingMutation } from '../../../store/api/reviewAPISlice';
 import { useAppSelector } from '../../../hooks/useRedux';
 import { selectorUserId } from '../../../store/selectors/userSelector';
 import { Path } from '../../../enums/path';

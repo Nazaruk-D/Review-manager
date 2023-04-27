@@ -1,7 +1,7 @@
 import React from 'react';
 import { Box, Typography } from '@mui/material';
 import { NavLink } from 'react-router-dom';
-import { useGetPopularTagsQuery } from '../../../store/api/reviewAPI';
+import { useGetPopularTagsQuery } from '../../../store/api/reviewAPISlice';
 import Loader from '../../../common/components/Loader/Loader';
 import { setAppErrorAC } from '../../../store/slices/appSlice';
 import { useAppDispatch } from '../../../hooks/useRedux';

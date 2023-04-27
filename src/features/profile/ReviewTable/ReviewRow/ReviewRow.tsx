@@ -27,7 +27,7 @@ const ReviewRow: FC<CardsRowPropsType> = ({ row, index }) => {
     };
 
     return (
-        <TableRow className={s.row} onClick={() => navigate(`/review/${row.id}`, { state: row })}>
+        <TableRow className={s.row} onClick={() => navigate(`/review/${row.id}`)}>
             <TableCell>{index + 1}</TableCell>
             <TableCell>
                 <img src={row.image ? row.image : noImage} alt={row.title} className={s.image} />

@@ -29,7 +29,7 @@ const ProfileHeader = () => {
         <Grid container spacing={2} className={s.headerContainer}>
             <Avatar user={user} />
             <ProfileInfo t={t} user={user} />
-            <EditProfile t={t} userName={user!.user_name} />
+            <EditProfile t={t} />
         </Grid>
     );
 };

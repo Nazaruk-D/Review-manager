@@ -8,7 +8,7 @@ import ReviewHeader from './ReviewHeader/ReviewHeader';
 import ReviewBody from './ReviewBody/ReviewBody';
 import { ReviewResponseType } from '../../../types/ReviewResponseType';
 import Loader from '../../../common/components/Loader/Loader';
-import { useGetReviewByIdQuery } from '../../../store/api/reviewAPI';
+import { useGetReviewByIdQuery } from '../../../store/api/reviewAPISlice';
 import { setAppErrorAC } from '../../../store/slices/appSlice';
 import { useAppDispatch } from '../../../hooks/useRedux';
 
