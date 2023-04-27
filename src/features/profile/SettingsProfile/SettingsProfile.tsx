@@ -1,13 +1,16 @@
-import React from 'react';
+import React, { FC } from 'react';
 import { Button } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import { useAppSelector } from '../../../hooks/useRedux';
 import { selectorUserId } from '../../../store/selectors/userSelector';
 
-const SettingsProfile = () => {
+type SettingsProfilePropsType = {
+    userId: string;
+};
+
+const SettingsProfile: FC<SettingsProfilePropsType> = ({ userId }) => {
     const navigate = useNavigate();
-    const userId = useAppSelector(selectorUserId);
     const { t } = useTranslation('translation', { keyPrefix: 'profile' });
 
     return (

@@ -9,6 +9,7 @@ import noImage from '../../../../common/png/no_image.png';
 import { ReviewResponseType } from '../../../../types/ReviewResponseType';
 import { useDeleteReviewByIdMutation } from '../../../../store/api/reviewAPISlice';
 import Loader from '../../../../common/components/Loader/Loader';
+import { Path } from '../../../../enums/path';
 
 type CardsRowPropsType = {
     review: ReviewResponseType;
@@ -21,6 +22,7 @@ const ReviewRow: FC<CardsRowPropsType> = ({ review, index }) => {
 
     const onEditReviewHandler = (event: React.MouseEvent<HTMLButtonElement>) => {
         event.stopPropagation();
+        navigate(`/update-review/${review.id}`, { state: review });
     };
 
     const onDeleteReviewHandler = (event: React.MouseEvent<HTMLButtonElement>) => {

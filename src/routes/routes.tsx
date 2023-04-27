@@ -19,6 +19,7 @@ const routes = createRoutesFromElements(
         <Route path={Path.Profile} element={<Profile />} />
         <Route path={Path.AdminPage} element={<AdminPage />} />
         <Route path={Path.CreateReview} element={<ReviewForm />} />
+        <Route path={Path.UpdateReview} element={<ReviewForm />} />
     </Route>,
 );
 

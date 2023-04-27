@@ -19,34 +19,59 @@ import {
     Typography,
 } from '@mui/material';
 import { useTranslation } from 'react-i18next';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { ReviewType } from '../../../types/ReviewType';
-import { useCreateReviewMutation } from '../../../store/api/reviewAPISlice';
 import { useAppSelector } from '../../../hooks/useRedux';
 import { selectorUserData } from '../../../store/selectors/userSelector';
 import UploadImage from '../../../common/components/UploadImage/UploadImage';
 import { ReviewErrorType } from '../../../types/FormikErrorTypes';
 import { ErrorStyle } from '../../../styles/common/ErrorStyle';
+import { ReviewResponseType } from '../../../types/ReviewResponseType';
+import { useSendReviewMutation } from '../../../store/api/reviewAPISlice';
 
 export const ReviewForm = () => {
     const navigate = useNavigate();
     const { userId = '' } = useParams<string>();
+    const { reviewId = '' } = useParams<string>();
+    const location = useLocation();
+    const review: ReviewResponseType = location.state;
     const [uploadImage, setUploadImage] = useState<File | null>(null);
     const { t } = useTranslation('translation', { keyPrefix: 'review editor' });
     const { t: tc } = useTranslation('translation', { keyPrefix: 'category' });
     const { t: tv } = useTranslation('translation', { keyPrefix: 'validator' });
     const user = useAppSelector(selectorUserData);
-    const [sendReview, { isLoading, isError, isSuccess, status, data }] = useCreateReviewMutation();
-    const formik = useFormik({
-        initialValues: {
-            reviewId: '',
+    const [sendReview, { isLoading, isError, isSuccess, status, data }] = useSendReviewMutation();
+    let initial;
+    let image;
+    let url: string;
+    const profileId = review ? review.author_id : userId;
+
+    if (review) {
+        initial = {
+            review_title: review.review_title,
+            title: review.title,
+            category: review.category,
+            body: review.body,
+            assessment: review.assessment,
+            tags: review.tags,
+        };
+        image = review.image;
+        url = 'update-review';
+    } else {
+        initial = {
             review_title: '',
             title: '',
             category: '',
             body: '',
             assessment: '',
             tags: [],
-        } as ReviewType,
+        };
+        image = '';
+        url = 'create-review';
+    }
+
+    const formik = useFormik({
+        initialValues: initial as ReviewType,
         validate: (values) => {
             const errors: ReviewErrorType = {};
             if (!values.review_title) {
@@ -69,14 +94,23 @@ export const ReviewForm = () => {
         onSubmit: async (values) => {
             if (values) {
                 console.log('VALUES: ', values);
-                sendReview({ ...values, author_name: user!.user_name, uploadImage, userId });
+                sendReview({
+                    ...values,
+                    author_name: user!.user_name,
+                    uploadImage,
+                    author_id: profileId,
+                    reviewId,
+                    url,
+                });
             }
         },
     });
 
+    const newReviewDisable = !(formik.isValid && formik.dirty);
+    const isDisable = review ? !review : newReviewDisable;
     useEffect(() => {
         if (isSuccess) {
-            navigate(`/profile/${user!.id}`);
+            navigate(`/profile/${profileId}`);
         }
     }, [isSuccess, navigate]);
 
@@ -179,16 +213,10 @@ export const ReviewForm = () => {
                             />
                         </Grid>
                         <Grid item xs={12}>
-                            <UploadImage image={uploadImage} setImage={setUploadImage} />
+                            <UploadImage image={uploadImage} setImage={setUploadImage} dbImage={image} />
                         </Grid>
                     </Grid>
-                    <Button
-                        variant="contained"
-                        type="submit"
-                        fullWidth
-                        sx={{ mt: 2, mb: 2 }}
-                        disabled={!(formik.isValid && formik.dirty)}
-                    >
+                    <Button variant="contained" type="submit" fullWidth sx={{ mt: 2, mb: 2 }} disabled={isDisable}>
                         {isLoading ? <CircularProgress size={24} color="inherit" /> : t('save review')}
                     </Button>
                 </form>

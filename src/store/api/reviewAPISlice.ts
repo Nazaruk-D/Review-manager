@@ -2,7 +2,7 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/dist/query/react';
 import { PathAPI } from '../../enums/pathAPI';
 import { ResponseType } from '../../types/ResponseType';
 import { ReviewResponseType } from '../../types/ReviewResponseType';
-import { CreateReviewType } from '../../types/CreateReviewType';
+import { SendReviewType } from '../../types/SendReviewType';
 import { TagType } from '../../enums/tagType';
 
 export const reviewAPISlice = createApi({
@@ -28,9 +28,23 @@ export const reviewAPISlice = createApi({
         getPopularTags: builder.query<ResponseType<string[]>, Record<string, never>>({
             query: () => `${PathAPI.GetPopularTags}`,
         }),
-        createReview: builder.mutation<ResponseType<ReviewResponseType>, CreateReviewType>({
-            query: ({ title, category, assessment, uploadImage, body, tags, review_title, author_name, userId }) => {
+        sendReview: builder.mutation<ResponseType<ReviewResponseType>, SendReviewType>({
+            query: ({
+                reviewId,
+                title,
+                category,
+                assessment,
+                uploadImage,
+                body,
+                tags,
+                url,
+                review_title,
+                author_name,
+                author_id,
+            }) => {
                 const formData = new FormData();
+                formData.append('reviewId', reviewId);
+                formData.append('author_id', author_id);
                 formData.append('review_title', review_title);
                 formData.append('title', title);
                 formData.append('category', category);
@@ -53,7 +67,7 @@ export const reviewAPISlice = createApi({
                     },
                 };
                 return {
-                    url: `${PathAPI.Review}/${userId}`,
+                    url: `${PathAPI.Review}/${url}`,
                     ...fetchConfig,
                 };
             },
@@ -89,7 +103,7 @@ export const reviewAPISlice = createApi({
 export const {
     useGetReviewsQuery,
     useGetReviewByIdQuery,
-    useCreateReviewMutation,
+    useSendReviewMutation,
     useGetLatestReviewsQuery,
     useGetPopularTagsQuery,
     useDeleteReviewByIdMutation,

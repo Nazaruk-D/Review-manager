@@ -6,4 +6,5 @@ export enum Path {
     AdminPage = '/admin',
     Review = '/review/:reviewId',
     CreateReview = '/create-review/:userId',
+    UpdateReview = '/update-review/:reviewId',
 }

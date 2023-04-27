@@ -4,11 +4,10 @@ import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import { TFunction } from 'i18next';
 import s from './EditProfiile.module.scss';
 import { useAppDispatch, useAppSelector } from '../../../../hooks/useRedux';
-import { selectorUserId, selectorUserName } from '../../../../store/selectors/userSelector';
+import { selectorUserId, selectorUserImage, selectorUserName } from '../../../../store/selectors/userSelector';
 import { useUpdateInfoMutation } from '../../../../store/api/userAPISlice';
 import UploadImage from '../../../../common/components/UploadImage/UploadImage';
 import { setAppErrorAC } from '../../../../store/slices/appSlice';
-import { setUser, uploadUserData } from '../../../../store/slices/userSlice';
 
 type EditProfilePropsType = {
     t: TFunction;
@@ -18,6 +17,7 @@ const EditProfile: FC<EditProfilePropsType> = ({ t }) => {
     const dispatch = useAppDispatch();
     const userId = useAppSelector(selectorUserId);
     const userName = useAppSelector(selectorUserName);
+    const userImage = useAppSelector(selectorUserImage);
     const [open, setOpen] = useState(false);
     const [image, setImage] = useState<File | null>(null);
     const [newName, setNewName] = useState<string>(userName || '');
@@ -75,7 +75,7 @@ const EditProfile: FC<EditProfilePropsType> = ({ t }) => {
                             />
                         </Grid>
                         <Grid item xs={12}>
-                            <UploadImage image={image} setImage={setImage} />
+                            <UploadImage image={image} setImage={setImage} dbImage={userImage || ''} />
                         </Grid>
                         <Grid item xs={12}>
                             <Button variant="contained" color="primary" fullWidth onClick={handleSaveChanges}>

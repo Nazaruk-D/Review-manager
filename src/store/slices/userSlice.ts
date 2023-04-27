@@ -40,9 +40,12 @@ const userSlice = createSlice({
             state.role = Role.User;
             state.isLoggedIn = false;
         },
+        deletePhoto(state) {
+            state.user!.main_photo = '';
+        },
     },
 });
 
-export const { setUser, setLoggedIn, setLoggedOut, uploadUserData } = userSlice.actions;
+export const { setUser, setLoggedIn, setLoggedOut, uploadUserData, deletePhoto } = userSlice.actions;
 
 export default userSlice.reducer;

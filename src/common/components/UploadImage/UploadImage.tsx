@@ -9,9 +9,10 @@ import { useAppDispatch } from '../../../hooks/useRedux';
 type UploadImagePropsType = {
     image: File | null;
     setImage: (image: File | null) => void;
+    dbImage: string | undefined;
 };
 
-const UploadImage: FC<UploadImagePropsType> = ({ setImage, image }) => {
+const UploadImage: FC<UploadImagePropsType> = ({ setImage, image, dbImage }) => {
     const dispatch = useAppDispatch();
     const { t } = useTranslation('translation', { keyPrefix: 'image' });
 
@@ -30,14 +31,15 @@ const UploadImage: FC<UploadImagePropsType> = ({ setImage, image }) => {
         onDrop: handleProfilePhotoDrop,
         multiple: false,
     });
+    console.log('image: ', image);
+    console.log('dbImage: ', dbImage);
+    const isImage = dbImage || (image ? URL.createObjectURL(image) : '');
+    console.log('isImage: ', isImage);
+
     return (
-        <Box
-            {...getRootProps()}
-            className={s.profilePhotoContainer}
-            style={{ backgroundImage: `url(${image ? URL.createObjectURL(image) : ''})` }}
-        >
+        <Box {...getRootProps()} className={s.profilePhotoContainer} style={{ backgroundImage: `url(${isImage})` }}>
             <input {...getInputProps()} className={s.photoBlock} />
-            {image ? null : (
+            {image || dbImage ? null : (
                 <Typography variant="caption" component="span">
                     {t('drag and drop')}
                 </Typography>
