@@ -22,7 +22,7 @@ const ReviewRow: FC<CardsRowPropsType> = ({ review, index }) => {
 
     const onEditReviewHandler = (event: React.MouseEvent<HTMLButtonElement>) => {
         event.stopPropagation();
-        navigate(`/update-review/${review.id}`, { state: review });
+        navigate(`/update-review/${review.id}`);
     };
 
     const onDeleteReviewHandler = (event: React.MouseEvent<HTMLButtonElement>) => {

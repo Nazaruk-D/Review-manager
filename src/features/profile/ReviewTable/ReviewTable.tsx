@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next';
 import { Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@mui/material';
 import { useParams } from 'react-router-dom';
 import ReviewRow from './ReviewRow/ReviewRow';
-import { useDeleteReviewByIdMutation, useGetReviewsQuery } from '../../../store/api/reviewAPISlice';
+import { useGetReviewsQuery } from '../../../store/api/reviewAPISlice';
 import Loader from '../../../common/components/Loader/Loader';
 import { useAppDispatch, useAppSelector } from '../../../hooks/useRedux';
 import { setUsersReview } from '../../../store/slices/reviewSlice';

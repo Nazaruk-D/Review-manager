@@ -31,10 +31,8 @@ const UploadImage: FC<UploadImagePropsType> = ({ setImage, image, dbImage }) => 
         onDrop: handleProfilePhotoDrop,
         multiple: false,
     });
-    console.log('image: ', image);
-    console.log('dbImage: ', dbImage);
+
     const isImage = dbImage || (image ? URL.createObjectURL(image) : '');
-    console.log('isImage: ', isImage);
 
     return (
         <Box {...getRootProps()} className={s.profilePhotoContainer} style={{ backgroundImage: `url(${isImage})` }}>

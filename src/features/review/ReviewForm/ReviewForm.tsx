@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { FC, useEffect, useState } from 'react';
 import { useFormik } from 'formik';
 import {
     Autocomplete,
@@ -19,59 +19,34 @@ import {
     Typography,
 } from '@mui/material';
 import { useTranslation } from 'react-i18next';
-import { useLocation, useNavigate, useParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { ReviewType } from '../../../types/ReviewType';
 import { useAppSelector } from '../../../hooks/useRedux';
 import { selectorUserData } from '../../../store/selectors/userSelector';
 import UploadImage from '../../../common/components/UploadImage/UploadImage';
 import { ReviewErrorType } from '../../../types/FormikErrorTypes';
 import { ErrorStyle } from '../../../styles/common/ErrorStyle';
-import { ReviewResponseType } from '../../../types/ReviewResponseType';
 import { useSendReviewMutation } from '../../../store/api/reviewAPISlice';
 
-export const ReviewForm = () => {
+type ReviewFromPropsType = {
+    initial: ReviewType;
+    url: string;
+    image: string;
+    profileId: string;
+    reviewId: string;
+};
+
+export const ReviewForm: FC<ReviewFromPropsType> = ({ initial, url, image, profileId, reviewId }) => {
     const navigate = useNavigate();
-    const { userId = '' } = useParams<string>();
-    const { reviewId = '' } = useParams<string>();
-    const location = useLocation();
-    const review: ReviewResponseType = location.state;
     const [uploadImage, setUploadImage] = useState<File | null>(null);
     const { t } = useTranslation('translation', { keyPrefix: 'review editor' });
     const { t: tc } = useTranslation('translation', { keyPrefix: 'category' });
     const { t: tv } = useTranslation('translation', { keyPrefix: 'validator' });
     const user = useAppSelector(selectorUserData);
-    const [sendReview, { isLoading, isError, isSuccess, status, data }] = useSendReviewMutation();
-    let initial;
-    let image;
-    let url: string;
-    const profileId = review ? review.author_id : userId;
-
-    if (review) {
-        initial = {
-            review_title: review.review_title,
-            title: review.title,
-            category: review.category,
-            body: review.body,
-            assessment: review.assessment,
-            tags: review.tags,
-        };
-        image = review.image;
-        url = 'update-review';
-    } else {
-        initial = {
-            review_title: '',
-            title: '',
-            category: '',
-            body: '',
-            assessment: '',
-            tags: [],
-        };
-        image = '';
-        url = 'create-review';
-    }
+    const [sendReview, { isSuccess, isLoading }] = useSendReviewMutation();
 
     const formik = useFormik({
-        initialValues: initial as ReviewType,
+        initialValues: initial,
         validate: (values) => {
             const errors: ReviewErrorType = {};
             if (!values.review_title) {
@@ -93,7 +68,6 @@ export const ReviewForm = () => {
         },
         onSubmit: async (values) => {
             if (values) {
-                console.log('VALUES: ', values);
                 sendReview({
                     ...values,
                     author_name: user!.user_name,
@@ -107,7 +81,8 @@ export const ReviewForm = () => {
     });
 
     const newReviewDisable = !(formik.isValid && formik.dirty);
-    const isDisable = review ? !review : newReviewDisable;
+    const isDisable = url === 'update-review' ? false : newReviewDisable;
+
     useEffect(() => {
         if (isSuccess) {
             navigate(`/profile/${profileId}`);
@@ -206,6 +181,7 @@ export const ReviewForm = () => {
                                 multiple
                                 freeSolo
                                 options={[]}
+                                value={formik.values.tags}
                                 renderInput={(params) => (
                                     <TextField {...params} label={t('tags')} fullWidth placeholder={t('press enter')!} />
                                 )}

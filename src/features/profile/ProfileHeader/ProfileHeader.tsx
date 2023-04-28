@@ -24,7 +24,6 @@ const ProfileHeader = () => {
         dispatch(setAppErrorAC('error'));
     }
     const user = data?.data;
-    console.log('data:', data);
     return (
         <Grid container spacing={2} className={s.headerContainer}>
             <Avatar user={user} />
