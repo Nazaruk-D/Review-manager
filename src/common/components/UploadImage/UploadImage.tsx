@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, useEffect, useState } from 'react';
 import { Box, Typography } from '@mui/material';
 import { useDropzone } from 'react-dropzone';
 import { useTranslation } from 'react-i18next';
@@ -32,7 +32,13 @@ const UploadImage: FC<UploadImagePropsType> = ({ setImage, image, dbImage }) => 
         multiple: false,
     });
 
-    const isImage = dbImage || (image ? URL.createObjectURL(image) : '');
+    const [localDbImage, setLocalDbImage] = useState<string | undefined>(dbImage);
+
+    useEffect(() => {
+        setLocalDbImage(dbImage);
+    }, [dbImage]);
+
+    const isImage = image ? URL.createObjectURL(image) : localDbImage;
 
     return (
         <Box {...getRootProps()} className={s.profilePhotoContainer} style={{ backgroundImage: `url(${isImage})` }}>
