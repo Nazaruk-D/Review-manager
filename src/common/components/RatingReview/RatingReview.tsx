@@ -28,14 +28,13 @@ const RatingReview: FC<RatingReviewPropsType> = ({ review }) => {
             <Rating
                 name="poster-rating"
                 precision={0.5}
-                defaultValue={review.rating.avgRating}
+                defaultValue={review.avg_rating}
                 size="medium"
-                disabled={review.rating.ratingUsers.includes(userId!)}
                 onChange={setRatingHandler}
                 onClick={onclickHandler}
             />
             <Typography variant="body1" color="text.secondary" sx={{ ml: 1, fontWeight: 600 }}>
-                {review.rating.avgRating ? review.rating.avgRating.toFixed(1) : 0}
+                {review.avg_rating ? review.avg_rating.toFixed(1) : 0}
             </Typography>
         </Box>
     );

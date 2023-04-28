@@ -25,6 +25,10 @@ export const reviewAPISlice = createApi({
             query: () => `${PathAPI.GetLatestReviews}`,
             providesTags: [TagType.Review],
         }),
+        getPopularReviews: builder.query<ResponseType<ReviewResponseType[]>, Record<string, never>>({
+            query: () => `${PathAPI.GetPopularReviews}`,
+            providesTags: [TagType.Review],
+        }),
         getPopularTags: builder.query<ResponseType<string[]>, Record<string, never>>({
             query: () => `${PathAPI.GetPopularTags}`,
         }),
@@ -105,6 +109,7 @@ export const {
     useGetReviewByIdQuery,
     useSendReviewMutation,
     useGetLatestReviewsQuery,
+    useGetPopularReviewsQuery,
     useGetPopularTagsQuery,
     useDeleteReviewByIdMutation,
     useSetRatingMutation,

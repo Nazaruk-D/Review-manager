@@ -7,6 +7,7 @@ export enum PathAPI {
     GetReview = '/review/get-reviews',
     GetPopularTags = '/review/get-popular-tags',
     GetLatestReviews = '/review/last-reviews',
+    GetPopularReviews = '/review/popular-reviews',
     GetUsers = '/user/get-users',
     GetUser = '/user/get-user',
     Comment = '/comment',

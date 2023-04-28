@@ -20,9 +20,6 @@ const Like: FC<LikePropsType> = ({ userId, reviewId, likes }) => {
 
     const isLiked = likes.includes(userId);
 
-    console.log('userId: ', userId);
-    console.log('reviewId: ', reviewId);
-
     return (
         <Box sx={{ display: 'flex', alignItems: 'center' }}>
             <Typography variant="subtitle1">{likes.length}</Typography>

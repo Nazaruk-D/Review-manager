@@ -17,13 +17,13 @@ const reviewSlice = createSlice({
     name: 'review',
     initialState,
     reducers: {
-        setPopularReview(state, action: PayloadAction<ReviewResponseType[] | null>) {
+        setPopularReview(state, action: PayloadAction<ReviewResponseType[]>) {
             state.popularReview = action.payload;
         },
-        setLatestReview(state, action: PayloadAction<ReviewResponseType[] | null>) {
+        setLatestReview(state, action: PayloadAction<ReviewResponseType[]>) {
             state.latestReview = action.payload;
         },
-        setUsersReview(state, action: PayloadAction<ReviewResponseType[] | null>) {
+        setUsersReview(state, action: PayloadAction<ReviewResponseType[]>) {
             state.usersReview = action.payload;
         },
     },
