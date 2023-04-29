@@ -4,7 +4,7 @@ import userReducer from './slices/userSlice';
 import reviewReducer from './slices/reviewSlice';
 import { authAPI } from './api/authAPI';
 import { reviewAPISlice } from './api/reviewAPISlice';
-import { commentAPI } from './api/commentAPI';
+import { itemAPI } from './api/itemAPI';
 import { userAPISlice } from './api/userAPISlice';
 
 const rootReducer = combineReducers({
@@ -13,7 +13,7 @@ const rootReducer = combineReducers({
     review: reviewReducer,
     [authAPI.reducerPath]: authAPI.reducer,
     [reviewAPISlice.reducerPath]: reviewAPISlice.reducer,
-    [commentAPI.reducerPath]: commentAPI.reducer,
+    [itemAPI.reducerPath]: itemAPI.reducer,
     [userAPISlice.reducerPath]: userAPISlice.reducer,
 });
 
@@ -23,7 +23,7 @@ export const store = configureStore({
         getDefaultMiddleware()
             .concat(authAPI.middleware)
             .concat(reviewAPISlice.middleware)
-            .concat(commentAPI.middleware)
+            .concat(itemAPI.middleware)
             .concat(userAPISlice.middleware),
 });
 

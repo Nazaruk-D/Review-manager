@@ -29,6 +29,7 @@ import { ErrorStyle } from '../../../styles/common/ErrorStyle';
 import { useSendReviewMutation } from '../../../store/api/reviewAPISlice';
 import { selectorThemeApp } from '../../../store/selectors/appSelector';
 import MarkDownEditor from '../../../common/components/MarkDownEditor/MarkDownEditor';
+import { selectorTags } from '../../../store/selectors/reviewSelector';
 
 type ReviewFromPropsType = {
     initial: ReviewType;
@@ -45,6 +46,7 @@ export const ReviewForm: FC<ReviewFromPropsType> = ({ initial, url, image, profi
     const { t: tc } = useTranslation('translation', { keyPrefix: 'category' });
     const { t: tv } = useTranslation('translation', { keyPrefix: 'validator' });
     const user = useAppSelector(selectorUserData);
+    const tags = useAppSelector(selectorTags);
     const [sendReview, { isSuccess, isLoading }] = useSendReviewMutation();
 
     const formik = useFormik({
@@ -195,7 +197,7 @@ export const ReviewForm: FC<ReviewFromPropsType> = ({ initial, url, image, profi
                             <Autocomplete
                                 multiple
                                 freeSolo
-                                options={[]}
+                                options={tags || []}
                                 value={formik.values.tags}
                                 renderInput={(params) => (
                                     <TextField {...params} label={t('tags')} fullWidth placeholder={t('press enter')!} />

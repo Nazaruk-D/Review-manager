@@ -3,7 +3,7 @@ import { Avatar, Box, Grid, Typography } from '@mui/material';
 import { useParams } from 'react-router-dom';
 import dateFormat from 'dateformat';
 import s from './CommentsBlock.module.scss';
-import { useCreateCommentMutation, useGetCommentsQuery } from '../../../../store/api/commentAPI';
+import { useCreateCommentMutation, useGetCommentsQuery } from '../../../../store/api/itemAPI';
 import { CommentType } from '../../../../types/CommentType';
 
 const CommentsBlock = () => {

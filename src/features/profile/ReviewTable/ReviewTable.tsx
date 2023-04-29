@@ -14,13 +14,13 @@ const ReviewTable = () => {
     const reviews = useAppSelector(selectorUserReviews);
     const { userId = '' } = useParams<string>();
     const { t } = useTranslation('translation', { keyPrefix: 'profile' });
-    const { data, isLoading, error } = useGetReviewsQuery({ userId });
+    const { data: reviewsData, isLoading, error } = useGetReviewsQuery({ userId });
 
     useEffect(() => {
-        if (data) {
-            dispatch(setUsersReview(data.data));
+        if (reviewsData) {
+            dispatch(setUsersReview(reviewsData.data));
         }
-    }, [dispatch, data]);
+    }, [dispatch, reviewsData]);
 
     if (isLoading) {
         return <Loader />;

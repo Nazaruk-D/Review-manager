@@ -1,7 +1,7 @@
 import React, { ChangeEvent, useState } from 'react';
 import { Button, Grid, TextField } from '@mui/material';
 import { useParams } from 'react-router-dom';
-import { useCreateCommentMutation, useGetCommentsQuery } from '../../../../store/api/commentAPI';
+import { useCreateCommentMutation, useGetCommentsQuery } from '../../../../store/api/itemAPI';
 import { useAppSelector } from '../../../../hooks/useRedux';
 import { selectorUserId } from '../../../../store/selectors/userSelector';
 

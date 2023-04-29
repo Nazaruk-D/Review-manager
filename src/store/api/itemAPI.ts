@@ -4,8 +4,8 @@ import { ResponseType } from '../../types/ResponseType';
 import { CommentType } from '../../types/CommentType';
 import { CreateCommentType } from '../../types/CreateCommentType';
 
-export const commentAPI = createApi({
-    reducerPath: 'comment',
+export const itemAPI = createApi({
+    reducerPath: 'item',
     baseQuery: fetchBaseQuery({
         baseUrl: 'http://localhost:7542/',
         credentials: 'include',
@@ -13,6 +13,9 @@ export const commentAPI = createApi({
     endpoints: (builder) => ({
         getComments: builder.query<ResponseType<CommentType[]>, { reviewId: string }>({
             query: ({ reviewId }) => `${PathAPI.Comment}/${reviewId}`,
+        }),
+        getTags: builder.query<ResponseType<string[]>, Record<string, never>>({
+            query: () => `${PathAPI.Tags}`,
         }),
         createComment: builder.mutation<ResponseType<CommentType>, CreateCommentType>({
             query: ({ review_id, author_id, body }) => ({
@@ -24,4 +27,4 @@ export const commentAPI = createApi({
     }),
 });
 
-export const { useGetCommentsQuery, useCreateCommentMutation } = commentAPI;
+export const { useGetCommentsQuery, useCreateCommentMutation, useGetTagsQuery } = itemAPI;
