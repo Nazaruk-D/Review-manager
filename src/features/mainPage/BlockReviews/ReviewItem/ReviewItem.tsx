@@ -1,17 +1,15 @@
 import React, { FC } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Box, Card, CardContent, CardMedia, Grid, Rating, Typography } from '@mui/material';
+import { Box, Card, CardContent, CardMedia, Grid, Typography } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import dateFormat from 'dateformat';
 import { NavLink } from 'react-router-dom';
-import { ReviewResponseType } from '../../../types/ReviewResponseType';
-import noImage from '../../png/no_image.png';
-import { useSetRatingMutation } from '../../../store/api/reviewAPISlice';
-import { useAppSelector } from '../../../hooks/useRedux';
-import { selectorUserId } from '../../../store/selectors/userSelector';
-import { Path } from '../../../enums/path';
-import RatingReview from '../RatingReview/RatingReview';
-import Like from '../Like/Like';
+import { ReviewResponseType } from '../../../../types/ReviewResponseType';
+import noImage from '../../../../common/png/no_image.png';
+import { useAppSelector } from '../../../../hooks/useRedux';
+import { selectorUserId } from '../../../../store/selectors/userSelector';
+import RatingReview from '../../../../common/components/RatingReview/RatingReview';
+import Like from '../../../../common/components/Like/Like';
 
 const StyledCard = styled(Card)({
     transition: 'all 0.2s ease-in-out',
@@ -37,7 +35,6 @@ type ReviewItemPropsType = {
 const ReviewItem: FC<ReviewItemPropsType> = ({ review }) => {
     const userId = useAppSelector(selectorUserId);
     const { t } = useTranslation('translation', { keyPrefix: 'poster' });
-
     return (
         <Grid item xs={12} md={4}>
             <NavLink to={`review/${review.id}`} style={{ textDecoration: 'none' }}>
@@ -59,9 +56,6 @@ const ReviewItem: FC<ReviewItemPropsType> = ({ review }) => {
                             </Typography>
                             <Typography variant="body2" color="text.secondary" sx={{ px: 0, py: 1 }}>
                                 {t('assessment')}: {review.assessment}
-                            </Typography>
-                            <Typography variant="body1" color="text.secondary">
-                                {review.body}
                             </Typography>
                         </CardContent>
                         <CardContent sx={{ px: 2, py: 0, display: 'flex' }}>

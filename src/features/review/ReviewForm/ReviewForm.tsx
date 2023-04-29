@@ -27,6 +27,8 @@ import UploadImage from '../../../common/components/UploadImage/UploadImage';
 import { ReviewErrorType } from '../../../types/FormikErrorTypes';
 import { ErrorStyle } from '../../../styles/common/ErrorStyle';
 import { useSendReviewMutation } from '../../../store/api/reviewAPISlice';
+import { selectorThemeApp } from '../../../store/selectors/appSelector';
+import MarkDownEditor from '../../../common/components/MarkDownEditor/MarkDownEditor';
 
 type ReviewFromPropsType = {
     initial: ReviewType;
@@ -82,13 +84,26 @@ export const ReviewForm: FC<ReviewFromPropsType> = ({ initial, url, image, profi
 
     const newReviewDisable = !(formik.isValid && formik.dirty);
     const isDisable = url === 'update-review' ? false : newReviewDisable;
+    const isDark = useAppSelector(selectorThemeApp);
+
+    const style =
+        isDark === 'dark'
+            ? {
+                  backgroundColor: 'primary.dark',
+                  color: 'white',
+                  mt: 2,
+                  mb: 2,
+                  '&:hover': { backgroundColor: 'primary.dark' },
+              }
+            : { mt: 2, mb: 2 };
+
+    const styleRadio = isDark === 'dark' ? { color: '#white', '&.Mui-checked': { color: '#505050' } } : {};
 
     useEffect(() => {
         if (isSuccess) {
             navigate(`/profile/${profileId}`);
         }
     }, [isSuccess, navigate]);
-
     return (
         <Container maxWidth="md" sx={{ mt: 3 }}>
             <Box>
@@ -143,7 +158,7 @@ export const ReviewForm: FC<ReviewFromPropsType> = ({ initial, url, image, profi
                             </Grid>
                         )}
                         <Grid item xs={12}>
-                            <TextField label={t('text')} fullWidth rows={4} multiline {...formik.getFieldProps('body')} />
+                            <MarkDownEditor formik={formik} />
                         </Grid>
                         {formik.touched.body && formik.errors.body && (
                             <Grid item xs={12} sx={ErrorStyle}>
@@ -164,7 +179,7 @@ export const ReviewForm: FC<ReviewFromPropsType> = ({ initial, url, image, profi
                                         <FormControlLabel
                                             key={index}
                                             value={(index + 1).toString()}
-                                            control={<Radio />}
+                                            control={<Radio sx={styleRadio} />}
                                             label={(index + 1).toString()}
                                         />
                                     ))}
@@ -192,7 +207,7 @@ export const ReviewForm: FC<ReviewFromPropsType> = ({ initial, url, image, profi
                             <UploadImage image={uploadImage} setImage={setUploadImage} dbImage={image} />
                         </Grid>
                     </Grid>
-                    <Button variant="contained" type="submit" fullWidth sx={{ mt: 2, mb: 2 }} disabled={isDisable}>
+                    <Button variant="contained" type="submit" fullWidth sx={style} disabled={isDisable}>
                         {isLoading ? <CircularProgress size={24} color="inherit" /> : t('save review')}
                     </Button>
                 </form>

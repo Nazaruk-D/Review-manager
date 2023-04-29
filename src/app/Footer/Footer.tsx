@@ -16,6 +16,7 @@ const Footer = () => {
                 textAlign: 'center',
                 fontSize: '0.8rem',
                 marginTop: 'auto',
+                width: '100%',
             }}
             onClick={() => navigate(`${Path.Review}/`)}
         >

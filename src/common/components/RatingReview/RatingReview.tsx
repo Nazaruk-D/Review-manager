@@ -22,7 +22,6 @@ const RatingReview: FC<RatingReviewPropsType> = ({ review }) => {
     const onclickHandler = (event: React.MouseEvent<HTMLElement>) => {
         event.stopPropagation();
     };
-    console.log('RATING: ', review.avg_rating);
     const rated = review.ratings.includes(userId!);
     const ratingColor = rated ? { color: 'rgba(148,148,148,0.5)' } : {};
     return (

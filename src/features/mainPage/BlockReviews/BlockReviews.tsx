@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import { Grid, Typography } from '@mui/material';
-import ReviewItem from '../../../common/components/ReviewItem/ReviewItem';
+import ReviewItem from './ReviewItem/ReviewItem';
 import { ReviewResponseType } from '../../../types/ReviewResponseType';
 
 type BlockReviewsPropsType = {

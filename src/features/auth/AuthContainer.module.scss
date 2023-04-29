@@ -1,5 +1,5 @@
-@import './src/styles/sass/mixin';
-@import './src/styles/sass/variables';
+@import '../../styles/sass/mixin';
+@import '../../styles/sass/variables';
 
 .authContainer {
   @include flex(row, center, flex-start, wrap);
