@@ -26,6 +26,7 @@ export async function getUserData(dispatch: Dispatch) {
             role: data[0].role,
             is_blocked: data[0].is_blocked,
             id: user.id,
+            totalLikes: data[0].totalLikes,
             created_at: user.created_at,
             updated_at: user.updated_at,
         };

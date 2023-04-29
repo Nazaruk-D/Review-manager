@@ -10,4 +10,5 @@ export type ReviewResponseType = ReviewType & {
     avg_rating: number;
     ratings: string[];
     likes: string[];
+    authorLikes: number;
 };

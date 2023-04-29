@@ -19,7 +19,7 @@
       "profile": {
         "changePhoto": "Change photo",
         "logout": "Logout",
-        "rating": "Rating",
+        "likes": "Total number of likes",
         "created": "Created",
         "email": "Email",
         "profile info": "Profile info",
@@ -108,7 +108,7 @@
       "profile": {
         "changePhoto": "Сменить фото",
         "logout": "Выйти",
-        "rating": "Рейтинг",
+        "likes": "Общее количество лайков",
         "created": "Аккаунт создан",
         "email": "Email",
         "profile info": "Информация профиля",

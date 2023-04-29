@@ -8,6 +8,7 @@ export type UserType = {
     main_photo: string;
     role: RoleType;
     is_blocked: boolean;
+    totalLikes: number;
     created_at?: string;
     updated_at?: string;
 };

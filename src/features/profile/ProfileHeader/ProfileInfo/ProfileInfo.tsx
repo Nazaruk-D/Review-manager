@@ -31,9 +31,9 @@ const ProfileInfo: FC<ProfileInfoPropsType> = ({ user, t }) => {
                 </Typography>
             </Box>
             <Box sx={{ display: 'flex', flexDirection: 'row' }}>
-                <Typography variant="h3">{t('rating')}:</Typography>
+                <Typography variant="h3">{t('likes')}:</Typography>
                 <Typography variant="h3" color="textSecondary" sx={{ ml: 1, mb: 1, fontWeight: 500 }}>
-                    rating
+                    {user?.totalLikes}
                 </Typography>
             </Box>
             <Box sx={{ display: 'flex', flexDirection: 'row' }}>

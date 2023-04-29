@@ -4,6 +4,7 @@ import { Box, Card, CardContent, CardMedia, Grid, Typography } from '@mui/materi
 import { styled } from '@mui/material/styles';
 import dateFormat from 'dateformat';
 import { NavLink } from 'react-router-dom';
+import FavoriteIcon from '@mui/icons-material/Favorite';
 import { ReviewResponseType } from '../../../../types/ReviewResponseType';
 import noImage from '../../../../common/png/no_image.png';
 import { useAppSelector } from '../../../../hooks/useRedux';
@@ -66,6 +67,8 @@ const ReviewItem: FC<ReviewItemPropsType> = ({ review }) => {
                                 {t('reviewed')}{' '}
                                 <Typography variant="subtitle2" component="span" color="text.secondary">
                                     {review.author_name}
+                                    <FavoriteIcon sx={{ fontSize: '10px', ml: 0.5 }} />
+                                    {review.authorLikes}
                                 </Typography>
                                 , {dateFormat(review.created_at, 'mm/dd/yyyy')}
                             </Typography>
