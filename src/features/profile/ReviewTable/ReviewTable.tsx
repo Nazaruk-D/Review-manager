@@ -1,47 +1,49 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@mui/material';
-import { useParams } from 'react-router-dom';
 import ReviewRow from './ReviewRow/ReviewRow';
-import { useGetReviewsQuery } from '../../../store/api/reviewAPISlice';
-import Loader from '../../../common/components/Loader/Loader';
 import { useAppDispatch, useAppSelector } from '../../../hooks/useRedux';
-import { setUsersReview } from '../../../store/slices/reviewSlice';
-import { selectorUserReviews } from '../../../store/selectors/reviewSelector';
+import { sortReviewsSelector } from '../../../store/selectors/sortSelector';
+import { ReviewFilterType } from '../../../types/ReviewFilterType';
+import { Sort } from '../../../enums/sort';
+import { setReviewFilter } from '../../../store/slices/sortSlice';
 
 const ReviewTable = () => {
     const dispatch = useAppDispatch();
-    const reviews = useAppSelector(selectorUserReviews);
-    const { userId = '' } = useParams<string>();
+    const sortReviews = useAppSelector(sortReviewsSelector);
     const { t } = useTranslation('translation', { keyPrefix: 'profile' });
-    const { data: reviewsData, isLoading, error } = useGetReviewsQuery({ userId });
 
-    useEffect(() => {
-        if (reviewsData) {
-            dispatch(setUsersReview(reviewsData.data));
-        }
-    }, [dispatch, reviewsData]);
-
-    if (isLoading) {
-        return <Loader />;
-    }
-
+    const onChangeFilter = (value: ReviewFilterType) => {
+        dispatch(setReviewFilter(value));
+    };
     return (
-        <TableContainer component={Paper} sx={{ mt: 3, mb: 3 }}>
+        <TableContainer component={Paper} sx={{ mb: 3 }}>
             <Table>
                 <TableHead>
                     <TableRow>
                         <TableCell>№</TableCell>
                         <TableCell>{t('image')}</TableCell>
-                        <TableCell>{t('name review')}</TableCell>
+                        <TableCell onClick={() => onChangeFilter(Sort.NameAZ)} sx={{ cursor: 'pointer' }}>
+                            {t('name review')}
+                        </TableCell>
                         <TableCell>{t('category')}</TableCell>
-                        <TableCell>{t('created review')}</TableCell>
-                        <TableCell>{t('rating')}</TableCell>
+                        <TableCell onClick={() => onChangeFilter(Sort.DateNewOld)} sx={{ cursor: 'pointer' }}>
+                            {t('created review')}
+                        </TableCell>
+                        <TableCell onClick={() => onChangeFilter(Sort.Assessment)} sx={{ cursor: 'pointer' }}>
+                            {t('assessment')}
+                        </TableCell>
+                        <TableCell onClick={() => onChangeFilter(Sort.AvgRating)} sx={{ cursor: 'pointer' }}>
+                            {t('rating')}
+                        </TableCell>
+                        <TableCell onClick={() => onChangeFilter(Sort.Likes)} sx={{ cursor: 'pointer' }}>
+                            {t('like')}
+                        </TableCell>
                         <TableCell>{t('settings')}</TableCell>
                     </TableRow>
                 </TableHead>
                 <TableBody>
-                    {reviews?.map((row, index) => (
+                    {sortReviews?.map((row, index) => (
                         <ReviewRow review={row} index={index} key={row.id} />
                     ))}
                 </TableBody>

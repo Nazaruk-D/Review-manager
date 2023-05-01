@@ -2,6 +2,7 @@ import { combineReducers, configureStore } from '@reduxjs/toolkit';
 import appReducer from './slices/appSlice';
 import userReducer from './slices/userSlice';
 import reviewReducer from './slices/reviewSlice';
+import sortReducer from './slices/sortSlice';
 import { authAPI } from './api/authAPI';
 import { reviewAPISlice } from './api/reviewAPISlice';
 import { itemAPI } from './api/itemAPI';
@@ -11,6 +12,7 @@ const rootReducer = combineReducers({
     app: appReducer,
     user: userReducer,
     review: reviewReducer,
+    sort: sortReducer,
     [authAPI.reducerPath]: authAPI.reducer,
     [reviewAPISlice.reducerPath]: reviewAPISlice.reducer,
     [itemAPI.reducerPath]: itemAPI.reducer,

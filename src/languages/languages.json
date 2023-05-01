@@ -26,6 +26,9 @@
         "name": "Name",
         "image": "Image",
         "role": "Role",
+        "assessment": "Assessment",
+        "rating": "Rating",
+        "like": "Like",
         "blocked": "Blocked",
         "name review": "Name review",
         "created review": "Created",
@@ -62,12 +65,12 @@
         "rating": "Rating is required"
       },
       "category": {
-        "movies": "Movies",
-        "books": "Books",
-        "games": "Games",
-        "food": "Food",
-        "cars": "Cars",
-        "other": "Other"
+        "Movies": "Movies",
+        "Books": "Books",
+        "Games": "Games",
+        "Food": "Food",
+        "Cars": "Cars",
+        "Other": "Other"
       },
       "introduction": {
         "title": "Meet Reviewer manager - a website created for managing recommendations.",
@@ -115,6 +118,9 @@
         "name": "Имя",
         "image": "Изображение",
         "role": "Права",
+        "assessment": "Оценка",
+        "rating": "Рейтинг",
+        "like": "Понравилось",
         "blocked": "Заблокирован",
         "name review": "Название обзора",
         "created review": "Создано",
@@ -151,12 +157,12 @@
         "rating": "Поставьте оценку"
       },
       "category": {
-        "movies": "Фильмы",
-        "books": "Книги",
-        "games": "Игры",
-        "food": "Еда",
-        "cars": "Автомобили",
-        "other": "Другое"
+        "Movies": "Фильмы",
+        "Books": "Книги",
+        "Games": "Игры",
+        "Food": "Еда",
+        "Cars": "Автомобили",
+        "Other": "Другое"
       },
       "introduction": {
         "title": "Познакомьтесь с Reviewer manager - сайтом, созданным для управления рекомендациями.",

@@ -30,6 +30,7 @@ import { useSendReviewMutation } from '../../../store/api/reviewAPISlice';
 import { selectorThemeApp } from '../../../store/selectors/appSelector';
 import MarkDownEditor from '../../../common/components/MarkDownEditor/MarkDownEditor';
 import { selectorTags } from '../../../store/selectors/reviewSelector';
+import { CATEGORIES } from '../../../common/constants/constants';
 
 type ReviewFromPropsType = {
     initial: ReviewType;
@@ -145,12 +146,11 @@ export const ReviewForm: FC<ReviewFromPropsType> = ({ initial, url, image, profi
                             <FormControl fullWidth>
                                 <InputLabel id="demo-simple-select-label">{t('category')}</InputLabel>
                                 <Select labelId="demo-simple-select-label" {...formik.getFieldProps('category')}>
-                                    <MenuItem value="Movies">{tc('movies')}</MenuItem>
-                                    <MenuItem value="Books">{tc('books')}</MenuItem>
-                                    <MenuItem value="Games">{tc('games')}</MenuItem>
-                                    <MenuItem value="Food">{tc('food')}</MenuItem>
-                                    <MenuItem value="Cars">{tc('cars')}</MenuItem>
-                                    <MenuItem value="Other">{tc('other')}</MenuItem>
+                                    {CATEGORIES.map((category: string) => (
+                                        <MenuItem key={category} value={category}>
+                                            {category}
+                                        </MenuItem>
+                                    ))}
                                 </Select>
                             </FormControl>
                         </Grid>

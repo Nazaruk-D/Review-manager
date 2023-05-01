@@ -43,6 +43,8 @@ const ReviewRow: FC<CardsRowPropsType> = ({ review, index }) => {
             <TableCell>{review.category}</TableCell>
             <TableCell>{dateFormat(review.created_at, 'mm/dd/yyyy')}</TableCell>
             <TableCell>{review.assessment}</TableCell>
+            <TableCell>{review.avg_rating ? review.avg_rating : '-'}</TableCell>
+            <TableCell>{review.likes.length}</TableCell>
             <TableCell>
                 <Box sx={{ display: 'flex', flexDirection: 'row' }}>
                     <IconButton onClick={onEditReviewHandler}>
