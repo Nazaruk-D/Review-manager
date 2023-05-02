@@ -3,6 +3,7 @@ import appReducer from './slices/appSlice';
 import userReducer from './slices/userSlice';
 import reviewReducer from './slices/reviewSlice';
 import sortReducer from './slices/sortSlice';
+import adminReducer from './slices/adminSlice';
 import { authAPI } from './api/authAPI';
 import { reviewAPISlice } from './api/reviewAPISlice';
 import { itemAPI } from './api/itemAPI';
@@ -13,6 +14,7 @@ const rootReducer = combineReducers({
     user: userReducer,
     review: reviewReducer,
     sort: sortReducer,
+    admin: adminReducer,
     [authAPI.reducerPath]: authAPI.reducer,
     [reviewAPISlice.reducerPath]: reviewAPISlice.reducer,
     [itemAPI.reducerPath]: itemAPI.reducer,

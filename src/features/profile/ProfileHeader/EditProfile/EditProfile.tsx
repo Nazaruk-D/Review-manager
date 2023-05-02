@@ -4,10 +4,10 @@ import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import { TFunction } from 'i18next';
 import s from './EditProfiile.module.scss';
 import { useAppDispatch, useAppSelector } from '../../../../hooks/useRedux';
-import { selectorUserId, selectorUserImage, selectorUserName } from '../../../../store/selectors/userSelector';
 import { useUpdateInfoMutation } from '../../../../store/api/userAPISlice';
 import UploadImage from '../../../../common/components/UploadImage/UploadImage';
 import { setAppErrorAC } from '../../../../store/slices/appSlice';
+import { userIdSelector, userNameSelector, userPhotoSelector } from '../../../../store/selectors/adminSelector';
 
 type EditProfilePropsType = {
     t: TFunction;
@@ -15,12 +15,12 @@ type EditProfilePropsType = {
 
 const EditProfile: FC<EditProfilePropsType> = ({ t }) => {
     const dispatch = useAppDispatch();
-    const userId = useAppSelector(selectorUserId);
-    const userName = useAppSelector(selectorUserName);
-    const userImage = useAppSelector(selectorUserImage);
+    const userId = useAppSelector(userIdSelector);
+    const userName = useAppSelector(userNameSelector);
+    const adminPhoto = useAppSelector(userPhotoSelector);
     const [open, setOpen] = useState(false);
     const [image, setImage] = useState<File | null>(null);
-    const [newName, setNewName] = useState<string>(userName || '');
+    const [newName, setNewName] = useState<string>('');
     const [profilePhoto, setProfilePhoto] = useState<File | null>(null);
     const [uploadInfo, { error, isLoading }] = useUpdateInfoMutation();
 
@@ -41,6 +41,12 @@ const EditProfile: FC<EditProfilePropsType> = ({ t }) => {
             setOpen(false);
         }
     };
+
+    useEffect(() => {
+        if (userName) {
+            setNewName(userName);
+        }
+    }, [userName]);
 
     useEffect(() => {
         if (error) {
@@ -75,7 +81,7 @@ const EditProfile: FC<EditProfilePropsType> = ({ t }) => {
                             />
                         </Grid>
                         <Grid item xs={12}>
-                            <UploadImage image={image} setImage={setImage} dbImage={userImage || ''} />
+                            <UploadImage image={image} setImage={setImage} dbImage={adminPhoto || ''} />
                         </Grid>
                         <Grid item xs={12}>
                             <Button variant="contained" color="primary" fullWidth onClick={handleSaveChanges}>

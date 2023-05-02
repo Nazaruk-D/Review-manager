@@ -12,6 +12,9 @@ import NewReviewButton from './NewReviewButton/NewReviewButton';
 import FilterSortPanel from './FilterSortPanel/FilterSortPanel';
 import { useGetReviewsQuery } from '../../store/api/reviewAPISlice';
 import Loader from '../../common/components/Loader/Loader';
+import { useGetUserQuery } from '../../store/api/userAPISlice';
+import { setAppErrorAC } from '../../store/slices/appSlice';
+import { setUserData } from '../../store/slices/adminSlice';
 
 const Profile = () => {
     const dispatch = useAppDispatch();
@@ -20,6 +23,17 @@ const Profile = () => {
     const { userId = '' } = useParams<string>();
     const { data: tags, isLoading: tagsLoading, error: tagsError } = useGetTagsQuery({});
     const { data: reviews, isLoading: reviewsLoading, error: reviewsError } = useGetReviewsQuery({ userId });
+    const { data: user, isLoading: userLoading, error: userError } = useGetUserQuery({ userId });
+
+    if (tagsError && reviewsError && userError) {
+        dispatch(setAppErrorAC('error'));
+    }
+
+    useEffect(() => {
+        if (user) {
+            dispatch(setUserData(user.data));
+        }
+    }, [dispatch, user]);
 
     useEffect(() => {
         if (reviews) {
@@ -37,13 +51,13 @@ const Profile = () => {
         if (!isLogin) navigate(Path.Root);
     }, [isLogin]);
 
-    if (tagsLoading || reviewsLoading) {
+    if (tagsLoading || reviewsLoading || userLoading || !user) {
         return <Loader />;
     }
 
     return (
         <Container sx={{ mt: '2rem' }}>
-            <ProfileHeader />
+            <ProfileHeader user={user.data} />
             <NewReviewButton userId={userId} />
             <FilterSortPanel />
             <ReviewTable />
