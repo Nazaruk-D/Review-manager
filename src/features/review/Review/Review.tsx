@@ -10,11 +10,13 @@ import { ReviewResponseType } from '../../../types/ReviewResponseType';
 import Loader from '../../../common/components/Loader/Loader';
 import { useGetReviewByIdQuery } from '../../../store/api/reviewAPISlice';
 import { setAppErrorAC } from '../../../store/slices/appSlice';
-import { useAppDispatch } from '../../../hooks/useRedux';
+import { useAppDispatch, useAppSelector } from '../../../hooks/useRedux';
+import { selectorIsLogin } from '../../../store/selectors/userSelector';
 
 const Review = () => {
     const dispatch = useAppDispatch();
     const location = useLocation();
+    const isLogin = useAppSelector(selectorIsLogin);
     const { t } = useTranslation('translation', { keyPrefix: 'profile' });
     const { reviewId = '' } = useParams<string>();
     let review: ReviewResponseType = location.state;
@@ -34,7 +36,7 @@ const Review = () => {
         <Container sx={{ mt: '2rem' }}>
             <ReviewHeader review={review} />
             <ReviewBody review={review} />
-            <SendCommentForm />
+            {isLogin && <SendCommentForm />}
             <CommentsBlock />
         </Container>
     );

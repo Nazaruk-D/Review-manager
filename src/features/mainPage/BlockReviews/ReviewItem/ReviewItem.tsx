@@ -8,7 +8,7 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import { ReviewResponseType } from '../../../../types/ReviewResponseType';
 import noImage from '../../../../common/png/no_image.png';
 import { useAppSelector } from '../../../../hooks/useRedux';
-import { selectorUserId } from '../../../../store/selectors/userSelector';
+import { selectorIsLogin, selectorUserId } from '../../../../store/selectors/userSelector';
 import RatingReview from '../../../../common/components/RatingReview/RatingReview';
 import Like from '../../../../common/components/Like/Like';
 

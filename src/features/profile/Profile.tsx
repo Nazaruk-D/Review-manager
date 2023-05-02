@@ -57,7 +57,7 @@ const Profile = () => {
 
     return (
         <Container sx={{ mt: '2rem' }}>
-            <ProfileHeader user={user.data} />
+            <ProfileHeader userProfileData={user.data} />
             <NewReviewButton userId={userId} />
             <FilterSortPanel />
             <ReviewTable />

@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import { Box, Rating, Typography } from '@mui/material';
 import { useAppSelector } from '../../../hooks/useRedux';
-import { selectorUserId } from '../../../store/selectors/userSelector';
+import { selectorIsLogin, selectorUserId } from '../../../store/selectors/userSelector';
 import { useSetRatingMutation } from '../../../store/api/reviewAPISlice';
 import { ReviewResponseType } from '../../../types/ReviewResponseType';
 
@@ -11,6 +11,8 @@ type RatingReviewPropsType = {
 
 const RatingReview: FC<RatingReviewPropsType> = ({ review }) => {
     const userId = useAppSelector(selectorUserId);
+    const isLogin = useAppSelector(selectorIsLogin);
+
     const [setRating] = useSetRatingMutation();
 
     const setRatingHandler = (event: React.SyntheticEvent, value: number | null) => {
@@ -34,6 +36,7 @@ const RatingReview: FC<RatingReviewPropsType> = ({ review }) => {
                 sx={ratingColor}
                 onChange={setRatingHandler}
                 onClick={onclickHandler}
+                disabled={!isLogin}
             />
             <Typography variant="body1" color="text.secondary" sx={{ ml: 1, fontWeight: 600 }}>
                 {review.avg_rating ? review.avg_rating.toFixed(1) : 0}
