@@ -44,7 +44,7 @@ const FilterSortPanel = () => {
     }, [categoryFilter, reviewsFilter, searchSort, reviews]);
 
     return (
-        <Grid container sx={{ mt: 2, mb: 1, display: 'flex', justifyContent: 'space-between' }}>
+        <Grid container sx={{ mb: 1, display: 'flex', justifyContent: 'space-between' }}>
             <Grid item xs={12} md={5.6} sx={{ mb: { xs: 1 } }}>
                 <TextField id="search" label="Search" variant="outlined" onChange={handleSearch} fullWidth />
             </Grid>

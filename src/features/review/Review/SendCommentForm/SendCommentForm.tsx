@@ -58,7 +58,7 @@ const SendCommentForm: FC<SendCommentFormPropsType> = ({ ws, sendComment }) => {
                     />
                 </Grid>
                 <Grid item>
-                    <Button variant="contained" color="primary" disableElevation onClick={onClickHandler}>
+                    <Button variant="contained" color="primary" disableElevation onClick={onClickHandler} sx={{ width: '125px' }}>
                         {loading ? <CircularProgress size={24} color="inherit" /> : t('send')}
                     </Button>
                 </Grid>

@@ -31,6 +31,7 @@ import { selectorThemeApp } from '../../../store/selectors/appSelector';
 import MarkDownEditor from '../../../common/components/MarkDownEditor/MarkDownEditor';
 import { selectorTags } from '../../../store/selectors/reviewSelector';
 import { CATEGORIES } from '../../../common/constants/constants';
+import { buttonStyles } from '../../../styles/common/buttonStyles';
 
 type ReviewFromPropsType = {
     initial: ReviewType;
@@ -87,20 +88,9 @@ export const ReviewForm: FC<ReviewFromPropsType> = ({ initial, url, image, profi
 
     const newReviewDisable = !(formik.isValid && formik.dirty);
     const isDisable = url === 'update-review' ? false : newReviewDisable;
-    const isDark = useAppSelector(selectorThemeApp);
-
-    const style =
-        isDark === 'dark'
-            ? {
-                  backgroundColor: 'primary.dark',
-                  color: 'white',
-                  mt: 2,
-                  mb: 2,
-                  '&:hover': { backgroundColor: 'primary.dark' },
-              }
-            : { mt: 2, mb: 2 };
-
-    const styleRadio = isDark === 'dark' ? { color: '#white', '&.Mui-checked': { color: '#505050' } } : {};
+    const themeColor = useAppSelector(selectorThemeApp);
+    const style = buttonStyles(themeColor);
+    const styleRadio = themeColor === 'dark' ? { color: '#white', '&.Mui-checked': { color: '#505050' } } : {};
 
     useEffect(() => {
         if (isSuccess) {

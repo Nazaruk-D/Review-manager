@@ -22,8 +22,6 @@ function App() {
     const { data: popular } = useGetPopularReviewsQuery({});
     const latestReviews: ReviewResponseType[] = latest ? latest!.data : [];
     const popularReviews: ReviewResponseType[] = popular ? popular!.data : [];
-    dispatch(setPopularReview(popularReviews));
-    dispatch(setLatestReview(latestReviews));
 
     const memoizedColorModeValue = useMemo(
         () => ({
@@ -32,6 +30,11 @@ function App() {
         }),
         [colorMode.toggleColorMode, mode],
     );
+
+    useEffect(() => {
+        dispatch(setPopularReview(popularReviews));
+        dispatch(setLatestReview(latestReviews));
+    }, [latest, popular]);
 
     useEffect(() => {
         getUserData(dispatch);
@@ -45,9 +48,7 @@ function App() {
         <ColorModeContext.Provider value={memoizedColorModeValue}>
             <ThemeProvider theme={theme}>
                 <CssBaseline />
-                <Suspense fallback={<Loader />}>
-                    <RouterProvider router={router} />
-                </Suspense>
+                <RouterProvider router={router} />
             </ThemeProvider>
         </ColorModeContext.Provider>
     );

@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import { useAppSelector } from '../../../hooks/useRedux';
 import { selectorThemeApp } from '../../../store/selectors/appSelector';
+import { buttonStyles } from '../../../styles/common/buttonStyles';
 
 type NewReviewButtonPropsType = {
     userId: string;
@@ -11,13 +12,9 @@ type NewReviewButtonPropsType = {
 
 const NewReviewButton: FC<NewReviewButtonPropsType> = ({ userId }) => {
     const navigate = useNavigate();
-    const isDark = useAppSelector(selectorThemeApp);
+    const themeColor = useAppSelector(selectorThemeApp);
     const { t } = useTranslation('translation', { keyPrefix: 'profile' });
-    const style =
-        isDark === 'dark'
-            ? { backgroundColor: 'primary.dark', color: 'white', '&:hover': { backgroundColor: 'primary.dark' } }
-            : {};
-
+    const style = buttonStyles(themeColor);
     return (
         <Button variant="contained" fullWidth onClick={() => navigate(`/create-review/${userId}`)} sx={style}>
             {t('new review')}

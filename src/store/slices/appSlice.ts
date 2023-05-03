@@ -5,14 +5,14 @@ type InitialStateType = {
     status: RequestStatusType;
     initialized: boolean;
     error: null | string;
-    themeColor: string | null;
+    themeColor: 'dark' | 'light';
 };
 
 const initialState: InitialStateType = {
     status: 'loading',
     initialized: false,
     error: null,
-    themeColor: null,
+    themeColor: 'light',
 };
 
 const appSlice = createSlice({
@@ -28,7 +28,7 @@ const appSlice = createSlice({
         setAppErrorAC(state, action: PayloadAction<null | string>) {
             state.error = action.payload;
         },
-        setAppThemeAC(state, action: PayloadAction<string>) {
+        setAppThemeAC(state, action: PayloadAction<'dark' | 'light'>) {
             state.themeColor = action.payload;
         },
     },
