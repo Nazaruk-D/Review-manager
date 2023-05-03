@@ -1,6 +1,6 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@mui/material';
+import { Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography } from '@mui/material';
 import ReviewRow from './ReviewRow/ReviewRow';
 import { useAppDispatch, useAppSelector } from '../../../hooks/useRedux';
 import { sortReviewsSelector } from '../../../store/selectors/sortSelector';
@@ -46,6 +46,13 @@ const ReviewTable = () => {
                     {sortReviews?.map((row, index) => (
                         <ReviewRow review={row} index={index} key={row.id} />
                     ))}
+                    {sortReviews?.length === 0 && (
+                        <TableRow>
+                            <TableCell style={{ textAlign: 'center', height: '100px' }} colSpan={9}>
+                                <Typography variant="h3"> {t('no reviews found')}</Typography>
+                            </TableCell>
+                        </TableRow>
+                    )}
                 </TableBody>
             </Table>
         </TableContainer>

@@ -6,9 +6,9 @@ import dateFormat from 'dateformat';
 import { NavLink } from 'react-router-dom';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import { ReviewResponseType } from '../../../../types/ReviewResponseType';
-import noImage from '../../../../common/png/no_image.png';
+import noImage from '../../../../common/png/logo.png';
 import { useAppSelector } from '../../../../hooks/useRedux';
-import { selectorIsLogin, selectorUserId } from '../../../../store/selectors/userSelector';
+import { selectorUserId } from '../../../../store/selectors/userSelector';
 import RatingReview from '../../../../common/components/RatingReview/RatingReview';
 import Like from '../../../../common/components/Like/Like';
 
@@ -41,7 +41,7 @@ const ReviewItem: FC<ReviewItemPropsType> = ({ review }) => {
             <NavLink to={`review/${review.id}`} style={{ textDecoration: 'none' }}>
                 <StyledCard>
                     <Card>
-                        <CardMedia sx={{ height: 240 }} image={review.image ? review.image : noImage} title="review" />
+                        <CardMedia sx={{ height: 220 }} image={review.image ? review.image : noImage} title="review" />
                         <CardContent>
                             <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                                 <Typography gutterBottom variant="h2" component="h3" color="text.secondary">
@@ -67,7 +67,7 @@ const ReviewItem: FC<ReviewItemPropsType> = ({ review }) => {
                                 {t('reviewed')}{' '}
                                 <Typography variant="subtitle2" component="span" color="text.secondary">
                                     {review.author_name}
-                                    <FavoriteIcon sx={{ fontSize: '10px', ml: 0.5 }} />
+                                    <FavoriteIcon sx={{ fontSize: '10px', ml: 0.5, mr: 0.2 }} />
                                     {review.authorLikes}
                                 </Typography>
                                 , {dateFormat(review.created_at, 'mm/dd/yyyy')}

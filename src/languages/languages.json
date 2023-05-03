@@ -44,7 +44,10 @@
         "new name": "Enter new full name",
         "save changes": "Save changes",
         "error update": "Failed to update profile information",
-        "error get review": "Failed to get reviews"
+        "error get review": "Failed to get reviews",
+        "no reviews found": "No reviews found",
+        "no users found": "No user found"
+
       },
       "review editor": {
         "review editor": "Review editor",
@@ -140,7 +143,9 @@
         "new name": "Введите новое имя",
         "save changes": "Сохранить изменения",
         "error update": "Не получилось обновить информацию профиля",
-        "error get review": "Не получилось обновить обзоры"
+        "error get review": "Не получилось обновить обзоры",
+        "no reviews found": "Ни одного обзора не найдено",
+        "no users found": "Ни одного пользователя не найдено"
       },
       "review editor": {
         "review editor":  "Редактирование обзора",

@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@mui/material';
+import { Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import { UserType } from '../../../types/UserType';
 import AdminTableRow from './AdminTableRow/AdminTableRow';
@@ -30,6 +30,13 @@ const AdminTable: FC<AdminTablePropsType> = ({ users }) => {
                     {users.map((user, index) => (
                         <AdminTableRow key={user.id} user={user} index={index} />
                     ))}
+                    {users.length === 0 && (
+                        <TableRow>
+                            <TableCell style={{ textAlign: 'center', height: '100px' }} colSpan={9}>
+                                <Typography variant="h3"> {t('no users found')}</Typography>
+                            </TableCell>
+                        </TableRow>
+                    )}
                 </TableBody>
             </Table>
         </TableContainer>

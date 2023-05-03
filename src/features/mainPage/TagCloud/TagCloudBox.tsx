@@ -11,13 +11,11 @@ import s from './TagCloud.module.scss';
 const TagCloudBox = () => {
     const dispatch = useAppDispatch();
     const { data, isLoading, error } = useGetPopularTagsQuery({});
-    if (isLoading) {
-        return <Loader />;
-    }
+
     if (error) {
         dispatch(setAppErrorAC('Error getting reviews'));
     }
-    const tags = data!.data;
+    const tags = data?.data || [];
     return (
         <Box>
             <Typography variant="h2" style={{ marginBottom: '15px' }}>

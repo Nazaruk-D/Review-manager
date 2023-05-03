@@ -8,7 +8,7 @@ import { useTranslation } from 'react-i18next';
 import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
 import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined';
 import s from './ReviewRow.module.scss';
-import noImage from '../../../../common/png/no_image.png';
+import noImage from '../../../../common/png/logo.png';
 import { ReviewResponseType } from '../../../../types/ReviewResponseType';
 import { useDeleteReviewByIdMutation } from '../../../../store/api/reviewAPISlice';
 

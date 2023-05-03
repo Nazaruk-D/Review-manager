@@ -10,9 +10,9 @@ const MainPage = () => {
     const latestReviews = useAppSelector(selectorLatestReviews);
     return (
         <Container sx={{ mt: '2rem' }}>
-            <TagCloudBox />
             <BlockReviews title="Popular reviews" reviews={popularReviews} />
             <BlockReviews title="Latest added reviews" reviews={latestReviews} />
+            <TagCloudBox />
         </Container>
     );
 };
