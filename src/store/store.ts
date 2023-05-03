@@ -1,9 +1,9 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
 import appReducer from './slices/appSlice';
+import adminReducer from './slices/adminSlice';
 import userReducer from './slices/userSlice';
 import reviewReducer from './slices/reviewSlice';
 import sortReducer from './slices/sortSlice';
-import adminReducer from './slices/adminSlice';
 import { authAPI } from './api/authAPI';
 import { reviewAPISlice } from './api/reviewAPISlice';
 import { itemAPI } from './api/itemAPI';
