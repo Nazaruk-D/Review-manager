@@ -1,14 +1,15 @@
 import React, { FC } from 'react';
-import { Box, Grid, Theme, Typography, useMediaQuery } from '@mui/material';
+import { Box, Grid, IconButton, Theme, Typography, useMediaQuery } from '@mui/material';
 import dateFormat from 'dateformat';
 import { useTranslation } from 'react-i18next';
+import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
+import { useNavigate } from 'react-router-dom';
 import s from './ReviewHeader.module.scss';
 import { ReviewResponseType } from '../../../../types/ReviewResponseType';
 import RatingReview from '../../../../common/components/RatingReview/RatingReview';
 import Like from '../../../../common/components/Like/Like';
 import { useAppSelector } from '../../../../hooks/useRedux';
 import { selectorRole, selectorUserId } from '../../../../store/selectors/userSelector';
-import EditReviewButton from '../../../../common/components/EditReviewButton/EditReviewButton';
 import { Role } from '../../../../enums/role';
 
 type ReviewHeaderPropsType = {
@@ -16,11 +17,16 @@ type ReviewHeaderPropsType = {
 };
 
 const ReviewHeader: FC<ReviewHeaderPropsType> = ({ review }) => {
+    const navigate = useNavigate();
     const userId = useAppSelector(selectorUserId);
     const isMobile = useMediaQuery((theme: Theme) => theme.breakpoints.down('sm'));
     const { t: tr } = useTranslation('translation', { keyPrefix: 'review editor' });
     const userID = useAppSelector(selectorUserId);
     const isAdmin = useAppSelector(selectorRole);
+
+    const onEditReviewHandler = () => {
+        navigate(`/update-review/${review.id}`);
+    };
 
     return (
         <Grid container spacing={2}>
@@ -46,7 +52,11 @@ const ReviewHeader: FC<ReviewHeaderPropsType> = ({ review }) => {
                         <Typography variant="h4" gutterBottom sx={{ m: 0, mr: 1 }}>
                             {review.review_title}
                         </Typography>
-                        {(userID === review.author_id || isAdmin === Role.Admin) && <EditReviewButton reviewId={review.id} />}
+                        {(userID === review.author_id || isAdmin === Role.Admin) && (
+                            <IconButton onClick={onEditReviewHandler}>
+                                <EditOutlinedIcon />
+                            </IconButton>
+                        )}
                     </Box>
                     <Like userId={userId!} reviewId={review.id} likes={review.likes} />
                 </Box>

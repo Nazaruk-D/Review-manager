@@ -5,7 +5,8 @@
         "signIn": "Sign In"
       },
       "action": {
-        "send": "Send"
+        "send": "Send",
+        "confirm": "Confirm?"
       },
       "auth": {
         "signIn": "Sign In",
@@ -100,7 +101,8 @@
         "signIn": "Вход"
       },
       "action": {
-        "send": "Отправить"
+        "send": "Отправить",
+        "confirm": "Удалить?"
       },
       "auth": {
         "signIn": "Вход",
