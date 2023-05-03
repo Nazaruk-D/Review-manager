@@ -4,6 +4,9 @@
       "header": {
         "signIn": "Sign In"
       },
+      "action": {
+        "send": "Send"
+      },
       "auth": {
         "signIn": "Sign In",
         "signUp": "Sign Up",
@@ -95,6 +98,9 @@
     "translation": {
       "header": {
         "signIn": "Вход"
+      },
+      "action": {
+        "send": "Отправить"
       },
       "auth": {
         "signIn": "Вход",

@@ -148,7 +148,7 @@ export const ReviewForm: FC<ReviewFromPropsType> = ({ initial, url, image, profi
                                 <Select labelId="demo-simple-select-label" {...formik.getFieldProps('category')}>
                                     {CATEGORIES.map((category: string) => (
                                         <MenuItem key={category} value={category}>
-                                            {category}
+                                            {tc(category)}
                                         </MenuItem>
                                     ))}
                                 </Select>

@@ -1,14 +1,13 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/dist/query/react';
 import { PathAPI } from '../../enums/pathAPI';
 import { ResponseType } from '../../types/ResponseType';
-import { ReviewResponseType } from '../../types/ReviewResponseType';
 import { UserType } from '../../types/UserType';
 import { TagType } from '../../enums/tagType';
 
 export const userAPISlice = createApi({
     reducerPath: 'userAPI',
     baseQuery: fetchBaseQuery({
-        baseUrl: 'http://localhost:7542/',
+        baseUrl: process.env.REACT_APP_BASE_URL || process.env.REACT_APP_REMOTE_BASE_URL,
         credentials: 'include',
     }),
     tagTypes: [TagType.User],

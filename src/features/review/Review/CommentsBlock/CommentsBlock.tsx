@@ -1,15 +1,36 @@
-import React from 'react';
+import React, { FC, useEffect, useState } from 'react';
 import { Avatar, Box, Grid, Typography } from '@mui/material';
 import { useParams } from 'react-router-dom';
 import dateFormat from 'dateformat';
+import { Socket } from 'socket.io-client';
+import { DefaultEventsMap } from 'socket.io/dist/typed-events';
 import s from './CommentsBlock.module.scss';
-import { useCreateCommentMutation, useGetCommentsQuery } from '../../../../store/api/itemAPI';
+import { useGetCommentsQuery, useLazyGetCommentsQuery } from '../../../../store/api/itemAPI';
 import { CommentType } from '../../../../types/CommentType';
 
-const CommentsBlock = () => {
+type CommentsBlockPropsType = {
+    ws: Socket<DefaultEventsMap, DefaultEventsMap>;
+};
+
+const CommentsBlock: FC<CommentsBlockPropsType> = ({ ws }) => {
+    const [comments, setComments] = useState<CommentType[]>([]);
     const { reviewId = '' } = useParams<string>();
     const { data, error, isLoading } = useGetCommentsQuery({ reviewId });
-    const comments: CommentType[] = data ? data.data : [];
+    const [getComments] = useLazyGetCommentsQuery();
+
+    useEffect(() => {
+        if (data) {
+            setComments(data.data);
+        }
+    }, [data]);
+
+    useEffect(() => {
+        if (ws) {
+            ws.on('commentAdded', () => {
+                getComments({ reviewId });
+            });
+        }
+    }, [ws]);
 
     return (
         <Box className={s.commentContainer}>

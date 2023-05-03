@@ -1,29 +1,45 @@
-import React, { ChangeEvent, useState } from 'react';
-import { Button, Grid, TextField } from '@mui/material';
-import { useParams } from 'react-router-dom';
-import { useCreateCommentMutation, useGetCommentsQuery } from '../../../../store/api/itemAPI';
-import { useAppSelector } from '../../../../hooks/useRedux';
-import { selectorUserId } from '../../../../store/selectors/userSelector';
+import React, { ChangeEvent, FC, useEffect, useState } from 'react';
+import { Button, CircularProgress, Grid, TextField } from '@mui/material';
+import { Socket } from 'socket.io-client';
+import { DefaultEventsMap } from 'socket.io/dist/typed-events';
+import { useTranslation } from 'react-i18next';
 
-const SendCommentForm = () => {
-    const { reviewId } = useParams<string>();
-    const userId = useAppSelector(selectorUserId);
+type SendCommentFormPropsType = {
+    ws: Socket<DefaultEventsMap, DefaultEventsMap>;
+    sendComment: (comment: string) => void;
+};
+
+const SendCommentForm: FC<SendCommentFormPropsType> = ({ ws, sendComment }) => {
+    const [loading, setLoading] = useState(false);
     const [comment, setComment] = useState('');
-    const [sendComment, { isLoading, isError, isSuccess }] = useCreateCommentMutation();
+    const { t } = useTranslation('translation', { keyPrefix: 'action' });
 
-    const onChangeHandler = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-        setComment(e.currentTarget.value);
+    const onChangeHandler = (event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+        setComment(event.currentTarget.value);
     };
 
-    const onClickHandler = async () => {
-        if (reviewId && userId && comment) {
-            await sendComment({ review_id: reviewId, author_id: userId, body: comment });
-            if (isSuccess) {
-                setComment('');
-                useGetCommentsQuery({ reviewId });
-            }
+    const onClickHandler = () => {
+        setLoading(true);
+        sendComment(comment);
+    };
+
+    const onKeyDownHandler = (event: React.KeyboardEvent<HTMLDivElement>) => {
+        if (event.key === 'Enter') {
+            event.preventDefault();
+            setLoading(true);
+            sendComment(comment);
+            setComment('');
         }
     };
+
+    useEffect(() => {
+        if (ws) {
+            ws.on('commentAdded', () => {
+                setComment('');
+                setLoading(false);
+            });
+        }
+    }, [ws]);
 
     return (
         <form noValidate autoComplete="off">
@@ -38,11 +54,12 @@ const SendCommentForm = () => {
                         rows={2}
                         value={comment}
                         onChange={onChangeHandler}
+                        onKeyDown={onKeyDownHandler}
                     />
                 </Grid>
                 <Grid item>
                     <Button variant="contained" color="primary" disableElevation onClick={onClickHandler}>
-                        Send
+                        {loading ? <CircularProgress size={24} color="inherit" /> : t('send')}
                     </Button>
                 </Grid>
             </Grid>

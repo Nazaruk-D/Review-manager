@@ -1,43 +1,66 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Container } from '@mui/material';
+import io, { Socket } from 'socket.io-client';
+import { DefaultEventsMap } from 'socket.io/dist/typed-events';
 import { useTranslation } from 'react-i18next';
-import { useLocation, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import CommentsBlock from './CommentsBlock/CommentsBlock';
 import SendCommentForm from './SendCommentForm/SendCommentForm';
 import ReviewHeader from './ReviewHeader/ReviewHeader';
 import ReviewBody from './ReviewBody/ReviewBody';
-import { ReviewResponseType } from '../../../types/ReviewResponseType';
 import Loader from '../../../common/components/Loader/Loader';
 import { useGetReviewByIdQuery } from '../../../store/api/reviewAPISlice';
 import { setAppErrorAC } from '../../../store/slices/appSlice';
 import { useAppDispatch, useAppSelector } from '../../../hooks/useRedux';
-import { selectorIsLogin } from '../../../store/selectors/userSelector';
+import { selectorIsLogin, selectorUserId } from '../../../store/selectors/userSelector';
 
 const Review = () => {
     const dispatch = useAppDispatch();
-    const location = useLocation();
     const isLogin = useAppSelector(selectorIsLogin);
     const { t } = useTranslation('translation', { keyPrefix: 'profile' });
     const { reviewId = '' } = useParams<string>();
-    let review: ReviewResponseType = location.state;
+    const [ws, setWs] = useState<Socket<DefaultEventsMap, DefaultEventsMap> | null>(null);
+    const { data: review, isLoading, error } = useGetReviewByIdQuery({ reviewId });
+    const userId = useAppSelector(selectorUserId);
+    const remoteWebSocketBaseUrl = process.env.REACT_APP_REMOTE_WB_BASE_URL;
+    const sendComment = async (comment: string) => {
+        if (reviewId && userId && comment && ws) {
+            const body = { reviewId, userId, comment };
+            ws.emit('newComment', body);
+        }
+    };
 
-    if (!review) {
-        const { data, isLoading, error } = useGetReviewByIdQuery({ reviewId });
-        if (data) {
-            review = data.data;
+    useEffect(() => {
+        if (!ws) {
+            const socket = io(remoteWebSocketBaseUrl!);
+            setWs(socket);
         }
-        if (error) {
-            dispatch(setAppErrorAC(t('error get review')));
+        return () => {
+            ws?.disconnect();
+        };
+    }, []);
+
+    useEffect(() => {
+        if (ws) {
+            ws.emit('subscribe', reviewId);
+            return () => {
+                ws.emit('unsubscribe', reviewId);
+            };
         }
-        if (isLoading) return <Loader />;
+        return undefined;
+    }, [ws, reviewId]);
+
+    if (error) {
+        dispatch(setAppErrorAC(t('error get review')));
     }
+    if (isLoading) return <Loader />;
 
     return (
         <Container sx={{ mt: '2rem' }}>
-            <ReviewHeader review={review} />
-            <ReviewBody review={review} />
-            {isLogin && <SendCommentForm />}
-            <CommentsBlock />
+            <ReviewHeader review={review!.data} />
+            <ReviewBody review={review!.data} />
+            {isLogin && <SendCommentForm ws={ws!} sendComment={sendComment} />}
+            <CommentsBlock ws={ws!} />
         </Container>
     );
 };
