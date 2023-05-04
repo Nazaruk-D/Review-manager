@@ -4,6 +4,7 @@ export enum PathAPI {
     Login = '/auth/login',
     Logout = '/auth/logout',
     Review = '/review',
+    Search = '/item/search',
     GetReview = '/review/get-reviews',
     GetPopularTags = '/review/get-popular-tags',
     GetLatestReviews = '/review/last-reviews',

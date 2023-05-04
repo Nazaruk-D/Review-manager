@@ -10,12 +10,12 @@ type BlockReviewsPropsType = {
 
 const BlockReviews: FC<BlockReviewsPropsType> = ({ title, reviews }) => {
     return (
-        <Grid container spacing={2} sx={{ mt: 2, mb: 2 }}>
+        <Grid container spacing={2}>
             <Grid item xs={12}>
                 <Typography variant="h2">{title}</Typography>
             </Grid>
             {reviews?.map((review) => (
-                <ReviewItem key={review.id} review={review} />
+                <ReviewItem key={review.id} review={review} flexDirection="column" contentWidth="100%" mediaWidth="100%" />
             ))}
         </Grid>
     );

@@ -2,6 +2,7 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { ReviewResponseType } from '../../types/ReviewResponseType';
 
 type InitialStateType = {
+    search: string | '';
     popularReview: ReviewResponseType[] | null;
     latestReview: ReviewResponseType[] | null;
     usersReview: ReviewResponseType[] | null;
@@ -9,6 +10,7 @@ type InitialStateType = {
 };
 
 const initialState: InitialStateType = {
+    search: '',
     popularReview: null,
     latestReview: null,
     usersReview: null,
@@ -31,9 +33,12 @@ const reviewSlice = createSlice({
         setTags(state, action: PayloadAction<string[]>) {
             state.tags = action.payload;
         },
+        setSearch(state, action: PayloadAction<string>) {
+            state.search = action.payload;
+        },
     },
 });
 
-export const { setPopularReview, setUsersReview, setLatestReview, setTags } = reviewSlice.actions;
+export const { setPopularReview, setUsersReview, setLatestReview, setTags, setSearch } = reviewSlice.actions;
 
 export default reviewSlice.reducer;

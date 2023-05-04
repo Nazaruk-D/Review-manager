@@ -5,6 +5,7 @@ export enum Path {
     Profile = '/profile/:userId',
     AdminPage = '/admin',
     Review = '/review/:reviewId',
+    Result = 'result',
     CreateReview = '/create-review/:userId',
     UpdateReview = '/update-review/:reviewId',
 }

@@ -4,6 +4,7 @@ import dateFormat from 'dateformat';
 import { useTranslation } from 'react-i18next';
 import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
 import { useNavigate } from 'react-router-dom';
+import noImage from '../../../../common/png/logo.png';
 import s from './ReviewHeader.module.scss';
 import { ReviewResponseType } from '../../../../types/ReviewResponseType';
 import RatingReview from '../../../../common/components/RatingReview/RatingReview';
@@ -32,11 +33,7 @@ const ReviewHeader: FC<ReviewHeaderPropsType> = ({ review }) => {
         <Grid container spacing={2}>
             <Grid item xs={12} md={4}>
                 <img
-                    src={
-                        review.image
-                            ? review.image
-                            : 'https://consultix.radiantthemes.com/demo-nine/wp-content/themes/consultix/images/no-image-found-360x250.png'
-                    }
+                    src={review.image ? review.image : noImage}
                     alt="test"
                     className={s.image}
                     style={{

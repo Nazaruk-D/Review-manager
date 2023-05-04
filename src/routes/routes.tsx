@@ -10,6 +10,7 @@ import Review from '../features/review/Review/Review';
 import AdminPage from '../features/admin/AdminPage';
 import EditReview from '../features/review/EditReview/EditReview';
 import CreateReview from '../features/review/CreateReview/CreateReview';
+import ResultPage from '../features/result/ResultPage';
 
 const routes = createRoutesFromElements(
     <Route path={Path.Root} element={<Root />}>
@@ -17,6 +18,7 @@ const routes = createRoutesFromElements(
         <Route path={Path.Login} element={<Login />} />
         <Route path={Path.Register} element={<Registration />} />
         <Route path={Path.Review} element={<Review />} />
+        <Route path={Path.Result} element={<ResultPage />} />
         <Route path={Path.Profile} element={<Profile />} />
         <Route path={Path.AdminPage} element={<AdminPage />} />
         <Route path={Path.CreateReview} element={<CreateReview />} />

@@ -1,7 +1,6 @@
-import React, { ChangeEvent, useState } from 'react';
+import React, { ChangeEvent, FC, useState } from 'react';
 import { InputBase } from '@mui/material';
 import { alpha, styled } from '@mui/material/styles';
-
 import SearchIcon from '@mui/icons-material/Search';
 
 const Search = styled('div')(({ theme }) => ({
@@ -19,7 +18,6 @@ const Search = styled('div')(({ theme }) => ({
         width: 'auto',
     },
 }));
-
 const SearchIconWrapper = styled('div')(({ theme }) => ({
     padding: theme.spacing(0, 2),
     height: '100%',
@@ -29,12 +27,10 @@ const SearchIconWrapper = styled('div')(({ theme }) => ({
     alignItems: 'center',
     justifyContent: 'center',
 }));
-
 const StyledInputBase = styled(InputBase)(({ theme }) => ({
     color: 'inherit',
     '& .MuiInputBase-input': {
         padding: theme.spacing(1, 1, 1, 0),
-        // vertical padding + font size from searchIcon
         paddingLeft: `calc(1em + ${theme.spacing(4)})`,
         transition: theme.transitions.create('width'),
         width: '100%',
@@ -47,11 +43,21 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
     },
 }));
 
-const SearchReview = () => {
+type SearchReviewPropsType = {
+    search: (value: string) => void;
+};
+
+const SearchReview: FC<SearchReviewPropsType> = ({ search }) => {
     const [value, setValue] = useState('');
 
-    const onChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
         setValue(e.currentTarget.value);
+    };
+
+    const onKeyDownHandler = (event: React.KeyboardEvent<HTMLTextAreaElement>) => {
+        if (event.key === 'Enter') {
+            search(value);
+        }
     };
 
     return (
@@ -59,7 +65,13 @@ const SearchReview = () => {
             <SearchIconWrapper>
                 <SearchIcon />
             </SearchIconWrapper>
-            <StyledInputBase placeholder="Search…" inputProps={{ 'aria-label': 'search' }} />
+            <StyledInputBase
+                placeholder="Search…"
+                inputProps={{ 'aria-label': 'search' }}
+                value={value}
+                onChange={onChangeHandler}
+                onKeyDown={onKeyDownHandler}
+            />
         </Search>
     );
 };
