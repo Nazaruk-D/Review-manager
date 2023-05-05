@@ -7,8 +7,7 @@ import ThemeSwitcher from '../../common/components/ThemeSwitcher/ThemeSwitcher';
 import AuthButtonsBlock from '../../common/components/AuthButtonsBlock/AuthButtonsBlock';
 import SearchReview from '../../common/components/SearchReview/SearchReview';
 import { setSearch } from '../../store/slices/reviewSlice';
-import { useAppDispatch, useAppSelector } from '../../hooks/useRedux';
-import { selectorSearchValue } from '../../store/selectors/reviewSelector';
+import { useAppDispatch } from '../../hooks/useRedux';
 import { Path } from '../../enums/path';
 
 const Header = () => {

@@ -14,7 +14,6 @@ const Search = styled('div')(({ theme }) => ({
     width: '100%',
     height: '40px',
     [theme.breakpoints.up('sm')]: {
-        marginLeft: theme.spacing(1),
         width: 'auto',
     },
 }));
@@ -35,9 +34,9 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
         transition: theme.transitions.create('width'),
         width: '100%',
         [theme.breakpoints.up('sm')]: {
-            width: '12ch',
+            width: '15ch',
             '&:focus': {
-                width: '20ch',
+                width: '22ch',
             },
         },
     },
@@ -55,8 +54,9 @@ const SearchReview: FC<SearchReviewPropsType> = ({ search }) => {
     };
 
     const onKeyDownHandler = (event: React.KeyboardEvent<HTMLTextAreaElement>) => {
-        if (event.key === 'Enter') {
+        if (event.key === 'Enter' && value) {
             search(value);
+            setValue('');
         }
     };
 

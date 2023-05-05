@@ -9,7 +9,7 @@ export const themeSettings = (mode: PaletteMode) => {
             ...(mode === 'dark'
                 ? {
                       primary: {
-                          main: colors.paleSky[200],
+                          main: colors.paleSky[100],
                       },
                       secondary: {
                           main: colors.eastBay[800],

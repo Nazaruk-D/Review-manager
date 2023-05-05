@@ -10,11 +10,8 @@ import {
     FormControlLabel,
     FormLabel,
     Grid,
-    InputLabel,
-    MenuItem,
     Radio,
     RadioGroup,
-    Select,
     TextField,
     Typography,
 } from '@mui/material';
@@ -24,14 +21,15 @@ import { ReviewType } from '../../../types/ReviewType';
 import { useAppSelector } from '../../../hooks/useRedux';
 import { selectorUserData } from '../../../store/selectors/userSelector';
 import UploadImage from '../../../common/components/UploadImage/UploadImage';
-import { ReviewErrorType } from '../../../types/FormikErrorTypes';
 import { ErrorStyle } from '../../../styles/common/ErrorStyle';
 import { useSendReviewMutation } from '../../../store/api/reviewAPISlice';
 import { selectorThemeApp } from '../../../store/selectors/appSelector';
 import MarkDownEditor from '../../../common/components/MarkDownEditor/MarkDownEditor';
 import { selectorTags } from '../../../store/selectors/reviewSelector';
-import { CATEGORIES } from '../../../common/constants/constants';
 import { buttonStyles } from '../../../styles/common/buttonStyles';
+import SelectCategory from '../../../common/components/SelectCategory/SelectCategory';
+import { validateForm } from './validateForm';
+import AssessmentControl from '../../../common/components/AssessmentControl/AssessmentControl';
 
 type ReviewFromPropsType = {
     initial: ReviewType;
@@ -45,33 +43,15 @@ export const ReviewForm: FC<ReviewFromPropsType> = ({ initial, url, image, profi
     const navigate = useNavigate();
     const [uploadImage, setUploadImage] = useState<File | null>(null);
     const { t } = useTranslation('translation', { keyPrefix: 'review editor' });
-    const { t: tc } = useTranslation('translation', { keyPrefix: 'category' });
-    const { t: tv } = useTranslation('translation', { keyPrefix: 'validator' });
+    const { t: tValidate } = useTranslation('translation', { keyPrefix: 'validator' });
     const user = useAppSelector(selectorUserData);
     const tags = useAppSelector(selectorTags);
+    const themeColor = useAppSelector(selectorThemeApp);
     const [sendReview, { isSuccess, isLoading }] = useSendReviewMutation();
 
     const formik = useFormik({
         initialValues: initial,
-        validate: (values) => {
-            const errors: ReviewErrorType = {};
-            if (!values.review_title) {
-                errors.review_title = `${tv('review title')}`;
-            }
-            if (!values.title) {
-                errors.title = `${tv('title')}`;
-            }
-            if (!values.category) {
-                errors.category = `${tv('category')}`;
-            }
-            if (!values.body) {
-                errors.body = `${tv('body')}`;
-            }
-            if (!errors.review_title && !errors.title && !errors.category && !errors.body && !values.assessment) {
-                errors.assessment = `${tv('assessment')}`;
-            }
-            return errors;
-        },
+        validate: (values) => validateForm(values, tValidate),
         onSubmit: async (values) => {
             if (values) {
                 sendReview({
@@ -88,15 +68,14 @@ export const ReviewForm: FC<ReviewFromPropsType> = ({ initial, url, image, profi
 
     const newReviewDisable = !(formik.isValid && formik.dirty);
     const isDisable = url === 'update-review' ? false : newReviewDisable;
-    const themeColor = useAppSelector(selectorThemeApp);
     const style = buttonStyles(themeColor);
-    const styleRadio = themeColor === 'dark' ? { color: '#white', '&.Mui-checked': { color: '#505050' } } : {};
 
     useEffect(() => {
         if (isSuccess) {
             navigate(`/profile/${profileId}`);
         }
     }, [isSuccess, navigate]);
+
     return (
         <Container maxWidth="md" sx={{ mt: 3 }}>
             <Box>
@@ -104,13 +83,7 @@ export const ReviewForm: FC<ReviewFromPropsType> = ({ initial, url, image, profi
                     variant="h4"
                     noWrap
                     component="h4"
-                    sx={{
-                        display: 'flex',
-                        fontWeight: 700,
-                        color: 'textSecondary',
-                        textDecoration: 'none',
-                        mb: 2,
-                    }}
+                    sx={{ display: 'flex', fontWeight: 700, color: 'textSecondary', textDecoration: 'none', mb: 2 }}
                 >
                     {t('review editor')}
                 </Typography>
@@ -133,16 +106,7 @@ export const ReviewForm: FC<ReviewFromPropsType> = ({ initial, url, image, profi
                             </Grid>
                         )}
                         <Grid item xs={12}>
-                            <FormControl fullWidth>
-                                <InputLabel id="demo-simple-select-label">{t('category')}</InputLabel>
-                                <Select labelId="demo-simple-select-label" {...formik.getFieldProps('category')}>
-                                    {CATEGORIES.map((category: string) => (
-                                        <MenuItem key={category} value={category}>
-                                            {tc(category)}
-                                        </MenuItem>
-                                    ))}
-                                </Select>
-                            </FormControl>
+                            <SelectCategory formik={formik} />
                         </Grid>
                         {formik.touched.category && formik.errors.category && (
                             <Grid item xs={12} sx={ErrorStyle}>
@@ -158,25 +122,7 @@ export const ReviewForm: FC<ReviewFromPropsType> = ({ initial, url, image, profi
                             </Grid>
                         )}
                         <Grid item xs={12}>
-                            <FormControl component="fieldset">
-                                <FormLabel component="legend">{t('rating')}</FormLabel>
-                                <RadioGroup
-                                    row
-                                    aria-label="assessment"
-                                    name="assessment"
-                                    value={formik.values.assessment}
-                                    onChange={formik.handleChange}
-                                >
-                                    {Array.from({ length: 10 }, (_, index) => (
-                                        <FormControlLabel
-                                            key={index}
-                                            value={(index + 1).toString()}
-                                            control={<Radio sx={styleRadio} />}
-                                            label={(index + 1).toString()}
-                                        />
-                                    ))}
-                                </RadioGroup>
-                            </FormControl>
+                            <AssessmentControl formik={formik} themeColor={themeColor} t={t} />
                         </Grid>
                         {formik.touched.body && formik.errors.assessment && (
                             <Grid item xs={12} sx={{ color: 'green', fontSize: '14px', fontWeight: 600 }}>

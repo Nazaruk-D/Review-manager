@@ -5,12 +5,12 @@ import { styled } from '@mui/material/styles';
 import dateFormat from 'dateformat';
 import { NavLink } from 'react-router-dom';
 import FavoriteIcon from '@mui/icons-material/Favorite';
-import { ReviewResponseType } from '../../../../types/ReviewResponseType';
-import noImage from '../../../../common/png/logo.png';
-import { useAppSelector } from '../../../../hooks/useRedux';
-import { selectorUserId } from '../../../../store/selectors/userSelector';
-import RatingReview from '../../../../common/components/RatingReview/RatingReview';
-import Like from '../../../../common/components/Like/Like';
+import { ReviewResponseType } from '../../../types/ReviewResponseType';
+import noImage from '../../png/logo.png';
+import { useAppSelector } from '../../../hooks/useRedux';
+import { selectorUserId } from '../../../store/selectors/userSelector';
+import RatingReview from '../RatingReview/RatingReview';
+import Like from '../Like/Like';
 
 const StyledCard = styled(Card)({
     transition: 'all 0.2s ease-in-out',
