@@ -93,6 +93,12 @@
         "file size": "The file size should not exceed 2MB",
         "only image": "Only image files are allowed"
       },
+      "result": {
+        "on request": "According to your request:",
+        "found": "found:",
+        "return": "Go back to the main page",
+        "no found": "No reviews found for your query"
+      },
       "footer": {
         "copyright": "Dmitry Nazaruk © 2023"
       }
@@ -190,6 +196,12 @@
         "drag and drop": "Перетащите фото сюда или нажмите, чтобы выбрать",
         "file size": "Размер файла не должен превышать 2 МБ",
         "only image": "Разрешены только файлы изображений"
+      },
+      "result": {
+        "on request": " По вашему запросу:",
+        "found": "найдено:",
+        "return": "Вернуться на главную страницу",
+        "no found": "Не было найдено обзоров  по вашему запросу"
       },
       "footer": {
         "copyright": "Дмитрий Назарук © 2023"
