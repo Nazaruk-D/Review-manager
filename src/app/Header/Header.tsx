@@ -25,7 +25,7 @@ const Header = () => {
                 <Toolbar disableGutters sx={{ display: 'flex', justifyContent: 'space-between', height: '80px' }}>
                     <Box sx={{ display: 'flex', alignItems: 'center' }}>
                         <Logo />
-                        <SearchReview search={onSearchQuery} />
+                        <SearchReview searchReview={onSearchQuery} />
                     </Box>
                     <Box sx={{ display: 'flex' }}>
                         <ThemeSwitcher />

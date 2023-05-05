@@ -43,10 +43,10 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 }));
 
 type SearchReviewPropsType = {
-    search: (value: string) => void;
+    searchReview: (value: string) => void;
 };
 
-const SearchReview: FC<SearchReviewPropsType> = ({ search }) => {
+const SearchReview: FC<SearchReviewPropsType> = ({ searchReview }) => {
     const [value, setValue] = useState('');
 
     const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
@@ -55,7 +55,7 @@ const SearchReview: FC<SearchReviewPropsType> = ({ search }) => {
 
     const onKeyDownHandler = (event: React.KeyboardEvent<HTMLTextAreaElement>) => {
         if (event.key === 'Enter' && value) {
-            search(value);
+            searchReview(value);
             setValue('');
         }
     };
