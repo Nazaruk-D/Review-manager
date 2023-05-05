@@ -5,5 +5,3 @@ export const selectorRole = (state: AppRootStateType) => state.user.role;
 
 export const selectorUserData = (state: AppRootStateType) => state.user.user;
 export const selectorUserId = (state: AppRootStateType) => state.user.user?.id;
-export const selectorUserName = (state: AppRootStateType) => state.user.user?.user_name;
-export const selectorUserImage = (state: AppRootStateType) => state.user.user?.main_photo;

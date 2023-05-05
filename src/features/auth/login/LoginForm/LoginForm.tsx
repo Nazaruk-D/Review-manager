@@ -12,7 +12,7 @@ import { useAppDispatch } from '../../../../hooks/useRedux';
 import { supabase } from '../../../../utils/supabase';
 import { getUserData } from '../../../../utils/getUserData';
 import { setAppErrorAC } from '../../../../store/slices/appSlice';
-import { authValidation } from '../../authValidation';
+import { loginValidation } from '../loginValidation';
 
 const LoginForm = () => {
     const navigate = useNavigate();
@@ -26,7 +26,7 @@ const LoginForm = () => {
             email: '',
             password: '',
         },
-        validate: (values) => authValidation(values, tValidation),
+        validate: (values) => loginValidation(values, tValidation),
         onSubmit: async (values) => {
             try {
                 setInProgress(true);

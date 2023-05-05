@@ -7,15 +7,20 @@ import { sortReviewsSelector } from '../../../store/selectors/sortSelector';
 import { ReviewFilterType } from '../../../types/ReviewFilterType';
 import { Sort } from '../../../enums/sort';
 import { setReviewFilter } from '../../../store/slices/sortSlice';
+import { selectorRole, selectorUserId } from '../../../store/selectors/userSelector';
+import { Role } from '../../../enums/role';
 
 const ReviewTable = () => {
     const dispatch = useAppDispatch();
     const sortReviews = useAppSelector(sortReviewsSelector);
+    const userID = useAppSelector(selectorUserId);
+    const isAdmin = useAppSelector(selectorRole);
     const { t } = useTranslation('translation', { keyPrefix: 'profile' });
 
     const onChangeFilter = (value: ReviewFilterType) => {
         dispatch(setReviewFilter(value));
     };
+
     return (
         <TableContainer component={Paper} sx={{ mb: 3 }}>
             <Table>
@@ -39,7 +44,9 @@ const ReviewTable = () => {
                         <TableCell onClick={() => onChangeFilter(Sort.Likes)} sx={{ cursor: 'pointer' }}>
                             {t('like')}
                         </TableCell>
-                        <TableCell>{t('settings')}</TableCell>
+                        {sortReviews && (userID === sortReviews[0].author_id || isAdmin === Role.Admin) && (
+                            <TableCell>{t('settings')}</TableCell>
+                        )}
                     </TableRow>
                 </TableHead>
                 <TableBody>

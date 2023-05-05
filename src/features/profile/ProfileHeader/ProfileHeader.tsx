@@ -23,8 +23,7 @@ const ProfileHeader: FC<ProfileHeaderPropsType> = ({ userProfileData }) => {
         <Grid container spacing={2} className={s.headerContainer}>
             <Avatar user={userProfileData} />
             <ProfileInfo t={t} user={userProfileData} />
-            {userID === userProfileData.id && <EditProfile t={t} />}
-            {isAdmin === Role.Admin && <EditProfile t={t} />}
+            {(userID === userProfileData.id || isAdmin === Role.Admin) && <EditProfile t={t} />}
         </Grid>
     );
 };

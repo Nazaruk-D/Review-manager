@@ -1,9 +1,9 @@
 import { FormikValues } from 'formik';
 import { TFunction } from 'i18next';
-import { RegisterErrorType } from '../../types/FormikErrorTypes';
+import { AuthErrorType } from '../../../types/FormikErrorTypes';
 
-export const authValidation = (values: FormikValues, t: TFunction) => {
-    const errors: RegisterErrorType = {};
+export const registerValidation = (values: FormikValues, t: TFunction) => {
+    const errors: AuthErrorType = {};
     if (!values.user_name) {
         errors.user_name = `${t('name')}`;
     } else if (values.user_name.length < 2) {

@@ -8,7 +8,7 @@ import s from '../../login/LoginForm/LoginForm.module.scss';
 import { supabase } from '../../../../utils/supabase';
 import { useAppDispatch } from '../../../../hooks/useRedux';
 import { setAppErrorAC } from '../../../../store/slices/appSlice';
-import { authValidation } from '../../authValidation';
+import { registerValidation } from '../registerValidation';
 
 const RegistrationForm = () => {
     const dispatch = useAppDispatch();
@@ -24,7 +24,7 @@ const RegistrationForm = () => {
             password: '',
             confirmPassword: '',
         },
-        validate: (values) => authValidation(values, tValidation),
+        validate: (values) => registerValidation(values, tValidation),
         onSubmit: async (values) => {
             try {
                 setInProgress(true);
