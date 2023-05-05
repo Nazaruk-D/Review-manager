@@ -64,7 +64,16 @@
         "created by": "Created by",
         "on": "on"
       },
-      "validator": {
+      "validation": {
+        "name": "Name is required",
+        "name more": "Name must be min 2 characters long",
+        "name max": "Name must not be more than 30 characters",
+        "email": "Email is required",
+        "email invalid": "Invalid email address",
+        "password": "Password is required",
+        "password more": "Must be 6 characters or more",
+        "password max": "Password must not be more than 30 characters",
+        "not match": "Passwords do not match",
         "review title": "Review title is required",
         "title": "Title is required",
         "category": "Category is required",
@@ -168,7 +177,16 @@
         "created by": "Автор",
         "on": ""
       },
-      "validator": {
+      "validation": {
+        "name": "Имя обязательно",
+        "name min": "Имя должно быть больше 2 символов",
+        "name max": "Имя не должно превышать 30 символов",
+        "email": "Email обязателен",
+        "email invalid": "Неверно указан email",
+        "password": "Пароль обязателен",
+        "password min": "Пароль должен содержать более 6 символов",
+        "password max": "Пароль не должен превышать 30 символов",
+        "not match": "Пароли не совпадают",
         "review title": "Укажите название обзора",
         "title": "Укажите название",
         "category": "Укажите категорию",

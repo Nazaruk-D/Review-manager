@@ -8,37 +8,25 @@ import { useTranslation } from 'react-i18next';
 import DiscordIcon from '../../../../common/svg/discord.svg';
 import s from './LoginForm.module.scss';
 import { Path } from '../../../../enums/path';
-import { LoginErrorType } from '../../../../types/FormikErrorTypes';
 import { useAppDispatch } from '../../../../hooks/useRedux';
 import { supabase } from '../../../../utils/supabase';
 import { getUserData } from '../../../../utils/getUserData';
 import { setAppErrorAC } from '../../../../store/slices/appSlice';
+import { authValidation } from '../../authValidation';
 
 const LoginForm = () => {
     const navigate = useNavigate();
     const dispatch = useAppDispatch();
     const [inProgress, setInProgress] = useState(false);
     const { t } = useTranslation('translation', { keyPrefix: 'auth' });
+    const { t: tValidation } = useTranslation('translation', { keyPrefix: 'validation' });
 
     const formik = useFormik({
         initialValues: {
             email: '',
             password: '',
         },
-        validate: (values) => {
-            const errors: LoginErrorType = {};
-            if (!values.email) {
-                errors.email = 'Email required';
-            } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
-                errors.email = 'Invalid email address';
-            }
-            if (!values.password) {
-                errors.password = 'Password required';
-            } else if (values.password.length < 3) {
-                errors.password = 'Password must be min 3 characters long.';
-            }
-            return errors;
-        },
+        validate: (values) => authValidation(values, tValidation),
         onSubmit: async (values) => {
             try {
                 setInProgress(true);

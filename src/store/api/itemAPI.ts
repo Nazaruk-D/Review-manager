@@ -2,13 +2,12 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/dist/query/react';
 import { PathAPI } from '../../enums/pathAPI';
 import { ResponseType } from '../../types/ResponseType';
 import { CommentType } from '../../types/CommentType';
-import { CreateCommentType } from '../../types/CreateCommentType';
 import { ReviewResponseType } from '../../types/ReviewResponseType';
 
 export const itemAPI = createApi({
     reducerPath: 'item',
     baseQuery: fetchBaseQuery({
-        baseUrl: 'http://localhost:7542/',
+        baseUrl: process.env.REACT_APP_REMOTE_BASE_URL,
         credentials: 'include',
     }),
     endpoints: (builder) => ({
@@ -28,6 +27,5 @@ export const {
     useGetCommentsQuery,
     useLazyGetCommentsQuery,
     useGetTagsQuery,
-    useLazyGetSearchResultQuery,
     useGetSearchResultQuery,
 } = itemAPI;

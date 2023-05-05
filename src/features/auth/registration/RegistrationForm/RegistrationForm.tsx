@@ -5,16 +5,17 @@ import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import { Path } from '../../../../enums/path';
 import s from '../../login/LoginForm/LoginForm.module.scss';
-import { RegisterErrorType } from '../../../../types/FormikErrorTypes';
 import { supabase } from '../../../../utils/supabase';
 import { useAppDispatch } from '../../../../hooks/useRedux';
 import { setAppErrorAC } from '../../../../store/slices/appSlice';
+import { authValidation } from '../../authValidation';
 
 const RegistrationForm = () => {
     const dispatch = useAppDispatch();
     const navigate = useNavigate();
     const [inProgress, setInProgress] = useState(false);
     const { t } = useTranslation('translation', { keyPrefix: 'auth' });
+    const { t: tValidation } = useTranslation('translation', { keyPrefix: 'validation' });
 
     const formik = useFormik({
         initialValues: {
@@ -23,35 +24,7 @@ const RegistrationForm = () => {
             password: '',
             confirmPassword: '',
         },
-        validate: (values) => {
-            const errors: RegisterErrorType = {};
-            if (!values.user_name) {
-                errors.user_name = 'Name is required';
-            } else if (values.user_name.length < 3) {
-                errors.user_name = 'Name must be min 3 characters long.';
-            }
-
-            if (!values.email) {
-                errors.email = 'Email is required';
-            } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
-                errors.email = 'Invalid email address';
-            }
-
-            if (!values.password) {
-                errors.password = 'Password is required';
-            } else if (values.password.length < 6) {
-                errors.password = 'Must be 6 characters or more';
-            }
-
-            if (!values.confirmPassword) {
-                errors.confirmPassword = 'Password is required';
-            } else if (values.confirmPassword.length < 6) {
-                errors.confirmPassword = 'Must be 6 characters or more';
-            } else if (values.password !== values.confirmPassword) {
-                errors.confirmPassword = 'Passwords do not match';
-            }
-            return errors;
-        },
+        validate: (values) => authValidation(values, tValidation),
         onSubmit: async (values) => {
             try {
                 setInProgress(true);

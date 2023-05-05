@@ -1,20 +1,6 @@
 import React, { FC, useEffect, useState } from 'react';
 import { useFormik } from 'formik';
-import {
-    Autocomplete,
-    Box,
-    Button,
-    CircularProgress,
-    Container,
-    FormControl,
-    FormControlLabel,
-    FormLabel,
-    Grid,
-    Radio,
-    RadioGroup,
-    TextField,
-    Typography,
-} from '@mui/material';
+import { Autocomplete, Box, Button, CircularProgress, Container, Grid, TextField, Typography } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import { ReviewType } from '../../../types/ReviewType';
@@ -43,7 +29,7 @@ export const ReviewForm: FC<ReviewFromPropsType> = ({ initial, url, image, profi
     const navigate = useNavigate();
     const [uploadImage, setUploadImage] = useState<File | null>(null);
     const { t } = useTranslation('translation', { keyPrefix: 'review editor' });
-    const { t: tValidate } = useTranslation('translation', { keyPrefix: 'validator' });
+    const { t: tValidate } = useTranslation('translation', { keyPrefix: 'validation' });
     const user = useAppSelector(selectorUserData);
     const tags = useAppSelector(selectorTags);
     const themeColor = useAppSelector(selectorThemeApp);
