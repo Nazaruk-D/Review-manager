@@ -11,6 +11,7 @@ import AdminPage from '../features/admin/AdminPage';
 import EditReview from '../features/review/EditReview/EditReview';
 import CreateReview from '../features/review/CreateReview/CreateReview';
 import ResultPage from '../features/result/ResultPage';
+import Page404 from '../common/components/Page404/Page404';
 
 const routes = createRoutesFromElements(
     <Route path={Path.Root} element={<Root />}>
@@ -23,6 +24,7 @@ const routes = createRoutesFromElements(
         <Route path={Path.AdminPage} element={<AdminPage />} />
         <Route path={Path.CreateReview} element={<CreateReview />} />
         <Route path={Path.UpdateReview} element={<EditReview />} />
+        <Route path="*" element={<Page404 />} />,
     </Route>,
 );
 
