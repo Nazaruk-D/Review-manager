@@ -29,6 +29,12 @@ const ReviewHeader: FC<ReviewHeaderPropsType> = ({ review }) => {
         navigate(`/update-review/${review.id}`);
     };
 
+    const onClickHandler = (event: React.MouseEvent<HTMLElement>) => {
+        event.preventDefault();
+        event.stopPropagation();
+        navigate(`/profile/${review.author_id}`);
+    };
+
     return (
         <Grid container spacing={2}>
             <Grid item xs={12} md={4}>
@@ -68,7 +74,22 @@ const ReviewHeader: FC<ReviewHeaderPropsType> = ({ review }) => {
                     {tr("author's assessment")}: {review.assessment}
                 </Typography>
                 <Typography variant="subtitle2" color="textSecondary" gutterBottom>
-                    {tr('created by')} {review.author_name} {tr('on')} {dateFormat(review.created_at, 'mm/dd/yyyy')}
+                    {tr('created by')}{' '}
+                    <Typography
+                        variant="subtitle2"
+                        component="span"
+                        color="text.secondary"
+                        onClick={onClickHandler}
+                        sx={{
+                            '&:hover': {
+                                cursor: 'pointer',
+                                color: 'rgba(255, 99, 71,1)',
+                            },
+                        }}
+                    >
+                        {review.author_name}
+                    </Typography>{' '}
+                    {tr('on')} {dateFormat(review.created_at, 'mm/dd/yyyy')}
                 </Typography>
                 <RatingReview review={review} />
             </Grid>

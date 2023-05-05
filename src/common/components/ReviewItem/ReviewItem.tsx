@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next';
 import { Box, Card, CardContent, CardMedia, Grid, Typography } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import dateFormat from 'dateformat';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import { ReviewResponseType } from '../../../types/ReviewResponseType';
 import noImage from '../../png/logo.png';
@@ -38,7 +38,15 @@ type ReviewItemPropsType = {
 
 const ReviewItem: FC<ReviewItemPropsType> = ({ flexDirection, contentWidth, mediaWidth, review }) => {
     const userId = useAppSelector(selectorUserId);
+    const navigate = useNavigate();
     const { t } = useTranslation('translation', { keyPrefix: 'poster' });
+
+    const onClickHandler = (event: React.MouseEvent<HTMLElement>) => {
+        event.preventDefault();
+        event.stopPropagation();
+        navigate(`profile/${review.author_id}`);
+    };
+
     return (
         <Grid item xs={12} md={4} sx={{ mb: 2 }}>
             <NavLink to={`/review/${review.id}`} style={{ textDecoration: 'none' }}>
@@ -74,7 +82,19 @@ const ReviewItem: FC<ReviewItemPropsType> = ({ flexDirection, contentWidth, medi
                                 <Typography variant="caption" color="text.secondary">
                                     {t('reviewed')}{' '}
                                     <Typography variant="subtitle2" component="span" color="text.secondary">
-                                        {review.author_name}
+                                        <Typography
+                                            variant="subtitle2"
+                                            component="span"
+                                            color="text.secondary"
+                                            onClick={onClickHandler}
+                                            sx={{
+                                                '&:hover': {
+                                                    color: 'rgba(255, 99, 71,1)',
+                                                },
+                                            }}
+                                        >
+                                            {review.author_name}
+                                        </Typography>
                                         <FavoriteIcon sx={{ fontSize: '10px', ml: 0.5, mr: 0.2 }} />
                                         {review.authorLikes}
                                     </Typography>
