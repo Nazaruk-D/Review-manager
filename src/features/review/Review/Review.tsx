@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import { Container } from '@mui/material';
+import { Button, Container } from '@mui/material';
 import io, { Socket } from 'socket.io-client';
+import JsPDF from 'jspdf';
+import html2canvas from 'html2canvas';
 import { DefaultEventsMap } from 'socket.io/dist/typed-events';
 import { useTranslation } from 'react-i18next';
 import { useParams } from 'react-router-dom';
@@ -30,6 +32,20 @@ const Review = () => {
         }
     };
 
+    const handleDownloadPDF = () => {
+        const input = document.getElementById('review-pdf');
+        html2canvas(input!).then((canvas) => {
+            const imgData = canvas.toDataURL('image/png');
+            const pdf = new JsPDF({
+                orientation: 'portrait',
+                unit: 'mm',
+                format: [210, 297],
+            });
+            pdf.addImage(imgData, 'PNG', 3, 0, 206, (canvas.height * 206) / canvas.width);
+            pdf.save(`${review?.data.review_title}.pdf`);
+        });
+    };
+
     useEffect(() => {
         if (!ws) {
             const socket = io(remoteWebSocketBaseUrl!);
@@ -57,8 +73,13 @@ const Review = () => {
 
     return (
         <Container sx={{ mt: '2rem' }}>
-            <ReviewHeader review={review!.data} />
-            <ReviewBody review={review!.data} />
+            <div id="review-pdf">
+                <ReviewHeader review={review!.data} />
+                <ReviewBody review={review!.data} />
+            </div>
+            <Button variant="contained" color="primary" onClick={handleDownloadPDF} sx={{ mb: 2 }}>
+                Скачать обзор в PDF
+            </Button>
             {isLogin && <SendCommentForm ws={ws!} sendComment={sendComment} />}
             <CommentsBlock ws={ws!} />
         </Container>

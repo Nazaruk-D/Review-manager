@@ -64,7 +64,7 @@ const AuthButtonsBlock = () => {
                 <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                     <Avatar
                         alt="Remy Sharp"
-                        sx={{ width: '50px', height: '50px', border: '1px solid white' }}
+                        sx={{ width: '50px', height: '50px', border: '2px solid white' }}
                         src={userData.small_photo || avatar}
                     />
                 </IconButton>
