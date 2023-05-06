@@ -1,11 +1,12 @@
 import React, { FC, useEffect, useState } from 'react';
-import { Avatar, Box, Grid, Typography } from '@mui/material';
+import { Avatar, Box, Grid, IconButton, Typography } from '@mui/material';
 import { useParams } from 'react-router-dom';
 import dateFormat from 'dateformat';
+import ClearIcon from '@mui/icons-material/Clear';
 import { Socket } from 'socket.io-client';
 import { DefaultEventsMap } from 'socket.io/dist/typed-events';
 import s from './CommentsBlock.module.scss';
-import { useGetCommentsQuery, useLazyGetCommentsQuery } from '../../../../store/api/itemAPI';
+import { useDeleteCommentMutation, useGetCommentsQuery, useLazyGetCommentsQuery } from '../../../../store/api/itemAPI';
 import { CommentType } from '../../../../types/CommentType';
 
 type CommentsBlockPropsType = {
@@ -17,6 +18,11 @@ const CommentsBlock: FC<CommentsBlockPropsType> = ({ ws }) => {
     const { reviewId = '' } = useParams<string>();
     const { data, error, isLoading } = useGetCommentsQuery({ reviewId });
     const [getComments] = useLazyGetCommentsQuery();
+    const [deleteComment] = useDeleteCommentMutation();
+
+    const onClickHandler = (id: string) => {
+        deleteComment({ id });
+    };
 
     useEffect(() => {
         if (data) {
@@ -36,7 +42,7 @@ const CommentsBlock: FC<CommentsBlockPropsType> = ({ ws }) => {
         <Box className={s.commentContainer}>
             {comments.map((comment: CommentType) => (
                 <Box key={comment.id} className={s.commentBlock}>
-                    <Grid container alignItems="center">
+                    <Grid container alignItems="center" className={s.commentGrid}>
                         <Grid item>
                             <Avatar variant="rounded" alt="small photo" src={comment.users.small_photo} className={s.avatar} />
                         </Grid>
@@ -48,6 +54,9 @@ const CommentsBlock: FC<CommentsBlockPropsType> = ({ ws }) => {
                                 {dateFormat(comment.updated_at, 'mmmm dS, yyyy, h:MM:ss TT')}
                             </Typography>
                             <Typography variant="body1">{comment.body}</Typography>
+                            <IconButton className={s.deleteButton} onClick={() => onClickHandler(comment.id)}>
+                                <ClearIcon fontSize="small" />
+                            </IconButton>
                         </Grid>
                     </Grid>
                 </Box>

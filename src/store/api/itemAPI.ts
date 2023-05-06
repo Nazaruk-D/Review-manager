@@ -3,6 +3,7 @@ import { PathAPI } from '../../enums/pathAPI';
 import { ResponseType } from '../../types/ResponseType';
 import { CommentType } from '../../types/CommentType';
 import { ReviewResponseType } from '../../types/ReviewResponseType';
+import { TagType } from '../../enums/tagType';
 
 export const itemAPI = createApi({
     reducerPath: 'item',
@@ -10,9 +11,11 @@ export const itemAPI = createApi({
         baseUrl: process.env.REACT_APP_REMOTE_BASE_URL,
         credentials: 'include',
     }),
+    tagTypes: [TagType.Comment],
     endpoints: (builder) => ({
         getComments: builder.query<ResponseType<CommentType[]>, { reviewId: string }>({
             query: ({ reviewId }) => `${PathAPI.Comment}/${reviewId}`,
+            providesTags: [TagType.Comment],
         }),
         getTags: builder.query<ResponseType<string[]>, Record<string, never>>({
             query: () => `${PathAPI.Tags}`,
@@ -20,7 +23,20 @@ export const itemAPI = createApi({
         getSearchResult: builder.query<ResponseType<ReviewResponseType[]>, { searchValue: string }>({
             query: ({ searchValue }) => `${PathAPI.Search}/${searchValue}`,
         }),
+        deleteComment: builder.mutation<ResponseType<CommentType[]>, { id: string }>({
+            query: ({ id }) => ({
+                url: `${PathAPI.Comment}/${id}`,
+                method: 'DELETE',
+            }),
+            invalidatesTags: [TagType.Comment],
+        }),
     }),
 });
 
-export const { useGetCommentsQuery, useLazyGetCommentsQuery, useGetTagsQuery, useGetSearchResultQuery } = itemAPI;
+export const {
+    useGetCommentsQuery,
+    useLazyGetCommentsQuery,
+    useGetTagsQuery,
+    useGetSearchResultQuery,
+    useDeleteCommentMutation,
+} = itemAPI;
