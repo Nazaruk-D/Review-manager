@@ -1,11 +1,12 @@
 import React, { FC, useState } from 'react';
-import { FormControlLabel, IconButton, Switch, TableCell, TableRow } from '@mui/material';
+import { FormControlLabel, Switch, TableCell, TableRow } from '@mui/material';
 import dateFormat from 'dateformat';
-import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import { useNavigate } from 'react-router-dom';
 import { UserType } from '../../../../types/UserType';
 import s from './AdminTableRow.module.scss';
 import { Role } from '../../../../enums/role';
+import avatar from '../../../../common/png/avatar.png';
+import DeleteTableCell from '../../../../common/components/DelteTableCell/DeleteTableCell';
 
 type AdminTableRowPropsType = {
     user: UserType;
@@ -13,9 +14,19 @@ type AdminTableRowPropsType = {
     blockUser: (id: string, status: boolean) => void;
     changeAdminStatus: (id: string, status: boolean) => void;
     deleteUser: (id: string) => void;
+    isLoading: boolean;
+    isSuccess: boolean;
 };
 
-const AdminTableRow: FC<AdminTableRowPropsType> = ({ user, index, blockUser, changeAdminStatus, deleteUser }) => {
+const AdminTableRow: FC<AdminTableRowPropsType> = ({
+    user,
+    index,
+    blockUser,
+    changeAdminStatus,
+    deleteUser,
+    isLoading,
+    isSuccess,
+}) => {
     const navigate = useNavigate();
     const [isUser, setIsUser] = useState(user.role === 'user');
     const [isBlocked, setIsBlocked] = useState(user.is_blocked);
@@ -30,8 +41,7 @@ const AdminTableRow: FC<AdminTableRowPropsType> = ({ user, index, blockUser, cha
         blockUser(user.id, !isBlocked);
     };
 
-    const deleteUserHandler = (event: React.MouseEvent<HTMLButtonElement>) => {
-        event.stopPropagation();
+    const deleteUserHandler = () => {
         deleteUser(user.id);
     };
 
@@ -39,7 +49,7 @@ const AdminTableRow: FC<AdminTableRowPropsType> = ({ user, index, blockUser, cha
         <TableRow key={user.id} className={s.row} onClick={() => navigate(`/profile/${user.id}`)}>
             <TableCell>{index + 1}</TableCell>
             <TableCell>
-                <img src={user.small_photo} alt="user" className={s.image} />
+                <img src={user.small_photo || avatar} alt="user" className={s.image} />
             </TableCell>
             <TableCell>{user.user_name}</TableCell>
             <TableCell>{user.email}</TableCell>
@@ -56,11 +66,7 @@ const AdminTableRow: FC<AdminTableRowPropsType> = ({ user, index, blockUser, cha
                 />
             </TableCell>
             <TableCell>{dateFormat(user.created_at, 'mmmm dS, yyyy, h:MM:ss TT')}</TableCell>
-            <TableCell>
-                <IconButton onClick={deleteUserHandler}>
-                    <DeleteForeverIcon color="inherit" />
-                </IconButton>
-            </TableCell>
+            <DeleteTableCell isLoading={isLoading} isSuccess={isSuccess} deleteHandler={deleteUserHandler} />
         </TableRow>
     );
 };

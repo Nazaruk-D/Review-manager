@@ -1,20 +1,15 @@
-import React, { FC, useState } from 'react';
-import { Box, CircularProgress, IconButton, TableCell, TableRow, Typography } from '@mui/material';
+import React, { FC } from 'react';
+import { TableCell, TableRow } from '@mui/material';
 import dateFormat from 'dateformat';
 import { useNavigate } from 'react-router-dom';
-import CheckIcon from '@mui/icons-material/Check';
-import CloseIcon from '@mui/icons-material/Close';
-import { useTranslation } from 'react-i18next';
-import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
-import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined';
 import s from './ReviewRow.module.scss';
 import noImage from '../../../../common/png/logo.png';
 import { ReviewResponseType } from '../../../../types/ReviewResponseType';
 import { useDeleteReviewByIdMutation } from '../../../../store/api/reviewAPISlice';
 import { Role } from '../../../../enums/role';
-import EditProfile from '../../ProfileHeader/EditProfile/EditProfile';
 import { useAppSelector } from '../../../../hooks/useRedux';
 import { selectorRole, selectorUserId } from '../../../../store/selectors/userSelector';
+import DeleteTableCell from '../../../../common/components/DelteTableCell/DeleteTableCell';
 
 type CardsRowPropsType = {
     review: ReviewResponseType;
@@ -25,31 +20,10 @@ const ReviewRow: FC<CardsRowPropsType> = ({ review, index }) => {
     const userID = useAppSelector(selectorUserId);
     const isAdmin = useAppSelector(selectorRole);
     const navigate = useNavigate();
-    const { t } = useTranslation('translation', { keyPrefix: 'action' });
     const [deleteReview, { isLoading, isSuccess }] = useDeleteReviewByIdMutation();
-    const [showDeleteConfirmation, setShowDeleteConfirmation] = useState(false);
 
-    const onEditReviewHandler = (event: React.MouseEvent<HTMLButtonElement>) => {
-        event.stopPropagation();
-        navigate(`/update-review/${review.id}`);
-    };
-
-    const onDeleteReviewHandler = (event: React.MouseEvent<HTMLButtonElement>) => {
-        event.stopPropagation();
+    const onDeleteReviewHandler = () => {
         deleteReview({ reviewId: review.id });
-        if (isSuccess) {
-            setShowDeleteConfirmation(false);
-        }
-    };
-
-    const onCancelDeleteReviewHandler = (event: React.MouseEvent<HTMLButtonElement>) => {
-        event.stopPropagation();
-        setShowDeleteConfirmation(false);
-    };
-
-    const onClickHandler = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
-        event.stopPropagation();
-        setShowDeleteConfirmation(true);
     };
 
     return (
@@ -65,36 +39,7 @@ const ReviewRow: FC<CardsRowPropsType> = ({ review, index }) => {
             <TableCell>{review.avg_rating ? review.avg_rating : '-'}</TableCell>
             <TableCell>{review.likes.length}</TableCell>
             {(userID === review.author_id || isAdmin === Role.Admin) && (
-                <TableCell>
-                    {!showDeleteConfirmation ? (
-                        <Box sx={{ display: 'flex', flexDirection: 'row' }}>
-                            <IconButton onClick={onEditReviewHandler}>
-                                <EditOutlinedIcon />
-                            </IconButton>
-                            <IconButton onClick={onClickHandler} disabled={isLoading}>
-                                <DeleteOutlineOutlinedIcon />
-                            </IconButton>
-                        </Box>
-                    ) : (
-                        <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-                            {isLoading ? (
-                                <CircularProgress size={24} color="inherit" />
-                            ) : (
-                                <>
-                                    <Typography variant="body2">{t('confirm')}</Typography>
-                                    <Box>
-                                        <IconButton onClick={onDeleteReviewHandler} disabled={isLoading}>
-                                            <CheckIcon fontSize="medium" />
-                                        </IconButton>
-                                        <IconButton onClick={onCancelDeleteReviewHandler} disabled={isLoading}>
-                                            <CloseIcon fontSize="medium" />
-                                        </IconButton>
-                                    </Box>
-                                </>
-                            )}
-                        </Box>
-                    )}
-                </TableCell>
+                <DeleteTableCell isLoading={isLoading} isSuccess={isSuccess} deleteHandler={onDeleteReviewHandler} />
             )}
         </TableRow>
     );

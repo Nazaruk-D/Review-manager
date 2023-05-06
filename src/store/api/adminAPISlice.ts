@@ -15,6 +15,7 @@ export const adminAPISlice = createApi({
     endpoints: (builder) => ({
         getUsers: builder.query<ResponseType<UserType[]>, void>({
             query: () => `${PathAPI.GetUsers}`,
+            providesTags: [TagType.User],
         }),
         changeAdminStatus: builder.mutation<ResponseType<UserType>, { userId: string; role: Role.Admin | Role.User }>({
             query: ({ userId, role }) => ({
@@ -30,7 +31,15 @@ export const adminAPISlice = createApi({
                 body: { userId, status },
             }),
         }),
+        deleteUser: builder.mutation<ResponseType<UserType>, { userId: string }>({
+            query: ({ userId }) => ({
+                url: `${PathAPI.DeleteUser}/${userId}`,
+                method: 'DELETE',
+            }),
+            invalidatesTags: [TagType.User],
+        }),
     }),
 });
 
-export const { useGetUsersQuery, useChangeAdminStatusMutation, useChangeIsBlockedStatusMutation } = adminAPISlice;
+export const { useGetUsersQuery, useChangeAdminStatusMutation, useChangeIsBlockedStatusMutation, useDeleteUserMutation } =
+    adminAPISlice;

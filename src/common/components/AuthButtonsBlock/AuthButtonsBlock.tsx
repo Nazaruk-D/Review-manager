@@ -9,6 +9,7 @@ import { useLogoutMutation } from '../../../store/api/authAPI';
 import { setLoggedOut } from '../../../store/slices/userSlice';
 import { supabase } from '../../../utils/supabase';
 import { Role } from '../../../enums/role';
+import avatar from '../../png/avatar.png';
 
 const AuthButtonsBlock = () => {
     const dispatch = useAppDispatch();
@@ -63,11 +64,8 @@ const AuthButtonsBlock = () => {
                 <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                     <Avatar
                         alt="Remy Sharp"
-                        sx={{ width: '50px', height: '50px' }}
-                        src={
-                            userData.small_photo ||
-                            'https://img.freepik.com/premium-vector/male-avatar-icon-unknown-or-anonymous-person-default-avatar-profile-icon-social-media-user-business-man-man-profile-silhouette-isolated-on-white-background-vector-illustration_735449-120.jpg'
-                        }
+                        sx={{ width: '50px', height: '50px', border: '1px solid white' }}
+                        src={userData.small_photo || avatar}
                     />
                 </IconButton>
             </Tooltip>

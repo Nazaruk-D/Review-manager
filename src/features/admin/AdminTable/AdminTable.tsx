@@ -3,7 +3,11 @@ import { Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow
 import { useTranslation } from 'react-i18next';
 import { UserType } from '../../../types/UserType';
 import AdminTableRow from './AdminTableRow/AdminTableRow';
-import { useChangeAdminStatusMutation, useChangeIsBlockedStatusMutation } from '../../../store/api/adminAPISlice';
+import {
+    useChangeAdminStatusMutation,
+    useChangeIsBlockedStatusMutation,
+    useDeleteUserMutation,
+} from '../../../store/api/adminAPISlice';
 import { Role } from '../../../enums/role';
 import { useAppDispatch } from '../../../hooks/useRedux';
 import { setAppErrorAC } from '../../../store/slices/appSlice';
@@ -15,8 +19,9 @@ type AdminTablePropsType = {
 const AdminTable: FC<AdminTablePropsType> = ({ users }) => {
     const dispatch = useAppDispatch();
     const { t } = useTranslation('translation', { keyPrefix: 'profile' });
-    const [changeAdminStatus, { error: RoleErr }] = useChangeAdminStatusMutation();
-    const [changeIsBlockedStatus, { error: statusErr }] = useChangeIsBlockedStatusMutation();
+    const [changeAdminStatus, { error: RoleError }] = useChangeAdminStatusMutation();
+    const [changeIsBlockedStatus, { error: statusError }] = useChangeIsBlockedStatusMutation();
+    const [deleteUser, { error: deleteError, isLoading, isSuccess }] = useDeleteUserMutation();
 
     const changeAdminStatusHandler = (userId: string, status: boolean) => {
         console.log(userId, status);
@@ -31,18 +36,21 @@ const AdminTable: FC<AdminTablePropsType> = ({ users }) => {
         changeIsBlockedStatus({ userId, status });
     };
 
-    const deleteUserHandler = (id: string) => {
-        console.log(id);
+    const deleteUserHandler = (userId: string) => {
+        deleteUser({ userId });
     };
 
     useEffect(() => {
-        if (RoleErr) {
+        if (RoleError) {
             dispatch(setAppErrorAC('Role change error'));
         }
-        if (statusErr) {
+        if (statusError) {
             dispatch(setAppErrorAC('Status change error'));
         }
-    }, [RoleErr, statusErr]);
+        if (deleteError) {
+            dispatch(setAppErrorAC('Delete user error'));
+        }
+    }, [RoleError, statusError, deleteError]);
 
     return (
         <TableContainer component={Paper} sx={{ mt: 3, mb: 3 }}>
@@ -68,6 +76,8 @@ const AdminTable: FC<AdminTablePropsType> = ({ users }) => {
                             blockUser={blockUserHandler}
                             changeAdminStatus={changeAdminStatusHandler}
                             deleteUser={deleteUserHandler}
+                            isLoading={isLoading}
+                            isSuccess={isSuccess}
                         />
                     ))}
                     {users.length === 0 && (

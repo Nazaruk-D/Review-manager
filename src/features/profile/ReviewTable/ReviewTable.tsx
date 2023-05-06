@@ -44,7 +44,7 @@ const ReviewTable = () => {
                         <TableCell onClick={() => onChangeFilter(Sort.Likes)} sx={{ cursor: 'pointer' }}>
                             {t('like')}
                         </TableCell>
-                        {sortReviews && (userID === sortReviews[0].author_id || isAdmin === Role.Admin) && (
+                        {sortReviews && (userID === sortReviews[0]?.author_id || isAdmin === Role.Admin) && (
                             <TableCell>{t('settings')}</TableCell>
                         )}
                     </TableRow>

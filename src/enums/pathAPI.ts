@@ -13,6 +13,7 @@ export enum PathAPI {
     GetUsers = '/admin/get-users',
     ChangeAdminStatus = '/admin/change-role',
     ChangeIsBlockedStatus = '/admin/change-status',
+    DeleteUser = '/admin/delete-user',
     GetUser = '/user/get-user',
     UploadPhoto = '/user/upload-info',
     Comment = '/comment',
