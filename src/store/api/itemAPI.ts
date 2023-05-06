@@ -23,9 +23,4 @@ export const itemAPI = createApi({
     }),
 });
 
-export const {
-    useGetCommentsQuery,
-    useLazyGetCommentsQuery,
-    useGetTagsQuery,
-    useGetSearchResultQuery,
-} = itemAPI;
+export const { useGetCommentsQuery, useLazyGetCommentsQuery, useGetTagsQuery, useGetSearchResultQuery } = itemAPI;

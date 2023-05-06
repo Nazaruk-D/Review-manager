@@ -12,9 +12,6 @@ export const userAPISlice = createApi({
     }),
     tagTypes: [TagType.User],
     endpoints: (builder) => ({
-        getUsers: builder.query<ResponseType<UserType[]>, void>({
-            query: () => `${PathAPI.GetUsers}`,
-        }),
         getUser: builder.query<ResponseType<UserType>, { userId: string }>({
             query: ({ userId }) => `${PathAPI.GetUser}/${userId}`,
             providesTags: [TagType.User],
@@ -49,4 +46,4 @@ export const userAPISlice = createApi({
     }),
 });
 
-export const { useUpdateInfoMutation, useGetUsersQuery, useGetUserQuery } = userAPISlice;
+export const { useUpdateInfoMutation, useGetUserQuery } = userAPISlice;

@@ -8,6 +8,7 @@ import { authAPI } from './api/authAPI';
 import { reviewAPISlice } from './api/reviewAPISlice';
 import { itemAPI } from './api/itemAPI';
 import { userAPISlice } from './api/userAPISlice';
+import { adminAPISlice } from './api/adminAPISlice';
 
 const rootReducer = combineReducers({
     app: appReducer,
@@ -19,6 +20,7 @@ const rootReducer = combineReducers({
     [reviewAPISlice.reducerPath]: reviewAPISlice.reducer,
     [itemAPI.reducerPath]: itemAPI.reducer,
     [userAPISlice.reducerPath]: userAPISlice.reducer,
+    [adminAPISlice.reducerPath]: adminAPISlice.reducer,
 });
 
 export const store = configureStore({
@@ -28,7 +30,8 @@ export const store = configureStore({
             .concat(authAPI.middleware)
             .concat(reviewAPISlice.middleware)
             .concat(itemAPI.middleware)
-            .concat(userAPISlice.middleware),
+            .concat(userAPISlice.middleware)
+            .concat(adminAPISlice.middleware),
 });
 
 export type AppRootStateType = ReturnType<typeof rootReducer>;

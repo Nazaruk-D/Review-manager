@@ -1,4 +1,4 @@
-import React, { Suspense, useEffect, useMemo } from 'react';
+import React, { useEffect, useMemo } from 'react';
 import './App.css';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import { CssBaseline, ThemeProvider } from '@mui/material';
@@ -8,10 +8,9 @@ import Loader from '../common/components/Loader/Loader';
 import { useAppDispatch, useAppSelector } from '../hooks/useRedux';
 import { selectorInitialized } from '../store/selectors/appSelector';
 import { getUserData } from '../utils/getUserData';
-import { useGetLatestReviewsQuery, useGetPopularReviewsQuery, useGetPopularTagsQuery } from '../store/api/reviewAPISlice';
+import { useGetLatestReviewsQuery, useGetPopularReviewsQuery } from '../store/api/reviewAPISlice';
 import { ReviewResponseType } from '../types/ReviewResponseType';
 import { setLatestReview, setPopularReview } from '../store/slices/reviewSlice';
-import { selectorUserId } from '../store/selectors/userSelector';
 
 function App() {
     const dispatch = useAppDispatch();

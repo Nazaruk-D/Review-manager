@@ -86,6 +86,7 @@
         "Games": "Games",
         "Food": "Food",
         "Cars": "Cars",
+        "Sport": "Sport",
         "Other": "Other"
       },
       "introduction": {
@@ -199,6 +200,7 @@
         "Games": "Игры",
         "Food": "Еда",
         "Cars": "Автомобили",
+        "Sport": "Спорт",
         "Other": "Другое"
       },
       "introduction": {

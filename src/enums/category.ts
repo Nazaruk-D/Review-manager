@@ -5,6 +5,7 @@ export enum Category {
     Games = 'Games',
     Food = 'Food',
     Cars = 'Cars',
+    Sport = 'Sport',
     Other = 'Other',
     Empty = '',
 }

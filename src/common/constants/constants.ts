@@ -1,1 +1,1 @@
-export const CATEGORIES = ['Movies', 'Books', 'Games', 'Food', 'Cars', 'Other'];
+export const CATEGORIES = ['Movies', 'Books', 'Games', 'Food', 'Cars', 'Sport', 'Other'];

@@ -1,9 +1,8 @@
 import React, { FC, useState } from 'react';
-import { TableCell, TableRow, Switch, FormControlLabel, IconButton } from '@mui/material';
+import { FormControlLabel, IconButton, Switch, TableCell, TableRow } from '@mui/material';
 import dateFormat from 'dateformat';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import { useNavigate } from 'react-router-dom';
-import { useAppDispatch } from '../../../../hooks/useRedux';
 import { UserType } from '../../../../types/UserType';
 import s from './AdminTableRow.module.scss';
 import { Role } from '../../../../enums/role';
@@ -11,27 +10,29 @@ import { Role } from '../../../../enums/role';
 type AdminTableRowPropsType = {
     user: UserType;
     index: number;
+    blockUser: (id: string, status: boolean) => void;
+    changeAdminStatus: (id: string, status: boolean) => void;
+    deleteUser: (id: string) => void;
 };
 
-const AdminTableRow: FC<AdminTableRowPropsType> = ({ user, index }) => {
+const AdminTableRow: FC<AdminTableRowPropsType> = ({ user, index, blockUser, changeAdminStatus, deleteUser }) => {
     const navigate = useNavigate();
-    const dispatch = useAppDispatch();
     const [isUser, setIsUser] = useState(user.role === 'user');
     const [isBlocked, setIsBlocked] = useState(user.is_blocked);
 
-    const handleUserRoleChange = () => {
+    const changeAdminStatusHandler = () => {
         setIsUser(!isUser);
-        console.log('ROLE CHANGES');
+        changeAdminStatus(user.id, isUser);
     };
 
-    const handleIsBlockedChange = () => {
+    const blockUserHandler = () => {
         setIsBlocked(!isBlocked);
-        console.log('ISBLOCKED CHANGES');
+        blockUser(user.id, !isBlocked);
     };
 
-    const handleDeleteButtonClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+    const deleteUserHandler = (event: React.MouseEvent<HTMLButtonElement>) => {
         event.stopPropagation();
-        console.log('DELETE');
+        deleteUser(user.id);
     };
 
     return (
@@ -44,19 +45,19 @@ const AdminTableRow: FC<AdminTableRowPropsType> = ({ user, index }) => {
             <TableCell>{user.email}</TableCell>
             <TableCell onClick={(e) => e.stopPropagation()}>
                 <FormControlLabel
-                    control={<Switch checked={isUser} onChange={handleUserRoleChange} />}
+                    control={<Switch checked={!isUser} onChange={changeAdminStatusHandler} />}
                     label={isUser ? Role.User : Role.Admin}
                 />
             </TableCell>
             <TableCell onClick={(e) => e.stopPropagation()}>
                 <FormControlLabel
-                    control={<Switch checked={isBlocked} onChange={handleIsBlockedChange} />}
+                    control={<Switch checked={isBlocked} onChange={blockUserHandler} />}
                     label={isBlocked ? 'blocked' : 'active'}
                 />
             </TableCell>
             <TableCell>{dateFormat(user.created_at, 'mmmm dS, yyyy, h:MM:ss TT')}</TableCell>
             <TableCell>
-                <IconButton onClick={handleDeleteButtonClick}>
+                <IconButton onClick={deleteUserHandler}>
                     <DeleteForeverIcon color="inherit" />
                 </IconButton>
             </TableCell>

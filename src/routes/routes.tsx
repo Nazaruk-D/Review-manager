@@ -12,6 +12,7 @@ import EditReview from '../features/review/EditReview/EditReview';
 import CreateReview from '../features/review/CreateReview/CreateReview';
 import ResultPage from '../features/result/ResultPage';
 import Page404 from '../common/components/Page404/Page404';
+import BlockedPage from '../common/components/BlockedPage/BlockedPage';
 
 const routes = createRoutesFromElements(
     <Route path={Path.Root} element={<Root />}>

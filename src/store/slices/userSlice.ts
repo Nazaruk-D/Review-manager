@@ -24,6 +24,7 @@ const userSlice = createSlice({
         setUser(state, { payload }: PayloadAction<UserType | null>) {
             state.user = payload;
             state.role = payload!.role;
+            state.isBlocked = payload!.is_blocked;
         },
         uploadUserData(state, { payload }: PayloadAction<{ newName: string; newPhoto?: string }>) {
             state.user!.user_name = payload.newName;
@@ -39,6 +40,7 @@ const userSlice = createSlice({
             state.user = null;
             state.role = Role.User;
             state.isLoggedIn = false;
+            state.isBlocked = false;
         },
         deletePhoto(state) {
             state.user!.main_photo = '';
