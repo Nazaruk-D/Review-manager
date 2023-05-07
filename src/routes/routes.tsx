@@ -12,7 +12,7 @@ import EditReview from '../features/review/EditReview/EditReview';
 import CreateReview from '../features/review/CreateReview/CreateReview';
 import ResultPage from '../features/result/ResultPage';
 import Page404 from '../common/components/Page404/Page404';
-import BlockedPage from '../common/components/BlockedPage/BlockedPage';
+import PrivacyPolicy from '../common/components/PrivacyPolicy/PrivacyPolicy';
 
 const routes = createRoutesFromElements(
     <Route path={Path.Root} element={<Root />}>
@@ -25,6 +25,7 @@ const routes = createRoutesFromElements(
         <Route path={Path.AdminPage} element={<AdminPage />} />
         <Route path={Path.CreateReview} element={<CreateReview />} />
         <Route path={Path.UpdateReview} element={<EditReview />} />
+        <Route path={Path.PrivacyPolicy} element={<PrivacyPolicy />} />
         <Route path="*" element={<Page404 />} />,
     </Route>,
 );

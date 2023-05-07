@@ -9,4 +9,5 @@ export enum Path {
     BlockedPage = '/blocked',
     CreateReview = '/create-review/:userId',
     UpdateReview = '/update-review/:reviewId',
+    PrivacyPolicy = '/privacy-policy',
 }
