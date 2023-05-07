@@ -14,7 +14,7 @@ import { useGetReviewByIdQuery } from '../../../store/api/reviewAPISlice';
 import { setAppErrorAC } from '../../../store/slices/appSlice';
 import { useAppDispatch, useAppSelector } from '../../../hooks/useRedux';
 import { selectorIsLogin, selectorUserId } from '../../../store/selectors/userSelector';
-import CardItem from '../../../common/components/ReviewItem/Card/CardItem';
+import CardItem from '../../../common/components/ReviewItem/CardItem/CardItem';
 
 const Review = () => {
     const dispatch = useAppDispatch();

@@ -1,17 +1,9 @@
 import React, { FC } from 'react';
-import { useTranslation } from 'react-i18next';
-import { Box, Card, CardContent, CardMedia, Grid, Typography } from '@mui/material';
+import { Card, Grid } from '@mui/material';
 import { styled } from '@mui/material/styles';
-import dateFormat from 'dateformat';
-import { NavLink, useNavigate } from 'react-router-dom';
-import FavoriteIcon from '@mui/icons-material/Favorite';
+import { NavLink } from 'react-router-dom';
 import { ReviewResponseType } from '../../../types/ReviewResponseType';
-import noImage from '../../png/logo.png';
-import { useAppSelector } from '../../../hooks/useRedux';
-import { selectorUserId } from '../../../store/selectors/userSelector';
-import RatingReview from '../RatingReview/RatingReview';
-import Like from '../Like/Like';
-import CardItem from './Card/CardItem';
+import CardItem from './CardItem/CardItem';
 
 const StyledCard = styled(Card)({
     transition: 'all 0.2s ease-in-out',
