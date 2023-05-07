@@ -61,7 +61,9 @@ export const reviewAPISlice = createApi({
                     });
                 }
                 if (uploadImage) {
-                    formData.append('reviewImage', uploadImage);
+                    uploadImage.forEach((file) => {
+                        formData.append('reviewImage', file);
+                    });
                 }
                 const fetchConfig: RequestInit = {
                     method: 'POST',

@@ -4,14 +4,17 @@ import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import CheckIcon from '@mui/icons-material/Check';
 import CloseIcon from '@mui/icons-material/Close';
 import { useTranslation } from 'react-i18next';
+import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
 
 type DeleteTableCellPropsType = {
     deleteHandler: () => void;
+    editHandler: () => void;
     isSuccess: boolean;
     isLoading: boolean;
+    editIcon: boolean;
 };
 
-const DeleteTableCell: FC<DeleteTableCellPropsType> = ({ isSuccess, isLoading, deleteHandler }) => {
+const DeleteTableCell: FC<DeleteTableCellPropsType> = ({ isSuccess, isLoading, deleteHandler, editHandler, editIcon }) => {
     const [showDeleteConfirmation, setShowDeleteConfirmation] = useState(false);
     const { t } = useTranslation('translation', { keyPrefix: 'action' });
 
@@ -28,6 +31,11 @@ const DeleteTableCell: FC<DeleteTableCellPropsType> = ({ isSuccess, isLoading, d
         }
     };
 
+    const onEditReviewHandler = (event: React.MouseEvent<HTMLButtonElement>) => {
+        event.stopPropagation();
+        editHandler();
+    };
+
     const onCancelDeleteReviewHandler = (event: React.MouseEvent<HTMLButtonElement>) => {
         event.stopPropagation();
         setShowDeleteConfirmation(false);
@@ -35,9 +43,16 @@ const DeleteTableCell: FC<DeleteTableCellPropsType> = ({ isSuccess, isLoading, d
     return (
         <TableCell sx={{ width: '120px' }}>
             {!showDeleteConfirmation ? (
-                <IconButton onClick={onClickHandler}>
-                    <DeleteForeverIcon color="inherit" />
-                </IconButton>
+                <>
+                    {editIcon && (
+                        <IconButton onClick={onEditReviewHandler}>
+                            <EditOutlinedIcon />
+                        </IconButton>
+                    )}
+                    <IconButton onClick={onClickHandler}>
+                        <DeleteForeverIcon color="inherit" />
+                    </IconButton>
+                </>
             ) : (
                 <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
                     {isLoading ? (

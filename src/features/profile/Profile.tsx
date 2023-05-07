@@ -55,8 +55,6 @@ const Profile = () => {
         return <Loader />;
     }
 
-    console.log('USERDATA: ', user.data);
-
     return (
         <Container sx={{ mt: '2rem' }}>
             <ProfileHeader userProfileData={user.data} />

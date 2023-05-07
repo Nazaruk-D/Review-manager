@@ -20,14 +20,14 @@ import AssessmentControl from '../../../common/components/AssessmentControl/Asse
 type ReviewFromPropsType = {
     initial: ReviewType;
     url: string;
-    image: string;
+    images: string[];
     profileId: string;
     reviewId: string;
 };
 
-export const ReviewForm: FC<ReviewFromPropsType> = ({ initial, url, image, profileId, reviewId }) => {
+export const ReviewForm: FC<ReviewFromPropsType> = ({ initial, url, images, profileId, reviewId }) => {
     const navigate = useNavigate();
-    const [uploadImage, setUploadImage] = useState<File | null>(null);
+    const [uploadImage, setUploadImage] = useState<File[] | null>(null);
     const { t } = useTranslation('translation', { keyPrefix: 'review editor' });
     const { t: tValidate } = useTranslation('translation', { keyPrefix: 'validation' });
     const user = useAppSelector(selectorUserData);
@@ -61,6 +61,8 @@ export const ReviewForm: FC<ReviewFromPropsType> = ({ initial, url, image, profi
             navigate(`/profile/${profileId}`);
         }
     }, [isSuccess, navigate]);
+
+    console.log('uploadImage: ', uploadImage);
 
     return (
         <Container maxWidth="md" sx={{ mt: 3 }}>
@@ -128,7 +130,7 @@ export const ReviewForm: FC<ReviewFromPropsType> = ({ initial, url, image, profi
                             />
                         </Grid>
                         <Grid item xs={12}>
-                            <UploadImage image={uploadImage} setImage={setUploadImage} dbImage={image} />
+                            <UploadImage images={uploadImage} setImages={setUploadImage} dbImages={images} multiple />
                         </Grid>
                     </Grid>
                     <Button variant="contained" type="submit" fullWidth sx={style} disabled={isDisable}>

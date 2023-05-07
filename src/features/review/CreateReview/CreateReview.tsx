@@ -14,11 +14,11 @@ const CreateReview = () => {
         assessment: '',
         tags: [],
     };
-    const image = '';
+    const image = [''];
     const url = 'create-review';
     return (
         <Container maxWidth="md" sx={{ mt: 3 }}>
-            <ReviewForm initial={initial} url={url} image={image} profileId={userId} reviewId="" />
+            <ReviewForm initial={initial} url={url} images={image} profileId={userId} reviewId="" />
         </Container>
     );
 };

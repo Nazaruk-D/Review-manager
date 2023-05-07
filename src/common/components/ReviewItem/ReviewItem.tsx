@@ -54,7 +54,7 @@ const ReviewItem: FC<ReviewItemPropsType> = ({ flexDirection, contentWidth, medi
                     <Card sx={{ display: 'flex', flexDirection }}>
                         <CardMedia
                             sx={{ height: '220px', width: mediaWidth }}
-                            image={review.image ? review.image : noImage}
+                            image={review.images?.[0] ?? noImage}
                             title="review"
                         />
                         <Box sx={{ height: '220px', width: contentWidth }}>

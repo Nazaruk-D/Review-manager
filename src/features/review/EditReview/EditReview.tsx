@@ -27,14 +27,13 @@ const EditReview = () => {
         assessment: review.assessment,
         tags: [...review.tags],
     };
-    const image = review.image!;
+    const images = review.images!.map((image: string) => image);
     const profileId = review.author_id;
     const url = 'update-review';
-    console.log(image);
 
     return (
         <Container maxWidth="md" sx={{ mt: 3 }}>
-            <ReviewForm initial={initial} url={url} image={image} profileId={profileId} reviewId={reviewId} />
+            <ReviewForm initial={initial} url={url} images={images} profileId={profileId} reviewId={reviewId} />
         </Container>
     );
 };

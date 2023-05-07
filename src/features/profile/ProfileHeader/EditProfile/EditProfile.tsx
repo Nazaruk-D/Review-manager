@@ -19,7 +19,7 @@ const EditProfile: FC<EditProfilePropsType> = ({ t }) => {
     const userName = useAppSelector(userNameSelector);
     const adminPhoto = useAppSelector(userPhotoSelector);
     const [open, setOpen] = useState(false);
-    const [image, setImage] = useState<File | null>(null);
+    const [image, setImage] = useState<File[] | null>(null);
     const [newName, setNewName] = useState<string>('');
     const [profilePhoto, setProfilePhoto] = useState<File | null>(null);
     const [uploadInfo, { error, isLoading }] = useUpdateInfoMutation();
@@ -81,7 +81,7 @@ const EditProfile: FC<EditProfilePropsType> = ({ t }) => {
                             />
                         </Grid>
                         <Grid item xs={12}>
-                            <UploadImage image={image} setImage={setImage} dbImage={adminPhoto || ''} />
+                            <UploadImage images={image} setImages={setImage} dbImages={adminPhoto || ''} multiple={false} />
                         </Grid>
                         <Grid item xs={12}>
                             <Button variant="contained" color="primary" fullWidth onClick={handleSaveChanges}>

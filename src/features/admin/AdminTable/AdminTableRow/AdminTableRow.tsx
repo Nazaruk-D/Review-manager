@@ -45,6 +45,10 @@ const AdminTableRow: FC<AdminTableRowPropsType> = ({
         deleteUser(user.id);
     };
 
+    const onEditProfileHandler = () => {
+        navigate(`/update-review/${user.id}`);
+    };
+
     return (
         <TableRow key={user.id} className={s.row} onClick={() => navigate(`/profile/${user.id}`)}>
             <TableCell>{index + 1}</TableCell>
@@ -66,7 +70,13 @@ const AdminTableRow: FC<AdminTableRowPropsType> = ({
                 />
             </TableCell>
             <TableCell>{dateFormat(user.created_at, 'mmmm dS, yyyy, h:MM:ss TT')}</TableCell>
-            <DeleteTableCell isLoading={isLoading} isSuccess={isSuccess} deleteHandler={deleteUserHandler} />
+            <DeleteTableCell
+                isLoading={isLoading}
+                isSuccess={isSuccess}
+                deleteHandler={deleteUserHandler}
+                editHandler={onEditProfileHandler}
+                editIcon={false}
+            />
         </TableRow>
     );
 };

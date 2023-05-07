@@ -5,5 +5,5 @@ export type SendReviewType = ReviewType & {
     reviewId: string;
     author_name: string;
     url: string;
-    uploadImage?: File | null;
+    uploadImage?: File[] | null;
 };

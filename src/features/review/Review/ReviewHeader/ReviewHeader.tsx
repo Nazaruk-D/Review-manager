@@ -39,8 +39,8 @@ const ReviewHeader: FC<ReviewHeaderPropsType> = ({ review }) => {
         <Grid container spacing={2}>
             <Grid item xs={12} md={4}>
                 <img
-                    src={review.image ? review.image : noImage}
-                    alt="test"
+                    src={review.images?.[0] ?? noImage}
+                    alt={review.title}
                     className={s.image}
                     style={{
                         width: isMobile ? '100%' : '90%',

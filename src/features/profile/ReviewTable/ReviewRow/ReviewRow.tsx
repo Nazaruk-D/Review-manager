@@ -1,7 +1,8 @@
 import React, { FC } from 'react';
-import { TableCell, TableRow } from '@mui/material';
+import { IconButton, TableCell, TableRow } from '@mui/material';
 import dateFormat from 'dateformat';
 import { useNavigate } from 'react-router-dom';
+import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
 import s from './ReviewRow.module.scss';
 import noImage from '../../../../common/png/logo.png';
 import { ReviewResponseType } from '../../../../types/ReviewResponseType';
@@ -26,11 +27,15 @@ const ReviewRow: FC<CardsRowPropsType> = ({ review, index }) => {
         deleteReview({ reviewId: review.id });
     };
 
+    const onEditReviewHandler = () => {
+        navigate(`/update-review/${review.id}`);
+    };
+
     return (
         <TableRow className={s.row} onClick={() => navigate(`/review/${review.id}`)}>
             <TableCell>{index + 1}</TableCell>
             <TableCell>
-                <img src={review.image ? review.image : noImage} alt={review.title} className={s.image} />
+                <img src={review.images?.[0] ?? noImage} alt={review.title} className={s.image} />
             </TableCell>
             <TableCell>
                 {review.review_title.length > 15 ? `${review.review_title.substring(0, 15)}...` : review.review_title}
@@ -41,7 +46,13 @@ const ReviewRow: FC<CardsRowPropsType> = ({ review, index }) => {
             <TableCell>{review.avg_rating ? review.avg_rating : '-'}</TableCell>
             <TableCell>{review.likes.length}</TableCell>
             {(userID === review.author_id || isAdmin === Role.Admin) && (
-                <DeleteTableCell isLoading={isLoading} isSuccess={isSuccess} deleteHandler={onDeleteReviewHandler} />
+                <DeleteTableCell
+                    isLoading={isLoading}
+                    isSuccess={isSuccess}
+                    deleteHandler={onDeleteReviewHandler}
+                    editHandler={onEditReviewHandler}
+                    editIcon
+                />
             )}
         </TableRow>
     );

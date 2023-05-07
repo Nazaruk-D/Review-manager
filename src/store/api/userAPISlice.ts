@@ -18,7 +18,7 @@ export const userAPISlice = createApi({
         }),
         updateInfo: builder.mutation<
             ResponseType<{ newName: string; newPhoto?: string }>,
-            { userId: string; newName?: string; image: File | null }
+            { userId: string; newName?: string; image: File[] | null }
         >({
             query: ({ userId, newName, image }) => {
                 const formData = new FormData();
@@ -27,7 +27,10 @@ export const userAPISlice = createApi({
                     formData.append('newName', newName);
                 }
                 if (image) {
-                    formData.append('profilePhoto', image);
+                    image.forEach((file) => {
+                        const blob = new Blob([file], { type: file.type });
+                        formData.append('profilePhoto', blob);
+                    });
                 }
                 const fetchConfig: RequestInit = {
                     method: 'PUT',
