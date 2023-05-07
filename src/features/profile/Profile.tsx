@@ -4,7 +4,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import ProfileHeader from './ProfileHeader/ProfileHeader';
 import ReviewTable from './ReviewTable/ReviewTable';
 import { useAppDispatch, useAppSelector } from '../../hooks/useRedux';
-import { selectorIsLogin } from '../../store/selectors/userSelector';
+import { selectorIsLogin, selectorRole, selectorUserId } from '../../store/selectors/userSelector';
 import { Path } from '../../enums/path';
 import { useGetTagsQuery } from '../../store/api/itemAPI';
 import { setTags, setUsersReview } from '../../store/slices/reviewSlice';
@@ -15,11 +15,13 @@ import Loader from '../../common/components/Loader/Loader';
 import { useGetUserQuery } from '../../store/api/userAPISlice';
 import { setAppErrorAC } from '../../store/slices/appSlice';
 import { setUserData } from '../../store/slices/adminSlice';
+import { Role } from '../../enums/role';
+import EditProfile from './ProfileHeader/EditProfile/EditProfile';
 
 const Profile = () => {
     const dispatch = useAppDispatch();
-    const isLogin = useAppSelector(selectorIsLogin);
-    const navigate = useNavigate();
+    const userID = useAppSelector(selectorUserId);
+    const isAdmin = useAppSelector(selectorRole);
     const { userId = '' } = useParams<string>();
     const { data: tags, isLoading: tagsLoading, error: tagsError } = useGetTagsQuery({});
     const { data: reviews, isLoading: reviewsLoading, error: reviewsError } = useGetReviewsQuery({ userId });
@@ -54,7 +56,7 @@ const Profile = () => {
     return (
         <Container sx={{ mt: '2rem' }}>
             <ProfileHeader userProfileData={user.data} />
-            <NewReviewButton userId={userId} />
+            {(userID === userId || isAdmin === Role.Admin) && <NewReviewButton userId={userId} />}
             <FilterSortPanel />
             <ReviewTable />
         </Container>
