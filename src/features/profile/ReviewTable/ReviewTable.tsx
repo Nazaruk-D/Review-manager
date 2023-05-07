@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography } from '@mui/material';
+import { Pagination } from '@mui/lab';
 import ReviewRow from './ReviewRow/ReviewRow';
 import { useAppDispatch, useAppSelector } from '../../../hooks/useRedux';
 import { sortReviewsSelector } from '../../../store/selectors/sortSelector';
@@ -16,9 +17,21 @@ const ReviewTable = () => {
     const userID = useAppSelector(selectorUserId);
     const isAdmin = useAppSelector(selectorRole);
     const { t } = useTranslation('translation', { keyPrefix: 'profile' });
+    const [currentPage, setCurrentPage] = useState(1);
+
+    const itemsPerPage = 6;
+    const reviews = sortReviews || [];
+    const indexOfLastItem = currentPage * itemsPerPage;
+    const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+    const currentReviews = reviews.slice(indexOfFirstItem, indexOfLastItem);
+    const startIndex = (currentPage - 1) * itemsPerPage;
 
     const onChangeFilter = (value: ReviewFilterType) => {
         dispatch(setReviewFilter(value));
+    };
+
+    const handleChangePage = (event: React.ChangeEvent<unknown>, value: number) => {
+        setCurrentPage(value);
     };
 
     return (
@@ -44,16 +57,16 @@ const ReviewTable = () => {
                         <TableCell onClick={() => onChangeFilter(Sort.Likes)} sx={{ cursor: 'pointer' }}>
                             {t('like')}
                         </TableCell>
-                        {sortReviews && (userID === sortReviews[0]?.author_id || isAdmin === Role.Admin) && (
+                        {currentReviews && (userID === currentReviews[0]?.author_id || isAdmin === Role.Admin) && (
                             <TableCell>{t('settings')}</TableCell>
                         )}
                     </TableRow>
                 </TableHead>
                 <TableBody>
-                    {sortReviews?.map((row, index) => (
-                        <ReviewRow review={row} index={index} key={row.id} />
+                    {currentReviews?.map((row, index) => (
+                        <ReviewRow review={row} index={startIndex + index} key={row.id} />
                     ))}
-                    {sortReviews?.length === 0 && (
+                    {currentReviews?.length === 0 && (
                         <TableRow>
                             <TableCell style={{ textAlign: 'center', height: '100px' }} colSpan={9}>
                                 <Typography variant="h3"> {t('no reviews found')}</Typography>
@@ -62,6 +75,16 @@ const ReviewTable = () => {
                     )}
                 </TableBody>
             </Table>
+            <Pagination
+                count={Math.ceil(reviews.length / itemsPerPage)}
+                page={currentPage}
+                onChange={handleChangePage}
+                variant="outlined"
+                shape="rounded"
+                color="primary"
+                size="large"
+                sx={{ mt: 1, mb: 1 }}
+            />
         </TableContainer>
     );
 };

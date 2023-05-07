@@ -6,7 +6,8 @@
       },
       "action": {
         "send": "Send",
-        "confirm": "Confirm?"
+        "confirm": "Confirm?",
+        "download": "Download review in PDF"
       },
       "auth": {
         "signIn": "Sign In",
@@ -121,7 +122,8 @@
       },
       "action": {
         "send": "Отправить",
-        "confirm": "Удалить?"
+        "confirm": "Удалить?",
+        "download": "Скачать обзор в PDF"
       },
       "auth": {
         "signIn": "Вход",

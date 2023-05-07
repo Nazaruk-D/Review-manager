@@ -32,7 +32,9 @@ const ReviewRow: FC<CardsRowPropsType> = ({ review, index }) => {
             <TableCell>
                 <img src={review.image ? review.image : noImage} alt={review.title} className={s.image} />
             </TableCell>
-            <TableCell>{review.review_title}</TableCell>
+            <TableCell>
+                {review.review_title.length > 15 ? `${review.review_title.substring(0, 15)}...` : review.review_title}
+            </TableCell>
             <TableCell>{review.category}</TableCell>
             <TableCell>{dateFormat(review.created_at, 'mm/dd/yyyy')}</TableCell>
             <TableCell>{review.assessment}</TableCell>

@@ -19,7 +19,7 @@ import { selectorIsLogin, selectorUserId } from '../../../store/selectors/userSe
 const Review = () => {
     const dispatch = useAppDispatch();
     const isLogin = useAppSelector(selectorIsLogin);
-    const { t } = useTranslation('translation', { keyPrefix: 'profile' });
+    const { t } = useTranslation('translation', { keyPrefix: 'action' });
     const { reviewId = '' } = useParams<string>();
     const [ws, setWs] = useState<Socket<DefaultEventsMap, DefaultEventsMap> | null>(null);
     const { data: review, isLoading, error } = useGetReviewByIdQuery({ reviewId });
@@ -67,7 +67,7 @@ const Review = () => {
     }, [ws, reviewId]);
 
     if (error) {
-        dispatch(setAppErrorAC(t('error get review')));
+        dispatch(setAppErrorAC('error get review'));
     }
     if (isLoading) return <Loader />;
 
@@ -78,7 +78,7 @@ const Review = () => {
                 <ReviewBody review={review!.data} />
             </div>
             <Button variant="contained" color="primary" onClick={handleDownloadPDF} sx={{ mb: 2 }}>
-                Скачать обзор в PDF
+                {t('download')}
             </Button>
             {isLogin && <SendCommentForm ws={ws!} sendComment={sendComment} />}
             <CommentsBlock ws={ws!} />
