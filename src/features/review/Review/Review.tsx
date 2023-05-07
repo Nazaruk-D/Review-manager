@@ -8,13 +8,13 @@ import { useTranslation } from 'react-i18next';
 import { useParams } from 'react-router-dom';
 import CommentsBlock from './CommentsBlock/CommentsBlock';
 import SendCommentForm from './SendCommentForm/SendCommentForm';
-import ReviewHeader from './ReviewHeader/ReviewHeader';
 import ReviewBody from './ReviewBody/ReviewBody';
 import Loader from '../../../common/components/Loader/Loader';
 import { useGetReviewByIdQuery } from '../../../store/api/reviewAPISlice';
 import { setAppErrorAC } from '../../../store/slices/appSlice';
 import { useAppDispatch, useAppSelector } from '../../../hooks/useRedux';
 import { selectorIsLogin, selectorUserId } from '../../../store/selectors/userSelector';
+import CardItem from '../../../common/components/ReviewItem/Card/CardItem';
 
 const Review = () => {
     const dispatch = useAppDispatch();
@@ -74,7 +74,7 @@ const Review = () => {
     return (
         <Container sx={{ mt: '2rem' }}>
             <div id="review-pdf">
-                <ReviewHeader review={review!.data} />
+                <CardItem review={review!.data} flexDirection="row" mediaWidth="30%" contentWidth="70%" paddingLeft={2} />
                 <ReviewBody review={review!.data} />
             </div>
             <Button variant="contained" color="primary" onClick={handleDownloadPDF} sx={{ mb: 2 }}>

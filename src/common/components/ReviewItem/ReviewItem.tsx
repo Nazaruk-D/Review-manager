@@ -11,6 +11,7 @@ import { useAppSelector } from '../../../hooks/useRedux';
 import { selectorUserId } from '../../../store/selectors/userSelector';
 import RatingReview from '../RatingReview/RatingReview';
 import Like from '../Like/Like';
+import CardItem from './Card/CardItem';
 
 const StyledCard = styled(Card)({
     transition: 'all 0.2s ease-in-out',
@@ -34,75 +35,21 @@ type ReviewItemPropsType = {
     flexDirection: 'row' | 'column';
     mediaWidth: string;
     contentWidth: string;
+    paddingLeft: number;
 };
 
-const ReviewItem: FC<ReviewItemPropsType> = ({ flexDirection, contentWidth, mediaWidth, review }) => {
-    const userId = useAppSelector(selectorUserId);
-    const navigate = useNavigate();
-    const { t } = useTranslation('translation', { keyPrefix: 'poster' });
-
-    const onClickHandler = (event: React.MouseEvent<HTMLElement>) => {
-        event.preventDefault();
-        event.stopPropagation();
-        navigate(`profile/${review.author_id}`);
-    };
-
+const ReviewItem: FC<ReviewItemPropsType> = ({ flexDirection, contentWidth, mediaWidth, review, paddingLeft }) => {
     return (
         <Grid item xs={12} md={4} sx={{ mb: 2 }}>
             <NavLink to={`/review/${review.id}`} style={{ textDecoration: 'none' }}>
                 <StyledCard>
-                    <Card sx={{ display: 'flex', flexDirection }}>
-                        <CardMedia
-                            sx={{ height: '220px', width: mediaWidth }}
-                            image={review.images?.[0] ?? noImage}
-                            title="review"
-                        />
-                        <Box sx={{ height: '220px', width: contentWidth }}>
-                            <CardContent>
-                                <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                                    <Typography gutterBottom variant="h2" component="h3" color="text.secondary">
-                                        {review.review_title}
-                                    </Typography>
-                                    <Like userId={userId!} reviewId={review.id} likes={review.likes} />
-                                </Box>
-                                <Typography gutterBottom variant="h3" component="h3" color="text.secondary">
-                                    {review.title}
-                                </Typography>
-                                <Typography variant="body2" color="text.secondary">
-                                    {t('category')}: {review.category}
-                                </Typography>
-                                <Typography variant="body2" color="text.secondary" sx={{ px: 0, py: 1 }}>
-                                    {t('assessment')}: {review.assessment}
-                                </Typography>
-                            </CardContent>
-                            <CardContent sx={{ px: 2, py: 0, display: 'flex' }}>
-                                <RatingReview review={review} />
-                            </CardContent>
-                            <CardContent sx={{ px: 2, py: 0 }}>
-                                <Typography variant="caption" color="text.secondary">
-                                    {t('reviewed')}{' '}
-                                    <Typography variant="subtitle2" component="span" color="text.secondary">
-                                        <Typography
-                                            variant="subtitle2"
-                                            component="span"
-                                            color="text.secondary"
-                                            onClick={onClickHandler}
-                                            sx={{
-                                                '&:hover': {
-                                                    color: 'rgba(255, 99, 71,1)',
-                                                },
-                                            }}
-                                        >
-                                            {review.author_name}
-                                        </Typography>
-                                        <FavoriteIcon sx={{ fontSize: '10px', ml: 0.5, mr: 0.2 }} />
-                                        {review.authorLikes}
-                                    </Typography>
-                                    , {dateFormat(review.created_at, 'mm/dd/yyyy')}
-                                </Typography>
-                            </CardContent>
-                        </Box>
-                    </Card>
+                    <CardItem
+                        review={review}
+                        flexDirection={flexDirection}
+                        contentWidth={contentWidth}
+                        mediaWidth={mediaWidth}
+                        paddingLeft={paddingLeft}
+                    />
                 </StyledCard>
             </NavLink>
         </Grid>

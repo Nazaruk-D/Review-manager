@@ -15,7 +15,14 @@ const BlockReviews: FC<BlockReviewsPropsType> = ({ title, reviews }) => {
                 <Typography variant="h2">{title}</Typography>
             </Grid>
             {reviews?.map((review) => (
-                <ReviewItem key={review.id} review={review} flexDirection="column" contentWidth="100%" mediaWidth="100%" />
+                <ReviewItem
+                    key={review.id}
+                    review={review}
+                    flexDirection="column"
+                    contentWidth="100%"
+                    mediaWidth="100%"
+                    paddingLeft={0}
+                />
             ))}
         </Grid>
     );

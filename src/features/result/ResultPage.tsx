@@ -47,7 +47,14 @@ const ResultPage = () => {
             )}
             {currentReviews &&
                 currentReviews.map((review) => (
-                    <ReviewItem key={review.id} review={review} flexDirection="row" mediaWidth="30%" contentWidth="70%" />
+                    <ReviewItem
+                        key={review.id}
+                        review={review}
+                        flexDirection="row"
+                        mediaWidth="30%"
+                        contentWidth="70%"
+                        paddingLeft={0}
+                    />
                 ))}
             {reviews.length === 0 && (
                 <Box sx={{ height: '100px', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
