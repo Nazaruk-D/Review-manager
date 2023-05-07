@@ -6,16 +6,26 @@ export const validateForm = (values: FormikValues, t: TFunction) => {
     const errors: ReviewErrorType = {};
     if (!values.review_title) {
         errors.review_title = `${t('review title')}`;
+    } else if (values.review_title.length > 40) {
+        errors.review_title = `${t('review title max')}`;
     }
+
     if (!values.title) {
         errors.title = `${t('title')}`;
+    } else if (values.title.length > 40) {
+        errors.title = `${t('title max')}`;
     }
+
     if (!values.category) {
         errors.category = `${t('category')}`;
     }
+
     if (!values.body) {
         errors.body = `${t('body')}`;
+    } else if (values.body.length > 2000) {
+        errors.body = `${t('body max')}`;
     }
+
     if (!errors.review_title && !errors.title && !errors.category && !errors.body && !values.assessment) {
         errors.assessment = `${t('assessment')}`;
     }

@@ -76,9 +76,12 @@
         "password max": "Password must not be more than 30 characters",
         "not match": "Passwords do not match",
         "review title": "Review title is required",
+        "review title max": "Review title must not exceed 40 characters",
         "title": "Title is required",
+        "title max": "Category is required",
         "category": "Category is required",
         "body": "Description text is required",
+        "body max": "Text must not exceed 2000 characters",
         "rating": "Rating is required"
       },
       "category": {
