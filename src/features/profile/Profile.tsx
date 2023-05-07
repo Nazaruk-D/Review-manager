@@ -47,10 +47,6 @@ const Profile = () => {
         }
     }, [dispatch, tags]);
 
-    useEffect(() => {
-        if (!isLogin) navigate(Path.Root);
-    }, [isLogin]);
-
     if (tagsLoading || reviewsLoading || userLoading || !user) {
         return <Loader />;
     }

@@ -27,7 +27,7 @@ const InfoBlock: FC<InfoBlockPropsType> = ({ review, paddingLeft, contentWidth }
     const onClickHandler = (event: React.MouseEvent<HTMLElement>) => {
         event.preventDefault();
         event.stopPropagation();
-        navigate(`profile/${review.author_id}`);
+        navigate(`/profile/${review.author_id}`);
     };
 
     const onEditReviewHandler = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
