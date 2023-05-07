@@ -62,7 +62,7 @@ const UploadImage: FC<UploadImagePropsType> = ({ setImages, images, dbImages, mu
                     {t('drag and drop')}
                 </Typography>
             )}
-            {isImage.length > 0 && isImage?.map((image, index) => <ImagePreview key={index} image={image} />)}
+            {isImage.length > 0 && isImage?.map((image) => <ImagePreview key={image} image={image} />)}
         </Box>
     );
 };
