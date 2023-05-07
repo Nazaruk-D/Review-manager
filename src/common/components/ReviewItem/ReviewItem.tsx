@@ -32,7 +32,7 @@ type ReviewItemPropsType = {
 
 const ReviewItem: FC<ReviewItemPropsType> = ({ flexDirection, contentWidth, mediaWidth, review, paddingLeft }) => {
     return (
-        <Grid item xs={12} md={4} sx={{ mb: 2 }}>
+        <Grid item xs={12} md={6} sx={{ mb: 2 }}>
             <NavLink to={`/review/${review.id}`} style={{ textDecoration: 'none' }}>
                 <StyledCard>
                     <CardItem

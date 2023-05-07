@@ -40,7 +40,7 @@ const InfoBlock: FC<InfoBlockPropsType> = ({ review, paddingLeft, contentWidth }
             <CardContent>
                 <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                     <Box sx={{ display: 'flex' }}>
-                        <Typography variant="h4" gutterBottom sx={{ m: 0, mr: 1 }}>
+                        <Typography variant="h5" component="h5" gutterBottom sx={{ m: 0, mr: 1 }}>
                             {review.review_title}
                         </Typography>
                         {(userId === review.author_id || isAdmin === Role.Admin) && (
