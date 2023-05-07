@@ -1,6 +1,7 @@
-import React, { FC, useEffect } from 'react';
+import React, { FC, useEffect, useState } from 'react';
 import { Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography } from '@mui/material';
 import { useTranslation } from 'react-i18next';
+import { Pagination } from '@mui/lab';
 import { UserType } from '../../../types/UserType';
 import AdminTableRow from './AdminTableRow/AdminTableRow';
 import {
@@ -22,6 +23,13 @@ const AdminTable: FC<AdminTablePropsType> = ({ users }) => {
     const [changeAdminStatus, { error: RoleError }] = useChangeAdminStatusMutation();
     const [changeIsBlockedStatus, { error: statusError }] = useChangeIsBlockedStatusMutation();
     const [deleteUser, { error: deleteError, isLoading, isSuccess }] = useDeleteUserMutation();
+    const [currentPage, setCurrentPage] = useState(1);
+
+    const itemsPerPage = 10;
+    const indexOfLastItem = currentPage * itemsPerPage;
+    const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+    const currentUsers = users.slice(indexOfFirstItem, indexOfLastItem);
+    const startIndex = (currentPage - 1) * itemsPerPage;
 
     const changeAdminStatusHandler = (userId: string, status: boolean) => {
         console.log(userId, status);
@@ -38,6 +46,10 @@ const AdminTable: FC<AdminTablePropsType> = ({ users }) => {
 
     const deleteUserHandler = (userId: string) => {
         deleteUser({ userId });
+    };
+
+    const handleChangePage = (event: React.ChangeEvent<unknown>, value: number) => {
+        setCurrentPage(value);
     };
 
     useEffect(() => {
@@ -68,11 +80,11 @@ const AdminTable: FC<AdminTablePropsType> = ({ users }) => {
                     </TableRow>
                 </TableHead>
                 <TableBody>
-                    {users.map((user, index) => (
+                    {currentUsers.map((user, index) => (
                         <AdminTableRow
                             key={user.id}
                             user={user}
-                            index={index}
+                            index={startIndex + index}
                             blockUser={blockUserHandler}
                             changeAdminStatus={changeAdminStatusHandler}
                             deleteUser={deleteUserHandler}
@@ -89,6 +101,16 @@ const AdminTable: FC<AdminTablePropsType> = ({ users }) => {
                     )}
                 </TableBody>
             </Table>
+            <Pagination
+                count={Math.ceil(users.length / itemsPerPage)}
+                page={currentPage}
+                onChange={handleChangePage}
+                variant="outlined"
+                shape="rounded"
+                color="primary"
+                size="large"
+                sx={{ mt: 1, mb: 1 }}
+            />
         </TableContainer>
     );
 };
