@@ -1,9 +1,13 @@
+@import 'src/styles/sass/variables';
 @import 'src/styles/sass/mixin';
-
 
 .image {
   @include bgSettings(cover, center, no-repeat);
   width: 179px;
   height: 120px;
   object-fit: cover;
+  @media screen and (max-width: $mediaWidth) {
+    width: 125px;
+    height: 75px;
+  }
 }

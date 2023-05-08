@@ -54,8 +54,6 @@ const UploadImage: FC<UploadImagePropsType> = ({ setImages, images, dbImages, mu
 
     const isImage = images ? images.map((image) => URL.createObjectURL(image)) : localDbImage;
 
-    console.log('isImage?.length: ', isImage?.length);
-    console.log('dbImages.length: ', dbImages.length);
     return (
         <Box {...getRootProps()} className={s.profilePhotoContainer}>
             <input {...getInputProps()} className={s.photoBlock} />
