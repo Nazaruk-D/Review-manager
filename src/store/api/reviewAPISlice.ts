@@ -4,6 +4,7 @@ import { ResponseType } from '../../types/ResponseType';
 import { ReviewResponseType } from '../../types/ReviewResponseType';
 import { SendReviewType } from '../../types/SendReviewType';
 import { TagType } from '../../enums/tagType';
+import { TagsCloudType } from '../../types/TagsCloudType';
 
 export const reviewAPISlice = createApi({
     reducerPath: 'reviewAPI',
@@ -29,7 +30,7 @@ export const reviewAPISlice = createApi({
             query: () => `${PathAPI.GetPopularReviews}`,
             providesTags: [TagType.Review],
         }),
-        getPopularTags: builder.query<ResponseType<string[]>, Record<string, never>>({
+        getPopularTags: builder.query<ResponseType<TagsCloudType[]>, Record<string, never>>({
             query: () => `${PathAPI.GetPopularTags}`,
         }),
         sendReview: builder.mutation<ResponseType<ReviewResponseType>, SendReviewType>({

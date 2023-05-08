@@ -23,14 +23,15 @@ const TagCloudBox = () => {
         dispatch(setAppErrorAC('Error getting reviews'));
     }
     const tags = data?.data || [];
+    console.log('tags: ', tags);
     return (
         <Box>
             <Typography variant="h2" style={{ marginBottom: '15px' }}>
                 Popular tags
             </Typography>
             {tags!.map((tag) => (
-                <Box key={tag} className={s.tag} onClick={() => onClickHandler(tag)}>
-                    #{tag}
+                <Box key={tag.name} className={s.tag} onClick={() => onClickHandler(tag.name)}>
+                    #{tag.name}
                 </Box>
             ))}
         </Box>
