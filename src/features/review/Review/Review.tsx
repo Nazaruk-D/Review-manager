@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Button, Container } from '@mui/material';
 import io, { Socket } from 'socket.io-client';
 import JsPDF from 'jspdf';
@@ -33,15 +33,13 @@ const Review = () => {
     };
 
     const handleDownloadPDF = () => {
-        const input = document.getElementById('review-pdf');
-        html2canvas(input!).then((canvas) => {
-            const imgData = canvas.toDataURL('image/png');
-            const pdf = new JsPDF({
-                orientation: 'portrait',
-                unit: 'mm',
-                format: [210, 297],
-            });
-            pdf.addImage(imgData, 'PNG', 3, 0, 206, (canvas.height * 206) / canvas.width);
+        const input = document.getElementById('review');
+        html2canvas(input!, { logging: true, allowTaint: true, useCORS: true }).then((canvas) => {
+            const imgWidth = 206;
+            const imgHeight = (canvas.height * imgWidth) / canvas.width;
+            const imageData = canvas.toDataURL('img/png');
+            const pdf = new JsPDF('p', 'mm', 'a4');
+            pdf.addImage(imageData, 'PNG', 3, 3, imgWidth, imgHeight);
             pdf.save(`${review?.data.review_title}.pdf`);
         });
     };
@@ -73,7 +71,7 @@ const Review = () => {
 
     return (
         <Container sx={{ mt: '2rem' }}>
-            <div id="review-pdf">
+            <div id="review">
                 <CardItem review={review!.data} flexDirection="row" mediaWidth="30%" contentWidth="70%" paddingLeft={2} />
                 <ReviewBody review={review!.data} />
             </div>
@@ -85,5 +83,4 @@ const Review = () => {
         </Container>
     );
 };
-
 export default Review;
