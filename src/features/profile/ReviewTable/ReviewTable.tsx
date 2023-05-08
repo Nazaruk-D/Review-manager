@@ -81,7 +81,7 @@ const ReviewTable = () => {
                 onChange={handleChangePage}
                 variant="outlined"
                 shape="rounded"
-                color="primary"
+                color="standard"
                 size="large"
                 sx={{ mt: 1, mb: 1 }}
             />

@@ -20,7 +20,7 @@ const ReviewTags: FC<ReviewTagsPropsType> = ({ tags }) => {
         navigate(`/${Path.Result}`);
     };
     return (
-        <Grid item xs={12} className={s.tagsBlock}>
+        <Grid item xs={12} className={s.tagsBlock} sx={{}}>
             {tags!.length > 0 && (
                 <>
                     {tags!.map((tag) => (

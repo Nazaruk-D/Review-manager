@@ -1,4 +1,5 @@
 @import "./src/styles/sass/mixin";
+@import "./src/styles/sass/variables";
 
 .tagsBlock {
   @include flex(row, flex-start, center, wrap);
@@ -9,10 +10,10 @@
     margin-right: 10px;
     margin-bottom: 10px;
     padding: 5px 10px;
-    background-color: #4cd9ea;
+    background-color: $tagBGColor;
     text-decoration: none;
     border-radius: 10px;
-    color: black;
+    color: $tagColor;
     transition: transform 0.2s ease-in-out;
     display: inline-block;
 
