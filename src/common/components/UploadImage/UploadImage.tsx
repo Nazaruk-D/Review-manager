@@ -19,19 +19,18 @@ const UploadImage: FC<UploadImagePropsType> = ({ setImages, images, dbImages, mu
     const { t } = useTranslation('translation', { keyPrefix: 'image' });
 
     const handleProfilePhotoDrop = (acceptedFiles: File[]) => {
-        console.log('acceptedFiles: ', acceptedFiles);
-        console.log('images: ', images);
-        console.log('dbImages: ', dbImages);
+        if (!multiple && images && images.length > 0) {
+            dispatch(setAppErrorAC('Only one photo can be added'));
+            return;
+        }
         const updatedImages = images ? [...images, ...acceptedFiles] : [...acceptedFiles];
         const overSizedImage = updatedImages.find((file) => file.size > 2 * 1024 * 1024);
         const nonImageFile = updatedImages.find((file) => !/^image\//.test(file.type));
-
         if (overSizedImage) {
             dispatch(setAppErrorAC(t('file size')));
         } else if (nonImageFile) {
             dispatch(setAppErrorAC(t('only image')));
         } else {
-            console.log('updatedImages: ', updatedImages);
             setImages(updatedImages);
         }
     };
@@ -60,12 +59,12 @@ const UploadImage: FC<UploadImagePropsType> = ({ setImages, images, dbImages, mu
     return (
         <Box {...getRootProps()} className={s.profilePhotoContainer}>
             <input {...getInputProps()} className={s.photoBlock} />
-            {isImage?.length > 1 || dbImages.length > 1 ? null : (
+            {isImage?.length > 0 || dbImages.length > 1 ? null : (
                 <Typography variant="caption" component="span">
                     {t('drag and drop')}
                 </Typography>
             )}
-            {isImage.length > 1 && isImage?.map((image) => <ImagePreview key={image} image={image} />)}
+            {isImage.length > 0 && isImage?.map((image) => <ImagePreview key={image} image={image} />)}
         </Box>
     );
 };

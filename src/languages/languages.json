@@ -48,7 +48,19 @@
         "error get review": "Failed to get reviews",
         "no reviews found": "No reviews found",
         "no users found": "No user found"
-
+      },
+      "table":{
+        "none": "None",
+        "nameAZ": "Name (A-Z)",
+        "nameZA": "Name (Z-A)",
+        "dateOldNew": "Date (Oldest-Newest)",
+        "dateNewOld": "Date (Newest-Oldest)",
+        "likes": "Likes (Most to Least)",
+        "assessmentHL": "Assessment (Highest to Lowest)",
+        "assessmentLH": "Average Rating (Highest to Lowest)",
+        "search": "Search",
+        "category": "Category",
+        "sort": "Sort by"
       },
       "review editor": {
         "review editor": "Review editor",
@@ -167,6 +179,19 @@
         "error get review": "Не получилось обновить обзоры",
         "no reviews found": "Ни одного обзора не найдено",
         "no users found": "Ни одного пользователя не найдено"
+      },
+      "table":{
+        "none": "Пусто",
+        "nameAZ": "По имени (А-Я)",
+        "nameZA": "По имени (Я-А)",
+        "dateOldNew": "По дате (Старые-Новые)",
+        "dateNewOld": "По дате (Новый-Старые)",
+        "likes": "Лайки (По убыванию)",
+        "assessmentHL": "Оценка (По убыванию)",
+        "assessmentLH": "Средний рейтинг (По убыванию)",
+        "search": "Поиск",
+        "category": "Категория",
+        "sort": "Сортироать по"
       },
       "review editor": {
         "review editor":  "Редактирование обзора",

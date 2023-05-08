@@ -11,6 +11,7 @@ import RatingReview from '../../../RatingReview/RatingReview';
 import { ReviewResponseType } from '../../../../../types/ReviewResponseType';
 import { useAppSelector } from '../../../../../hooks/useRedux';
 import { selectorRole, selectorUserId } from '../../../../../store/selectors/userSelector';
+import { getCategoryTranslation } from '../../../../../utils/getCategoryTranslation';
 
 type InfoBlockPropsType = {
     review: ReviewResponseType;
@@ -55,7 +56,7 @@ const InfoBlock: FC<InfoBlockPropsType> = ({ review, paddingLeft, contentWidth }
                     {review.title}
                 </Typography>
                 <Typography variant="body2" color="text.secondary">
-                    {t('category')}: {review.category}
+                    {t('category')}: {getCategoryTranslation(review.category)}
                 </Typography>
                 <Typography variant="body2" color="text.secondary" sx={{ px: 0, py: 1 }}>
                     {t('assessment')}: {review.assessment}

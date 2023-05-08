@@ -1,5 +1,6 @@
 import React, { ChangeEvent, useEffect } from 'react';
 import { FormControl, Grid, InputLabel, MenuItem, Select, SelectChangeEvent, TextField } from '@mui/material';
+import { useTranslation } from 'react-i18next';
 import { CATEGORIES } from '../../../common/constants/constants';
 import { useAppDispatch, useAppSelector } from '../../../hooks/useRedux';
 import { categoryFilterSelector, sortReviewsFilterSelector, sortSearchSortSelector } from '../../../store/selectors/sortSelector';
@@ -8,6 +9,8 @@ import { setCategoryFilter, setReviewFilter, setSearchSort, setSortedReviews } f
 import { sortReviewsUtil } from '../../../utils/sort-utils';
 import { Sort } from '../../../enums/sort';
 import { Category } from '../../../enums/category';
+import { getCategoryTranslation } from '../../../utils/getCategoryTranslation';
+import { CategoryFilterType } from '../../../types/CategoryFilterType';
 
 const FilterSortPanel = () => {
     const dispatch = useAppDispatch();
@@ -15,6 +18,7 @@ const FilterSortPanel = () => {
     const reviewsFilter = useAppSelector(sortReviewsFilterSelector);
     const searchSort = useAppSelector(sortSearchSortSelector);
     const reviews = useAppSelector(selectorUserReviews);
+    const { t } = useTranslation('translation', { keyPrefix: 'table' });
 
     const handleCategoryFilterChange = (event: SelectChangeEvent) => {
         if (event.target.value) {
@@ -46,11 +50,11 @@ const FilterSortPanel = () => {
     return (
         <Grid container sx={{ mb: 1, display: 'flex', justifyContent: 'space-between' }}>
             <Grid item xs={12} md={5.6} sx={{ mb: { xs: 1 } }}>
-                <TextField id="search" label="Search" variant="outlined" onChange={handleSearch} fullWidth />
+                <TextField id="search" label={t('search')} variant="outlined" onChange={handleSearch} fullWidth />
             </Grid>
             <Grid item xs={12} md={3} sx={{ mb: { xs: 1 } }}>
                 <FormControl fullWidth>
-                    <InputLabel id="category-filter-label">Category</InputLabel>
+                    <InputLabel id="category-filter-label">{t('category')}</InputLabel>
                     <Select
                         labelId="category-filter-label"
                         id="category-filter"
@@ -58,9 +62,9 @@ const FilterSortPanel = () => {
                         onChange={handleCategoryFilterChange}
                     >
                         <MenuItem value={Category.All}>All</MenuItem>
-                        {CATEGORIES.map((category: string) => (
+                        {CATEGORIES.map((category: CategoryFilterType) => (
                             <MenuItem key={category} value={category}>
-                                {category}
+                                {getCategoryTranslation(category)}
                             </MenuItem>
                         ))}
                     </Select>
@@ -68,16 +72,16 @@ const FilterSortPanel = () => {
             </Grid>
             <Grid item xs={12} md={3}>
                 <FormControl fullWidth>
-                    <InputLabel id="sort-order-label">Sort By</InputLabel>
+                    <InputLabel id="sort-order-label">{t('sort')}</InputLabel>
                     <Select labelId="sort-order-label" id="sort-order" value={reviewsFilter} onChange={handleSortOrderChange}>
-                        <MenuItem value={Sort.None}>None</MenuItem>
-                        <MenuItem value={Sort.NameAZ}>Name (A-Z)</MenuItem>
-                        <MenuItem value={Sort.NameZA}>Name (Z-A)</MenuItem>
-                        <MenuItem value={Sort.DateOldNew}>Date (Oldest-Newest)</MenuItem>
-                        <MenuItem value={Sort.DateNewOld}>Date (Newest-Oldest)</MenuItem>
-                        <MenuItem value={Sort.Likes}>Likes (Most to Least)</MenuItem>
-                        <MenuItem value={Sort.Assessment}>Assessment (Highest to Lowest)</MenuItem>
-                        <MenuItem value={Sort.AvgRating}>Average Rating (Highest to Lowest)</MenuItem>
+                        <MenuItem value={Sort.None}>{t('none')}</MenuItem>
+                        <MenuItem value={Sort.NameAZ}>{t('nameAZ')}</MenuItem>
+                        <MenuItem value={Sort.NameZA}>{t('nameZA')}</MenuItem>
+                        <MenuItem value={Sort.DateOldNew}>{t('dateOldNew')}</MenuItem>
+                        <MenuItem value={Sort.DateNewOld}>{t('dateNewOld')}</MenuItem>
+                        <MenuItem value={Sort.Likes}>{t('likes')}</MenuItem>
+                        <MenuItem value={Sort.Assessment}>{t('assessmentHL')}</MenuItem>
+                        <MenuItem value={Sort.AvgRating}>{t('assessmentLH')}</MenuItem>
                     </Select>
                 </FormControl>
             </Grid>

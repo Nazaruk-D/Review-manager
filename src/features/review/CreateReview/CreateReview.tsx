@@ -3,13 +3,14 @@ import { useParams } from 'react-router-dom';
 import { Container } from '@mui/material';
 import { ReviewForm } from '../ReviewForm/ReviewForm';
 import { ReviewType } from '../../../types/ReviewType';
+import { Category } from '../../../enums/category';
 
 const CreateReview = () => {
     const { userId = '' } = useParams<string>();
     const initial: ReviewType = {
         review_title: '',
         title: '',
-        category: '',
+        category: Category.Empty,
         body: '',
         assessment: '',
         tags: [],

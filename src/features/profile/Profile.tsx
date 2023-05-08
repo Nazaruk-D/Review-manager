@@ -1,11 +1,10 @@
 import React, { useEffect } from 'react';
 import { Container } from '@mui/material';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import ProfileHeader from './ProfileHeader/ProfileHeader';
 import ReviewTable from './ReviewTable/ReviewTable';
 import { useAppDispatch, useAppSelector } from '../../hooks/useRedux';
-import { selectorIsLogin, selectorRole, selectorUserId } from '../../store/selectors/userSelector';
-import { Path } from '../../enums/path';
+import { selectorRole, selectorUserId } from '../../store/selectors/userSelector';
 import { useGetTagsQuery } from '../../store/api/itemAPI';
 import { setTags, setUsersReview } from '../../store/slices/reviewSlice';
 import NewReviewButton from './NewReviewButton/NewReviewButton';
@@ -16,7 +15,6 @@ import { useGetUserQuery } from '../../store/api/userAPISlice';
 import { setAppErrorAC } from '../../store/slices/appSlice';
 import { setUserData } from '../../store/slices/adminSlice';
 import { Role } from '../../enums/role';
-import EditProfile from './ProfileHeader/EditProfile/EditProfile';
 
 const Profile = () => {
     const dispatch = useAppDispatch();

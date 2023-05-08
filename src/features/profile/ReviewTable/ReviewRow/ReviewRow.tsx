@@ -11,6 +11,7 @@ import { Role } from '../../../../enums/role';
 import { useAppSelector } from '../../../../hooks/useRedux';
 import { selectorRole, selectorUserId } from '../../../../store/selectors/userSelector';
 import DeleteTableCell from '../../../../common/components/DelteTableCell/DeleteTableCell';
+import { getCategoryTranslation } from '../../../../utils/getCategoryTranslation';
 
 type CardsRowPropsType = {
     review: ReviewResponseType;
@@ -40,7 +41,7 @@ const ReviewRow: FC<CardsRowPropsType> = ({ review, index }) => {
             <TableCell>
                 {review.review_title.length > 15 ? `${review.review_title.substring(0, 15)}...` : review.review_title}
             </TableCell>
-            <TableCell>{review.category}</TableCell>
+            <TableCell>{getCategoryTranslation(review.category)}</TableCell>
             <TableCell>{dateFormat(review.created_at, 'mm/dd/yyyy')}</TableCell>
             <TableCell>{review.assessment}</TableCell>
             <TableCell>{review.avg_rating ? review.avg_rating : '-'}</TableCell>

@@ -7,5 +7,6 @@ export type CategoryFilterType =
     | Category.Games
     | Category.Food
     | Category.Cars
+    | Category.Sport
     | Category.Other
     | Category.Empty;
