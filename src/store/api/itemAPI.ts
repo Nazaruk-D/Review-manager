@@ -4,6 +4,7 @@ import { ResponseType } from '../../types/ResponseType';
 import { CommentType } from '../../types/CommentType';
 import { ReviewResponseType } from '../../types/ReviewResponseType';
 import { TagType } from '../../enums/tagType';
+import { TagsCloudType } from '../../types/TagsCloudType';
 
 export const itemAPI = createApi({
     reducerPath: 'item',
@@ -17,7 +18,7 @@ export const itemAPI = createApi({
             query: ({ reviewId }) => `${PathAPI.Comment}/${reviewId}`,
             providesTags: [TagType.Comment],
         }),
-        getTags: builder.query<ResponseType<string[]>, Record<string, never>>({
+        getTags: builder.query<ResponseType<TagsCloudType[]>, Record<string, never>>({
             query: () => `${PathAPI.Tags}`,
         }),
         getSearchResult: builder.query<ResponseType<ReviewResponseType[]>, { searchValue: string }>({

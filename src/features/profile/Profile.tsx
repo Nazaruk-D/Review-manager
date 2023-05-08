@@ -45,7 +45,7 @@ const Profile = () => {
 
     useEffect(() => {
         if (tags) {
-            dispatch(setTags(tags.data));
+            dispatch(setTags(tags.data.map((tag) => tag.name)));
         }
     }, [dispatch, tags]);
 

@@ -44,14 +44,22 @@ const PhotoBlock: FC<PhotoBlockPropsType> = ({ reviewImages, mediaWidth }) => {
         >
             {isHovered && (
                 <>
-                    <Box sx={{ position: 'absolute', left: '3%', top: '45%' }}>
+                    <Box sx={{ position: 'absolute', left: '3%', top: '40%' }}>
                         <IconButton onClick={setNextImage}>
-                            <ChevronLeftIcon color="warning" />
+                            <ChevronLeftIcon
+                                color="warning"
+                                fontSize="large"
+                                sx={{ backgroundColor: 'rgba(255,255,255,0.7)', borderRadius: '50%' }}
+                            />
                         </IconButton>
                     </Box>
-                    <Box sx={{ position: 'absolute', right: '3%', top: '45%' }}>
+                    <Box sx={{ position: 'absolute', right: '3%', top: '40%' }}>
                         <IconButton onClick={setPreviousImage}>
-                            <ChevronRightIcon color="warning" />
+                            <ChevronRightIcon
+                                color="warning"
+                                fontSize="large"
+                                sx={{ backgroundColor: 'rgba(255,255,255,0.7)', borderRadius: '50%' }}
+                            />
                         </IconButton>
                     </Box>
                 </>
