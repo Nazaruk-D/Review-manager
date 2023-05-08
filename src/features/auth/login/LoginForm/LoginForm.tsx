@@ -2,7 +2,7 @@ import React, { useCallback, useState } from 'react';
 import { useFormik } from 'formik';
 import { Box, Button, CircularProgress, Grid, Paper, TextField, Typography } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
-import FacebookOutlinedIcon from '@mui/icons-material/FacebookOutlined';
+import GoogleIcon from '@mui/icons-material/Google';
 import { Provider } from '@supabase/supabase-js';
 import { useTranslation } from 'react-i18next';
 import DiscordIcon from '../../../../common/svg/discord.svg';
@@ -110,9 +110,9 @@ const LoginForm = () => {
                     </Button>
                 </form>
                 <Grid container spacing={2}>
-                    <Grid item xs={6} onClick={() => signInWithSocial('facebook')}>
+                    <Grid item xs={6} onClick={() => signInWithSocial('google')}>
                         <Button variant="contained" color="primary" fullWidth sx={{ mt: '20px' }}>
-                            <FacebookOutlinedIcon />
+                            <GoogleIcon />
                             <Typography
                                 variant="body1"
                                 noWrap
@@ -127,7 +127,7 @@ const LoginForm = () => {
                                     ml: 1,
                                 }}
                             >
-                                Facebook
+                                Google
                             </Typography>
                         </Button>
                     </Grid>
