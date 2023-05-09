@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { Box, CardContent, IconButton, Typography } from '@mui/material';
+import { Box, CardContent, IconButton, Paper, Typography } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
@@ -52,9 +52,14 @@ const InfoBlock: FC<InfoBlockPropsType> = ({ review, paddingLeft, contentWidth }
                     </Box>
                     <Like userId={userId!} reviewId={review.id} likes={review.likes} />
                 </Box>
-                <Typography gutterBottom variant="h3" component="h3" color="text.secondary">
-                    {review.title}
-                </Typography>
+                <Box sx={{ height: '35px', display: 'flex', alignItems: 'center' }}>
+                    <Typography gutterBottom variant="h3" component="h3" color="text.secondary" sx={{ mr: 1, mb: 0 }}>
+                        {review.title}
+                    </Typography>
+                    <Paper sx={{ p: 0.7, borderRadius: 1, boxShadow: 1 }}>
+                        <Typography variant="body2">{review.avg_assessment.toFixed(1)}</Typography>
+                    </Paper>
+                </Box>
                 <Typography variant="body2" color="text.secondary">
                     {t('category')}: {getCategoryTranslation(review.category)}
                 </Typography>
@@ -65,29 +70,31 @@ const InfoBlock: FC<InfoBlockPropsType> = ({ review, paddingLeft, contentWidth }
             <CardContent sx={{ px: 2, py: 0, display: 'flex' }}>
                 <RatingReview review={review} />
             </CardContent>
-            <CardContent sx={{ px: 2, py: 0 }}>
-                <Typography variant="caption" color="text.secondary">
-                    {t('reviewed')}{' '}
-                    <Typography variant="subtitle2" component="span" color="text.secondary">
-                        <Typography
-                            variant="subtitle2"
-                            component="span"
-                            color="text.secondary"
-                            onClick={onClickHandler}
-                            sx={{
-                                '&:hover': {
-                                    color: 'rgba(255, 99, 71,1)',
-                                    cursor: 'pointer',
-                                },
-                            }}
-                        >
-                            {review.author_name}
+            <CardContent sx={{ px: 2, py: 0, display: 'flex', justifyContent: 'space-between' }}>
+                <Box>
+                    <Typography variant="caption" color="text.secondary">
+                        {t('reviewed')}{' '}
+                        <Typography variant="subtitle2" component="span" color="text.secondary">
+                            <Typography
+                                variant="subtitle2"
+                                component="span"
+                                color="text.secondary"
+                                onClick={onClickHandler}
+                                sx={{
+                                    '&:hover': {
+                                        color: 'rgba(255, 99, 71,1)',
+                                        cursor: 'pointer',
+                                    },
+                                }}
+                            >
+                                {review.author_name}
+                            </Typography>
+                            <FavoriteIcon sx={{ fontSize: '10px', ml: 0.5, mr: 0.2 }} />
+                            {review.authorLikes}
                         </Typography>
-                        <FavoriteIcon sx={{ fontSize: '10px', ml: 0.5, mr: 0.2 }} />
-                        {review.authorLikes}
+                        , {dateFormat(review.created_at, 'mm/dd/yyyy')}
                     </Typography>
-                    , {dateFormat(review.created_at, 'mm/dd/yyyy')}
-                </Typography>
+                </Box>
             </CardContent>
         </Box>
     );
