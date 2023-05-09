@@ -21,6 +21,9 @@ export const itemAPI = createApi({
         getTags: builder.query<ResponseType<TagsCloudType[]>, Record<string, never>>({
             query: () => `${PathAPI.Tags}`,
         }),
+        getProductNames: builder.query<ResponseType<string[]>, Record<string, never>>({
+            query: () => `${PathAPI.ProductNames}`,
+        }),
         getSearchResult: builder.query<ResponseType<ReviewResponseType[]>, { searchValue: string }>({
             query: ({ searchValue }) => `${PathAPI.Search}/${searchValue}`,
         }),
@@ -40,4 +43,5 @@ export const {
     useGetTagsQuery,
     useGetSearchResultQuery,
     useDeleteCommentMutation,
+    useGetProductNamesQuery,
 } = itemAPI;

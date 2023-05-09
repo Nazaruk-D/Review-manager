@@ -23,6 +23,10 @@ const UploadImage: FC<UploadImagePropsType> = ({ setImages, images, dbImages, mu
             dispatch(setAppErrorAC('Only one photo can be added'));
             return;
         }
+        if (acceptedFiles.length > 3) {
+            dispatch(setAppErrorAC("You can't attach more than 3 photos"));
+            return;
+        }
         const updatedImages = images ? [...images, ...acceptedFiles] : [...acceptedFiles];
         const overSizedImage = updatedImages.find((file) => file.size > 2 * 1024 * 1024);
         const nonImageFile = updatedImages.find((file) => !/^image\//.test(file.type));

@@ -5,8 +5,8 @@ import ProfileHeader from './ProfileHeader/ProfileHeader';
 import ReviewTable from './ReviewTable/ReviewTable';
 import { useAppDispatch, useAppSelector } from '../../hooks/useRedux';
 import { selectorRole, selectorUserId } from '../../store/selectors/userSelector';
-import { useGetTagsQuery } from '../../store/api/itemAPI';
-import { setTags, setUsersReview } from '../../store/slices/reviewSlice';
+import { useGetProductNamesQuery, useGetTagsQuery } from '../../store/api/itemAPI';
+import { setProductNames, setTags, setUsersReview } from '../../store/slices/reviewSlice';
 import NewReviewButton from './NewReviewButton/NewReviewButton';
 import FilterSortPanel from './FilterSortPanel/FilterSortPanel';
 import { useGetReviewsQuery } from '../../store/api/reviewAPISlice';
@@ -22,12 +22,19 @@ const Profile = () => {
     const isAdmin = useAppSelector(selectorRole);
     const { userId = '' } = useParams<string>();
     const { data: tags, isLoading: tagsLoading, error: tagsError } = useGetTagsQuery({});
+    const { data: productNames, isLoading: productNamesLoading, error: productNamesError } = useGetProductNamesQuery({});
     const { data: reviews, isLoading: reviewsLoading, error: reviewsError } = useGetReviewsQuery({ userId });
     const { data: user, isLoading: userLoading, error: userError } = useGetUserQuery({ userId });
 
-    if (tagsError && reviewsError && userError) {
+    if (tagsError || reviewsError || userError || productNamesError) {
         dispatch(setAppErrorAC('error'));
     }
+
+    useEffect(() => {
+        if (productNames) {
+            dispatch(setProductNames(productNames.data));
+        }
+    }, [productNames]);
 
     useEffect(() => {
         if (user) {

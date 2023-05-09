@@ -3,11 +3,11 @@
 
 .image {
   @include bgSettings(cover, center, no-repeat);
-  width: 179px;
-  height: 120px;
+  width: 230px;
+  height: 180px;
   object-fit: cover;
   @media screen and (max-width: $mediaWidth) {
-    width: 125px;
+    width: 150px;
     height: 75px;
   }
 }

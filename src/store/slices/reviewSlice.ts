@@ -7,6 +7,7 @@ type InitialStateType = {
     latestReview: ReviewResponseType[] | null;
     usersReview: ReviewResponseType[] | null;
     tags: string[] | null;
+    productNames: string[] | null;
 };
 
 const initialState: InitialStateType = {
@@ -15,6 +16,7 @@ const initialState: InitialStateType = {
     latestReview: null,
     usersReview: null,
     tags: null,
+    productNames: null,
 };
 
 const reviewSlice = createSlice({
@@ -33,12 +35,15 @@ const reviewSlice = createSlice({
         setTags(state, action: PayloadAction<string[]>) {
             state.tags = action.payload;
         },
+        setProductNames(state, action: PayloadAction<string[]>) {
+            state.productNames = action.payload;
+        },
         setSearch(state, action: PayloadAction<string>) {
             state.search = action.payload;
         },
     },
 });
 
-export const { setPopularReview, setUsersReview, setLatestReview, setTags, setSearch } = reviewSlice.actions;
+export const { setPopularReview, setUsersReview, setLatestReview, setTags, setSearch, setProductNames } = reviewSlice.actions;
 
 export default reviewSlice.reducer;

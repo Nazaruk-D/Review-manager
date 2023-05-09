@@ -5,3 +5,4 @@ export const selectorPopularReviews = (state: AppRootStateType) => state.review.
 export const selectorLatestReviews = (state: AppRootStateType) => state.review.latestReview;
 export const selectorTags = (state: AppRootStateType) => state.review.tags;
 export const selectorSearchValue = (state: AppRootStateType): string => state.review.search;
+export const selectorProductNames = (state: AppRootStateType): string[] | null => state.review.productNames;

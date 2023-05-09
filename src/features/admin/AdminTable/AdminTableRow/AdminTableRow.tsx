@@ -48,7 +48,7 @@ const AdminTableRow: FC<AdminTableRowPropsType> = ({
     const onEditProfileHandler = () => {
         navigate(`/update-review/${user.id}`);
     };
-
+    console.log('user.small_photo, ', user.small_photo, user.user_name);
     return (
         <TableRow key={user.id} className={s.row} onClick={() => navigate(`/profile/${user.id}`)}>
             <TableCell>{index + 1}</TableCell>

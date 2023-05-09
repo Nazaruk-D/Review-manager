@@ -11,7 +11,7 @@ import { ErrorStyle } from '../../../styles/common/ErrorStyle';
 import { useSendReviewMutation } from '../../../store/api/reviewAPISlice';
 import { selectorThemeApp } from '../../../store/selectors/appSelector';
 import MarkDownEditor from '../../../common/components/MarkDownEditor/MarkDownEditor';
-import { selectorTags } from '../../../store/selectors/reviewSelector';
+import { selectorProductNames, selectorTags } from '../../../store/selectors/reviewSelector';
 import { buttonStyles } from '../../../styles/common/buttonStyles';
 import SelectCategory from '../../../common/components/SelectCategory/SelectCategory';
 import { validateForm } from './validateForm';
@@ -32,6 +32,7 @@ export const ReviewForm: FC<ReviewFromPropsType> = ({ initial, url, images, prof
     const { t: tValidate } = useTranslation('translation', { keyPrefix: 'validation' });
     const user = useAppSelector(selectorUserData);
     const tags = useAppSelector(selectorTags);
+    const productNames = useAppSelector(selectorProductNames);
     const themeColor = useAppSelector(selectorThemeApp);
     const [sendReview, { isSuccess, isLoading }] = useSendReviewMutation();
 
@@ -62,8 +63,6 @@ export const ReviewForm: FC<ReviewFromPropsType> = ({ initial, url, images, prof
         }
     }, [isSuccess, navigate]);
 
-    console.log('uploadImage: ', uploadImage);
-
     return (
         <Container maxWidth="md" sx={{ mt: 3 }}>
             <Box>
@@ -86,7 +85,27 @@ export const ReviewForm: FC<ReviewFromPropsType> = ({ initial, url, images, prof
                             </Grid>
                         )}
                         <Grid item xs={12}>
-                            <TextField label={t('title')} fullWidth {...formik.getFieldProps('title')} />
+                            <Autocomplete
+                                freeSolo
+                                options={productNames || []}
+                                value={formik.values.title}
+                                renderInput={(params) => (
+                                    <TextField
+                                        {...params}
+                                        label={t('title')}
+                                        fullWidth
+                                        placeholder={t('title')!}
+                                        onBlur={() => {
+                                            formik.handleBlur('title');
+                                            formik.setFieldValue('title', params.inputProps.value);
+                                        }}
+                                    />
+                                )}
+                                onChange={(_, value) => {
+                                    formik.setFieldValue('title', value!);
+                                    formik.handleBlur('title');
+                                }}
+                            />
                         </Grid>
                         {formik.touched.title && formik.errors.title && (
                             <Grid item xs={12} sx={ErrorStyle}>
@@ -123,10 +142,20 @@ export const ReviewForm: FC<ReviewFromPropsType> = ({ initial, url, images, prof
                                 freeSolo
                                 options={tags || []}
                                 value={formik.values.tags}
+                                onOpen={() => formik.handleBlur('tags')}
                                 renderInput={(params) => (
-                                    <TextField {...params} label={t('tags')} fullWidth placeholder={t('press enter')!} />
+                                    <TextField
+                                        {...params}
+                                        label={t('tags')}
+                                        fullWidth
+                                        placeholder={t('press enter')!}
+                                        onBlur={formik.handleBlur('tags')}
+                                    />
                                 )}
-                                onChange={(_, value) => formik.setFieldValue('tags', value)}
+                                onChange={(_, value) => {
+                                    formik.setFieldValue('tags', value);
+                                    formik.handleBlur('tags');
+                                }}
                             />
                         </Grid>
                         <Grid item xs={12}>

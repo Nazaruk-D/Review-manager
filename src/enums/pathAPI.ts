@@ -10,6 +10,7 @@ export enum PathAPI {
     GetPopularReviews = '/review/popular-reviews',
     Rating = '/review/rating',
     Like = '/review/like',
+    ProductNames = '/review/product-names',
     GetUsers = '/admin/get-users',
     ChangeAdminStatus = '/admin/change-role',
     ChangeIsBlockedStatus = '/admin/change-status',
