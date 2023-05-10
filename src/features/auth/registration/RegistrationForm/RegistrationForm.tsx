@@ -7,7 +7,7 @@ import { Path } from '../../../../enums/path';
 import s from '../../login/LoginForm/LoginForm.module.scss';
 import { supabase } from '../../../../utils/supabase';
 import { useAppDispatch } from '../../../../hooks/useRedux';
-import { setAppErrorAC } from '../../../../store/slices/appSlice';
+import { setAppErrorAC, setAppInformMessage } from '../../../../store/slices/appSlice';
 import { registerValidation } from '../registerValidation';
 
 const RegistrationForm = () => {
@@ -16,6 +16,7 @@ const RegistrationForm = () => {
     const [inProgress, setInProgress] = useState(false);
     const { t } = useTranslation('translation', { keyPrefix: 'auth' });
     const { t: tValidation } = useTranslation('translation', { keyPrefix: 'validation' });
+    const { t: tSnackbar } = useTranslation('translation', { keyPrefix: 'snackbar messages' });
 
     const formik = useFormik({
         initialValues: {
@@ -34,13 +35,14 @@ const RegistrationForm = () => {
                 });
                 if (!error && data.user?.id) {
                     await supabase.from('users').update({ user_name: values.user_name }).eq('id', data.user.id);
+                    dispatch(setAppInformMessage(tSnackbar('registered')));
                 } else {
                     dispatch(setAppErrorAC(error!.message));
                 }
                 navigate(Path.Login);
                 setInProgress(false);
             } catch {
-                dispatch(setAppErrorAC('Unknown error occurred'));
+                dispatch(setAppErrorAC(tSnackbar('error registered')));
                 setInProgress(false);
             }
         },

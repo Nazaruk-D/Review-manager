@@ -9,7 +9,6 @@ import s from './CommentsBlock.module.scss';
 import { useDeleteCommentMutation, useGetCommentsQuery, useLazyGetCommentsQuery } from '../../../../store/api/itemAPI';
 import { CommentType } from '../../../../types/CommentType';
 import { Role } from '../../../../enums/role';
-import NewReviewButton from '../../../profile/NewReviewButton/NewReviewButton';
 import { useAppSelector } from '../../../../hooks/useRedux';
 import { selectorRole, selectorUserId } from '../../../../store/selectors/userSelector';
 

@@ -1,12 +1,10 @@
 import React, { FC } from 'react';
-import { IconButton, TableCell, TableRow } from '@mui/material';
+import { TableCell, TableRow } from '@mui/material';
 import dateFormat from 'dateformat';
 import { useNavigate } from 'react-router-dom';
-import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
 import s from './ReviewRow.module.scss';
 import noImage from '../../../../common/png/logo.png';
 import { ReviewResponseType } from '../../../../types/ReviewResponseType';
-import { useDeleteReviewByIdMutation } from '../../../../store/api/reviewAPISlice';
 import { Role } from '../../../../enums/role';
 import { useAppSelector } from '../../../../hooks/useRedux';
 import { selectorRole, selectorUserId } from '../../../../store/selectors/userSelector';
@@ -14,22 +12,25 @@ import DeleteTableCell from '../../../../common/components/DelteTableCell/Delete
 import { getCategoryTranslation } from '../../../../utils/getCategoryTranslation';
 
 type CardsRowPropsType = {
+    deleteReview: (reviewId: string) => void;
+    editReview: (reviewId: string) => void;
     review: ReviewResponseType;
     index: number;
+    isSuccess: boolean;
+    isLoading: boolean;
 };
 
-const ReviewRow: FC<CardsRowPropsType> = ({ review, index }) => {
+const ReviewRow: FC<CardsRowPropsType> = ({ review, index, deleteReview, editReview, isSuccess, isLoading }) => {
     const userID = useAppSelector(selectorUserId);
     const isAdmin = useAppSelector(selectorRole);
     const navigate = useNavigate();
-    const [deleteReview, { isLoading, isSuccess }] = useDeleteReviewByIdMutation();
 
     const onDeleteReviewHandler = () => {
-        deleteReview({ reviewId: review.id });
+        deleteReview(review.id);
     };
 
     const onEditReviewHandler = () => {
-        navigate(`/update-review/${review.id}`);
+        editReview(review.id);
     };
 
     return (

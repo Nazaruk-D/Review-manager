@@ -4,7 +4,7 @@ import { Autocomplete, Box, Button, CircularProgress, Container, Grid, TextField
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import { ReviewType } from '../../../types/ReviewType';
-import { useAppSelector } from '../../../hooks/useRedux';
+import { useAppDispatch, useAppSelector } from '../../../hooks/useRedux';
 import { selectorUserData } from '../../../store/selectors/userSelector';
 import UploadImage from '../../../common/components/UploadImage/UploadImage';
 import { ErrorStyle } from '../../../styles/common/ErrorStyle';
@@ -16,6 +16,7 @@ import { buttonStyles } from '../../../styles/common/buttonStyles';
 import SelectCategory from '../../../common/components/SelectCategory/SelectCategory';
 import { validateForm } from './validateForm';
 import AssessmentControl from '../../../common/components/AssessmentControl/AssessmentControl';
+import { setAppInformMessage } from '../../../store/slices/appSlice';
 
 type ReviewFromPropsType = {
     initial: ReviewType;
@@ -26,10 +27,12 @@ type ReviewFromPropsType = {
 };
 
 export const ReviewForm: FC<ReviewFromPropsType> = ({ initial, url, images, profileId, reviewId }) => {
+    const dispatch = useAppDispatch();
     const navigate = useNavigate();
     const [uploadImage, setUploadImage] = useState<File[] | null>(null);
     const { t } = useTranslation('translation', { keyPrefix: 'review editor' });
     const { t: tValidate } = useTranslation('translation', { keyPrefix: 'validation' });
+    const { t: tSnackbar } = useTranslation('translation', { keyPrefix: 'snackbar messages' });
     const user = useAppSelector(selectorUserData);
     const tags = useAppSelector(selectorTags);
     const productNames = useAppSelector(selectorProductNames);
@@ -59,6 +62,7 @@ export const ReviewForm: FC<ReviewFromPropsType> = ({ initial, url, images, prof
 
     useEffect(() => {
         if (isSuccess) {
+            dispatch(setAppInformMessage(tSnackbar('add review')));
             navigate(`/profile/${profileId}`);
         }
     }, [isSuccess, navigate]);

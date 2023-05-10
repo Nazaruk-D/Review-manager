@@ -11,7 +11,7 @@ import {
 } from '../../../store/api/adminAPISlice';
 import { Role } from '../../../enums/role';
 import { useAppDispatch } from '../../../hooks/useRedux';
-import { setAppErrorAC } from '../../../store/slices/appSlice';
+import { setAppErrorAC, setAppInformMessage } from '../../../store/slices/appSlice';
 
 type AdminTablePropsType = {
     users: UserType[];
@@ -20,6 +20,7 @@ type AdminTablePropsType = {
 const AdminTable: FC<AdminTablePropsType> = ({ users }) => {
     const dispatch = useAppDispatch();
     const { t } = useTranslation('translation', { keyPrefix: 'profile' });
+    const { t: tSnackbar } = useTranslation('translation', { keyPrefix: 'snackbar messages' });
     const [changeAdminStatus, { error: RoleError }] = useChangeAdminStatusMutation();
     const [changeIsBlockedStatus, { error: statusError }] = useChangeIsBlockedStatusMutation();
     const [deleteUser, { error: deleteError, isLoading, isSuccess }] = useDeleteUserMutation();
@@ -32,20 +33,30 @@ const AdminTable: FC<AdminTablePropsType> = ({ users }) => {
     const startIndex = (currentPage - 1) * itemsPerPage;
 
     const changeAdminStatusHandler = (userId: string, status: boolean) => {
-        console.log(userId, status);
-        if (status) {
+        if (status && !RoleError) {
             changeAdminStatus({ userId, role: Role.Admin });
-        } else {
+            dispatch(setAppInformMessage(`${tSnackbar('change role')} ${Role.Admin}`));
+        } else if (!status && !RoleError) {
             changeAdminStatus({ userId, role: Role.User });
+            dispatch(setAppInformMessage(`${tSnackbar('change role')} ${Role.User}`));
         }
     };
 
     const blockUserHandler = (userId: string, status: boolean) => {
-        changeIsBlockedStatus({ userId, status });
+        if (status && !statusError) {
+            changeIsBlockedStatus({ userId, status });
+            dispatch(setAppInformMessage(`${tSnackbar('blocked status')}`));
+        } else if (!status && !statusError) {
+            changeIsBlockedStatus({ userId, status });
+            dispatch(setAppInformMessage(`${tSnackbar('active status')} ${Role.User}`));
+        }
     };
 
     const deleteUserHandler = (userId: string) => {
         deleteUser({ userId });
+        if (!deleteError) {
+            dispatch(setAppInformMessage(tSnackbar('delete user')));
+        }
     };
 
     const handleChangePage = (event: React.ChangeEvent<unknown>, value: number) => {

@@ -126,6 +126,16 @@
         "return": "Go back to the main page",
         "no found": "No reviews found for your query"
       },
+      "snackbar messages": {
+        "registered": "Account registered successfully",
+        "error registered": "Error when registering an account",
+        "delete review": "Review deleted",
+        "add review": "Review added successfully",
+        "change role": "Role successfully changed to",
+        "blocked status": "User successfully blocked",
+        "active status": "User successfully unlocked",
+        "delete user": "User deleted successfully"
+      },
       "footer": {
         "copyright": "Dmitry Nazaruk © 2023"
       }
@@ -254,6 +264,16 @@
         "found": "найдено:",
         "return": "Вернуться на главную страницу",
         "no found": "Не было найдено обзоров  по вашему запросу"
+      },
+      "snackbar messages": {
+        "registered account": "Аккаунт успешно зарегистрирован",
+        "error registered": "Ошибка при регистрации аккаунта",
+        "delete review": "Обзор удалён",
+        "add review": "Обзор успешно добавлен",
+        "change role": "Роль успешно изменена на",
+        "blocked status": "Пользователь успешно заблокирован",
+        "active status": "Пользователь успешно разблокирован",
+        "delete user": "Пользователь успешно удалён"
       },
       "footer": {
         "copyright": "Дмитрий Назарук © 2023"

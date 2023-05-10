@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography } from '@mui/material';
 import { Pagination } from '@mui/lab';
+import { useNavigate } from 'react-router-dom';
 import ReviewRow from './ReviewRow/ReviewRow';
 import { useAppDispatch, useAppSelector } from '../../../hooks/useRedux';
 import { sortReviewsSelector } from '../../../store/selectors/sortSelector';
@@ -10,14 +11,19 @@ import { Sort } from '../../../enums/sort';
 import { setReviewFilter } from '../../../store/slices/sortSlice';
 import { selectorRole, selectorUserId } from '../../../store/selectors/userSelector';
 import { Role } from '../../../enums/role';
+import { useDeleteReviewByIdMutation } from '../../../store/api/reviewAPISlice';
+import { setAppInformMessage } from '../../../store/slices/appSlice';
 
 const ReviewTable = () => {
     const dispatch = useAppDispatch();
+    const navigate = useNavigate();
     const sortReviews = useAppSelector(sortReviewsSelector);
     const userID = useAppSelector(selectorUserId);
     const isAdmin = useAppSelector(selectorRole);
     const { t } = useTranslation('translation', { keyPrefix: 'profile' });
+    const { t: tSnackbar } = useTranslation('translation', { keyPrefix: 'snackbar messages' });
     const [currentPage, setCurrentPage] = useState(1);
+    const [deleteReview, { isLoading, isSuccess, error }] = useDeleteReviewByIdMutation();
 
     const itemsPerPage = 6;
     const reviews = sortReviews || [];
@@ -32,6 +38,17 @@ const ReviewTable = () => {
 
     const handleChangePage = (event: React.ChangeEvent<unknown>, value: number) => {
         setCurrentPage(value);
+    };
+
+    const deleteReviewHandler = (reviewId: string) => {
+        deleteReview({ reviewId });
+        if (!error) {
+            dispatch(setAppInformMessage(tSnackbar('delete review')));
+        }
+    };
+
+    const editReviewHandler = (reviewId: string) => {
+        navigate(`/update-review/${reviewId}`);
     };
 
     return (
@@ -64,7 +81,15 @@ const ReviewTable = () => {
                 </TableHead>
                 <TableBody>
                     {currentReviews?.map((row, index) => (
-                        <ReviewRow review={row} index={startIndex + index} key={row.id} />
+                        <ReviewRow
+                            review={row}
+                            index={startIndex + index}
+                            key={row.id}
+                            deleteReview={deleteReviewHandler}
+                            editReview={editReviewHandler}
+                            isSuccess={isSuccess}
+                            isLoading={isLoading}
+                        />
                     ))}
                     {currentReviews?.length === 0 && (
                         <TableRow>
