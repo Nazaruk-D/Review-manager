@@ -1,5 +1,5 @@
-import React, { useEffect, useRef, useState } from 'react';
-import { Box, Button, Card, CardContent, Container, Grid, Typography } from '@mui/material';
+import React, { useEffect, useState } from 'react';
+import { Box, Button, Container } from '@mui/material';
 import io, { Socket } from 'socket.io-client';
 import JsPDF from 'jspdf';
 import html2canvas from 'html2canvas';
@@ -15,7 +15,7 @@ import { setAppErrorAC } from '../../../store/slices/appSlice';
 import { useAppDispatch, useAppSelector } from '../../../hooks/useRedux';
 import { selectorIsLogin, selectorUserId } from '../../../store/selectors/userSelector';
 import CardItem from '../../../common/components/ReviewItem/CardItem/CardItem';
-import { ReviewResponseType } from '../../../types/ReviewResponseType';
+import SimilarReview from './SimilarReview/SimilarReview';
 
 const Review = () => {
     const dispatch = useAppDispatch();
@@ -72,34 +72,14 @@ const Review = () => {
 
     return (
         <Container sx={{ mt: '2rem' }}>
-            <div id="review">
+            <Box id="review">
                 <CardItem review={review!.data} flexDirection="row" mediaWidth="30%" contentWidth="70%" paddingLeft={2} />
                 <ReviewBody review={review!.data} />
-            </div>
+            </Box>
             <Button variant="contained" color="primary" onClick={handleDownloadPDF} sx={{ mb: 2 }}>
                 {t('download')}
             </Button>
-            {review?.data && review?.data.similarReview?.length > 0 && (
-                <Box sx={{ mt: 2, mb: 2 }}>
-                    <Typography variant="h5" sx={{ mb: 2 }}>
-                        Похожие отзывы по теме
-                    </Typography>
-                    <Grid container spacing={2}>
-                        {review?.data.similarReview.map((similarReview) => (
-                            <Grid item key={similarReview.id} xs={12} sm={6} md={4} lg={3}>
-                                <Card>
-                                    <CardContent>
-                                        <Typography variant="h6">{similarReview.review_title}</Typography>
-                                        <Typography variant="body2" sx={{ mt: 1 }}>
-                                            Автор: {similarReview.author_name}
-                                        </Typography>
-                                    </CardContent>
-                                </Card>
-                            </Grid>
-                        ))}
-                    </Grid>
-                </Box>
-            )}
+            {review?.data && review?.data.similarReview?.length > 0 && <SimilarReview review={review.data} />}
             {isLogin && <SendCommentForm ws={ws!} sendComment={sendComment} />}
             <CommentsBlock ws={ws!} />
         </Container>

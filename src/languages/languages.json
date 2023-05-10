@@ -71,7 +71,7 @@
         "title": "Work name",
         "category": "Category",
         "text": "Text",
-        "rating": "Rating",
+        "assessment": "Assessment",
         "tags": "Tags",
         "add photo": "Add photo",
         "save review": "Save review",
@@ -79,6 +79,11 @@
         "author's assessment": "Author's assessment",
         "created by": "Created by",
         "on": "on"
+      },
+      "similar review": {
+        "similar review": "Similar reviews on the topic",
+        "author": "Review author:",
+        "rating": "Average review rating:"
       },
       "validation": {
         "name": "Name is required",
@@ -196,7 +201,7 @@
         "no users found": "Ни одного пользователя не найдено",
         "delete profile": "Удалить профиль",
         "confirm": "Подтвердить",
-        "cancel": "отменить"
+        "cancel": "Отменить"
       },
       "table":{
         "none": "Пусто",
@@ -217,7 +222,7 @@
         "title": "Название произведения",
         "category": "Категория",
         "text": "Описание",
-        "rating": "Оценка",
+        "assessment": "Оценка",
         "tags": "Тэги",
         "add photo": "Добавить фото",
         "save review": "Сохранить обзор",
@@ -225,6 +230,11 @@
         "author's assessment": "Оценка автора",
         "created by": "Автор",
         "on": ""
+      },
+      "similar review": {
+        "similar review": "Похожие отзывы по теме",
+        "author": "Автор обзора:",
+        "rating": "Средний рейтинг обзора:"
       },
       "validation": {
         "name": "Имя обязательно",

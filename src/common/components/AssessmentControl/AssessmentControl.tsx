@@ -13,7 +13,7 @@ const AssessmentControl: FC<AssessmentControlPropsType> = ({ t, formik, themeCol
     const styleRadio = themeColor === 'dark' ? { color: '#white', '&.Mui-checked': { color: '#505050' } } : {};
     return (
         <FormControl component="fieldset">
-            <FormLabel component="legend">{t('rating')}</FormLabel>
+            <FormLabel component="legend">{t('assessment')}</FormLabel>
             <RadioGroup
                 row
                 aria-label="assessment"
