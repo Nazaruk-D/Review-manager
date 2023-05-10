@@ -9,4 +9,5 @@ export const CATEGORIES: CategoryFilterType[] = [
     Category.Cars,
     Category.Sport,
     Category.Other,
+    Category.All,
 ];

@@ -18,6 +18,8 @@ export function getCategoryTranslation(category: CategoryFilterType) {
             return t('Sport');
         case 'Other':
             return t('Other');
+        case 'All':
+            return t('All');
         default:
             return category;
     }

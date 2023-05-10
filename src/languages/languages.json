@@ -103,7 +103,8 @@
         "Food": "Food",
         "Cars": "Cars",
         "Sport": "Sport",
-        "Other": "Other"
+        "Other": "Other",
+        "All": "Other"
       },
       "introduction": {
         "title": "Meet Reviewer manager - a website created for managing recommendations.",
@@ -231,7 +232,8 @@
         "Food": "Еда",
         "Cars": "Автомобили",
         "Sport": "Спорт",
-        "Other": "Другое"
+        "Other": "Другое",
+        "All": "Все"
       },
       "introduction": {
         "title": "Познакомьтесь с Reviewer manager - сайтом, созданным для управления рекомендациями.",

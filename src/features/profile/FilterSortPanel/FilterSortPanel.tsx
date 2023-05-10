@@ -61,7 +61,6 @@ const FilterSortPanel = () => {
                         value={categoryFilter}
                         onChange={handleCategoryFilterChange}
                     >
-                        <MenuItem value={Category.All}>All</MenuItem>
                         {CATEGORIES.map((category: CategoryFilterType) => (
                             <MenuItem key={category} value={category}>
                                 {getCategoryTranslation(category)}
