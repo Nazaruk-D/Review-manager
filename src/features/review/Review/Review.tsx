@@ -82,7 +82,7 @@ const Review = () => {
             {review?.data && review?.data.similarReview?.length > 0 && (
                 <Box sx={{ mt: 2, mb: 2 }}>
                     <Typography variant="h5" sx={{ mb: 2 }}>
-                        Похожие отзывы
+                        Похожие отзывы по теме
                     </Typography>
                     <Grid container spacing={2}>
                         {review?.data.similarReview.map((similarReview) => (

@@ -94,7 +94,7 @@
         "category": "Category is required",
         "body": "Description text is required",
         "body max": "Text must not exceed 2000 characters",
-        "rating": "Rating is required"
+        "assessment": "Rating is required"
       },
       "category": {
         "Movies": "Movies",
@@ -222,7 +222,7 @@
         "title": "Укажите название",
         "category": "Укажите категорию",
         "body": "Напшии своё описание к обзору",
-        "rating": "Поставьте оценку"
+        "assessment": "Поставьте оценку"
       },
       "category": {
         "Movies": "Фильмы",

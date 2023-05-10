@@ -20,7 +20,6 @@ const TagCloudBox = () => {
     }
 
     const callbacks = {
-        getWordTooltip: (word: { text: string; value: number }) => `The word "${word.text}" appears ${word.value} times.`,
         onWordClick: (word: { text: string; value: number }) => {
             dispatch(setSearch(word.text));
             navigate(Path.Result);
@@ -39,8 +38,9 @@ const TagCloudBox = () => {
                         fontSizes: [25, 40],
                         padding: 5,
                         rotations: 2,
-                        rotationAngles: [-90, 0],
+                        rotationAngles: [0, 0],
                         colors: ['black', 'grey', '#2B2B2B', '#5D6D7E', '#6C7A89'],
+                        enableTooltip: false,
                     }}
                     maxWords={100}
                     callbacks={callbacks}

@@ -103,7 +103,6 @@ export const ReviewForm: FC<ReviewFromPropsType> = ({ initial, url, images, prof
                                 )}
                                 onChange={(_, value) => {
                                     formik.setFieldValue('title', value!);
-                                    formik.handleBlur('title');
                                 }}
                             />
                         </Grid>

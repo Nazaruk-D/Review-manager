@@ -36,13 +36,15 @@ const InfoBlock: FC<InfoBlockPropsType> = ({ review, paddingLeft, contentWidth }
         navigate(`/update-review/${review.id}`);
     };
 
+    console.log('review.author_name: ', review.author_name);
+
     return (
-        <Box sx={{ height: '220px', width: contentWidth, pl: paddingLeft }}>
+        <Box sx={{ minHeight: '220px', width: contentWidth, pl: paddingLeft }}>
             <CardContent>
                 <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                     <Box sx={{ display: 'flex' }}>
                         <Typography variant="h5" component="h5" gutterBottom sx={{ m: 0, mr: 1 }}>
-                            {review.review_title}
+                            {review.review_title.length > 30 ? `${review.review_title.slice(0, 25)}...` : review.review_title}
                         </Typography>
                         {(userId === review.author_id || isAdmin === Role.Admin) && (
                             <IconButton onClick={onEditReviewHandler}>
