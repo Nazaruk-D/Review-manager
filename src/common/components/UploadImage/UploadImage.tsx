@@ -1,6 +1,7 @@
 import React, { FC, useEffect, useState } from 'react';
-import { Box, Typography } from '@mui/material';
+import { Box, IconButton, Typography } from '@mui/material';
 import { useDropzone } from 'react-dropzone';
+import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 import { useTranslation } from 'react-i18next';
 import s from './UploadImage.module.scss';
 import { setAppErrorAC } from '../../../store/slices/appSlice';
@@ -9,7 +10,7 @@ import ImagePreview from '../ImagePreview/ImagePreview';
 
 type UploadImagePropsType = {
     images: File[] | null;
-    setImages: (images: File[]) => void;
+    setImages: (images: File[] | null) => void;
     dbImages: string[] | string;
     multiple: boolean;
 };
@@ -46,6 +47,12 @@ const UploadImage: FC<UploadImagePropsType> = ({ setImages, images, dbImages, mu
 
     const [localDbImage, setLocalDbImage] = useState<string[]>([]);
 
+    const deleteImageHandler = (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+        event.stopPropagation();
+        setImages(null);
+        setLocalDbImage([]);
+    };
+
     useEffect(() => {
         if (dbImages[0] === '') {
             setLocalDbImage([]);
@@ -55,18 +62,22 @@ const UploadImage: FC<UploadImagePropsType> = ({ setImages, images, dbImages, mu
             setLocalDbImage(dbImages);
         }
     }, [dbImages]);
-
     const isImage = images ? images.map((image) => URL.createObjectURL(image)) : localDbImage;
 
     return (
         <Box {...getRootProps()} className={s.profilePhotoContainer}>
             <input {...getInputProps()} className={s.photoBlock} />
-            {isImage?.length > 0 || dbImages.length > 1 ? null : (
+            {(isImage?.length > 0 && isImage[0] !== '') || (dbImages.length > 0 && dbImages[0] !== '') ? null : (
                 <Typography variant="caption" component="span">
                     {t('drag and drop')}
                 </Typography>
             )}
-            {isImage.length > 0 && isImage?.map((image) => <ImagePreview key={image} image={image} />)}
+            {isImage.length > 0 && isImage[0] !== '' && isImage?.map((image) => <ImagePreview key={image} image={image} />)}
+            <Box sx={{ position: 'absolute', right: '15px', top: '15px' }} onClick={deleteImageHandler}>
+                <IconButton>
+                    <DeleteOutlineIcon />
+                </IconButton>
+            </Box>
         </Box>
     );
 };

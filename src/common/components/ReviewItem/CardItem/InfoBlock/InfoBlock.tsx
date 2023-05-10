@@ -36,8 +36,6 @@ const InfoBlock: FC<InfoBlockPropsType> = ({ review, paddingLeft, contentWidth }
         navigate(`/update-review/${review.id}`);
     };
 
-    console.log('review.author_name: ', review.author_name);
-
     return (
         <Box sx={{ minHeight: '220px', width: contentWidth, pl: paddingLeft }}>
             <CardContent>

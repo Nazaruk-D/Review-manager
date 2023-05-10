@@ -47,7 +47,10 @@
         "error update": "Failed to update profile information",
         "error get review": "Failed to get reviews",
         "no reviews found": "No reviews found",
-        "no users found": "No user found"
+        "no users found": "No user found",
+        "delete profile": "Delete profile",
+        "confirm": "Confirm",
+        "cancel": "Cancel"
       },
       "table":{
         "none": "None",
@@ -134,7 +137,8 @@
         "change role": "Role successfully changed to",
         "blocked status": "User successfully blocked",
         "active status": "User successfully unlocked",
-        "delete user": "User deleted successfully"
+        "delete user": "User deleted successfully",
+        "edit profile": "Profile data changed"
       },
       "footer": {
         "copyright": "Dmitry Nazaruk © 2023"
@@ -189,7 +193,10 @@
         "error update": "Не получилось обновить информацию профиля",
         "error get review": "Не получилось обновить обзоры",
         "no reviews found": "Ни одного обзора не найдено",
-        "no users found": "Ни одного пользователя не найдено"
+        "no users found": "Ни одного пользователя не найдено",
+        "delete profile": "Удалить профиль",
+        "confirm": "Подтвердить",
+        "cancel": "отменить"
       },
       "table":{
         "none": "Пусто",
@@ -273,7 +280,8 @@
         "change role": "Роль успешно изменена на",
         "blocked status": "Пользователь успешно заблокирован",
         "active status": "Пользователь успешно разблокирован",
-        "delete user": "Пользователь успешно удалён"
+        "delete user": "Пользователь успешно удалён",
+        "edit profile": "Данные профиля изменены"
       },
       "footer": {
         "copyright": "Дмитрий Назарук © 2023"

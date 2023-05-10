@@ -26,13 +26,6 @@ const userSlice = createSlice({
             state.role = payload!.role;
             state.isBlocked = payload!.is_blocked;
         },
-        uploadUserData(state, { payload }: PayloadAction<{ newName: string; newPhoto?: string }>) {
-            state.user!.user_name = payload.newName;
-            if (payload.newPhoto) {
-                state.user!.main_photo = payload.newPhoto;
-                state.user!.small_photo = payload.newPhoto;
-            }
-        },
         setLoggedIn(state, { payload }: PayloadAction<boolean>) {
             state.isLoggedIn = payload;
         },
@@ -42,12 +35,9 @@ const userSlice = createSlice({
             state.isLoggedIn = false;
             state.isBlocked = false;
         },
-        deletePhoto(state) {
-            state.user!.main_photo = '';
-        },
     },
 });
 
-export const { setUser, setLoggedIn, setLoggedOut, uploadUserData, deletePhoto } = userSlice.actions;
+export const { setUser, setLoggedIn, setLoggedOut } = userSlice.actions;
 
 export default userSlice.reducer;
