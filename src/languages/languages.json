@@ -64,8 +64,8 @@
       },
       "review editor": {
         "review editor": "Review editor",
-        "title": "Title",
         "review title": "Review title",
+        "title": "Work name",
         "category": "Category",
         "text": "Text",
         "rating": "Rating",
@@ -196,8 +196,8 @@
       },
       "review editor": {
         "review editor":  "Редактирование обзора",
-        "title": "Название",
         "review title": "Название обзора",
+        "title": "Название произведения",
         "category": "Категория",
         "text": "Описание",
         "rating": "Оценка",

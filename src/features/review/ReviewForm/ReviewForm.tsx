@@ -140,16 +140,11 @@ export const ReviewForm: FC<ReviewFromPropsType> = ({ initial, url, images, prof
                                 multiple
                                 freeSolo
                                 options={tags || []}
+                                autoSelect
                                 value={formik.values.tags}
                                 onOpen={() => formik.handleBlur('tags')}
                                 renderInput={(params) => (
-                                    <TextField
-                                        {...params}
-                                        label={t('tags')}
-                                        fullWidth
-                                        placeholder={t('press enter')!}
-                                        onBlur={formik.handleBlur('tags')}
-                                    />
+                                    <TextField {...params} label={t('tags')} fullWidth onBlur={formik.handleBlur('tags')} />
                                 )}
                                 onChange={(_, value) => {
                                     formik.setFieldValue('tags', value);

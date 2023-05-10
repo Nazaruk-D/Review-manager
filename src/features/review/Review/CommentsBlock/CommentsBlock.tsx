@@ -8,12 +8,18 @@ import { DefaultEventsMap } from 'socket.io/dist/typed-events';
 import s from './CommentsBlock.module.scss';
 import { useDeleteCommentMutation, useGetCommentsQuery, useLazyGetCommentsQuery } from '../../../../store/api/itemAPI';
 import { CommentType } from '../../../../types/CommentType';
+import { Role } from '../../../../enums/role';
+import NewReviewButton from '../../../profile/NewReviewButton/NewReviewButton';
+import { useAppSelector } from '../../../../hooks/useRedux';
+import { selectorRole, selectorUserId } from '../../../../store/selectors/userSelector';
 
 type CommentsBlockPropsType = {
     ws: Socket<DefaultEventsMap, DefaultEventsMap>;
 };
 
 const CommentsBlock: FC<CommentsBlockPropsType> = ({ ws }) => {
+    const userID = useAppSelector(selectorUserId);
+    const isAdmin = useAppSelector(selectorRole);
     const [comments, setComments] = useState<CommentType[]>([]);
     const { reviewId = '' } = useParams<string>();
     const { data, error, isLoading } = useGetCommentsQuery({ reviewId });
@@ -54,9 +60,11 @@ const CommentsBlock: FC<CommentsBlockPropsType> = ({ ws }) => {
                                 {dateFormat(comment.updated_at, 'mmmm dS, yyyy, h:MM:ss TT')}
                             </Typography>
                             <Typography variant="body1">{comment.body}</Typography>
-                            <IconButton className={s.deleteButton} onClick={() => onClickHandler(comment.id)}>
-                                <ClearIcon fontSize="small" />
-                            </IconButton>
+                            {(userID === comment.author_id || isAdmin === Role.Admin) && (
+                                <IconButton className={s.deleteButton} onClick={() => onClickHandler(comment.id)}>
+                                    <ClearIcon fontSize="small" />
+                                </IconButton>
+                            )}
                         </Grid>
                     </Grid>
                 </Box>
