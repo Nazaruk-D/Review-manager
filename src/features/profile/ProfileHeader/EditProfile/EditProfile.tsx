@@ -50,6 +50,7 @@ const EditProfile: FC<EditProfilePropsType> = ({ t }) => {
 
     const handleSaveChanges = () => {
         if (userId) {
+            console.log('userId: ', userId);
             uploadInfo({ userId, newName, image });
         }
         if (!error) {

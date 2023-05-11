@@ -21,9 +21,9 @@ const AdminTable: FC<AdminTablePropsType> = ({ users }) => {
     const dispatch = useAppDispatch();
     const { t } = useTranslation('translation', { keyPrefix: 'profile' });
     const { t: tSnackbar } = useTranslation('translation', { keyPrefix: 'snackbar messages' });
-    const [changeAdminStatus, { error: RoleError }] = useChangeAdminStatusMutation();
-    const [changeIsBlockedStatus, { error: statusError }] = useChangeIsBlockedStatusMutation();
-    const [deleteUser, { error: deleteError, isLoading, isSuccess }] = useDeleteUserMutation();
+    const [changeAdminStatus, { error: roleError, isSuccess: roleSuccess }] = useChangeAdminStatusMutation();
+    const [changeIsBlockedStatus, { error: statusError, isSuccess: statusSuccess }] = useChangeIsBlockedStatusMutation();
+    const [deleteUser, { error: deleteError, isLoading, isSuccess: deleteSuccess }] = useDeleteUserMutation();
     const [currentPage, setCurrentPage] = useState(1);
 
     const itemsPerPage = 10;
@@ -33,10 +33,10 @@ const AdminTable: FC<AdminTablePropsType> = ({ users }) => {
     const startIndex = (currentPage - 1) * itemsPerPage;
 
     const changeAdminStatusHandler = (userId: string, status: boolean) => {
-        if (status && !RoleError) {
+        if (status && !roleError) {
             changeAdminStatus({ userId, role: Role.Admin });
             dispatch(setAppInformMessage(`${tSnackbar('change role')} ${Role.Admin}`));
-        } else if (!status && !RoleError) {
+        } else if (!status && !roleError) {
             changeAdminStatus({ userId, role: Role.User });
             dispatch(setAppInformMessage(`${tSnackbar('change role')} ${Role.User}`));
         }
@@ -48,7 +48,7 @@ const AdminTable: FC<AdminTablePropsType> = ({ users }) => {
             dispatch(setAppInformMessage(`${tSnackbar('blocked status')}`));
         } else if (!status && !statusError) {
             changeIsBlockedStatus({ userId, status });
-            dispatch(setAppInformMessage(`${tSnackbar('active status')} ${Role.User}`));
+            dispatch(setAppInformMessage(`${tSnackbar('active status')}`));
         }
     };
 
@@ -64,7 +64,7 @@ const AdminTable: FC<AdminTablePropsType> = ({ users }) => {
     };
 
     useEffect(() => {
-        if (RoleError) {
+        if (roleError) {
             dispatch(setAppErrorAC('Role change error'));
         }
         if (statusError) {
@@ -73,7 +73,7 @@ const AdminTable: FC<AdminTablePropsType> = ({ users }) => {
         if (deleteError) {
             dispatch(setAppErrorAC('Delete user error'));
         }
-    }, [RoleError, statusError, deleteError]);
+    }, [roleError, statusError, deleteError]);
 
     return (
         <TableContainer component={Paper} sx={{ mt: 3, mb: 3 }}>
@@ -100,7 +100,7 @@ const AdminTable: FC<AdminTablePropsType> = ({ users }) => {
                             changeAdminStatus={changeAdminStatusHandler}
                             deleteUser={deleteUserHandler}
                             isLoading={isLoading}
-                            isSuccess={isSuccess}
+                            isSuccess={deleteSuccess}
                         />
                     ))}
                     {users.length === 0 && (

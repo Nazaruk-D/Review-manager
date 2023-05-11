@@ -26,6 +26,7 @@ const Review = () => {
     const { data: review, isLoading, error } = useGetReviewByIdQuery({ reviewId });
     const userId = useAppSelector(selectorUserId);
     const remoteWebSocketBaseUrl = process.env.REACT_APP_REMOTE_WB_BASE_URL;
+
     const sendComment = async (comment: string) => {
         if (reviewId && userId && comment && ws) {
             const body = { reviewId, userId, comment };

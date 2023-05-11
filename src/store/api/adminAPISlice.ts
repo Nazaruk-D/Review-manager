@@ -8,7 +8,7 @@ import { Role } from '../../enums/role';
 export const adminAPISlice = createApi({
     reducerPath: 'adminAPI',
     baseQuery: fetchBaseQuery({
-        baseUrl: process.env.REACT_APP_REMOTE_BASE_URL,
+        baseUrl: 'http://localhost:7542/',
         credentials: 'include',
     }),
     tagTypes: [TagType.User],

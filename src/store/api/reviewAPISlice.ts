@@ -9,7 +9,7 @@ import { TagsCloudType } from '../../types/TagsCloudType';
 export const reviewAPISlice = createApi({
     reducerPath: 'reviewAPI',
     baseQuery: fetchBaseQuery({
-        baseUrl: process.env.REACT_APP_REMOTE_BASE_URL,
+        baseUrl: 'http://localhost:7542/',
         credentials: 'include',
     }),
     tagTypes: [TagType.Review, TagType.ReviewById],
@@ -34,19 +34,7 @@ export const reviewAPISlice = createApi({
             query: () => `${PathAPI.GetPopularTags}`,
         }),
         sendReview: builder.mutation<ResponseType<ReviewResponseType>, SendReviewType>({
-            query: ({
-                reviewId,
-                title,
-                category,
-                assessment,
-                uploadImage,
-                body,
-                tags,
-                url,
-                review_title,
-                author_name,
-                author_id,
-            }) => {
+            query: ({ reviewId, title, category, assessment, uploadImage, body, tags, url, review_title, author_id }) => {
                 const formData = new FormData();
                 formData.append('reviewId', reviewId);
                 formData.append('author_id', author_id);
@@ -54,7 +42,6 @@ export const reviewAPISlice = createApi({
                 formData.append('title', title);
                 formData.append('category', category);
                 formData.append('body', body);
-                formData.append('author_name', author_name);
                 formData.append('assessment', assessment);
                 if (tags) {
                     tags.forEach((tag) => {

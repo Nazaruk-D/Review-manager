@@ -7,7 +7,7 @@ import { TagType } from '../../enums/tagType';
 export const userAPISlice = createApi({
     reducerPath: 'userAPI',
     baseQuery: fetchBaseQuery({
-        baseUrl: process.env.REACT_APP_REMOTE_BASE_URL,
+        baseUrl: 'http://localhost:7542/',
         credentials: 'include',
     }),
     tagTypes: [TagType.User],
@@ -28,8 +28,7 @@ export const userAPISlice = createApi({
                 }
                 if (image) {
                     image.forEach((file) => {
-                        const blob = new Blob([file], { type: file.type });
-                        formData.append('profilePhoto', blob);
+                        formData.append('profilePhoto', file);
                     });
                 }
                 const fetchConfig: RequestInit = {

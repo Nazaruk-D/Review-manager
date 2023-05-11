@@ -47,7 +47,6 @@ export const ReviewForm: FC<ReviewFromPropsType> = ({ initial, url, images, prof
             if (values) {
                 sendReview({
                     ...values,
-                    author_name: user!.user_name,
                     uploadImage,
                     author_id: profileId,
                     reviewId,
