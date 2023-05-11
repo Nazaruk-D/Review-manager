@@ -1,17 +1,17 @@
 import React, { FC } from 'react';
-import { Box, CardContent, IconButton, Paper, Typography } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
+import { Box, CardContent, IconButton, Paper, Typography } from '@mui/material';
 import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import dateFormat from 'dateformat';
-import { Role } from '../../../../../enums/role';
 import Like from '../../../Like/Like';
 import RatingReview from '../../../RatingReview/RatingReview';
-import { ReviewResponseType } from '../../../../../types/ReviewResponseType';
+import { getCategoryTranslation } from '../../../../../utils/getCategoryTranslation';
 import { useAppSelector } from '../../../../../hooks/useRedux';
 import { selectorRole, selectorUserId } from '../../../../../store/selectors/userSelector';
-import { getCategoryTranslation } from '../../../../../utils/getCategoryTranslation';
+import { ReviewResponseType } from '../../../../../types/ReviewResponseType';
+import { Role } from '../../../../../enums/role';
 
 type InfoBlockPropsType = {
     review: ReviewResponseType;

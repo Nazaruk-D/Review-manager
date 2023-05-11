@@ -1,18 +1,18 @@
 import React, { useCallback, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useFormik } from 'formik';
 import { Box, Button, CircularProgress, Grid, Paper, TextField, Typography } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import GoogleIcon from '@mui/icons-material/Google';
 import { Provider } from '@supabase/supabase-js';
-import { useTranslation } from 'react-i18next';
-import DiscordIcon from '../../../../common/svg/discord.svg';
-import s from './LoginForm.module.scss';
-import { Path } from '../../../../enums/path';
 import { useAppDispatch } from '../../../../hooks/useRedux';
 import { supabase } from '../../../../utils/supabase';
 import { getUserData } from '../../../../utils/getUserData';
 import { setAppErrorAC } from '../../../../store/slices/appSlice';
 import { loginValidation } from '../loginValidation';
+import s from './LoginForm.module.scss';
+import { Path } from '../../../../enums/path';
+import DiscordIcon from '../../../../common/svg/discord.svg';
 
 const LoginForm = () => {
     const navigate = useNavigate();

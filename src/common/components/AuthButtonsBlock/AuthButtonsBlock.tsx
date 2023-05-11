@@ -1,13 +1,13 @@
 import React from 'react';
-import { Avatar, Box, Button, IconButton, Menu, MenuItem, Tooltip, Typography } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { Path } from '../../../enums/path';
+import { Avatar, Box, Button, IconButton, Menu, MenuItem, Tooltip, Typography } from '@mui/material';
 import { useAppDispatch, useAppSelector } from '../../../hooks/useRedux';
-import { selectorUserData } from '../../../store/selectors/userSelector';
 import { setLoggedOut } from '../../../store/slices/userSlice';
 import { supabase } from '../../../utils/supabase';
+import { selectorUserData } from '../../../store/selectors/userSelector';
 import { Role } from '../../../enums/role';
+import { Path } from '../../../enums/path';
 import avatar from '../../png/avatar.png';
 
 const AuthButtonsBlock = () => {

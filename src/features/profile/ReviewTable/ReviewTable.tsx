@@ -1,18 +1,18 @@
 import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { useNavigate } from 'react-router-dom';
 import { Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography } from '@mui/material';
 import { Pagination } from '@mui/lab';
-import { useNavigate } from 'react-router-dom';
 import ReviewRow from './ReviewRow/ReviewRow';
 import { useAppDispatch, useAppSelector } from '../../../hooks/useRedux';
 import { sortReviewsSelector } from '../../../store/selectors/sortSelector';
-import { ReviewFilterType } from '../../../types/ReviewFilterType';
-import { Sort } from '../../../enums/sort';
+import { setAppInformMessage } from '../../../store/slices/appSlice';
 import { setReviewFilter } from '../../../store/slices/sortSlice';
 import { selectorRole, selectorUserId } from '../../../store/selectors/userSelector';
-import { Role } from '../../../enums/role';
 import { useDeleteReviewByIdMutation } from '../../../store/api/reviewAPISlice';
-import { setAppInformMessage } from '../../../store/slices/appSlice';
+import { Sort } from '../../../enums/sort';
+import { Role } from '../../../enums/role';
+import { ReviewFilterType } from '../../../types/ReviewFilterType';
 
 const ReviewTable = () => {
     const dispatch = useAppDispatch();

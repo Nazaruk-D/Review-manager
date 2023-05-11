@@ -1,7 +1,7 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import { Box, Container, IconButton, Typography } from '@mui/material';
 import { Facebook, GitHub, Instagram, LinkedIn } from '@mui/icons-material';
-import { useTranslation } from 'react-i18next';
 
 const Footer = () => {
     const { t } = useTranslation('translation', { keyPrefix: 'footer' });

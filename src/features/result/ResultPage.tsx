@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from 'react';
-import { Box, Container, Typography } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import { NavLink } from 'react-router-dom';
+import { Box, Container, Typography } from '@mui/material';
 import { Pagination } from '@mui/lab';
-import { Path } from '../../enums/path';
 import { useAppDispatch, useAppSelector } from '../../hooks/useRedux';
 import { selectorSearchValue } from '../../store/selectors/reviewSelector';
 import { useGetSearchResultQuery } from '../../store/api/itemAPI';
+import { setAppErrorAC } from '../../store/slices/appSlice';
 import ReviewItem from '../../common/components/ReviewItem/ReviewItem';
 import Loader from '../../common/components/Loader/Loader';
-import { setAppErrorAC } from '../../store/slices/appSlice';
+import { Path } from '../../enums/path';
 
 const ResultPage = () => {
     const dispatch = useAppDispatch();

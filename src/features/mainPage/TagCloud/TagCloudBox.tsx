@@ -1,11 +1,11 @@
 import React, { FC, memo } from 'react';
-import { Box, Typography } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import ReactWordCloud from 'react-wordcloud';
+import { Box, Typography } from '@mui/material';
 import { useAppDispatch } from '../../../hooks/useRedux';
-import { Path } from '../../../enums/path';
 import { setSearch } from '../../../store/slices/reviewSlice';
 import { TagsCloudType } from '../../../types/TagsCloudType';
+import { Path } from '../../../enums/path';
 
 type TagCloudBoxPropsType = {
     tags: TagsCloudType[];

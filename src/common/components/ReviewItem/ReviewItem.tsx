@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
+import { NavLink } from 'react-router-dom';
 import { Card, Grid } from '@mui/material';
 import { styled } from '@mui/material/styles';
-import { NavLink } from 'react-router-dom';
 import { ReviewResponseType } from '../../../types/ReviewResponseType';
 import CardItem from './CardItem/CardItem';
 

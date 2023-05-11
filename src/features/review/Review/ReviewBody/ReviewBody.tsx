@@ -1,8 +1,8 @@
 import React, { FC } from 'react';
 import { Grid } from '@mui/material';
-import { ReviewResponseType } from '../../../../types/ReviewResponseType';
 import ReviewTags from './ReviewTags/ReviewTags';
 import ReviewText from './ReviewText/ReviewText';
+import { ReviewResponseType } from '../../../../types/ReviewResponseType';
 
 type ReviewBodyPropsType = {
     review: ReviewResponseType;

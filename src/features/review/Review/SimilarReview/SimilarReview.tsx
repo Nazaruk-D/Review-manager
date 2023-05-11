@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
-import { Box, Card, CardContent, Grid, Typography } from '@mui/material';
 import { NavLink } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
+import { Box, Card, CardContent, Grid, Typography } from '@mui/material';
 import { ReviewResponseType } from '../../../../types/ReviewResponseType';
 
 type SimilarReviewPropsType = {

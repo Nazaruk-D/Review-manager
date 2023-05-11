@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Container } from '@mui/material';
 import BlockReviews from './BlockReviews/BlockReviews';
 import TagCloudBox from './TagCloud/TagCloudBox';

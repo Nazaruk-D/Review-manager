@@ -4,9 +4,9 @@ import { Container } from '@mui/material';
 import { ReviewForm } from '../ReviewForm/ReviewForm';
 import { useGetReviewByIdQuery } from '../../../store/api/reviewAPISlice';
 import Loader from '../../../common/components/Loader/Loader';
-import { ReviewResponseType } from '../../../types/ReviewResponseType';
 import { useAppDispatch } from '../../../hooks/useRedux';
 import { setAppErrorAC } from '../../../store/slices/appSlice';
+import { ReviewResponseType } from '../../../types/ReviewResponseType';
 
 const EditReview = () => {
     const dispatch = useAppDispatch();

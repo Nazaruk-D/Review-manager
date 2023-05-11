@@ -1,20 +1,20 @@
 import React, { FC, useEffect, useState } from 'react';
-import { Box, Button, CircularProgress, Grid, IconButton, Modal, TextField, Typography } from '@mui/material';
-import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
-import { TFunction } from 'i18next';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
-import { Path } from '../../../../enums/path';
-import s from './EditProfiile.module.scss';
+import { TFunction } from 'i18next';
+import { Box, Button, CircularProgress, Grid, IconButton, Modal, TextField, Typography } from '@mui/material';
+import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import { useAppDispatch, useAppSelector } from '../../../../hooks/useRedux';
 import { useUpdateInfoMutation } from '../../../../store/api/userAPISlice';
 import UploadImage from '../../../../common/components/UploadImage/UploadImage';
-import { setAppErrorAC, setAppInformMessage } from '../../../../store/slices/appSlice';
 import { userIdSelector, userNameSelector, userPhotoSelector } from '../../../../store/selectors/adminSelector';
-import { buttonStyles } from '../../../../styles/common/buttonStyles';
 import { selectorThemeApp } from '../../../../store/selectors/appSelector';
 import { useDeleteUserMutation } from '../../../../store/api/adminAPISlice';
+import { setAppErrorAC, setAppInformMessage } from '../../../../store/slices/appSlice';
 import { setLoggedOut, setUser } from '../../../../store/slices/userSlice';
+import { buttonStyles } from '../../../../styles/common/buttonStyles';
+import { Path } from '../../../../enums/path';
+import s from './EditProfiile.module.scss';
 
 type EditProfilePropsType = {
     t: TFunction;

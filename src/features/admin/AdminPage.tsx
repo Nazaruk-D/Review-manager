@@ -1,14 +1,14 @@
 import React, { useEffect } from 'react';
-import { Container } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
+import { Container } from '@mui/material';
 import { useAppSelector } from '../../hooks/useRedux';
 import { selectorIsLogin, selectorRole } from '../../store/selectors/userSelector';
-import { Path } from '../../enums/path';
-import { Role } from '../../enums/role';
-import { UserType } from '../../types/UserType';
 import AdminTable from './AdminTable/AdminTable';
 import Loader from '../../common/components/Loader/Loader';
 import { useGetUsersQuery } from '../../store/api/adminAPISlice';
+import { Path } from '../../enums/path';
+import { Role } from '../../enums/role';
+import { UserType } from '../../types/UserType';
 
 const AdminPage = () => {
     const isLogin = useAppSelector(selectorIsLogin);

@@ -1,9 +1,9 @@
 import React, { FC, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { Box, CircularProgress, IconButton, TableCell, Typography } from '@mui/material';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import CheckIcon from '@mui/icons-material/Check';
 import CloseIcon from '@mui/icons-material/Close';
-import { useTranslation } from 'react-i18next';
 import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
 
 type DeleteTableCellPropsType = {

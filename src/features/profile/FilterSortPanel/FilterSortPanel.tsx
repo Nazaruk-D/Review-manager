@@ -1,15 +1,14 @@
 import React, { ChangeEvent, useEffect } from 'react';
-import { FormControl, Grid, InputLabel, MenuItem, Select, SelectChangeEvent, TextField } from '@mui/material';
 import { useTranslation } from 'react-i18next';
+import { FormControl, Grid, InputLabel, MenuItem, Select, SelectChangeEvent, TextField } from '@mui/material';
 import { CATEGORIES } from '../../../common/constants/constants';
 import { useAppDispatch, useAppSelector } from '../../../hooks/useRedux';
 import { categoryFilterSelector, sortReviewsFilterSelector, sortSearchSortSelector } from '../../../store/selectors/sortSelector';
 import { selectorUserReviews } from '../../../store/selectors/reviewSelector';
 import { setCategoryFilter, setReviewFilter, setSearchSort, setSortedReviews } from '../../../store/slices/sortSlice';
 import { sortReviewsUtil } from '../../../utils/sort-utils';
-import { Sort } from '../../../enums/sort';
-import { Category } from '../../../enums/category';
 import { getCategoryTranslation } from '../../../utils/getCategoryTranslation';
+import { Sort } from '../../../enums/sort';
 import { CategoryFilterType } from '../../../types/CategoryFilterType';
 
 const FilterSortPanel = () => {

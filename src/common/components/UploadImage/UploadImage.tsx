@@ -1,12 +1,12 @@
 import React, { FC, useEffect, useState } from 'react';
-import { Box, IconButton, Typography } from '@mui/material';
 import { useDropzone } from 'react-dropzone';
-import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 import { useTranslation } from 'react-i18next';
-import s from './UploadImage.module.scss';
+import { Box, IconButton, Typography } from '@mui/material';
+import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 import { setAppErrorAC } from '../../../store/slices/appSlice';
 import { useAppDispatch } from '../../../hooks/useRedux';
 import ImagePreview from '../ImagePreview/ImagePreview';
+import s from './UploadImage.module.scss';
 
 type UploadImagePropsType = {
     images: File[] | null;

@@ -1,9 +1,9 @@
 import React, { FC } from 'react';
 import { Box, Grid, Typography } from '@mui/material';
-import { TFunction } from 'i18next';
 import dateFormat from 'dateformat';
-import s from './ProfileInfo.module.scss';
+import { TFunction } from 'i18next';
 import { UserType } from '../../../../types/UserType';
+import s from './ProfileInfo.module.scss';
 
 type ProfileInfoPropsType = {
     t: TFunction;

@@ -1,22 +1,22 @@
 import React, { FC, useEffect, useState } from 'react';
-import { useFormik } from 'formik';
-import { Autocomplete, Box, Button, CircularProgress, Container, Grid, TextField, Typography } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
-import { ReviewType } from '../../../types/ReviewType';
+import { useFormik } from 'formik';
+import { Autocomplete, Box, Button, CircularProgress, Container, Grid, TextField, Typography } from '@mui/material';
 import { useAppDispatch, useAppSelector } from '../../../hooks/useRedux';
 import { selectorUserData } from '../../../store/selectors/userSelector';
-import UploadImage from '../../../common/components/UploadImage/UploadImage';
-import { ErrorStyle } from '../../../styles/common/ErrorStyle';
-import { useSendReviewMutation } from '../../../store/api/reviewAPISlice';
 import { selectorThemeApp } from '../../../store/selectors/appSelector';
+import UploadImage from '../../../common/components/UploadImage/UploadImage';
+import { useSendReviewMutation } from '../../../store/api/reviewAPISlice';
+import { useGetProductNamesQuery, useGetTagsQuery } from '../../../store/api/itemAPI';
 import MarkDownEditor from '../../../common/components/MarkDownEditor/MarkDownEditor';
-import { buttonStyles } from '../../../styles/common/buttonStyles';
 import SelectCategory from '../../../common/components/SelectCategory/SelectCategory';
 import { validateForm } from './validateForm';
 import AssessmentControl from '../../../common/components/AssessmentControl/AssessmentControl';
 import { setAppInformMessage } from '../../../store/slices/appSlice';
-import { useGetProductNamesQuery, useGetTagsQuery } from '../../../store/api/itemAPI';
+import { buttonStyles } from '../../../styles/common/buttonStyles';
+import { ErrorStyle } from '../../../styles/common/ErrorStyle';
+import { ReviewType } from '../../../types/ReviewType';
 
 type ReviewFromPropsType = {
     initial: ReviewType;

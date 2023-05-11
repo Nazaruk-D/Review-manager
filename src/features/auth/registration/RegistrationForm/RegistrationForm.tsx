@@ -1,14 +1,14 @@
 import React, { useState } from 'react';
-import { useFormik } from 'formik';
-import { Box, Button, CircularProgress, Paper, TextField, Typography } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
-import { Path } from '../../../../enums/path';
-import s from '../../login/LoginForm/LoginForm.module.scss';
+import { useFormik } from 'formik';
+import { Box, Button, CircularProgress, Paper, TextField, Typography } from '@mui/material';
 import { supabase } from '../../../../utils/supabase';
 import { useAppDispatch } from '../../../../hooks/useRedux';
 import { setAppErrorAC, setAppInformMessage } from '../../../../store/slices/appSlice';
 import { registerValidation } from '../registerValidation';
+import { Path } from '../../../../enums/path';
+import s from '../../login/LoginForm/LoginForm.module.scss';
 
 const RegistrationForm = () => {
     const dispatch = useAppDispatch();

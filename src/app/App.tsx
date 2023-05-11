@@ -1,5 +1,4 @@
 import React, { useEffect, useMemo } from 'react';
-import './App.css';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import { CssBaseline, ThemeProvider } from '@mui/material';
 import routes from '../routes/routes';

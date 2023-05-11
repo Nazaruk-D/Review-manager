@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
+import { useParams } from 'react-router-dom';
 import { Box, Button, Container } from '@mui/material';
 import io, { Socket } from 'socket.io-client';
 import JsPDF from 'jspdf';
 import html2canvas from 'html2canvas';
 import { DefaultEventsMap } from 'socket.io/dist/typed-events';
-import { useTranslation } from 'react-i18next';
-import { useParams } from 'react-router-dom';
 import CommentsBlock from './CommentsBlock/CommentsBlock';
 import SendCommentForm from './SendCommentForm/SendCommentForm';
 import ReviewBody from './ReviewBody/ReviewBody';

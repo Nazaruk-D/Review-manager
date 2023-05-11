@@ -1,17 +1,17 @@
 import React, { FC, useEffect, useState } from 'react';
-import { Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography } from '@mui/material';
 import { useTranslation } from 'react-i18next';
+import { Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography } from '@mui/material';
 import { Pagination } from '@mui/lab';
-import { UserType } from '../../../types/UserType';
 import AdminTableRow from './AdminTableRow/AdminTableRow';
 import {
     useChangeAdminStatusMutation,
     useChangeIsBlockedStatusMutation,
     useDeleteUserMutation,
 } from '../../../store/api/adminAPISlice';
-import { Role } from '../../../enums/role';
 import { useAppDispatch } from '../../../hooks/useRedux';
 import { setAppErrorAC, setAppInformMessage } from '../../../store/slices/appSlice';
+import { Role } from '../../../enums/role';
+import { UserType } from '../../../types/UserType';
 
 type AdminTablePropsType = {
     users: UserType[];

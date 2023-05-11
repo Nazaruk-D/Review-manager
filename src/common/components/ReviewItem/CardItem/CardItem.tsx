@@ -1,8 +1,8 @@
 import React, { FC } from 'react';
 import { Card } from '@mui/material';
-import { ReviewResponseType } from '../../../../types/ReviewResponseType';
 import PhotoBlock from './PhotoBlock/PhotoBlock';
 import InfoBlock from './InfoBlock/InfoBlock';
+import { ReviewResponseType } from '../../../../types/ReviewResponseType';
 
 type CardPropsType = {
     review: ReviewResponseType;

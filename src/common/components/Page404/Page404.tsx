@@ -1,6 +1,6 @@
 import React from 'react';
-import { Box, Button, Container, Typography } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
+import { Box, Button, Container, Typography } from '@mui/material';
 import image404 from '../../png/404.png';
 import { Path } from '../../../enums/path';
 

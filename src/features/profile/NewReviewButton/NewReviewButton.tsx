@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
-import { Button } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
+import { Button } from '@mui/material';
 import { useAppSelector } from '../../../hooks/useRedux';
 import { selectorThemeApp } from '../../../store/selectors/appSelector';
 import { buttonStyles } from '../../../styles/common/buttonStyles';

@@ -1,6 +1,5 @@
 import React from 'react';
 import { createRoutesFromElements, Route } from 'react-router-dom';
-import { Path } from '../enums/path';
 import MainPage from '../features/mainPage/MainPage';
 import Login from '../features/auth/login/Login';
 import Registration from '../features/auth/registration/Registration';
@@ -13,6 +12,7 @@ import CreateReview from '../features/review/CreateReview/CreateReview';
 import ResultPage from '../features/result/ResultPage';
 import Page404 from '../common/components/Page404/Page404';
 import PrivacyPolicy from '../common/components/PrivacyPolicy/PrivacyPolicy';
+import { Path } from '../enums/path';
 
 const routes = createRoutesFromElements(
     <Route path={Path.Root} element={<Root />}>

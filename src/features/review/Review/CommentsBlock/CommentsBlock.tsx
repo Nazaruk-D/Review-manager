@@ -1,16 +1,16 @@
 import React, { FC, useEffect, useState } from 'react';
-import { Avatar, Box, Grid, IconButton, Typography } from '@mui/material';
 import { useParams } from 'react-router-dom';
+import { DefaultEventsMap } from 'socket.io/dist/typed-events';
+import { Avatar, Box, Grid, IconButton, Typography } from '@mui/material';
 import dateFormat from 'dateformat';
 import ClearIcon from '@mui/icons-material/Clear';
 import { Socket } from 'socket.io-client';
-import { DefaultEventsMap } from 'socket.io/dist/typed-events';
-import s from './CommentsBlock.module.scss';
 import { useDeleteCommentMutation, useGetCommentsQuery, useLazyGetCommentsQuery } from '../../../../store/api/itemAPI';
-import { CommentType } from '../../../../types/CommentType';
-import { Role } from '../../../../enums/role';
 import { useAppSelector } from '../../../../hooks/useRedux';
 import { selectorRole, selectorUserId } from '../../../../store/selectors/userSelector';
+import { CommentType } from '../../../../types/CommentType';
+import { Role } from '../../../../enums/role';
+import s from './CommentsBlock.module.scss';
 
 type CommentsBlockPropsType = {
     ws: Socket<DefaultEventsMap, DefaultEventsMap>;

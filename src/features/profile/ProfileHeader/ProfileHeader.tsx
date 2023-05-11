@@ -1,14 +1,14 @@
 import React, { FC } from 'react';
-import { Grid } from '@mui/material';
 import { useTranslation } from 'react-i18next';
-import s from './ProfileHeader.module.scss';
+import { Grid } from '@mui/material';
 import EditProfile from './EditProfile/EditProfile';
 import ProfileInfo from './ProfileInfo/ProfileInfo';
 import Avatar from './Avatar/Avatar';
-import { UserType } from '../../../types/UserType';
 import { useAppSelector } from '../../../hooks/useRedux';
 import { selectorRole, selectorUserId } from '../../../store/selectors/userSelector';
 import { Role } from '../../../enums/role';
+import { UserType } from '../../../types/UserType';
+import s from './ProfileHeader.module.scss';
 
 type ProfileHeaderPropsType = {
     userProfileData: UserType;

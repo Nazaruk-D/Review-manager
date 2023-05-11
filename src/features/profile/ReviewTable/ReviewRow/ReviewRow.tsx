@@ -1,15 +1,15 @@
 import React, { FC } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { TableCell, TableRow } from '@mui/material';
 import dateFormat from 'dateformat';
-import { useNavigate } from 'react-router-dom';
-import s from './ReviewRow.module.scss';
-import noImage from '../../../../common/png/logo.png';
-import { ReviewResponseType } from '../../../../types/ReviewResponseType';
-import { Role } from '../../../../enums/role';
 import { useAppSelector } from '../../../../hooks/useRedux';
 import { selectorRole, selectorUserId } from '../../../../store/selectors/userSelector';
 import DeleteTableCell from '../../../../common/components/DelteTableCell/DeleteTableCell';
 import { getCategoryTranslation } from '../../../../utils/getCategoryTranslation';
+import s from './ReviewRow.module.scss';
+import noImage from '../../../../common/png/logo.png';
+import { ReviewResponseType } from '../../../../types/ReviewResponseType';
+import { Role } from '../../../../enums/role';
 
 type CardsRowPropsType = {
     deleteReview: (reviewId: string) => void;

@@ -1,12 +1,12 @@
 import React, { FC, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { FormControlLabel, Switch, TableCell, TableRow } from '@mui/material';
 import dateFormat from 'dateformat';
-import { useNavigate } from 'react-router-dom';
+import DeleteTableCell from '../../../../common/components/DelteTableCell/DeleteTableCell';
 import { UserType } from '../../../../types/UserType';
 import s from './AdminTableRow.module.scss';
 import { Role } from '../../../../enums/role';
 import avatar from '../../../../common/png/avatar.png';
-import DeleteTableCell from '../../../../common/components/DelteTableCell/DeleteTableCell';
 
 type AdminTableRowPropsType = {
     user: UserType;

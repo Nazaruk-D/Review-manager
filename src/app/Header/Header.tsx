@@ -1,6 +1,6 @@
 import React from 'react';
-import { AppBar, Box, Container, Toolbar } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
+import { AppBar, Box, Container, Toolbar } from '@mui/material';
 import Logo from '../../common/components/Logo/Logo';
 import LanguageSwitcher from '../../common/components/LanguageSwitcher/LanguageSwitcher';
 import ThemeSwitcher from '../../common/components/ThemeSwitcher/ThemeSwitcher';

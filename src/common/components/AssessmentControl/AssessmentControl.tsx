@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
-import { FormControl, FormControlLabel, FormLabel, Radio, RadioGroup } from '@mui/material';
 import { TFunction } from 'i18next';
 import { FormikValues } from 'formik';
+import { FormControl, FormControlLabel, FormLabel, Radio, RadioGroup } from '@mui/material';
 
 type AssessmentControlPropsType = {
     t: TFunction;

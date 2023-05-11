@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
-import { FormControl, InputLabel, MenuItem, Select } from '@mui/material';
 import { useTranslation } from 'react-i18next';
+import { FormControl, InputLabel, MenuItem, Select } from '@mui/material';
 import { FormikValues } from 'formik';
 import { CATEGORIES } from '../../constants/constants';
 

@@ -1,11 +1,10 @@
 import React, { FC } from 'react';
 import { Box, Grid } from '@mui/material';
-import { NavLink, useNavigate } from 'react-router-dom';
-import { useTranslation } from 'react-i18next';
-import { Path } from '../../../../../enums/path';
-import s from './ReviewTags.module.scss';
+import { useNavigate } from 'react-router-dom';
 import { setSearch } from '../../../../../store/slices/reviewSlice';
 import { useAppDispatch } from '../../../../../hooks/useRedux';
+import { Path } from '../../../../../enums/path';
+import s from './ReviewTags.module.scss';
 
 type ReviewTagsPropsType = {
     tags: string[] | undefined;
