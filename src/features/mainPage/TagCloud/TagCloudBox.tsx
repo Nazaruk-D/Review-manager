@@ -44,7 +44,6 @@ const TagCloudBox: FC<TagCloudBoxPropsType> = ({ tags, isLoading }) => {
                     words={tags.map((tag) => ({ text: tag.name, value: tag.total_mentions }))}
                 />
             )}
-            {isLoading && <Loader />}
         </Box>
     );
 };

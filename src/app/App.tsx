@@ -4,14 +4,11 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import { CssBaseline, ThemeProvider } from '@mui/material';
 import routes from '../routes/routes';
 import { ColorModeContext, useThemeMode } from '../hooks/useThemeMode';
-import Loader from '../common/components/Loader/Loader';
-import { useAppDispatch, useAppSelector } from '../hooks/useRedux';
-import { selectorInitialized } from '../store/selectors/appSelector';
+import { useAppDispatch } from '../hooks/useRedux';
 import { getUserData } from '../utils/getUserData';
 
 function App() {
     const dispatch = useAppDispatch();
-    const isAppInitialized = useAppSelector(selectorInitialized);
     const router = createBrowserRouter(routes);
     const [theme, colorMode, mode] = useThemeMode();
 
@@ -26,10 +23,6 @@ function App() {
     useEffect(() => {
         getUserData(dispatch);
     }, []);
-
-    if (!isAppInitialized) {
-        return <Loader />;
-    }
 
     return (
         <ColorModeContext.Provider value={memoizedColorModeValue}>

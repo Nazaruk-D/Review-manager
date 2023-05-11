@@ -1,17 +1,11 @@
-import reducer, { setInitialized, setAppErrorAC, setAppInformMessage, setAppThemeAC, InitialStateType } from '../appSlice';
+import reducer, { setAppErrorAC, setAppInformMessage, setAppThemeAC, InitialStateType } from '../appSlice';
 
 describe('appSlice reducer', () => {
     const initialState: InitialStateType = {
-        initialized: false,
         error: null,
         informMessage: null,
         themeColor: 'light',
     };
-
-    it('should handle setInitialized', () => {
-        const state = reducer(initialState, setInitialized());
-        expect(state.initialized).toEqual(true);
-    });
 
     it('should handle setAppErrorAC', () => {
         const error = 'Some error message';

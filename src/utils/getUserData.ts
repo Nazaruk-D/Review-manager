@@ -2,13 +2,12 @@ import { Dispatch } from '@reduxjs/toolkit';
 import { supabase } from './supabase';
 import { setLoggedIn, setUser } from '../store/slices/userSlice';
 import { UserType } from '../types/UserType';
-import { setAppErrorAC, setInitialized } from '../store/slices/appSlice';
+import { setAppErrorAC } from '../store/slices/appSlice';
 
 export async function getUserData(dispatch: Dispatch) {
     const { data: authData, error: authError } = await supabase.auth.getUser();
     if (authError) {
         dispatch(setAppErrorAC('Error get user data'));
-        dispatch(setInitialized());
         return;
     }
     if (authData?.user) {
@@ -32,6 +31,5 @@ export async function getUserData(dispatch: Dispatch) {
         };
         dispatch(setUser(newData));
         dispatch(setLoggedIn(true));
-        dispatch(setInitialized());
     }
 }

@@ -11,7 +11,6 @@ import { ErrorStyle } from '../../../styles/common/ErrorStyle';
 import { useSendReviewMutation } from '../../../store/api/reviewAPISlice';
 import { selectorThemeApp } from '../../../store/selectors/appSelector';
 import MarkDownEditor from '../../../common/components/MarkDownEditor/MarkDownEditor';
-import { selectorProductNames, selectorTags } from '../../../store/selectors/reviewSelector';
 import { buttonStyles } from '../../../styles/common/buttonStyles';
 import SelectCategory from '../../../common/components/SelectCategory/SelectCategory';
 import { validateForm } from './validateForm';
