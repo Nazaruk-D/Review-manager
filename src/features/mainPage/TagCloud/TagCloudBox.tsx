@@ -31,14 +31,14 @@ const TagCloudBox: FC<TagCloudBoxPropsType> = ({ tags, isLoading }) => {
                 <ReactWordCloud
                     options={{
                         fontFamily: 'courier new',
-                        fontSizes: [25, 40],
+                        fontSizes: [15, 45],
                         padding: 5,
                         rotations: 2,
                         rotationAngles: [0, 0],
                         colors: ['black', 'grey', '#2B2B2B', '#5D6D7E', '#6C7A89'],
                         enableTooltip: false,
                     }}
-                    maxWords={100}
+                    maxWords={60}
                     callbacks={callbacks}
                     words={tags.map((tag) => ({ text: tag.name, value: tag.total_mentions }))}
                 />

@@ -96,9 +96,9 @@
         "password max": "Password must not be more than 30 characters",
         "not match": "Passwords do not match",
         "review title": "Review title is required",
-        "review title max": "Review title must not exceed 40 characters",
+        "review title max": "Review title must not exceed 70 characters",
         "title": "Title is required",
-        "title max": "Category is required",
+        "title max": "Title must not exceed 50 characters",
         "category": "Category is required",
         "body": "Description text is required",
         "body max": "Text must not exceed 2000 characters",
@@ -112,7 +112,7 @@
         "Cars": "Cars",
         "Sport": "Sport",
         "Other": "Other",
-        "All": "Other"
+        "All": "All"
       },
       "introduction": {
         "title": "Meet Reviewer manager - a website created for managing recommendations.",
@@ -247,7 +247,9 @@
         "password max": "Пароль не должен превышать 30 символов",
         "not match": "Пароли не совпадают",
         "review title": "Укажите название обзора",
+        "review title max": "Название обзора не должно превышать 70 символов",
         "title": "Укажите название",
+        "title max": "Название произведения не должно превышать 50 символов",
         "category": "Укажите категорию",
         "body": "Напшии своё описание к обзору",
         "assessment": "Поставьте оценку"

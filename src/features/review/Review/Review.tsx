@@ -36,7 +36,11 @@ const Review = () => {
 
     const handleDownloadPDF = async () => {
         const input = document.getElementById('review');
-        html2canvas(input!, { logging: true, allowTaint: true, useCORS: true }).then((canvas) => {
+        html2canvas(input!, {
+            logging: true,
+            allowTaint: true,
+            useCORS: true,
+        }).then((canvas) => {
             const imgWidth = 206;
             const imgHeight = (canvas.height * imgWidth) / canvas.width;
             const imageData = canvas.toDataURL('img/png');

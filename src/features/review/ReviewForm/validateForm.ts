@@ -6,13 +6,13 @@ export const validateForm = (values: FormikValues, t: TFunction) => {
     const errors: ReviewErrorType = {};
     if (!values.review_title) {
         errors.review_title = `${t('review title')}`;
-    } else if (values.review_title.length > 40) {
+    } else if (values.review_title.length > 70) {
         errors.review_title = `${t('review title max')}`;
     }
 
     if (!values.title) {
         errors.title = `${t('title')}`;
-    } else if (values.title.length > 40) {
+    } else if (values.title.length > 50) {
         errors.title = `${t('title max')}`;
     }
 
