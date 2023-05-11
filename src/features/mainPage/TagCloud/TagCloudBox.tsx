@@ -2,7 +2,6 @@ import React, { FC, memo } from 'react';
 import { Box, Typography } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import ReactWordCloud from 'react-wordcloud';
-import Loader from '../../../common/components/Loader/Loader';
 import { useAppDispatch } from '../../../hooks/useRedux';
 import { Path } from '../../../enums/path';
 import { setSearch } from '../../../store/slices/reviewSlice';

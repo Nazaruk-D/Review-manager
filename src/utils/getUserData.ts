@@ -7,7 +7,6 @@ import { setAppErrorAC } from '../store/slices/appSlice';
 export async function getUserData(dispatch: Dispatch) {
     const { data: authData, error: authError } = await supabase.auth.getUser();
     if (authError) {
-        dispatch(setAppErrorAC('Error get user data'));
         return;
     }
     if (authData?.user) {
