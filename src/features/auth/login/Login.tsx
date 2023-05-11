@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { Box } from '@mui/material';
 import s from '../AuthContainer.module.scss';
 import LoginForm from './LoginForm/LoginForm';
 import Introduction from './Introduction/Introduction';
@@ -16,10 +17,10 @@ const Login = () => {
     }, [isLogin]);
 
     return (
-        <div className={s.authContainer}>
+        <Box className={s.authContainer}>
             <Introduction />
             <LoginForm />
-        </div>
+        </Box>
     );
 };
 
