@@ -5,7 +5,7 @@ import { Category } from '../../enums/category';
 import { CategoryFilterType } from '../../types/CategoryFilterType';
 import { ReviewFilterType } from '../../types/ReviewFilterType';
 
-type InitialStateType = {
+export type InitialStateType = {
     sortReviews: ReviewResponseType[] | null;
     categoryFilter: CategoryFilterType;
     reviewsFilter: ReviewFilterType;

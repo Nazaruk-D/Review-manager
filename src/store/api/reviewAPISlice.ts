@@ -9,7 +9,7 @@ import { TagsCloudType } from '../../types/TagsCloudType';
 export const reviewAPISlice = createApi({
     reducerPath: 'reviewAPI',
     baseQuery: fetchBaseQuery({
-        baseUrl: 'http://localhost:7542/',
+        baseUrl: process.env.REACT_APP_REMOTE_BASE_URL,
         credentials: 'include',
     }),
     tagTypes: [TagType.Review, TagType.ReviewById],

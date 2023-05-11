@@ -12,5 +12,5 @@ export type ReviewResponseType = ReviewType & {
     likes: string[];
     authorLikes: number;
     avg_assessment: number;
-    similarReview: ReviewResponseType[];
+    similarReview: ReviewResponseType[] | [];
 };

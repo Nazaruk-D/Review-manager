@@ -7,7 +7,7 @@ import { TagType } from '../../enums/tagType';
 export const userAPISlice = createApi({
     reducerPath: 'userAPI',
     baseQuery: fetchBaseQuery({
-        baseUrl: 'http://localhost:7542/',
+        baseUrl: process.env.REACT_APP_REMOTE_BASE_URL,
         credentials: 'include',
     }),
     tagTypes: [TagType.User],

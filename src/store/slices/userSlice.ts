@@ -3,14 +3,14 @@ import { UserType } from '../../types/UserType';
 import { RoleType } from '../../types/RoleType';
 import { Role } from '../../enums/role';
 
-interface UserState {
+export type InitialStateType = {
     user: UserType | null;
     role: RoleType;
     isLoggedIn: boolean;
     isBlocked: boolean;
-}
+};
 
-const initialState: UserState = {
+const initialState: InitialStateType = {
     user: null,
     role: Role.User,
     isLoggedIn: false,

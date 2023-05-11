@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { UserType } from '../../types/UserType';
 
-type InitialStateType = {
+export type InitialStateType = {
     user: UserType | null;
 };
 
