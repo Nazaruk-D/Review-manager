@@ -6,6 +6,6 @@ export type ReviewType = {
     category: CategoryFilterType;
     body: string;
     assessment: string;
-    tags: string[];
+    tags: string[] | [];
     images?: string[];
 };

@@ -34,11 +34,12 @@ export const ReviewForm: FC<ReviewFromPropsType> = ({ initial, url, images, prof
     const { t } = useTranslation('translation', { keyPrefix: 'review editor' });
     const { t: tValidate } = useTranslation('translation', { keyPrefix: 'validation' });
     const { t: tSnackbar } = useTranslation('translation', { keyPrefix: 'snackbar messages' });
-    const { data: tags, isLoading: tagsLoading, error: tagsError } = useGetTagsQuery({});
+    const { data: tagsData, isLoading: tagsLoading, error: tagsError } = useGetTagsQuery({});
     const { data: productNames, isLoading: productNamesLoading, error: productNamesError } = useGetProductNamesQuery({});
     const user = useAppSelector(selectorUserData);
     const themeColor = useAppSelector(selectorThemeApp);
     const [sendReview, { isSuccess, isLoading }] = useSendReviewMutation();
+    const tags = tagsData?.data ? tagsData?.data.map((tag) => tag.name) : [];
 
     const formik = useFormik({
         initialValues: initial,
@@ -143,7 +144,7 @@ export const ReviewForm: FC<ReviewFromPropsType> = ({ initial, url, images, prof
                             <Autocomplete
                                 multiple
                                 freeSolo
-                                options={tags?.data || []}
+                                options={tags}
                                 autoSelect
                                 value={formik.values.tags}
                                 onOpen={() => formik.handleBlur('tags')}

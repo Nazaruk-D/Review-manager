@@ -17,7 +17,6 @@ const ResultPage = () => {
     const { t } = useTranslation('translation', { keyPrefix: 'result' });
     const { data, isFetching, isError } = useGetSearchResultQuery({ searchValue }, { skip: searchValue === '' });
     const [currentPage, setCurrentPage] = useState(1);
-
     const itemsPerPage = 5;
     const reviews = data?.data || [];
     const indexOfLastItem = currentPage * itemsPerPage;
