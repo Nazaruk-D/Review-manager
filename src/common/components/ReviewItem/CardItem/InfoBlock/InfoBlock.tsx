@@ -17,9 +17,10 @@ type InfoBlockPropsType = {
     review: ReviewResponseType;
     contentWidth: string;
     paddingLeft: number;
+    flexDirection: 'row' | 'column';
 };
 
-const InfoBlock: FC<InfoBlockPropsType> = ({ review, paddingLeft, contentWidth }) => {
+const InfoBlock: FC<InfoBlockPropsType> = ({ review, paddingLeft, contentWidth, flexDirection }) => {
     const navigate = useNavigate();
     const isAdmin = useAppSelector(selectorRole);
     const userId = useAppSelector(selectorUserId);
@@ -36,13 +37,20 @@ const InfoBlock: FC<InfoBlockPropsType> = ({ review, paddingLeft, contentWidth }
         navigate(`/update-review/${review.id}`);
     };
 
+    let title = review.review_title;
+    if (flexDirection !== 'row') {
+        if (review.review_title.length > 30) {
+            title = `${review.review_title.slice(0, 25)}...`;
+        }
+    }
+
     return (
         <Box sx={{ minHeight: '220px', width: contentWidth, pl: paddingLeft }}>
             <CardContent>
                 <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                     <Box sx={{ display: 'flex' }}>
                         <Typography variant="h5" component="h5" gutterBottom sx={{ m: 0, mr: 1 }}>
-                            {review.review_title.length > 30 ? `${review.review_title.slice(0, 25)}...` : review.review_title}
+                            {title}
                         </Typography>
                         {(userId === review.author_id || isAdmin === Role.Admin) && (
                             <IconButton onClick={onEditReviewHandler}>

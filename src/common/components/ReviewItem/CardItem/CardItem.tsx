@@ -16,7 +16,7 @@ const CardItem: FC<CardPropsType> = ({ flexDirection, contentWidth, mediaWidth, 
     return (
         <Card sx={{ display: 'flex', flexDirection }}>
             <PhotoBlock mediaWidth={mediaWidth} reviewImages={review.images} />
-            <InfoBlock review={review} paddingLeft={paddingLeft} contentWidth={contentWidth} />
+            <InfoBlock review={review} paddingLeft={paddingLeft} contentWidth={contentWidth} flexDirection={flexDirection} />
         </Card>
     );
 };
