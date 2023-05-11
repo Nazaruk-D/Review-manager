@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography } from '@mui/material';
 import { Pagination } from '@mui/lab';
@@ -42,14 +42,17 @@ const ReviewTable = () => {
 
     const deleteReviewHandler = (reviewId: string) => {
         deleteReview({ reviewId });
-        if (!error) {
-            dispatch(setAppInformMessage(tSnackbar('delete review')));
-        }
     };
 
     const editReviewHandler = (reviewId: string) => {
         navigate(`/update-review/${reviewId}`);
     };
+
+    useEffect(() => {
+        if (isSuccess) {
+            dispatch(setAppInformMessage(tSnackbar('delete review')));
+        }
+    }, [isSuccess]);
 
     return (
         <TableContainer component={Paper} sx={{ mb: 3 }}>
