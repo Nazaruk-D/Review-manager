@@ -21,20 +21,12 @@ const Profile = () => {
     const userID = useAppSelector(selectorUserId);
     const isAdmin = useAppSelector(selectorRole);
     const { userId = '' } = useParams<string>();
-    const { data: tags, isLoading: tagsLoading, error: tagsError } = useGetTagsQuery({});
-    const { data: productNames, isLoading: productNamesLoading, error: productNamesError } = useGetProductNamesQuery({});
     const { data: reviews, isLoading: reviewsLoading, error: reviewsError } = useGetReviewsQuery({ userId });
     const { data: user, isLoading: userLoading, error: userError } = useGetUserQuery({ userId });
 
-    if (tagsError || reviewsError || userError || productNamesError) {
+    if (reviewsError || userError) {
         dispatch(setAppErrorAC('error'));
     }
-
-    useEffect(() => {
-        if (productNames) {
-            dispatch(setProductNames(productNames.data));
-        }
-    }, [productNames]);
 
     useEffect(() => {
         if (user) {
@@ -48,13 +40,7 @@ const Profile = () => {
         }
     }, [dispatch, reviews]);
 
-    useEffect(() => {
-        if (tags) {
-            dispatch(setTags(tags.data.map((tag) => tag.name)));
-        }
-    }, [dispatch, tags]);
-
-    if (tagsLoading || reviewsLoading || userLoading || !user) {
+    if (reviewsLoading || userLoading || !user) {
         return <Loader />;
     }
 

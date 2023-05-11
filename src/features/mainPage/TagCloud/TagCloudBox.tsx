@@ -1,23 +1,21 @@
-import React from 'react';
+import React, { FC, memo } from 'react';
 import { Box, Typography } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import ReactWordCloud from 'react-wordcloud';
-import { useGetPopularTagsQuery } from '../../../store/api/reviewAPISlice';
 import Loader from '../../../common/components/Loader/Loader';
-import { setAppErrorAC } from '../../../store/slices/appSlice';
 import { useAppDispatch } from '../../../hooks/useRedux';
 import { Path } from '../../../enums/path';
 import { setSearch } from '../../../store/slices/reviewSlice';
+import { TagsCloudType } from '../../../types/TagsCloudType';
 
-const TagCloudBox = () => {
+type TagCloudBoxPropsType = {
+    tags: TagsCloudType[];
+    isLoading: boolean;
+};
+
+const TagCloudBox: FC<TagCloudBoxPropsType> = ({ tags, isLoading }) => {
     const dispatch = useAppDispatch();
     const navigate = useNavigate();
-    const { data, isLoading, error } = useGetPopularTagsQuery({});
-    const tags = data?.data || [];
-
-    if (error) {
-        dispatch(setAppErrorAC('Error getting reviews'));
-    }
 
     const callbacks = {
         onWordClick: (word: { text: string; value: number }) => {
@@ -25,7 +23,6 @@ const TagCloudBox = () => {
             navigate(Path.Result);
         },
     };
-
     return (
         <Box>
             <Typography variant="h4" style={{ marginBottom: '15px' }}>
@@ -52,4 +49,4 @@ const TagCloudBox = () => {
     );
 };
 
-export default TagCloudBox;
+export default memo(TagCloudBox);

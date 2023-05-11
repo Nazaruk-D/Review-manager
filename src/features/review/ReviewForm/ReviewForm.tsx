@@ -17,6 +17,7 @@ import SelectCategory from '../../../common/components/SelectCategory/SelectCate
 import { validateForm } from './validateForm';
 import AssessmentControl from '../../../common/components/AssessmentControl/AssessmentControl';
 import { setAppInformMessage } from '../../../store/slices/appSlice';
+import { useGetProductNamesQuery, useGetTagsQuery } from '../../../store/api/itemAPI';
 
 type ReviewFromPropsType = {
     initial: ReviewType;
@@ -33,9 +34,9 @@ export const ReviewForm: FC<ReviewFromPropsType> = ({ initial, url, images, prof
     const { t } = useTranslation('translation', { keyPrefix: 'review editor' });
     const { t: tValidate } = useTranslation('translation', { keyPrefix: 'validation' });
     const { t: tSnackbar } = useTranslation('translation', { keyPrefix: 'snackbar messages' });
+    const { data: tags, isLoading: tagsLoading, error: tagsError } = useGetTagsQuery({});
+    const { data: productNames, isLoading: productNamesLoading, error: productNamesError } = useGetProductNamesQuery({});
     const user = useAppSelector(selectorUserData);
-    const tags = useAppSelector(selectorTags);
-    const productNames = useAppSelector(selectorProductNames);
     const themeColor = useAppSelector(selectorThemeApp);
     const [sendReview, { isSuccess, isLoading }] = useSendReviewMutation();
 
@@ -91,7 +92,7 @@ export const ReviewForm: FC<ReviewFromPropsType> = ({ initial, url, images, prof
                         <Grid item xs={12}>
                             <Autocomplete
                                 freeSolo
-                                options={productNames || []}
+                                options={productNames?.data || []}
                                 value={formik.values.title}
                                 renderInput={(params) => (
                                     <TextField
@@ -143,7 +144,7 @@ export const ReviewForm: FC<ReviewFromPropsType> = ({ initial, url, images, prof
                             <Autocomplete
                                 multiple
                                 freeSolo
-                                options={tags || []}
+                                options={tags?.data || []}
                                 autoSelect
                                 value={formik.values.tags}
                                 onOpen={() => formik.handleBlur('tags')}

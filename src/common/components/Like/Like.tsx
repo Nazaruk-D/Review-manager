@@ -21,6 +21,7 @@ const Like: FC<LikePropsType> = ({ userId, reviewId, likes }) => {
 
     const onClickHandler = (event: React.MouseEvent<HTMLElement>) => {
         event.preventDefault();
+        event.stopPropagation();
         setIsLiked(!isLiked);
         setLikeCount(isLiked ? likeCount - 1 : likeCount + 1);
         setLike({ userId, reviewId });

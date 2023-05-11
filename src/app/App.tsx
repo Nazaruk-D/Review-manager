@@ -8,19 +8,12 @@ import Loader from '../common/components/Loader/Loader';
 import { useAppDispatch, useAppSelector } from '../hooks/useRedux';
 import { selectorInitialized } from '../store/selectors/appSelector';
 import { getUserData } from '../utils/getUserData';
-import { useGetLatestReviewsQuery, useGetPopularReviewsQuery } from '../store/api/reviewAPISlice';
-import { ReviewResponseType } from '../types/ReviewResponseType';
-import { setLatestReview, setPopularReview } from '../store/slices/reviewSlice';
 
 function App() {
     const dispatch = useAppDispatch();
     const isAppInitialized = useAppSelector(selectorInitialized);
     const router = createBrowserRouter(routes);
     const [theme, colorMode, mode] = useThemeMode();
-    const { data: latest } = useGetLatestReviewsQuery({});
-    const { data: popular } = useGetPopularReviewsQuery({});
-    const latestReviews: ReviewResponseType[] = latest ? latest!.data : [];
-    const popularReviews: ReviewResponseType[] = popular ? popular!.data : [];
 
     const memoizedColorModeValue = useMemo(
         () => ({
@@ -29,11 +22,6 @@ function App() {
         }),
         [colorMode.toggleColorMode, mode],
     );
-
-    useEffect(() => {
-        dispatch(setPopularReview(popularReviews));
-        dispatch(setLatestReview(latestReviews));
-    }, [latest, popular]);
 
     useEffect(() => {
         getUserData(dispatch);

@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, memo } from 'react';
 import { Grid, Typography } from '@mui/material';
 import ReviewItem from '../../../common/components/ReviewItem/ReviewItem';
 import { ReviewResponseType } from '../../../types/ReviewResponseType';
@@ -28,4 +28,4 @@ const BlockReviews: FC<BlockReviewsPropsType> = ({ title, reviews }) => {
     );
 };
 
-export default BlockReviews;
+export default memo(BlockReviews);
