@@ -5,7 +5,6 @@ import { useTranslation } from 'react-i18next';
 import { Path } from '../../../enums/path';
 import { useAppDispatch, useAppSelector } from '../../../hooks/useRedux';
 import { selectorUserData } from '../../../store/selectors/userSelector';
-import { useLogoutMutation } from '../../../store/api/authAPI';
 import { setLoggedOut } from '../../../store/slices/userSlice';
 import { supabase } from '../../../utils/supabase';
 import { Role } from '../../../enums/role';
@@ -15,7 +14,6 @@ const AuthButtonsBlock = () => {
     const dispatch = useAppDispatch();
     const navigate = useNavigate();
     const userData = useAppSelector(selectorUserData);
-    const [logout] = useLogoutMutation();
     const { t } = useTranslation('translation', { keyPrefix: 'auth' });
 
     const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(null);
@@ -43,7 +41,6 @@ const AuthButtonsBlock = () => {
             console.log(error);
             return;
         }
-        await logout({});
         dispatch(setLoggedOut());
         handleCloseUserMenu();
     };
