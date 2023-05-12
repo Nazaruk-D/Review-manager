@@ -6,16 +6,20 @@ import { setAppErrorAC } from '../store/slices/appSlice';
 
 export async function getUserData(dispatch: Dispatch) {
     const { data: authData, error: authError } = await supabase.auth.getUser();
+
     if (authError) {
         return;
     }
+
     if (authData?.user) {
         const { user } = authData;
         const { data, error } = await supabase.from('users').select('*').eq('id', user.id);
+
         if (error) {
             dispatch(setAppErrorAC('Error auth'));
             return;
         }
+
         const newData: UserType = {
             email: user.email!,
             small_photo: data[0].small_photo,
@@ -28,6 +32,7 @@ export async function getUserData(dispatch: Dispatch) {
             created_at: user.created_at,
             updated_at: user.updated_at,
         };
+
         dispatch(setUser(newData));
         dispatch(setLoggedIn(true));
     }

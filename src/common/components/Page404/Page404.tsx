@@ -10,7 +10,7 @@ const Page404 = () => {
         navigate(Path.Root);
     };
     return (
-        <Container sx={{ mt: '2rem' }}>
+        <Container sx={{ mt: 2 }}>
             <Box
                 sx={{
                     height: '70vh',

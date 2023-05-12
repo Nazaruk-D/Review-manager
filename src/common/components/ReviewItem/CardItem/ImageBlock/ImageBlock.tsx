@@ -9,7 +9,7 @@ type PhotoBlockPropsType = {
     reviewImages: string[] | undefined;
 };
 
-const PhotoBlock: FC<PhotoBlockPropsType> = ({ reviewImages, mediaWidth }) => {
+const ImageBlock: FC<PhotoBlockPropsType> = ({ reviewImages, mediaWidth }) => {
     const [photoNumber, setPhotoNumber] = useState(0);
     const [isHovered, setIsHovered] = useState(false);
 
@@ -69,4 +69,4 @@ const PhotoBlock: FC<PhotoBlockPropsType> = ({ reviewImages, mediaWidth }) => {
     );
 };
 
-export default PhotoBlock;
+export default ImageBlock;

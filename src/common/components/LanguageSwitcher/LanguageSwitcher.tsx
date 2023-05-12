@@ -1,16 +1,17 @@
 import React, { useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
 import { FormControlLabel, FormGroup, Switch } from '@mui/material';
+import { Language } from '../../../enums/language';
 
 const LanguageSwitcher = () => {
     const { i18n } = useTranslation();
 
     const handleLanguageChange = useCallback(() => {
-        const newLanguage = i18n.language === 'ru' ? 'en' : 'ru';
+        const newLanguage = i18n.language === Language.RU ? Language.EN : Language.RU;
         i18n.changeLanguage(newLanguage);
     }, [i18n]);
 
-    const isEnglish = i18n.language === 'en';
+    const isEnglish = i18n.language === Language.EN;
 
     return (
         <FormGroup>

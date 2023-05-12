@@ -9,21 +9,7 @@ const MessageSnackbar = () => {
     const error = useAppSelector(selectorError);
     const informMessage = useAppSelector(selectorInformMessage);
     const [open, setOpen] = useState(false);
-    const [message, setMessage] = useState('');
     const [severity, setSeverity] = useState<AlertColor>('error');
-
-    useEffect(() => {
-        if (error) {
-            setOpen(true);
-            setSeverity('error');
-            setMessage(error);
-        }
-        if (informMessage) {
-            setOpen(true);
-            setSeverity('info');
-            setMessage(informMessage);
-        }
-    }, [error, informMessage]);
 
     const handleClose = (event?: React.SyntheticEvent | Event, reason?: string) => {
         if (reason === 'clickaway') {
@@ -32,8 +18,21 @@ const MessageSnackbar = () => {
         dispatch(setAppErrorAC(null));
         dispatch(setAppInformMessage(null));
         setOpen(false);
-        setMessage('');
     };
+
+    useEffect(() => {
+        if (error) {
+            setOpen(true);
+            setSeverity('error');
+        }
+    }, [error]);
+
+    useEffect(() => {
+        if (informMessage) {
+            setOpen(true);
+            setSeverity('info');
+        }
+    }, [informMessage]);
 
     return (
         <Snackbar
@@ -43,7 +42,7 @@ const MessageSnackbar = () => {
             onClose={handleClose}
         >
             <Alert onClose={handleClose} severity={severity}>
-                {message}
+                {error || informMessage}
             </Alert>
         </Snackbar>
     );

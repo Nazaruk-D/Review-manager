@@ -17,7 +17,9 @@ type UploadImagePropsType = {
 
 const UploadImage: FC<UploadImagePropsType> = ({ setImages, images, dbImages, multiple }) => {
     const dispatch = useAppDispatch();
+    const [localDbImage, setLocalDbImage] = useState<string[]>([]);
     const { t } = useTranslation('translation', { keyPrefix: 'image' });
+    const isImage = images ? images.map((image) => URL.createObjectURL(image)) : localDbImage;
 
     const handleProfilePhotoDrop = (acceptedFiles: File[]) => {
         if (!multiple && images && images.length > 0) {
@@ -45,8 +47,6 @@ const UploadImage: FC<UploadImagePropsType> = ({ setImages, images, dbImages, mu
         multiple,
     });
 
-    const [localDbImage, setLocalDbImage] = useState<string[]>([]);
-
     const deleteImageHandler = (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
         event.stopPropagation();
         setImages(null);
@@ -62,7 +62,6 @@ const UploadImage: FC<UploadImagePropsType> = ({ setImages, images, dbImages, mu
             setLocalDbImage(dbImages);
         }
     }, [dbImages]);
-    const isImage = images ? images.map((image) => URL.createObjectURL(image)) : localDbImage;
 
     return (
         <Box {...getRootProps()} className={s.profilePhotoContainer}>

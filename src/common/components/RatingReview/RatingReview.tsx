@@ -12,8 +12,8 @@ type RatingReviewPropsType = {
 const RatingReview: FC<RatingReviewPropsType> = ({ review }) => {
     const userId = useAppSelector(selectorUserId);
     const isLogin = useAppSelector(selectorIsLogin);
-
     const [setRating] = useSetRatingMutation();
+    const rated = review.ratings.includes(userId!);
 
     const setRatingHandler = (event: React.SyntheticEvent, value: number | null) => {
         if (value && userId && review.id) {
@@ -24,8 +24,6 @@ const RatingReview: FC<RatingReviewPropsType> = ({ review }) => {
     const onclickHandler = (event: React.MouseEvent<HTMLElement>) => {
         event.stopPropagation();
     };
-    const rated = review.ratings.includes(userId!);
-    const ratingColor = rated ? { color: 'rgba(148,148,148,0.5)' } : {};
     return (
         <Box sx={{ display: 'flex' }}>
             <Rating
@@ -33,7 +31,7 @@ const RatingReview: FC<RatingReviewPropsType> = ({ review }) => {
                 precision={0.5}
                 defaultValue={review.avg_rating}
                 size="medium"
-                sx={ratingColor}
+                sx={rated ? { color: 'rgba(148,148,148,0.5)' } : {}}
                 onChange={setRatingHandler}
                 onClick={onclickHandler}
                 disabled={!isLogin}

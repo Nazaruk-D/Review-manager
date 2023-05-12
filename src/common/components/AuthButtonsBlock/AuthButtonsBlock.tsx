@@ -9,14 +9,14 @@ import { selectorUserData } from '../../../store/selectors/userSelector';
 import { Role } from '../../../enums/role';
 import { Path } from '../../../enums/path';
 import avatar from '../../png/avatar.png';
+import { setAppErrorAC } from '../../../store/slices/appSlice';
 
 const AuthButtonsBlock = () => {
     const dispatch = useAppDispatch();
     const navigate = useNavigate();
     const userData = useAppSelector(selectorUserData);
-    const { t } = useTranslation('translation', { keyPrefix: 'auth' });
-
     const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(null);
+    const { t } = useTranslation('translation', { keyPrefix: 'auth' });
 
     const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
         setAnchorElUser(event.currentTarget);
@@ -35,10 +35,10 @@ const AuthButtonsBlock = () => {
         handleCloseUserMenu();
     };
 
-    const LogoutHandler = async () => {
+    const logoutHandler = async () => {
         const { error } = await supabase.auth.signOut();
         if (error) {
-            console.log(error);
+            dispatch(setAppErrorAC('Logout error'));
             return;
         }
         dispatch(setLoggedOut());
@@ -93,7 +93,7 @@ const AuthButtonsBlock = () => {
                         <Typography textAlign="center">{t('admin')}</Typography>
                     </MenuItem>
                 )}
-                <MenuItem onClick={LogoutHandler}>
+                <MenuItem onClick={logoutHandler}>
                     <Typography textAlign="center">{t('logout')}</Typography>
                 </MenuItem>
             </Menu>

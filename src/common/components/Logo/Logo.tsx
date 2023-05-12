@@ -1,8 +1,8 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import s from './Logo.module.scss';
 import logo from '../../svg/svgLogo.svg';
 import { Path } from '../../../enums/path';
+import s from './Logo.module.scss';
 
 const Logo = () => {
     return (
