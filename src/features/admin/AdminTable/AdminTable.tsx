@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useState } from 'react';
+import React, { FC, memo, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography } from '@mui/material';
 import { Pagination } from '@mui/lab';
@@ -126,4 +126,4 @@ const AdminTable: FC<AdminTablePropsType> = ({ users }) => {
     );
 };
 
-export default AdminTable;
+export default memo(AdminTable);

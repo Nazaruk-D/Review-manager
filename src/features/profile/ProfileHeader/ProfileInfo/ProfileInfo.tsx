@@ -3,7 +3,6 @@ import { Box, Grid, Typography } from '@mui/material';
 import dateFormat from 'dateformat';
 import { TFunction } from 'i18next';
 import { UserType } from '../../../../types/UserType';
-import s from './ProfileInfo.module.scss';
 
 type ProfileInfoPropsType = {
     t: TFunction;
@@ -12,7 +11,7 @@ type ProfileInfoPropsType = {
 
 const ProfileInfo: FC<ProfileInfoPropsType> = ({ user, t }) => {
     return (
-        <Grid item xs={12} md={8} className={s.profileBlock} sx={{ display: 'flex', flexDirection: 'column' }}>
+        <Grid item xs={12} md={8} sx={{ display: 'flex', flexDirection: 'column' }}>
             <Box>
                 <Typography variant="h1" gutterBottom>
                     {t('profile info')}
