@@ -4,6 +4,11 @@
       "header": {
         "signIn": "Sign In"
       },
+      "main page": {
+        "popular reviews": "Popular reviews",
+        "latest reviews": "Latest added reviews",
+        "popular tags": "Popular tags"
+      },
       "action": {
         "send": "Send",
         "confirm": "Confirm?",
@@ -154,6 +159,11 @@
     "translation": {
       "header": {
         "signIn": "Вход"
+      },
+      "main page": {
+        "popular reviews": "Популярные обзоры",
+        "latest reviews": "Последние добавленные обзоры",
+        "popular tags": "Популярные тэги"
       },
       "action": {
         "send": "Отправить",

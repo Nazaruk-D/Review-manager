@@ -53,7 +53,7 @@ const ReviewTable = () => {
             dispatch(setAppInformMessage(tSnackbar('delete review')));
         }
     }, [isSuccess]);
-    console.log('ReviewTable');
+
     return (
         <TableContainer component={Paper} sx={{ mb: 3 }}>
             <Table>

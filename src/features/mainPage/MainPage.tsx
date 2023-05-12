@@ -1,4 +1,5 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import { Container } from '@mui/material';
 import BlockReviews from './BlockReviews/BlockReviews';
 import TagCloudBox from './TagCloud/TagCloudBox';
@@ -9,6 +10,7 @@ const MainPage = () => {
     const { data: latestReview, isLoading: latestReviewLoading } = useGetLatestReviewsQuery({});
     const { data: popularReview, isLoading: popularReviewLoading } = useGetPopularReviewsQuery({});
     const { data: tags, isLoading: tagsLoading } = useGetPopularTagsQuery({});
+    const { t } = useTranslation('translation', { keyPrefix: 'main page' });
     const popularTags = tags?.data || [];
     const latestReviews = latestReview?.data || [];
     const popularReviews = popularReview?.data || [];
@@ -19,8 +21,8 @@ const MainPage = () => {
 
     return (
         <Container sx={{ mt: '2rem' }}>
-            <BlockReviews title="Popular reviews" reviews={popularReviews} />
-            <BlockReviews title="Latest added reviews" reviews={latestReviews} />
+            <BlockReviews title={t('popular reviews')} reviews={popularReviews} />
+            <BlockReviews title={t('latest reviews')} reviews={latestReviews} />
             <TagCloudBox tags={popularTags} isLoading={tagsLoading} />
         </Container>
     );

@@ -1,5 +1,6 @@
 import React, { FC, memo } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import ReactWordCloud from 'react-wordcloud';
 import { Box, Typography } from '@mui/material';
 import { useAppDispatch } from '../../../hooks/useRedux';
@@ -15,6 +16,7 @@ type TagCloudBoxPropsType = {
 const TagCloudBox: FC<TagCloudBoxPropsType> = ({ tags, isLoading }) => {
     const dispatch = useAppDispatch();
     const navigate = useNavigate();
+    const { t } = useTranslation('translation', { keyPrefix: 'main page' });
 
     const callbacks = {
         onWordClick: (word: { text: string; value: number }) => {
@@ -26,7 +28,7 @@ const TagCloudBox: FC<TagCloudBoxPropsType> = ({ tags, isLoading }) => {
     return (
         <Box>
             <Typography variant="h4" style={{ marginBottom: '15px' }}>
-                Popular tags
+                {t('popular tags')}
             </Typography>
             {!isLoading && tags && tags.length > 0 && (
                 <ReactWordCloud

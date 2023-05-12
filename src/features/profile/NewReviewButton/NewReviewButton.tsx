@@ -15,7 +15,7 @@ const NewReviewButton: FC<NewReviewButtonPropsType> = ({ userId }) => {
     const themeColor = useAppSelector(selectorThemeApp);
     const { t } = useTranslation('translation', { keyPrefix: 'profile' });
     const style = buttonStyles(themeColor);
-    console.log('Button');
+
     return (
         <Button variant="contained" fullWidth onClick={() => navigate(`/create-review/${userId}`)} sx={style}>
             {t('new review')}
