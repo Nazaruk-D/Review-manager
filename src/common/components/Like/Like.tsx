@@ -34,6 +34,10 @@ const Like: FC<LikePropsType> = ({ userId, reviewId, likes }) => {
         }
     }, [error]);
 
+    useEffect(() => {
+        setIsLiked(likes.includes(userId));
+    }, [likes, userId]);
+
     return (
         <Box sx={{ display: 'flex', alignItems: 'center' }}>
             <Typography variant="subtitle1">{likeCount}</Typography>
