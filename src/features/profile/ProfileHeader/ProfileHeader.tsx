@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, memo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Grid } from '@mui/material';
 import EditProfile from './EditProfile/EditProfile';
@@ -18,7 +18,7 @@ const ProfileHeader: FC<ProfileHeaderPropsType> = ({ userProfileData }) => {
     const { t } = useTranslation('translation', { keyPrefix: 'profile' });
     const userID = useAppSelector(selectorUserId);
     const isAdmin = useAppSelector(selectorRole);
-
+    console.log('ProfileHeader');
     return (
         <Grid container spacing={2} className={s.headerContainer}>
             <Avatar user={userProfileData} />
@@ -28,4 +28,4 @@ const ProfileHeader: FC<ProfileHeaderPropsType> = ({ userProfileData }) => {
     );
 };
 
-export default ProfileHeader;
+export default memo(ProfileHeader);

@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, memo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import { Button } from '@mui/material';
@@ -15,6 +15,7 @@ const NewReviewButton: FC<NewReviewButtonPropsType> = ({ userId }) => {
     const themeColor = useAppSelector(selectorThemeApp);
     const { t } = useTranslation('translation', { keyPrefix: 'profile' });
     const style = buttonStyles(themeColor);
+    console.log('Button');
     return (
         <Button variant="contained" fullWidth onClick={() => navigate(`/create-review/${userId}`)} sx={style}>
             {t('new review')}
@@ -22,4 +23,4 @@ const NewReviewButton: FC<NewReviewButtonPropsType> = ({ userId }) => {
     );
 };
 
-export default NewReviewButton;
+export default memo(NewReviewButton);

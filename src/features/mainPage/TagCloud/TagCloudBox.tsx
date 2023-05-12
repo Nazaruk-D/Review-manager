@@ -22,6 +22,7 @@ const TagCloudBox: FC<TagCloudBoxPropsType> = ({ tags, isLoading }) => {
             navigate(Path.Result);
         },
     };
+
     return (
         <Box>
             <Typography variant="h4" style={{ marginBottom: '15px' }}>
