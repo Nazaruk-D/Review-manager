@@ -1,13 +1,11 @@
-import React, { useEffect, useMemo } from 'react';
-import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-import { CssBaseline, ThemeProvider } from '@mui/material';
+import React, {useMemo} from 'react';
+import {createBrowserRouter, RouterProvider} from 'react-router-dom';
+import {CssBaseline, ThemeProvider} from '@mui/material';
 import routes from '../routes/routes';
-import { ColorModeContext, useThemeMode } from '../hooks/useThemeMode';
-import { useAppDispatch } from '../hooks/useRedux';
-import { getUserData } from '../utils/getUserData';
+import {ColorModeContext, useThemeMode} from '../hooks/useThemeMode';
+import {useUserData} from "../hooks/useUserData";
 
 function App() {
-    const dispatch = useAppDispatch();
     const router = createBrowserRouter(routes);
     const [theme, colorMode, mode] = useThemeMode();
 
@@ -19,9 +17,7 @@ function App() {
         [colorMode.toggleColorMode, mode],
     );
 
-    useEffect(() => {
-        getUserData(dispatch);
-    }, []);
+    useUserData()
 
     return (
         <ColorModeContext.Provider value={memoizedColorModeValue}>

@@ -7,12 +7,12 @@ import GoogleIcon from '@mui/icons-material/Google';
 import { Provider } from '@supabase/supabase-js';
 import { useAppDispatch } from '../../../../hooks/useRedux';
 import { supabase } from '../../../../utils/supabase';
-import { getUserData } from '../../../../utils/getUserData';
 import { setAppErrorAC } from '../../../../store/slices/appSlice';
 import { loginValidation } from '../loginValidation';
 import s from './LoginForm.module.scss';
 import { Path } from '../../../../enums/path';
 import DiscordIcon from '../../../../common/svg/discord.svg';
+import {useUserData} from "../../../../hooks/useUserData";
 
 const LoginForm = () => {
     const navigate = useNavigate();
@@ -35,7 +35,7 @@ const LoginForm = () => {
                     password: values.password,
                 });
                 if (!error) {
-                    await getUserData(dispatch);
+                    useUserData()
                     navigate(Path.Root);
                 } else {
                     dispatch(setAppErrorAC(error.message));
